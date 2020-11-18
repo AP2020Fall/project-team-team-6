@@ -1,5 +1,5 @@
 package model;
 
 public class GameLog {
-    //skdfjfsdkmvc sdvsdvsllihjfvvlsdfkmvcc dfihgjsdfgfsdfvsdvj
+    //000000000000000000000000000000000000000000000000000
 }
