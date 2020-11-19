@@ -1,7 +1,5 @@
 package controller;
 
-import model.Army;
-import model.Country;
 import model.DataBase;
 import model.RiskGame;
 
