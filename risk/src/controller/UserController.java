@@ -1,9 +1,8 @@
 package controller;
 
-import model.Admin;
-import model.DataBase;
-import model.Player;
-import model.User;
+import model.*;
+
+import java.util.HashMap;
 
 public class UserController {
     private static UserController userController = new UserController();
@@ -103,9 +102,60 @@ public class UserController {
 
     //Players Methods
     //-----------------------------------------------------------------------------------------------------------------
+    public void sendFriendRequest(Player firstPlayer , String secondPlayer){
+        //TODO .....
+    }
+    public HashMap<Integer, Player> getPlayersFriends(Player player){
+        return player.getFriends();
+    }
+    public HashMap<Integer, Player> getFriendsRequestsList(Player player){
+        return player.getRequestsForFriendShips();
+    }
+    public void rejectFriend(Player player , Player secondPlayer){
+        //TODO
+    }
+
+    public void acceptFriend(Player player , Player secondPlayer){
+        //TODO ....
+    }
+
+    public void removePlayerFromFriendsList(Player firstPlayer , Player secondPlayer){
+        //TODO ......
+    }
+
+    public void inviteToPlay(Player player , String username , RiskGame riskGame){
+        //TODO ....
+    }
+
+    public void acceptInvitation(Player player , RequestForPlaying requestForPlaying){
+        //TODO ....
+    }
+    public void rejectInvitation(Player player , RequestForPlaying requestForPlaying){
+        //TODO ....
+    }
+
+    public HashMap<Integer,GameLog> getAllGamesLogForPlayer(Player player){
+        return player.getGameLogs();
+    }
+
+    public HashMap<Integer , GameLog> getAllActiveGames(Player player){
+        //TODO
+        return null;
+    }
+    public double getPlayersCredit(Player player){
+        return player.getCredit();
+    }
+    public double getPlayersRate(Player player){
+        return player.getRate();
+    }
+    public void addCreditForPlayer(Player player , double credit){
+        //TODO ....
+    }
+    public void reduceCreditForPlayer(Player player , double credit){
+        //TODO .....
+    }
 
 
-    //Method for Event
 
     
 
