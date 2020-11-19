@@ -12,6 +12,9 @@ public class  Player extends User{
     private HashMap<Integer , Player> friends;
     private HashMap<Integer , Player> requestsForFriendShips;
     private HashMap<Integer , RequestForPlaying> requestForPlaysList;
+    private ArrayList<Card> playersCard;
+    private ArrayList<Country> playersCountry;
+    private int numberOfSoldiers = 0;
 
     public Player(String firstName, String lastName,
                   String username, String password,
@@ -25,6 +28,8 @@ public class  Player extends User{
         this.friends = new HashMap<>();
         this.requestsForFriendShips = new HashMap<>();
         this.requestForPlaysList = new HashMap<>();
+        this.playersCard = new ArrayList<>();
+        this.playersCountry = new ArrayList<>();
         setId();
     }
 
@@ -65,6 +70,18 @@ public class  Player extends User{
         return rate;
     }
 
+    public ArrayList<Card> getPlayersCard() {
+        return playersCard;
+    }
+
+    public ArrayList<Country> getPlayersCountry() {
+        return playersCountry;
+    }
+
+    public int getNumberOfSoldiers() {
+        return numberOfSoldiers;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -99,6 +116,10 @@ public class  Player extends User{
 
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public void setNumberOfSoldiers(int numberOfSoldiers) {
+        this.numberOfSoldiers = numberOfSoldiers;
     }
 
     public HashMap<Integer, GameLog> getGameLogs() {
