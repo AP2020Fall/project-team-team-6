@@ -14,6 +14,7 @@ public class DataBase {
     private HashMap<Integer , Country> allAsiaCountries;
     private HashMap<Integer , Country> allAustraliaCountries;
     private HashMap<Integer , RiskGame> allGames ;
+    private HashMap<Integer , Event> allEvents;
     private Admin admin;
 
     private DataBase(){
@@ -27,6 +28,7 @@ public class DataBase {
        this.allAsiaCountries = new HashMap<>();
        this.allAustraliaCountries = new HashMap<>();
        this.allGames = new HashMap<>();
+       this.allEvents = new HashMap<>();
     }
 
 
@@ -80,5 +82,9 @@ public class DataBase {
 
     public void setAdmin(Admin admin) {
         this.admin = admin;
+    }
+
+    public HashMap<Integer, Event> getAllEvents() {
+        return allEvents;
     }
 }
