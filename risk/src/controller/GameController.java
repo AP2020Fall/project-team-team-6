@@ -28,6 +28,15 @@ public class GameController {
       return null;
   }
 
+    public ArrayList<Card> playerCards(Player player) {
+        //todo
+        return null;
+    }
+    public ArrayList<Card> giveAllPlayerCards(Player player1, Player player2) {
+        //todo
+        return null;
+    }
+
 
     public static void makeAllCountries(RiskGame riskGame){
         //TODO hanooz marz haro va rah ertebati ghate va kamel nashode
