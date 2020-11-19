@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 
 public class RequestForPlaying {
     private Player player;
+    private Player invitedPlayer;
     private RiskGame riskGame;
     private boolean isAvailable;
     private LocalDateTime inviteDate;
 
-    public RequestForPlaying(Player player, RiskGame riskGame) {
+    public RequestForPlaying(Player player,Player invitedPlayer, RiskGame riskGame) {
         this.player = player;
+        this.invitedPlayer = invitedPlayer;
         this.riskGame = riskGame;
         this.inviteDate = LocalDateTime.now();
         this.isAvailable = true;
@@ -38,4 +40,9 @@ public class RequestForPlaying {
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
+
+    public Player getInvitedPlayer() {
+        return invitedPlayer;
+    }
+
 }
