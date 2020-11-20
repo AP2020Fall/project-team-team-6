@@ -133,9 +133,98 @@ public class GameController {
 
     //GAMES METHODS ----------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------
-    public void makeOnlineGame(){
+    public void makeOnlineGameForPlayer(String name , Player creator , RiskGameType riskGameType , int numberOfPlayers){
+        //TODO......
+    }
+    public void makeOnlineGameForEvent(String name , RiskGameType riskGameType , int numberOfPlayers , int gamePoint){
+       //TODO......
+    }
+    public void makeOfflineGame(String name , String[] playersName , int numberOfPlayers){
+      //TODO ......
+    }
+    public boolean checkGame(RiskGame riskGame){
+     return true;
+     //TODO ......
+    }
+
+    public void startGame(RiskGame riskGame , Player creator){
+      //TODO.....
+    }
+
+    public boolean isGameStarted(RiskGame riskGame){
+     //TODO ....
+        return true;
+    }
+    public void addSoldiersForStartingGame(RiskGame riskGame , int numberOfPlayers){
+     //TODO ....
+    }
+    public void addSoldiers(Player player  , int numbersOfSoldiers , RiskGame riskGame){
+     //TODO .......
+    }
+    public void calculateNumberOfSoldiersToAdd(Player player){
 
     }
+    public void placeSoldiers(RiskGame  riskGame , int numbersOfSoldiers , Player player){
+     //TODO .........
+    }
+    public boolean attack(Country country , Player attacker , Player defender , RiskGame riskGame){
+     //TODO .....
+        return true;
+    }
+    public int calculateDiceNumber(boolean isAttack , Country country , RiskGame riskGame){
+        //TODO
+        return 0;
+    }
+    public int rollDice(){
+        //TODO
+        return 0;
+    }
+    public void endAttack(Player player , RiskGame riskGame){
+     //TODO
+    }
+
+    public void moveSoldiers(Player player , RiskGame riskGame){
+
+    }
+    public void endFortify(Player player , RiskGame riskGame){
+
+    }
+    public void addCardToPlayer(RiskGame riskGame , Player player){
+     //TODO
+    }
+
+    public void nextTurn(RiskGame riskGame){
+     //TODO
+    }
+    public void endGame(RiskGame riskGame){
+     //TODO .....
+    }
+    public void setNewGameInformationForPlayers(Player[] players){
+     //TODO ......
+    }
+
+    public void doBlizzard(RiskGame riskGame){
+     //TODO
+    }
+    public void fogOfWar(RiskGame riskGame){
+     //TODO
+    }
+    public void setTimerForEachPlayer(Long timer , RiskGame riskGame){
+     //TODO ....
+    }
+    public void checkTimer(Player player , RiskGame riskGame){
+     //TODO
+    }
+    public void setCountriesUnManually(RiskGame riskGame){
+     //TODO
+    }
+
+
+
+
+
+
+
 
 
 }

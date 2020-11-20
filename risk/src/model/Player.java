@@ -15,11 +15,16 @@ public class  Player extends User{
     private ArrayList<Card> playersCard;
     private ArrayList<Country> playersCountry;
     private int numberOfSoldiers = 0;
+    //This should change to HashMap<User , String >
     private ArrayList<String> sentMessages;
     private ArrayList<String> receivedMessages;
     private ArrayList<String> allMessages;
+
+
     private int numbersOfWin;
     private int numbersOfGames;
+    private Player friendInGame;
+    private ArrayList<Player> requestForFriendShipInGame;
 
     public Player(String firstName, String lastName,
                   String username, String password,
@@ -40,6 +45,8 @@ public class  Player extends User{
         this.sentMessages = new ArrayList<>();
         this.receivedMessages = new ArrayList<>();
         this.allMessages = new ArrayList<>();
+        this.requestForFriendShipInGame = new ArrayList<>();
+        this.friendInGame = null;
         setId();
     }
 
@@ -184,5 +191,15 @@ public class  Player extends User{
         this.numbersOfGames = numbersOfGames;
     }
 
+    public Player getFriendInGame() {
+        return friendInGame;
+    }
 
+    public void setFriendInGame(Player friendInGame) {
+        this.friendInGame = friendInGame;
+    }
+
+    public ArrayList<Player> getRequestForFriendShipInGame() {
+        return requestForFriendShipInGame;
+    }
 }
