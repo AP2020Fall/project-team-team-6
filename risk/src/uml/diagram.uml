@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="705.0" y="422.0">view.GamesMenu</node>
+    <node x="1060.9982142857143" y="652.0">view.MainMenu</node>
+    <node x="457.0" y="422.0">view.RiskGameMenu</node>
+    <node x="702.2807142857142" y="0.0">view.Menu</node>
+    <node x="0.0" y="422.0">view.UserMenu</node>
+    <node x="191.0" y="411.0">view.FriendsMenu</node>
+    <node x="1154.0" y="443.0">view.RegisterMenu</node>
+    <node x="986.0" y="443.0">view.LoginMenu</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="view.UserMenu" target="view.Menu">
+      <point x="42.75" y="-79.5" />
+      <point x="128.25" y="341.0" />
+      <point x="735.7092857142857" y="341.0" />
+      <point x="-122.57142857142856" y="155.5" />
+    </edge>
+    <edge source="view.MainMenu" target="view.Menu">
+      <point x="49.799999999999955" y="-123.5" />
+      <point x="1235.298214285714" y="622.0" />
+      <point x="1325.5" y="622.0" />
+      <point x="1325.5" y="341.0" />
+      <point x="980.8521428571428" y="341.0" />
+      <point x="122.57142857142856" y="155.5" />
+    </edge>
+    <edge source="view.MainMenu" target="view.RegisterMenu">
+      <point x="0.0" y="-123.5" />
+      <point x="1185.4982142857143" y="612.0" />
+      <point x="1234.5" y="612.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="view.MainMenu" target="view.LoginMenu">
+      <point x="-49.799999999999955" y="-123.5" />
+      <point x="1135.6982142857141" y="622.0" />
+      <point x="1060.0" y="622.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="view.RegisterMenu" target="view.Menu">
+      <point x="40.25" y="-58.5" />
+      <point x="1274.75" y="351.0" />
+      <point x="958.5664285714284" y="351.0" />
+      <point x="100.28571428571422" y="155.5" />
+    </edge>
+    <edge source="view.MainMenu" target="view.UserMenu">
+      <point x="-99.59999999999991" y="-123.5" />
+      <point x="1085.8982142857144" y="632.0" />
+      <point x="85.5" y="632.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="view.LoginMenu" target="view.Menu">
+      <point x="37.0" y="-58.5" />
+      <point x="1097.0" y="371.0" />
+      <point x="913.995" y="371.0" />
+      <point x="55.71428571428578" y="155.5" />
+    </edge>
+    <edge source="view.GamesMenu" target="view.Menu">
+      <point x="65.25" y="-79.5" />
+      <point x="900.75" y="391.0" />
+      <point x="869.4235714285713" y="391.0" />
+      <point x="11.14285714285711" y="155.5" />
+    </edge>
+    <edge source="view.FriendsMenu" target="view.Menu">
+      <point x="61.5" y="-90.5" />
+      <point x="375.5" y="361.0" />
+      <point x="780.2807142857142" y="361.0" />
+      <point x="-78.0" y="155.5" />
+    </edge>
+    <edge source="view.RiskGameMenu" target="view.Menu">
+      <point x="-57.0" y="-79.5" />
+      <point x="514.0" y="371.0" />
+      <point x="802.5664285714286" y="371.0" />
+      <point x="-55.714285714285666" y="155.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5" x="817.4999999999991" y="529.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

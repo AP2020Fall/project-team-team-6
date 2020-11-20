@@ -1,18 +1,22 @@
 package controller;
 
 import model.DataBase;
-import model.Event;
 import model.Player;
 import model.RiskGame;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class EventController {
     private static EventController eventController = new EventController();
+    private GameController gameController = GameController.getGameController();
+    private UserController userController = UserController.getUserController();
     private DataBase dataBase;
-    public EventController() {
+    private EventController() {
         dataBase = DataBase.getDataBase();
+    }
+
+    public static EventController getEventController() {
+        return eventController;
     }
 
     //creating event by admin methods

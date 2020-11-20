@@ -8,11 +8,18 @@ import java.util.HashMap;
 public class GameController {
 
  private static GameController gameController = new GameController();
+ private UserController userController = UserController.getUserController();
+ private EventController eventController = EventController.getEventController();
  private DataBase dataBase;
  private GameController() {
        this.dataBase = DataBase.getDataBase();
     }
-  public HashMap<Integer, RiskGame> getAllRiskGames(){
+
+    public static GameController getGameController() {
+        return gameController;
+    }
+
+    public HashMap<Integer, RiskGame> getAllRiskGames(){
      return dataBase.getAllRiskGames();
   }
   public int matchCards(Card card1, Card card2, Card card3, Player player) {
