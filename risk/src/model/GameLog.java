@@ -1,20 +1,29 @@
 package model;
 
 public class GameLog {
-    private int numberOfTimes;
-    private int numberOfWins;
     private int logID;
     private int pointsEarned;
+    private RiskGame game;
 
-    public GameLog(int numberOfTimes, int numberOfWins, int pointsEarned) {
-        this.numberOfTimes = numberOfTimes;
-        this.numberOfWins = numberOfWins;
-        this.pointsEarned = pointsEarned;
+    public GameLog(RiskGame game) {
+         this.game = game;
+        this.pointsEarned = 0;
+        //TODO pointsEarned
     }
 
-    public int showNumberOfWins(){return numberOfWins;}
+    public int getLogID() {
+        return logID;
+    }
 
-    public int showNumberOfTimes(){return numberOfTimes;}
+    public int getPointsEarned() {
+        return pointsEarned;
+    }
 
+    public RiskGame getGame() {
+        return game;
+    }
+    public  void setLogID(){
+        //TODO .....
+    }
 }
 

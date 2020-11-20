@@ -18,6 +18,8 @@ public class  Player extends User{
     private ArrayList<String> sentMessages;
     private ArrayList<String> receivedMessages;
     private ArrayList<String> allMessages;
+    private int numbersOfWin;
+    private int numbersOfGames;
 
     public Player(String firstName, String lastName,
                   String username, String password,
@@ -26,6 +28,8 @@ public class  Player extends User{
 
         this.numbersOfDaysSinceRegistration = 0;
         this.credit = 0.0;
+        this.numbersOfGames= 0;
+        this.numbersOfWin = 0;
         this.rate = 0.0;
         this.gameLogs = new HashMap<>();
         this.friends = new HashMap<>();
@@ -163,4 +167,22 @@ public class  Player extends User{
     public void setId(){
         this.playerID = DataBase.getDataBase().getAllPlayersWithID().size()+1;
     }
+
+    public int getNumbersOfWin() {
+        return numbersOfWin;
+    }
+
+    public void setNumbersOfWin(int numbersOfWin) {
+        this.numbersOfWin = numbersOfWin;
+    }
+
+    public int getNumbersOfGames() {
+        return numbersOfGames;
+    }
+
+    public void setNumbersOfGames(int numbersOfGames) {
+        this.numbersOfGames = numbersOfGames;
+    }
+
+
 }

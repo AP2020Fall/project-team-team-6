@@ -121,5 +121,21 @@ public class GameController {
 //        dataBase.getAllAsiaCountries().putAll(allCountries);
     }
 
+    public static  Player[] makeOfflinePlayers(String[] playersName){
+      Player[] players = new Player[playersName.length];
+      for(int i = 0; i < playersName.length ; i++){
+          Player player = new Player("","",playersName[i] ,
+                                     "","","");
+          players[i] = player;
+      }
+      return players;
+    }
+
+    //GAMES METHODS ----------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------
+    public void makeOnlineGame(){
+
+    }
+
 
 }

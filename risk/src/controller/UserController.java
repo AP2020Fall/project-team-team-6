@@ -99,6 +99,8 @@ public class UserController {
         return true;
     }
 
+    //End Users Methods
+    //-----------------------------------------------------------------------------------------------------------------
 
 
     //Players Methods
@@ -139,10 +141,6 @@ public class UserController {
         return player.getGameLogs();
     }
 
-    public HashMap<Integer , GameLog> getAllActiveGames(Player player){
-        //TODO
-        return null;
-    }
     public double getPlayersCredit(Player player){
         return player.getCredit();
     }
@@ -183,6 +181,18 @@ public class UserController {
         return null;
     }
 
+    public int getNumbersOfWin(Player player){
+        //TODO
+
+        return 0;
+    }
+
+    public int getNumbersOfPlayer(Player player){
+        //TODO
+
+
+        return 0;
+    }
 
 
     //Admin methods

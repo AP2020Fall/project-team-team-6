@@ -8,41 +8,59 @@ import java.util.HashMap;
 public class RiskGame {
     private String name;
     private int gameID;
+    private RiskGameType riskGameType;
+    private int gamePoint;
 
 
-    private HashMap<Integer , Country> allCountriesWithNumber;
-    private HashMap<Integer , Country> allNorthAmericasCountries;
-    private HashMap<Integer , Country> allSouthAmericasCountries;
-    private HashMap<Integer , Country> allAfricaCountries;
-    private HashMap<Integer , Country> allEuropeCountries;
-    private HashMap<Integer , Country> allAsiaCountries;
-    private HashMap<Integer , Country> allAustraliaCountries;
+    private HashMap<Integer , Country> allCountriesWithNumber = new HashMap<>();
+    private HashMap<Integer , Country> allNorthAmericasCountries = new HashMap<>();
+    private HashMap<Integer , Country> allSouthAmericasCountries = new HashMap<>();
+    private HashMap<Integer , Country> allAfricaCountries = new HashMap<>();
+    private HashMap<Integer , Country> allEuropeCountries = new HashMap<>();
+    private HashMap<Integer , Country> allAsiaCountries = new HashMap<>();
+    private HashMap<Integer , Country> allAustraliaCountries = new HashMap<>();
 
+
+    private int numberOfPlayers;
+    private Player winner ;
 
     private ArrayList<Card> allCards;
 
 
     private Player creator;
-    private ArrayList<Player> players;
+    private Player[] players;
 
 
-
-    public RiskGame(String name ,Player creator) {
+    //This constructor is for online
+    public RiskGame(String name ,Player creator , RiskGameType riskGameType , int numberOfPlayers , int gamePoint) {
         this.name = name;
-        this.allAfricaCountries = new HashMap<>();
-        this.allAsiaCountries   = new HashMap<>();
-        this.allAustraliaCountries  = new HashMap<>();
-        this.allEuropeCountries  = new HashMap<>();
-        this.allNorthAmericasCountries = new HashMap<>();
-        this.allSouthAmericasCountries = new HashMap<>();
-        this.allCountriesWithNumber = new HashMap<>();
+        this.numberOfPlayers = numberOfPlayers;
         GameController.makeAllCountries(this);
         this.allCards = GameController.makeAllCardsForGame();
         this.creator = creator;
-        this.players = new ArrayList<>();
-        players.add(creator);
+        this.players = new Player[numberOfPlayers];
+        players[0] = creator;
+        this.winner = null;
         setGameID();
     }
+    //This constructor is for offline games
+    public RiskGame(String name , String[] playersName , int numberOfPlayers) {
+        this.name = name;
+        this.numberOfPlayers = numberOfPlayers;
+
+        //Make card + Countries
+        GameController.makeAllCountries(this);
+        this.allCards = GameController.makeAllCardsForGame();
+
+        //Set Players
+        this.players = new Player[numberOfPlayers];
+        this.players = GameController.makeOfflinePlayers(playersName);
+        this.winner = null;
+
+
+        setGameID();
+    }
+
 
 
     public void setGameID(){
@@ -93,11 +111,27 @@ public class RiskGame {
         return creator;
     }
 
-    public ArrayList<Player> getPlayers() {
+    public Player[] getPlayers() {
         return players;
     }
 
     public void setCreator(Player creator) {
         this.creator = creator;
+    }
+
+    public RiskGameType getRiskGameType() {
+        return riskGameType;
+    }
+
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Player winner) {
+        this.winner = winner;
     }
 }
