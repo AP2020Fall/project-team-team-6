@@ -15,6 +15,9 @@ public class  Player extends User{
     private ArrayList<Card> playersCard;
     private ArrayList<Country> playersCountry;
     private int numberOfSoldiers = 0;
+    private ArrayList<String> sentMessages;
+    private ArrayList<String> receivedMessages;
+    private ArrayList<String> allMessages;
 
     public Player(String firstName, String lastName,
                   String username, String password,
@@ -30,6 +33,9 @@ public class  Player extends User{
         this.requestForPlaysList = new HashMap<>();
         this.playersCard = new ArrayList<>();
         this.playersCountry = new ArrayList<>();
+        this.sentMessages = new ArrayList<>();
+        this.receivedMessages = new ArrayList<>();
+        this.allMessages = new ArrayList<>();
         setId();
     }
 
@@ -80,6 +86,18 @@ public class  Player extends User{
 
     public int getNumberOfSoldiers() {
         return numberOfSoldiers;
+    }
+
+    public ArrayList<String> getSentMessages() {
+        return sentMessages;
+    }
+
+    public ArrayList<String> getReceivedMessages() {
+        return receivedMessages;
+    }
+
+    public ArrayList<String> getAllMessages() {
+        return allMessages;
     }
 
     public void setFirstName(String firstName) {
