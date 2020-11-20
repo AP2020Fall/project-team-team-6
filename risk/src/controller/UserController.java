@@ -7,13 +7,17 @@ import java.util.HashMap;
 
 public class UserController {
     private static UserController userController = new UserController();
+    private static EventController eventController = EventController.getEventController();
+    private static GameController gameController = GameController.getGameController();
     private DataBase dataBase;
 
     private UserController() {
         dataBase = DataBase.getDataBase();
     }
 
-
+    public static UserController getUserController() {
+        return userController;
+    }
 
     //Users Methods
     //-----------------------------------------------------------------------------------------------------------------
