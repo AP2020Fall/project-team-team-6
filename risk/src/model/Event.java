@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Event {
     private String gameName;
@@ -9,6 +10,7 @@ public class Event {
     private LocalDateTime endDate;
     private double eventPoint;
     private int eventID;
+    private ArrayList<Player> invitedPlayers;
 
     public Event(LocalDateTime startDate, LocalDateTime endDate, RiskGame riskGame,double eventPoint) {
         this.gameName = riskGame.getName();
@@ -16,6 +18,7 @@ public class Event {
         this.endDate = endDate;
         this.eventPoint = eventPoint;
         this.game = riskGame;
+        this.invitedPlayers = new ArrayList<>();
         setEventID();
     }
 
@@ -43,6 +46,10 @@ public class Event {
         return game;
     }
 
+    public ArrayList<Player> getInvitedPlayers() {
+        return invitedPlayers;
+    }
+
     public void setGame(RiskGame game) {
         this.game = game;
     }
@@ -67,4 +74,7 @@ public class Event {
         eventID = DataBase.getDataBase().getAllEvents().size()+1;
     }
 
+    public void setInvitedPlayers(ArrayList<Player> invitedPlayers) {
+        this.invitedPlayers = invitedPlayers;
+    }
 }

@@ -2,6 +2,7 @@ package controller;
 
 import model.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UserController {
@@ -155,9 +156,42 @@ public class UserController {
         //TODO .....
     }
 
+    //new player methods
+//----------------------------------------------------------------------------------------------------------------
 
-    
+    public void acceptEvent(Event event) {
+        //ToDo
+    }
+
+    public void rejectEvent(Event event) {
+        //ToDo
+    }
+
+    public void sendMessage(Player player1, Player player2) {
+        //ToDo
+    }
+
+    public ArrayList<String> showAllMessages(Player player) {
+        return null;
+    }
+
+    public ArrayList<String> showSentMessages(Player player) {
+        return null;
+    }
+
+    public ArrayList<String> showReceivedMessages(Player player) {
+        return null;
+    }
 
 
 
+    //Admin methods
+//------------------------------------------------------------------------------------------------------------------
+    public void sendMessageToAllPlayers() {
+        //ToDo
+    }
+
+    public void sendMessageToChosenPlayers(ArrayList<Player> chosenPlayers) {
+        //ToDo
+    }
 }
