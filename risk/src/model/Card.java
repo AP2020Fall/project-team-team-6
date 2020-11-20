@@ -6,7 +6,7 @@ public class Card {
     private Country country;
     private Color color;
     private CardDesigns cardDesigns;
-    private  Player player;
+    private Player player;
 
     private Card(Country country, Color color, CardDesigns cardsDesigns) {
         this.country = country;

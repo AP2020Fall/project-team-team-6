@@ -6,15 +6,12 @@ public class DataBase {
     private static  DataBase dataBase = new DataBase();
     private HashMap<Integer,Player> allPlayersWithID;
     private HashMap<Integer,RiskGame> allRiskGames;
-
-    private HashMap<Integer , RiskGame> allGames ;
     private HashMap<Integer , Event> allEvents;
     private Admin admin;
 
     private DataBase(){
        this.allPlayersWithID = new HashMap<>();
        this.allRiskGames = new HashMap<>();
-       this.allGames = new HashMap<>();
        this.allEvents = new HashMap<>();
     }
 
@@ -29,10 +26,6 @@ public class DataBase {
 
     public HashMap<Integer, RiskGame> getAllRiskGames() {
         return allRiskGames;
-    }
-
-    public HashMap<Integer, RiskGame> getAllGames() {
-        return allGames;
     }
 
     public Admin getAdmin() {
