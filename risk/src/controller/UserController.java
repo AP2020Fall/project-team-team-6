@@ -194,6 +194,19 @@ public class UserController {
         return 0;
     }
 
+    public void sendRequestForFriendShipInGame(Player firstPlayer , Player secondPlayer , RiskGame riskGame){
+        //TODO .....
+    }
+    public void acceptFriendShipInGame(Player firstPlayer , Player secondPlayer){
+        //TODO.....
+    }
+    public void rejectFriendShipInGame(Player firstPlayer , Player secondPlayer){
+
+    }
+    public void endFriendShipInGame(Player player){
+
+    }
+
 
     //Admin methods
 //------------------------------------------------------------------------------------------------------------------
