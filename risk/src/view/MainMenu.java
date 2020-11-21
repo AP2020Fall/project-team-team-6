@@ -51,7 +51,7 @@ public class MainMenu extends Menu {
                     public void execute() {
                         Menu nextMenu = this;
                         String inputInString = getInputFormatWithHelpText("^1|2|3$" , "Enter a number:");
-                        int input = Integer.parseInt(inputString);
+                        int input = Integer.parseInt(inputInString);
                         if(input == 1){
                             nextMenu = parentMenu;
                         }else if(input == 2 ){
