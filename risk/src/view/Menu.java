@@ -1,5 +1,9 @@
 package view;
 
+import controller.EventController;
+import controller.GameController;
+import controller.UserController;
+
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -11,6 +15,9 @@ public abstract class Menu {
     protected Menu parentMenu;
     protected Scanner scanner;
     private Scanner generalScanner = new Scanner(System.in);
+    protected GameController gameController;
+    protected UserController userController;
+    protected EventController eventController;
 
 
     public Menu(String name , Menu parentMenu){
@@ -18,6 +25,9 @@ public abstract class Menu {
         this.parentMenu = parentMenu;
         this.subMenus = new HashMap<>();
         this.scanner = generalScanner;
+        this.eventController = EventController.getEventController();
+        this.userController = UserController.getUserController();
+        this.gameController = GameController.getGameController();
     }
 
     public String getName() {
@@ -33,6 +43,7 @@ public abstract class Menu {
     }
 
     public void show(){
+        System.out.println(this.name);
         if(parentMenu == null){
             System.out.println("1.Exit");
         }else{

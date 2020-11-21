@@ -71,6 +71,7 @@ public class RiskGame {
         this.allCards = GameController.makeAllCardsForGame();
         this.timer = timer;
         this.isMapManually = isMapManually;
+        this.riskGameType = RiskGameType.OFFLINE;
 
         //Set Players
         this.players = new Player[numberOfPlayers];
