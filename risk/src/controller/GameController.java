@@ -55,15 +55,14 @@ public class GameController {
         makeAllAustraliaCountries(riskGame);
     }
     public static void makeAllNorthAmericasCountries(RiskGame riskGame){
-        DataBase dataBase = DataBase.getDataBase();
         String[] countriesName = {"Alaska","Albert","Central America","Eastern United States",
                 "Greenland","Northwest Territory","Ontario","Quebec","Western United States"};
         HashMap<Integer , Country> allCountries = new HashMap<>();
         for(int i =1 ; i <= 9 ; i++){
             allCountries.put(i,new Country(i,Continent.NORTH_AMERICA,countriesName[i-1]));
         }
-//        dataBase.getAllCountriesWithNumber().putAll(allCountries);
-//        dataBase.getAllNorthAmericasCountries().putAll(allCountries);
+        riskGame.getAllNorthAmericasCountries().putAll(allCountries);
+        riskGame.getAllCountriesWithNumber().putAll(allCountries);
     }
     public static void makeAllSouthAmericasCountries(RiskGame riskGame){
         DataBase dataBase = DataBase.getDataBase();
@@ -74,8 +73,8 @@ public class GameController {
             allCountries.put(i,new Country(i,Continent.SOUTH_AMERICA , countriesName[counter]));
             counter++;
         }
-//        dataBase.getAllCountriesWithNumber().putAll(allCountries);
-//        dataBase.getAllSouthAmericasCountries().putAll(allCountries);
+        riskGame.getAllSouthAmericasCountries().putAll(allCountries);
+        riskGame.getAllCountriesWithNumber().putAll(allCountries);
     }
     public static void makeAllAfricaCountries(RiskGame riskGame){
         DataBase dataBase = DataBase.getDataBase();
@@ -86,8 +85,9 @@ public class GameController {
             allCountries.put(i,new Country(i,Continent.AFRICA,countriesName[counter]));
             counter++;
         }
-//        dataBase.getAllCountriesWithNumber().putAll(allCountries);
-//        dataBase.getAllAfricaCountries().putAll(allCountries);
+        riskGame.getAllAfricaCountries().putAll(allCountries);
+        riskGame.getAllCountriesWithNumber().putAll(allCountries);
+
     }
     public static void makeAllEuropeCountries(RiskGame riskGame){
         DataBase dataBase = DataBase.getDataBase();
@@ -95,37 +95,35 @@ public class GameController {
         String[] countriesName = {"Great Britain","Iceland","Northern Europe","Scandinavia",
                 "Southern Europe" , "Ukraine", "Western Europe"};
         int counter = 0;
-        for(int i =19 ; i <= 27 ; i++){
+        for(int i =20 ; i <= 26 ; i++){
             allCountries.put(i,new Country(i,Continent.EUROPE , countriesName[counter]));
             counter++;
         }
-//        dataBase.getAllCountriesWithNumber().putAll(allCountries);
-//        dataBase.getAllEuropeCountries().putAll(allCountries);
+        riskGame.getAllEuropeCountries().putAll(allCountries);
+        riskGame.getAllCountriesWithNumber().putAll(allCountries);
     }
     public static void makeAllAsiaCountries(RiskGame riskGame){
-        DataBase dataBase = DataBase.getDataBase();
         HashMap<Integer , Country> allCountries = new HashMap<>();
         String[] countriesName = {"Afghanistan", "China", "India", "Irkutsk", "Japan",
                 "Kamchatka", "Middle East", "Mongolia", "Siam (Southeast Asia)", "Siberia", "Ural", "Yakutsk"};
         int counter = 0;
-        for(int i =27 ; i <= 39 ; i++){
+        for(int i =27 ; i <= 38 ; i++){
             allCountries.put(i,new Country(i,Continent.NORTH_AMERICA , countriesName[counter]));
             counter++;
         }
-//        dataBase.getAllCountriesWithNumber().putAll(allCountries);
-//        dataBase.getAllAsiaCountries().putAll(allCountries);
+        riskGame.getAllAsiaCountries().putAll(allCountries);
+        riskGame.getAllCountriesWithNumber().putAll(allCountries);
     }
     public static void makeAllAustraliaCountries(RiskGame riskGame){
-        DataBase dataBase = DataBase.getDataBase();
         HashMap<Integer , Country> allCountries = new HashMap<>();
         String[] countriesName ={"Eastern Australia","Indonesia","New Guinea","Western Australia"};
         int counter  =0;
-        for(int i =38 ; i <= 42 ; i++){
+        for(int i =39 ; i <= 42 ; i++){
             allCountries.put(i,new Country(i,Continent.AUSTRALIA , countriesName[counter]));
             counter++;
         }
-//        dataBase.getAllCountriesWithNumber().putAll(allCountries);
-//        dataBase.getAllAsiaCountries().putAll(allCountries);
+        riskGame.getAllAustraliaCountries().putAll(allCountries);
+        riskGame.getAllCountriesWithNumber().putAll(allCountries);
     }
 
     public static  Player[] makeOfflinePlayers(String[] playersName){
@@ -146,12 +144,29 @@ public class GameController {
     public void makeOnlineGameForEvent(String name , RiskGameType riskGameType , int numberOfPlayers , int gamePoint){
        //TODO......
     }
-    public void makeOfflineGame(String name , String[] playersName , int numberOfPlayers){
-      //TODO ......
+    public void makeOfflineGame(String name , String[] playersName , int numberOfPlayers , long timer , boolean isMapManually){
+        RiskGame offlineGame = new RiskGame(name , playersName , numberOfPlayers , timer , isMapManually );
+        RiskGame.setOfflineGame(offlineGame);
     }
     public boolean checkGame(RiskGame riskGame){
      return true;
      //TODO ......
+    }
+
+    public RiskGame getOfflineGame(){
+      return RiskGame.getOfflineGame();
+    }
+    public void setOfflineGame(RiskGame riskGame){
+     RiskGame.setOfflineGame(riskGame);
+    }
+    public boolean checkNumberOfPlayers(int numberOfPlayers) throws Exception {
+     if(numberOfPlayers < 2 ){
+         throw new Exception("You should have at least two player to start the game");
+     } else if (numberOfPlayers > 6) {
+         throw new Exception("You can't have more than six player in this game") ;
+     }else{
+         return true;
+     }
     }
 
     public void startGame(RiskGame riskGame , Player creator){
