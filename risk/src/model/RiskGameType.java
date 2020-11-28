@@ -1,5 +1,22 @@
 package model;
 
 public enum RiskGameType {
-    PRIVATE , PUBLIC , OFFLINE,
+    PRIVATE{
+        @Override
+        public String toString() {
+            return "Private";
+        }
+    } ,
+    PUBLIC{
+        @Override
+        public String toString() {
+            return "Public";
+        }
+    } ,
+    OFFLINE{@Override
+    public String toString() {
+        return "Offline";
+    }
+
+    };
 }

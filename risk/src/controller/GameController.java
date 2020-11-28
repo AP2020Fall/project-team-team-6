@@ -4,6 +4,8 @@ import model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GameController {
 
@@ -53,6 +55,7 @@ public class GameController {
         makeAllEuropeCountries(riskGame);
         makeAllAsiaCountries(riskGame);
         makeAllAustraliaCountries(riskGame);
+        makeCountriesNeighbours(riskGame);
     }
     public static void makeAllNorthAmericasCountries(RiskGame riskGame){
         String[] countriesName = {"Alaska","Albert","Central America","Eastern United States",
@@ -90,7 +93,6 @@ public class GameController {
 
     }
     public static void makeAllEuropeCountries(RiskGame riskGame){
-        DataBase dataBase = DataBase.getDataBase();
         HashMap<Integer , Country> allCountries = new HashMap<>();
         String[] countriesName = {"Great Britain","Iceland","Northern Europe","Scandinavia",
                 "Southern Europe" , "Ukraine", "Western Europe"};
@@ -134,6 +136,65 @@ public class GameController {
           players[i] = player;
       }
       return players;
+    }
+    private static void makeCountriesNeighbours(RiskGame riskGame){
+     String map = "1  6  6  5  5  5  21  23  23 23  23  --  --  --  --  --  --  --  --  38  38  32  32\n" +
+                  "2  2  7  7  8  -  20  20  22 22  25  25  25  25  37  37  37  36  36  36  30  30  31\n" +
+                  "9  9  9  4  4  -  26  26  26 24  24  33  33  25  27  27  28  28  28  34  34  34  34\n" +
+                  "3  3  3  3  3  -  18  18  18 18  18  16  33  33  33  29  29  29  35  --  --  --  --\n" +
+                  "3  -  -  -  -  -  18  18  18 18  18  16  33  33  33  29  29  29  35  --  --  --  --\n" +
+                  "13 11 11 11 11 11 18  18  18 18  18  16  33  33  33  29  29  29  35  --  --  --  --\n" +
+                  "12 12 10 -- -- -- 14  14  14 14  15  15  33  --  --  --  --  --  40  41  41  --  --\n" +
+                  "-- -- -- -- -- -- --  --  -- 19  19  17  --  --  --  --  --  --  42  42  39  --  --";
+     HashMap<Integer, Country> allCountries = riskGame.getAllCountriesWithNumber();
+     String[] rows = map.split("\\s+");
+     Country neighbourCountry = null;
+     Pattern pattern = Pattern.compile("\\d+");
+     Matcher matcher;
+     for(int i =0 ; i < rows.length; i++){
+         matcher = pattern.matcher(rows[i]);
+         if(!matcher.find())
+             continue;
+         int countriesNumber = Integer.parseInt(rows[i]);
+         int neighbourCountryNumber;
+         Country country = allCountries.get(countriesNumber);
+          matcher = pattern.matcher(rows[i]);
+         if(i-1 >= 0 && calculateRowNumber(i)== calculateRowNumber(i-1)){
+             matcher = pattern.matcher(rows[i-1]);
+             if(matcher.find()) {
+                 neighbourCountryNumber = Integer.parseInt(rows[i - 1]);
+                 neighbourCountry = allCountries.get(neighbourCountryNumber);
+                 country.getNeighboringCountries().add(neighbourCountry);
+             }
+         }
+         if(i+1 <= rows.length  && calculateRowNumber(i)== calculateRowNumber(i+1)){
+             matcher = pattern.matcher(rows[i+1]);
+             if(matcher.find()) {
+                 neighbourCountryNumber = Integer.parseInt(rows[i + 1]);
+                 neighbourCountry = allCountries.get(neighbourCountryNumber);
+                 country.getNeighboringCountries().add(neighbourCountry);
+             }
+         }
+         if(i-23 >= 0){
+             matcher = pattern.matcher(rows[i-23]);
+             if(matcher.find()) {
+                 neighbourCountryNumber = Integer.parseInt(rows[i - 23]);
+                 neighbourCountry = allCountries.get(neighbourCountryNumber);
+                 country.getNeighboringCountries().add(neighbourCountry);
+             }
+         }
+         if(i+23 <= rows.length){
+             matcher = pattern.matcher(rows[i+23]);
+             if(matcher.find()) {
+                 neighbourCountryNumber = Integer.parseInt(rows[i + 23]);
+                 neighbourCountry = allCountries.get(neighbourCountryNumber);
+                 country.getNeighboringCountries().add(neighbourCountry);
+             }
+         }
+     }
+    }
+    private static int calculateRowNumber(int countriesNumber){
+     return countriesNumber/23;
     }
 
     //GAMES METHODS ----------------------------------------------------------------------------------
