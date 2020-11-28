@@ -1,17 +1,47 @@
 package view;
 
+import model.Player;
 import model.RiskGame;
 
 public class OfflineGame extends Menu {
-    private String[] playersName;
     private RiskGame riskGame;
-    public OfflineGame( Menu parentMenu , RiskGame riskGame) {
+    private Player[] players;
+    public OfflineGame( Menu parentMenu) {
         super( "Play Offline Game" ,parentMenu);
-        //TODO players Name
-        this.riskGame = riskGame;
+        this.riskGame = gameController.getOfflineGame();
+        this.players = riskGame.getPlayers();
     }
 
-    public String[] getPlayersName() {
-        return playersName;
+    @Override
+    public void show() {
+        showRiskGameInformation();
+        System.out.println("1.Back");
+        System.out.println("2.Continue this game");
+    }
+
+    @Override
+    public void execute() {
+        String inputInString = getInputFormatWithHelpText("^1|2$" , "Enter a number : ");
+        int input = Integer.parseInt(inputInString);
+        Menu nextMenu = this;
+        if(input == 1){
+           nextMenu = parentMenu;
+        }else if(input == 2 ){
+            nextMenu = new RiskGameMenu(this ,  riskGame);
+        }
+        nextMenu.show();
+        nextMenu.execute();
+    }
+
+    private void showRiskGameInformation(){
+        System.out.println("Name : "+riskGame.getName());
+        System.out.print("Players : ");
+        for(int i = 1; i <= players.length ; i++){
+            System.out.print(i+"."+ players[i-1].getUsername() + "\t");
+        }
+        System.out.println();
+        System.out.println("Timer : " + riskGame.getTimer() +" s");
+        System.out.println(riskGame.getRiskGameType());
+        System.out.println("------------------------------------------------");
     }
 }

@@ -216,4 +216,5 @@ public class RiskGame {
     public boolean isMapManually() {
         return isMapManually;
     }
+
 }

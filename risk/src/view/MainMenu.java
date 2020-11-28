@@ -37,7 +37,7 @@ public class MainMenu extends Menu {
             offlineRiskGame = gameController.getOfflineGame();
             if(offlineRiskGame == null) {
                 makeNewOfflineGame();
-                nextMenu = new OfflineGame(this, gameController.getOfflineGame());
+                nextMenu = new OfflineGame(this);
             }else{
                 nextMenu = new Menu("Do you want to continue your last game ? " , this) {
                     @Override
@@ -55,10 +55,10 @@ public class MainMenu extends Menu {
                         if(input == 1){
                             nextMenu = parentMenu;
                         }else if(input == 2 ){
-                            nextMenu = new OfflineGame(this, gameController.getOfflineGame());
+                            nextMenu = new OfflineGame(this);
                         }else if(input == 3){
                             makeNewOfflineGame();
-                            nextMenu = new OfflineGame(this, gameController.getOfflineGame());
+                            nextMenu = new OfflineGame(this);
                         }
                         nextMenu.show();
                         nextMenu.execute();
