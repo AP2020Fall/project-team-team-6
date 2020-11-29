@@ -1,9 +1,9 @@
 package view;
 
-import controller.GameController;
-import model.Admin;
-import model.RiskGame;
-import model.User;
+import model.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainMenu extends Menu {
     private static Admin admin = null;
@@ -36,8 +36,9 @@ public class MainMenu extends Menu {
             nextMenu = this;
             offlineRiskGame = gameController.getOfflineGame();
             if(offlineRiskGame == null) {
-                makeNewOfflineGame();
-                nextMenu = new OfflineGame(this);
+                if(makeNewOfflineGame()) {
+                    nextMenu = new OfflineGame(this);
+                }
             }else{
                 nextMenu = new Menu("Do you want to continue your last game ? " , this) {
                     @Override
@@ -68,19 +69,6 @@ public class MainMenu extends Menu {
         }
         nextMenu.show();
         nextMenu.execute();
-    }
-    private String[] getPlayersName(int playersNumber){
-        String[] playersName = new String[playersNumber];
-        System.out.println("Enter Players names or type back to return");
-        for(int i =1 ; i < playersName.length+1 ; i++){
-            System.out.print(i+".");
-            playersName[i-1] = getInputWithFormat(".+");
-            if(playersName[i-1].equalsIgnoreCase("Back")) {
-                return null;
-            }
-            System.out.println();
-        }
-        return playersName;
     }
 
     private String getRiskGameName(){
@@ -126,20 +114,56 @@ public class MainMenu extends Menu {
         }
     }
     //TODO Manually is not complete
-    public void makeNewOfflineGame(){
+    public boolean makeNewOfflineGame(){
         String riskGameName = getRiskGameName();
         if(riskGameName == null)
-            return ;
+            return false ;
         int numberOfPlayers = getPlayersNumber();
         if(numberOfPlayers == 0)
-            return ;
-        String[] playersName = getPlayersName(numberOfPlayers);
-        if(playersName == null)
-            return ;
+            return false;
+        Player[] players= makeOfflinePlayers(numberOfPlayers);
+        if(players == null)
+            return false;
         long timer = setTimer();
         if(timer == 0){
-            return;
+            return false;
         }
-        gameController.makeOfflineGame(riskGameName , playersName , numberOfPlayers , timer , true);
+        gameController.makeOfflineGame(riskGameName , players , numberOfPlayers , timer , true);
+        return true;
+    }
+
+    private Player[] makeOfflinePlayers(int numberOfPlayers){
+        String inputInString;
+        String userName;
+        ArrayList<Color> colors = gameController.getDefaultColors();
+        HashMap<Integer,Color> colorsToChose = gameController.getColorsToChose(colors);
+        Player[] players = new Player[numberOfPlayers];
+        System.out.println("Enter the names of the players or write back to return");
+        for(int i = 0 ; i < numberOfPlayers ; i++) {
+            userName = getInputFormatWithHelpText(".+|(?i)back", "Please Enter a Username : ");
+            if(userName.equalsIgnoreCase("back"))
+                return null;
+            colorsToChose = gameController.getColorsToChose(colors);
+            showColorsToChose(colorsToChose);
+            while (true) {
+                inputInString = getInputWithFormat("\\d+|(?i)back");
+                if(inputInString.equalsIgnoreCase("back"))
+                    return null;
+                int input = Integer.parseInt(inputInString);
+                if(input<=colorsToChose.size()){
+                    colors.remove(colorsToChose.get(input));
+                    players[i] = gameController.makeOfflinePlayerWithColor(userName , colorsToChose.get(input));
+                    break;
+                }
+            }
+        }
+        return players;
+    }
+
+    private void showColorsToChose(HashMap<Integer , Color> colors){
+        for(Integer i : colors.keySet()){
+            System.out.print(i+"."+colors.get(i).toString()+"\t");
+        }
     }
 }
+

@@ -12,10 +12,22 @@ public class RiskGame {
     private int gamePoint;
     private static RiskGame offlineGame;
     private boolean isGameStarted;
-    private GameStages gameStages = GameStages.DRAFT;
+    private GameStages gameStages = GameStages.STARTING;
     private boolean hasOneSuccessAttack;
     private long timer;
     private boolean isMapManually;
+
+
+    private static final String defaultMap = "1  6  6  5  5  5  21  23  23 23  23  --  --  --  --  --  --  --  --  38  38  32  32\n" +
+            "2  2  7  7  8  -  20  20  22 22  25  25  25  25  37  37  37  36  36  36  30  30  31\n" +
+            "9  9  9  4  4  -  26  26  26 24  24  33  33  25  27  27  28  28  28  34  34  34  34\n" +
+            "3  3  3  3  3  -  18  18  18 18  18  16  33  33  33  29  29  29  35  --  --  --  --\n" +
+            "3  -  -  -  -  -  18  18  18 18  18  16  33  33  33  29  29  29  35  --  --  --  --\n" +
+            "13 11 11 11 11 11 18  18  18 18  18  16  33  33  33  29  29  29  35  --  --  --  --\n" +
+            "12 12 10 -- -- -- 14  14  14 14  15  15  33  --  --  --  --  --  40  41  41  --  --\n" +
+            "-- -- -- -- -- -- --  --  -- 19  19  17  --  --  --  --  --  --  42  42  39  --  --";
+
+    private String[][] riskMap = makeRiskMap();
 
 
     private HashMap<Integer , Country> allCountriesWithNumber = new HashMap<>();
@@ -62,7 +74,7 @@ public class RiskGame {
         setGameID();
     }
     //This constructor is for offline games
-    public RiskGame(String name , String[] playersName , int numberOfPlayers , long timer , boolean isMapManually) {
+    public RiskGame(String name , Player[] players  , int numberOfPlayers , long timer , boolean isMapManually) {
         this.name = name;
         this.numberOfPlayers = numberOfPlayers;
 
@@ -74,15 +86,13 @@ public class RiskGame {
         this.riskGameType = RiskGameType.OFFLINE;
 
         //Set Players
-        this.players = new Player[numberOfPlayers];
-        this.players = GameController.makeOfflinePlayers(playersName);
+        this.players = players;
         this.winner = null;
-        this.currentPlayer = null;
+        this.currentPlayer = players[0];
         this.isGameStarted = true;
         this.gamePoint =0 ;
-        this.riskGameType = RiskGameType.OFFLINE;
         this.hasOneSuccessAttack = false;
-
+        GameController.getGameController().addSoldiersForStartingGame(this);
 
         setGameID();
     }
@@ -217,4 +227,31 @@ public class RiskGame {
         return isMapManually;
     }
 
+    private String[][] makeRiskMap(){
+        String map[][] = new String[8][23];
+        String[] defaultMap = RiskGame.defaultMap.split("\\s+");
+        for(int i = 0 ; i < 8 ; i++){
+            for(int j =0 ; j < 23 ; j++){
+                map[i][j] = defaultMap[i*23 + j];
+            }
+        }
+        return map;
+    }
+
+    public static String getDefaultMap() {
+        return defaultMap;
+    }
+
+    public String[][] getRiskMap() {
+        return riskMap;
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
+    }
+
+
+    public void setGameStages(GameStages gameStages) {
+        this.gameStages = gameStages;
+    }
 }

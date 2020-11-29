@@ -3,6 +3,7 @@ package controller;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,7 +49,6 @@ public class GameController {
 
 
     public static void makeAllCountries(RiskGame riskGame){
-        //TODO hanooz marz haro va rah ertebati ghate va kamel nashode
         makeAllNorthAmericasCountries(riskGame);
         makeAllSouthAmericasCountries(riskGame);
         makeAllAfricaCountries(riskGame);
@@ -80,7 +80,6 @@ public class GameController {
         riskGame.getAllCountriesWithNumber().putAll(allCountries);
     }
     public static void makeAllAfricaCountries(RiskGame riskGame){
-        DataBase dataBase = DataBase.getDataBase();
         HashMap<Integer , Country> allCountries = new HashMap<>();
         String[] countriesName= {"Congo","East Africa","Egypt","Madagascar","North Africa" ,"South Africa"};
         int counter = 0;
@@ -128,24 +127,16 @@ public class GameController {
         riskGame.getAllCountriesWithNumber().putAll(allCountries);
     }
 
-    public static  Player[] makeOfflinePlayers(String[] playersName){
-      Player[] players = new Player[playersName.length];
-      for(int i = 0; i < playersName.length ; i++){
-          Player player = new Player("","",playersName[i] ,
-                                     "","","");
-          players[i] = player;
-      }
-      return players;
-    }
+//    public static  Player[] makeOfflinePlayers(String[] playersName){
+//      Player[] players = new Player[playersName.length];
+//      for(int i = 0; i < playersName.length ; i++){
+//          Player player = makeOfflinePlayerWithColor()
+//          players[i] = player;
+//      }
+//      return players;
+//    }
     private static void makeCountriesNeighbours(RiskGame riskGame){
-     String map = "1  6  6  5  5  5  21  23  23 23  23  --  --  --  --  --  --  --  --  38  38  32  32\n" +
-                  "2  2  7  7  8  -  20  20  22 22  25  25  25  25  37  37  37  36  36  36  30  30  31\n" +
-                  "9  9  9  4  4  -  26  26  26 24  24  33  33  25  27  27  28  28  28  34  34  34  34\n" +
-                  "3  3  3  3  3  -  18  18  18 18  18  16  33  33  33  29  29  29  35  --  --  --  --\n" +
-                  "3  -  -  -  -  -  18  18  18 18  18  16  33  33  33  29  29  29  35  --  --  --  --\n" +
-                  "13 11 11 11 11 11 18  18  18 18  18  16  33  33  33  29  29  29  35  --  --  --  --\n" +
-                  "12 12 10 -- -- -- 14  14  14 14  15  15  33  --  --  --  --  --  40  41  41  --  --\n" +
-                  "-- -- -- -- -- -- --  --  -- 19  19  17  --  --  --  --  --  --  42  42  39  --  --";
+     String map = RiskGame.getDefaultMap();
      HashMap<Integer, Country> allCountries = riskGame.getAllCountriesWithNumber();
      String[] rows = map.split("\\s+");
      Country neighbourCountry = null;
@@ -197,6 +188,13 @@ public class GameController {
      return countriesNumber/23;
     }
 
+    public  Player makeOfflinePlayerWithColor(String userName , Color color){
+     Player player = new Player("","",userName,"" ,"" , "");
+     player.setCurrentColor(color);
+     return player;
+    }
+
+
     //GAMES METHODS ----------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------
     public void makeOnlineGameForPlayer(String name , Player creator , RiskGameType riskGameType , int numberOfPlayers){
@@ -205,8 +203,8 @@ public class GameController {
     public void makeOnlineGameForEvent(String name , RiskGameType riskGameType , int numberOfPlayers , int gamePoint){
        //TODO......
     }
-    public void makeOfflineGame(String name , String[] playersName , int numberOfPlayers , long timer , boolean isMapManually){
-        RiskGame offlineGame = new RiskGame(name , playersName , numberOfPlayers , timer , isMapManually );
+    public void makeOfflineGame(String name , Player[] players, int numberOfPlayers , long timer , boolean isMapManually){
+        RiskGame offlineGame = new RiskGame(name , players , numberOfPlayers , timer , isMapManually );
         RiskGame.setOfflineGame(offlineGame);
     }
     public boolean checkGame(RiskGame riskGame){
@@ -238,8 +236,23 @@ public class GameController {
      //TODO ....
         return true;
     }
-    public void addSoldiersForStartingGame(RiskGame riskGame , int numberOfPlayers){
-     //TODO ....
+    public void addSoldiersForStartingGame(RiskGame riskGame){
+      int numberOfPlayers = riskGame.getNumberOfPlayers();
+      int numberOfSoldiers =0;
+      if(numberOfPlayers == 2){
+          numberOfSoldiers = 40;
+      }else if(numberOfPlayers == 3){
+          numberOfSoldiers = 35;
+      }else if(numberOfPlayers == 4){
+          numberOfSoldiers = 30;
+      }else if(numberOfPlayers == 5){
+          numberOfSoldiers = 25;
+      }else if(numberOfPlayers == 6){
+          numberOfSoldiers = 20;
+      }
+      for(Player player : riskGame.getPlayers()){
+         player.setNumberOfSoldiers(numberOfSoldiers);
+      }
     }
     public void addSoldiers(Player player  , int numbersOfSoldiers , RiskGame riskGame){
      //TODO .......
@@ -247,9 +260,76 @@ public class GameController {
     public void calculateNumberOfSoldiersToAdd(Player player){
 
     }
-    public void placeSoldiers(RiskGame  riskGame , int numbersOfSoldiers , Player player){
-     //TODO .........
+    public void placeSoldiers(Country country ,int numbersOfSoldiers , Player player ) throws Exception{
+      if(numbersOfSoldiers > player.getNumberOfSoldiers())
+          throw new Exception("You don't have this much soldiers");
+      if(country.getColor() != null && country.getColor() != player.getCurrentColor())
+          throw new Exception("This country is not yours");
+      if(country.getColor() == null){
+          country.setColor(player.getCurrentColor());
+      }
+      addSoliderToCountry(country , numbersOfSoldiers);
+      removeSoldiersFormPlayer(player,numbersOfSoldiers);
+
     }
+
+    public void placeSoldiersForStartingStage(RiskGame riskGame ,Country country , Player player ) throws Exception {
+     if (riskGame.getGameStages().equals(GameStages.STARTING)) {
+         if (checkCountriesForStartingStage(riskGame)) {
+             if (country.getColor() != null && country.getColor() != player.getCurrentColor())
+                 throw new Exception("This country is not yours");
+             else
+                 placeSoldiers(country, 1, player);
+         } else {
+             if (country.getColor() != null)
+                 throw new Exception("You can't put soldiers in this country while you are in starting stage");
+             placeSoldiers(country, 1, player);
+         }
+     }else{
+         throw new Exception("You are not in starting stage");
+     }
+    }
+    public int calculateNumberOfSoldiersForStartingStage(int playersNumber){
+       int numberOfSoldiers = 40;
+       for(int i = 2; i < playersNumber ; i++){
+           numberOfSoldiers -=5;
+       }
+       return numberOfSoldiers * playersNumber;
+    }
+
+    public void goNextStage(RiskGame riskGame){
+       if(riskGame.getGameStages().equals(GameStages.STARTING))
+           riskGame.setGameStages(GameStages.DRAFT);
+       else if(riskGame.getGameStages().equals(GameStages.DRAFT))
+           riskGame.setGameStages(GameStages.ATTACK);
+       else if(riskGame.getGameStages().equals(GameStages.ATTACK))
+           riskGame.setGameStages(GameStages.FORTIFY);
+    }
+    public boolean checkCountriesForStartingStage(RiskGame riskGame){
+       HashMap<Integer , Country> allCountries = riskGame.getAllCountriesWithNumber();
+
+       for(Country country : allCountries.values()){
+           if(country.getColor() ==null)
+               return false;
+       }
+
+       return true;
+    }
+
+    public void addSoliderToCountry(Country country , int numberOfSoldiers){
+      int numberOfSoldiersInCountry = country.getNumberOfSoldiers();
+      numberOfSoldiersInCountry+= numberOfSoldiers;
+      country.setNumberOfSoldiers(numberOfSoldiersInCountry);
+    }
+
+    public void removeSoldiersFormPlayer(Player player , int numberOfSoldiers) throws Exception {
+      int numberOfCurrentSoldiers = player.getNumberOfSoldiers();
+      if(numberOfSoldiers> numberOfCurrentSoldiers)
+          throw new Exception("Error");
+      numberOfCurrentSoldiers -= numberOfSoldiers;
+      player.setNumberOfSoldiers(numberOfCurrentSoldiers);
+    }
+
     public boolean attack(Country country , Player attacker , Player defender , RiskGame riskGame){
      //TODO .....
         return true;
@@ -276,8 +356,18 @@ public class GameController {
      //TODO
     }
 
-    public void nextTurn(RiskGame riskGame){
-     //TODO
+    public void nextPlayer(RiskGame riskGame){
+      Player[] players = riskGame.getPlayers();
+      ArrayList<Player> gamePlayers = new ArrayList<>(Arrays.asList(players));
+      Player currentPlayer = riskGame.getCurrentPlayer();
+
+      int playersIndex = gamePlayers.indexOf(currentPlayer);
+      if(playersIndex == gamePlayers.size()-1)
+          currentPlayer = gamePlayers.get(0);
+      else{
+          currentPlayer = gamePlayers.get(playersIndex+1);
+      }
+      riskGame.setCurrentPlayer(currentPlayer);
     }
     public void endGame(RiskGame riskGame){
      //TODO .....
@@ -300,6 +390,22 @@ public class GameController {
     }
     public void setCountriesUnManually(RiskGame riskGame){
      //TODO
+    }
+
+    public ArrayList<Color> getDefaultColors(){
+     Color[] colors = Color.getDefaultColor();
+        ArrayList<Color> defaultColors = new ArrayList<>(Arrays.asList(colors));
+     return defaultColors;
+    }
+
+    public HashMap<Integer , Color> getColorsToChose(ArrayList<Color> colors){
+     HashMap<Integer, Color> colorsToChose = new HashMap<>();
+     int counter = 1;
+     for(Color c : colors){
+         colorsToChose.put(counter , c);
+         counter++;
+     }
+     return colorsToChose;
     }
 
 
