@@ -13,14 +13,14 @@ public class  Player extends User{
     private HashMap<Integer , Player> requestsForFriendShips;
     private HashMap<Integer , RequestForPlaying> requestForPlaysList;
     private ArrayList<Card> playersCard;
-    private ArrayList<Country> playersCountry;
+    private HashMap<Integer , Country> playersCountry;
     private int numberOfSoldiers = 0;
     //This should change to HashMap<User , String >
     private ArrayList<String> sentMessages;
     private ArrayList<String> receivedMessages;
     private ArrayList<String> allMessages;
 
-
+    private Color currentColor;
     private int numbersOfWin;
     private int numbersOfGames;
     private Player friendInGame;
@@ -41,12 +41,13 @@ public class  Player extends User{
         this.requestsForFriendShips = new HashMap<>();
         this.requestForPlaysList = new HashMap<>();
         this.playersCard = new ArrayList<>();
-        this.playersCountry = new ArrayList<>();
+        this.playersCountry = new HashMap<>();
         this.sentMessages = new ArrayList<>();
         this.receivedMessages = new ArrayList<>();
         this.allMessages = new ArrayList<>();
         this.requestForFriendShipInGame = new ArrayList<>();
         this.friendInGame = null;
+        this.currentColor = null;
         setId();
     }
 
@@ -91,7 +92,7 @@ public class  Player extends User{
         return playersCard;
     }
 
-    public ArrayList<Country> getPlayersCountry() {
+    public HashMap<Integer, Country> getPlayersCountry() {
         return playersCountry;
     }
 
@@ -201,5 +202,13 @@ public class  Player extends User{
 
     public ArrayList<Player> getRequestForFriendShipInGame() {
         return requestForFriendShipInGame;
+    }
+
+    public Color getCurrentColor() {
+        return currentColor;
+    }
+
+    public void setCurrentColor(Color currentColor) {
+        this.currentColor = currentColor;
     }
 }
