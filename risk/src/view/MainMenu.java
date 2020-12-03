@@ -128,7 +128,15 @@ public class MainMenu extends Menu {
         if(timer == 0){
             return false;
         }
-        gameController.makeOfflineGame(riskGameName , players , numberOfPlayers , timer , true);
+        System.out.println("Do U wanna Play Manually for Starting or Unmanually ?");
+        System.out.println("1.Back      2.Manually      3.Unmanually");
+        String input = getInputWithFormat("^1|2|3$");
+        if(input.equalsIgnoreCase("1"))
+            return false;
+        else if(input.equalsIgnoreCase("2"))
+            gameController.makeOfflineGame(riskGameName , players , numberOfPlayers , timer , true);
+        else if(input.equalsIgnoreCase("3"))
+            gameController.makeOfflineGame(riskGameName , players , numberOfPlayers , timer , false);
         return true;
     }
 
@@ -165,5 +173,6 @@ public class MainMenu extends Menu {
             System.out.print(i+"."+colors.get(i).toString()+"\t");
         }
     }
+
 }
 

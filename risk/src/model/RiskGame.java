@@ -4,6 +4,8 @@ import controller.GameController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RiskGame {
     private String name;
@@ -12,11 +14,12 @@ public class RiskGame {
     private int gamePoint;
     private static RiskGame offlineGame;
     private boolean isGameStarted;
-    private GameStages gameStages = GameStages.STARTING;
+    private GameStages gameStages;
+    private  boolean hasGotSoldiersForDraft = false;
     private boolean hasOneSuccessAttack;
     private long timer;
     private boolean isMapManually;
-
+    private Country[][] allCountriesInArray = new Country[8][23];
 
     private static final String defaultMap = "1  6  6  5  5  5  21  23  23 23  23  --  --  --  --  --  --  --  --  38  38  32  32\n" +
             "2  2  7  7  8  -  20  20  22 22  25  25  25  25  37  37  37  36  36  36  30  30  31\n" +
@@ -68,9 +71,11 @@ public class RiskGame {
         this.isGameStarted = false;
         this.currentPlayer = null;
         this.gamePoint = gamePoint;
+        this.gameStages = GameStages.STARTING;
         this.hasOneSuccessAttack = false;
         this.timer = timer;
         this.isMapManually = isMapManually;
+        makeAllCountriesArray();
         setGameID();
     }
     //This constructor is for offline games
@@ -90,9 +95,11 @@ public class RiskGame {
         this.winner = null;
         this.currentPlayer = players[0];
         this.isGameStarted = true;
+        this.gameStages = GameStages.STARTING;
         this.gamePoint =0 ;
         this.hasOneSuccessAttack = false;
         GameController.getGameController().addSoldiersForStartingGame(this);
+        makeAllCountriesArray();
 
         setGameID();
     }
@@ -253,5 +260,32 @@ public class RiskGame {
 
     public void setGameStages(GameStages gameStages) {
         this.gameStages = gameStages;
+    }
+
+    public void  makeAllCountriesArray(){
+        Pattern pattern = Pattern.compile("\\d+");
+        Matcher matcher;
+        for(int i = 0 ; i < 8 ; i++){
+            for(int j =0 ; j < 23 ; j++){
+                matcher = pattern.matcher(riskMap[i][j]);
+                if(matcher.find()){
+                    int countryCoordinate = Integer.parseInt(riskMap[i][j]);
+                    Country country = allCountriesWithNumber.get(countryCoordinate);
+                    allCountriesInArray[i][j] = country;
+                }
+            }
+        }
+    }
+
+    public Country[][] getAllCountriesInArray() {
+        return allCountriesInArray;
+    }
+
+    public boolean isHasGotSoldiersForDraft() {
+        return hasGotSoldiersForDraft;
+    }
+
+    public void setHasGotSoldiersForDraft(boolean hasGotSoldiersForDraft) {
+        this.hasGotSoldiersForDraft = hasGotSoldiersForDraft;
     }
 }
