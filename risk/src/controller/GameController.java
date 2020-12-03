@@ -2,9 +2,7 @@ package controller;
 
 import model.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -251,15 +249,54 @@ public class GameController {
           numberOfSoldiers = 20;
       }
       for(Player player : riskGame.getPlayers()){
-         player.setNumberOfSoldiers(numberOfSoldiers);
+         addSoldiers(player , numberOfSoldiers);
       }
     }
-    public void addSoldiers(Player player  , int numbersOfSoldiers , RiskGame riskGame){
-     //TODO .......
+    public void addSoldiers(Player player  , int numbersOfSoldiers ){
+      int currentNumberOfSoldiers = player.getNumberOfSoldiers();
+      currentNumberOfSoldiers += numbersOfSoldiers;
+      player.setNumberOfSoldiers(currentNumberOfSoldiers);
     }
-    public void calculateNumberOfSoldiersToAdd(Player player){
+    public void calculateNumberOfSoldiersToAddInDraft(Player player){
+     int numberOfCountries = player.getPlayersCountry().size();
+     if(numberOfCountries < 12)
+         addSoldiers(player , 3);
+     else {
+         int numberOfSoldier = numberOfCountries / 4;
+         addSoldiers(player , numberOfSoldier);
+     }
+     if(checkIfPlayerHasContinent(player , Continent.NORTH_AMERICA))
+         addSoldiers(player,5);
+     else if(checkIfPlayerHasContinent(player , Continent.SOUTH_AMERICA))
+         addSoldiers(player,2);
+     else if(checkIfPlayerHasContinent(player , Continent.AFRICA))
+         addSoldiers(player,3);
+     else if(checkIfPlayerHasContinent(player , Continent.EUROPE))
+         addSoldiers(player,5);
+     else if(checkIfPlayerHasContinent(player , Continent.ASIA))
+         addSoldiers(player,7);
+     else if(checkIfPlayerHasContinent(player , Continent.AUSTRALIA))
+         addSoldiers(player,2);
+    }
+    public boolean checkIfPlayerHasContinent(Player player , Continent continent){
+       ArrayList<Integer> allContinentCountries = new ArrayList<>(continent.getCountries().keySet());
+       ArrayList<Integer> allPlayersCountries = new ArrayList<>(player.getPlayersCountry().keySet());
+       for(int i : allContinentCountries){
+           if(!allPlayersCountries.contains(i))
+               return false;
+       }
+       return true;
+    }
 
+    public boolean hasGotSoldiersForDraft(RiskGame riskGame){
+     return riskGame.isHasGotSoldiersForDraft();
     }
+
+    public void changeHasGotSoldiersForDraft(RiskGame riskGame){
+       riskGame.setHasGotSoldiersForDraft(!riskGame.isHasGotSoldiersForDraft());
+    }
+
+
     public void placeSoldiers(Country country ,int numbersOfSoldiers , Player player ) throws Exception{
       if(numbersOfSoldiers > player.getNumberOfSoldiers())
           throw new Exception("You don't have this much soldiers");
@@ -267,10 +304,15 @@ public class GameController {
           throw new Exception("This country is not yours");
       if(country.getColor() == null){
           country.setColor(player.getCurrentColor());
+          player.getPlayersCountry().put(country.getCountryCoordinate() , country);
       }
       addSoliderToCountry(country , numbersOfSoldiers);
       removeSoldiersFormPlayer(player,numbersOfSoldiers);
 
+    }
+
+    public Country[][] getAllCountriesInArray(RiskGame riskGame){
+       return riskGame.getAllCountriesInArray();
     }
 
     public void placeSoldiersForStartingStage(RiskGame riskGame ,Country country , Player player ) throws Exception {
@@ -289,13 +331,6 @@ public class GameController {
          throw new Exception("You are not in starting stage");
      }
     }
-    public int calculateNumberOfSoldiersForStartingStage(int playersNumber){
-       int numberOfSoldiers = 40;
-       for(int i = 2; i < playersNumber ; i++){
-           numberOfSoldiers -=5;
-       }
-       return numberOfSoldiers * playersNumber;
-    }
 
     public void goNextStage(RiskGame riskGame){
        if(riskGame.getGameStages().equals(GameStages.STARTING))
@@ -304,6 +339,8 @@ public class GameController {
            riskGame.setGameStages(GameStages.ATTACK);
        else if(riskGame.getGameStages().equals(GameStages.ATTACK))
            riskGame.setGameStages(GameStages.FORTIFY);
+       else if(riskGame.getGameStages().equals(GameStages.FORTIFY))
+           riskGame.setGameStages(GameStages.DRAFT);
     }
     public boolean checkCountriesForStartingStage(RiskGame riskGame){
        HashMap<Integer , Country> allCountries = riskGame.getAllCountriesWithNumber();
@@ -322,6 +359,16 @@ public class GameController {
       country.setNumberOfSoldiers(numberOfSoldiersInCountry);
     }
 
+    public void removeSoldierFormCountry(Country country , int numberOfSoldiers) throws Exception {
+       int currentNumberOfSoldiers = country.getNumberOfSoldiers();
+       if(currentNumberOfSoldiers < numberOfSoldiers)
+           throw new Exception("You can't remove this much soldiers !!");
+       else{
+           currentNumberOfSoldiers -= numberOfSoldiers;
+           country.setNumberOfSoldiers(currentNumberOfSoldiers);
+       }
+    }
+
     public void removeSoldiersFormPlayer(Player player , int numberOfSoldiers) throws Exception {
       int numberOfCurrentSoldiers = player.getNumberOfSoldiers();
       if(numberOfSoldiers> numberOfCurrentSoldiers)
@@ -329,18 +376,127 @@ public class GameController {
       numberOfCurrentSoldiers -= numberOfSoldiers;
       player.setNumberOfSoldiers(numberOfCurrentSoldiers);
     }
-
-    public boolean attack(Country country , Player attacker , Player defender , RiskGame riskGame){
-     //TODO .....
-        return true;
+    //TODO ....
+    public void moveSoldiersFromACountryToAnotherCountry(Country first , Country second , int numberOfSoldiers) throws Exception {
+       removeSoldierFormCountry(first , numberOfSoldiers);
+       addSoliderToCountry(second , numberOfSoldiers);
     }
-    public int calculateDiceNumber(boolean isAttack , Country country , RiskGame riskGame){
-        //TODO
-        return 0;
+
+
+    public boolean isPathAvailableForFortifying(RiskGame riskGame ,Player player  , Country firstCountry , Country destinationCountry , ArrayList<Country> chosenCountries){
+       chosenCountries.add(firstCountry);
+       ArrayList<Country> neighboursCountries = getNeighboursCountriesWithPlayerColor(riskGame , player , firstCountry );
+        neighboursCountries.removeIf(chosenCountries::contains);
+       if (neighboursCountries.contains(destinationCountry))
+           return true;
+       for(Country country : neighboursCountries){
+           isPathAvailableForFortifying(riskGame , player , country , destinationCountry , chosenCountries);
+       }
+       return false;
+    }
+
+    public ArrayList<Country> getNeighboursCountriesWithPlayerColor(RiskGame riskGame , Player player , Country country){
+        ArrayList<Country> allNeighboursCountriesWithPlayerColor = new ArrayList<>();
+        HashMap<Integer , Country> allCountries = riskGame.getAllCountriesWithNumber();
+        for(Country country1 : country.getNeighboringCountries()){
+            if(country1.getColor().equals(player.getCurrentColor()))
+                allNeighboursCountriesWithPlayerColor.add(country1);
+        }
+        return allNeighboursCountriesWithPlayerColor;
+    }
+
+
+    public void occupyingACountry(RiskGame riskGame , Player attacker , Country country ){
+     Player defender = getDefenderPlayerByCountryColor(riskGame  , country);
+     HashMap<Integer , Country> attackerCountries=  attacker.getPlayersCountry();
+     HashMap<Integer , Country> defenderCountries = defender.getPlayersCountry();
+     defenderCountries.remove(country.getCountryCoordinate());
+     attackerCountries.put(country.getCountryCoordinate() , country);
+     country.setColor(attacker.getCurrentColor());
+    }
+    public void removeOneSoldierFromCountry(Country country){
+       int currentNumberOfSoldiers = country.getNumberOfSoldiers();
+       if(currentNumberOfSoldiers > 0) {
+           currentNumberOfSoldiers--;
+           country.setNumberOfSoldiers(currentNumberOfSoldiers);
+       }
+    }
+    public Player getDefenderPlayerByCountryColor(RiskGame riskGame,Country defenderCounter){
+       Player[] players = riskGame.getPlayers();
+       for(Player player : players){
+           if(player.getCurrentColor().equals(defenderCounter.getColor()))
+               return player;
+       }
+       return null;
+    }
+    public boolean isCountryForPlayer(Country country , Player player){
+        return player.getPlayersCountry().containsKey(country.getCountryCoordinate());
+    }
+
+    public ArrayList<Integer> compareDiceForAttack(ArrayList<Integer> attackerDice , ArrayList<Integer> defenderDice){
+        int numberOfDefenderDice = defenderDice.size();
+        Collections.sort(attackerDice);
+        Collections.reverse(attackerDice);
+        ArrayList<Integer> finalDice = new ArrayList<>();
+        for(int i = 0 ; i < numberOfDefenderDice; i++ ){
+            finalDice.add(attackerDice.get(i) - defenderDice.get(i));
+        }
+        return finalDice;
+    }
+
+   public boolean attack(RiskGame riskGame , Player attacker , Country attackerCountry , Country defenderCountry , ArrayList<Integer> attackerDices , ArrayList<Integer> defenderDices) throws Exception {
+         if(isCountryForPlayer(attackerCountry , attacker)){
+             if(!isCountryForPlayer(defenderCountry , attacker)){
+                 if(attackerCountry.getNumberOfSoldiers() > 1) {
+                     ArrayList<Integer> totalDiceAfterAttack = compareDiceForAttack(attackerDices, defenderDices);
+                     for (int i : totalDiceAfterAttack) {
+                         if (i <= 0) {
+                             removeOneSoldierFromCountry(attackerCountry);
+                         } else {
+                             removeOneSoldierFromCountry(defenderCountry);
+                             if (defenderCountry.getNumberOfSoldiers() == 0)
+                                 return true;
+                         }
+                     }
+                     return false;
+                 }else{
+                     throw new Exception("You cant attack with this country cause u only have one player in this country");
+                 }
+             }else{
+                 throw new Exception("You cant attack your own countries");
+             }
+         }else{
+             throw new Exception("This country is not yours to attack");
+         }
+   }
+    public int getNumberOfDiceForAttacker(Country country){
+      if(country.getNumberOfSoldiers() > 4)
+          return 3;
+      else if(country.getNumberOfSoldiers() > 3)
+          return 2;
+      else if(country.getNumberOfSoldiers() > 2 )
+          return 1;
+      else
+          return 0;
+    }
+    public int getNumberOfDiceForDefender(Country country){
+       if(country.getNumberOfSoldiers() >= 2)
+           return 2;
+       return 1;
+    }
+
+    public ArrayList<Integer> rollDice(int numberOfDice){
+       ArrayList<Integer> dices = new ArrayList<>();
+       for(int i = 0 ; i < numberOfDice ; i++){
+           dices.add(rollDice());
+       }
+       return dices;
     }
     public int rollDice(){
-        //TODO
-        return 0;
+        Random r = new Random();
+        int low = 1;
+        int high = 6;
+        return r.nextInt(high-low) + low;
     }
     public void endAttack(Player player , RiskGame riskGame){
      //TODO
@@ -388,9 +544,6 @@ public class GameController {
     public void checkTimer(Player player , RiskGame riskGame){
      //TODO
     }
-    public void setCountriesUnManually(RiskGame riskGame){
-     //TODO
-    }
 
     public ArrayList<Color> getDefaultColors(){
      Color[] colors = Color.getDefaultColor();
@@ -407,6 +560,54 @@ public class GameController {
      }
      return colorsToChose;
     }
+    public boolean isStartingStageFinished(RiskGame riskGame){
+      Player[] players = riskGame.getPlayers();
+      for(Player player : players){
+          if(player.getNumberOfSoldiers() != 0)
+              return false;
+      }
+      return true;
+    }
+
+    public void putSoldiersForStartingStageUnManually(RiskGame riskGame) throws Exception {
+       int numberOfPlayers = riskGame.getNumberOfPlayers();
+       HashMap<Integer , Country> allCountries = riskGame.getAllCountriesWithNumber();
+       Player[] players = riskGame.getPlayers();
+       int numberOfCountriesForEachPlayer = 42 / players.length;
+       ArrayList<Integer> countriesCoordinates = new ArrayList<>(allCountries.keySet());
+       for(int i =0 ; i < numberOfPlayers -1 ; i++){
+           Player currentPlayer = players[i];
+           for(int j =0 ; j < numberOfCountriesForEachPlayer ; j++){
+               int randomIndex = makeARandomNumber(countriesCoordinates.size() - 1);
+               int randomCountryCoordinate = countriesCoordinates.get(randomIndex);
+               Country randomCountry = allCountries.get(randomCountryCoordinate);
+               placeSoldiersForStartingStage(riskGame , randomCountry , currentPlayer);
+               countriesCoordinates.remove(randomIndex);
+           }
+       }
+       Player lastPlayer = players[numberOfPlayers - 1 ];
+       for(int i : countriesCoordinates){
+           Country country = allCountries.get(i);
+           placeSoldiersForStartingStage(riskGame , country , lastPlayer);
+       }
+       for(int i = 0 ; i < numberOfPlayers ; i++){
+           Player player = players[i];
+           int numberOfSoldiers = player.getNumberOfSoldiers();
+           ArrayList<Integer> playersCountries =  new ArrayList<>(player.getPlayersCountry().keySet());
+           for(int j = 0 ; j < numberOfSoldiers ; j++){
+               int randomIndex = makeARandomNumber(playersCountries.size() -1 );
+               int randomCountryCoordinate = playersCountries.get(randomIndex);
+               Country country =  player.getPlayersCountry().get(randomCountryCoordinate);
+               placeSoldiersForStartingStage(riskGame , country , player);
+        }
+       }
+    }
+    public int makeARandomNumber(int max){
+      Random random = new Random();
+        return random.nextInt(max);
+    }
+
+
 
 
 

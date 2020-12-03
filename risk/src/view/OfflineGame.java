@@ -42,6 +42,11 @@ public class OfflineGame extends Menu {
         System.out.println();
         System.out.println("Timer : " + riskGame.getTimer() +" s");
         System.out.println(riskGame.getRiskGameType());
+        if(riskGame.isMapManually())
+            System.out.println("Manually");
+        else{
+            System.out.println("Unmanually");
+        }
         System.out.println("------------------------------------------------");
     }
 }
