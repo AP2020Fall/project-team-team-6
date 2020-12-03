@@ -29,10 +29,12 @@ public class UserController {
         Admin admin = new Admin(firstName , lastName , username , password , emailAddress , telephoneNumber);
         dataBase.setAdmin(admin);
     }
-    public void signUp(String firstName , String lastName , String username ,
+    public User signUp(String firstName , String lastName , String username ,
                        String password , String emailAddress ,String telephoneNumber){
         Player player = new Player(firstName , lastName , username , password , emailAddress , telephoneNumber);
         dataBase.getAllPlayersWithID().put(player.getPlayerID(),player);
+        dataBase.getAllUsers().add(player);
+        return player;
     }
     public User findUserByUsername(String userName) throws Exception{
         return null;
@@ -94,7 +96,11 @@ public class UserController {
     }
 
     public boolean checkUsername(String username){
-        //Todo this will check if username exist or not if exits then return false;
+        ArrayList<User> allUsers = dataBase.getAllUsers();
+        for(User user : allUsers) {
+            if (user.getUsername().equals(username))
+                return false;
+        }
         return true;
     }
 
