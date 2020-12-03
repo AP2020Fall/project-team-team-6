@@ -1,11 +1,13 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DataBase {
     private static  DataBase dataBase = new DataBase();
     private HashMap<Integer,Player> allPlayersWithID;
     private HashMap<Integer,RiskGame> allRiskGames;
+    private ArrayList<User> allUsers;
     private HashMap<Integer , Event> allEvents;
     private Admin admin;
 
@@ -13,6 +15,7 @@ public class DataBase {
        this.allPlayersWithID = new HashMap<>();
        this.allRiskGames = new HashMap<>();
        this.allEvents = new HashMap<>();
+       this.allUsers = new ArrayList<>();
     }
 
 
@@ -38,5 +41,9 @@ public class DataBase {
 
     public HashMap<Integer, Event> getAllEvents() {
         return allEvents;
+    }
+
+    public ArrayList<User> getAllUsers() {
+        return allUsers;
     }
 }
