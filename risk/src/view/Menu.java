@@ -30,6 +30,10 @@ public abstract class Menu {
         this.gameController = GameController.getGameController();
     }
 
+    public Menu() {
+
+    }
+
     public String getName() {
         return name;
     }

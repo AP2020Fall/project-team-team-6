@@ -36,9 +36,9 @@ public class UserController {
         dataBase.getAllUsers().add(player);
         return player;
     }
-    public User findUserByUsername(String userName) throws Exception{
+    public User findUserByUsername(String userName) {
         return null;
-        //TODO
+        //todo
     }
     public void changeFirstName(String username , String newFirstName) throws Exception {
         User user = findUserByUsername(username);
@@ -78,17 +78,8 @@ public class UserController {
             throw new Exception("This username has already taken.");
         }
     }
-    public User login(String username , String password) throws Exception {
-        if(!checkUsername(username)){
-            if(checkPassword(username , password)){
-                return findUserByUsername(username);
-            }else{
-                throw new Exception("Username or Password are incorrect.");
-            }
-        }else{
-            throw new Exception("Username or Password are incorrect.");
-        }
-        //TODO
+    public User login(String username , String password)  {
+        return findUserByUsername(username);
     }
 
     public void logout(){
@@ -105,8 +96,13 @@ public class UserController {
     }
 
     public boolean checkPassword(String userName,String password){
-        //TODO
-        return true;
+        HashMap<User, String> allPassword = dataBase.getAllPasswords();
+        for (User user : allPassword.keySet()) {
+            if (user.getUsername().equals(userName))
+                if (user.getPassword().equals(password))
+                    return true;
+        }
+        return false;
     }
 
     //End Users Methods
