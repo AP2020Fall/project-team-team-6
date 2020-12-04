@@ -8,7 +8,6 @@ public class DataBase {
     private HashMap<Integer,Player> allPlayersWithID;
     private HashMap<Integer,RiskGame> allRiskGames;
     private ArrayList<User> allUsers;
-    private HashMap<User, String> allPasswords;
     private HashMap<Integer , Event> allEvents;
     private Admin admin;
 
@@ -17,7 +16,6 @@ public class DataBase {
        this.allRiskGames = new HashMap<>();
        this.allEvents = new HashMap<>();
        this.allUsers = new ArrayList<>();
-       this.allPasswords = new HashMap<>();
     }
 
 
@@ -47,9 +45,5 @@ public class DataBase {
 
     public ArrayList<User> getAllUsers() {
         return allUsers;
-    }
-
-    public HashMap<User, String> getAllPasswords() {
-        return allPasswords;
     }
 }

@@ -53,6 +53,7 @@ public class RegisterMenu extends Menu {
         }
         System.out.println("Your account has successfully created.");
         User user = userController.signUp(firstName , lastName, userName , password , emailAddress , telephoneNumber);
+        OnlineGameMenu.setCurrentUser(user);
         nextMenu = new UserMenu(this.parentMenu.getParentMenu() , user);
         nextMenu.show();
         nextMenu.execute();

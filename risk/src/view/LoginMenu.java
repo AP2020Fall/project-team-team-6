@@ -1,5 +1,6 @@
 package view;
 
+
 import model.User;
 
 public class LoginMenu extends Menu {
@@ -19,51 +20,43 @@ public class LoginMenu extends Menu {
         Menu nextMenu = this;
         String userName = getUserName();
         if (userName == null) {
-            System.out.println("this user name does not exist.");
             nextMenu = parentMenu;
-            nextMenu.show();
-            nextMenu.execute();
         }
 
         String password = getPassword();
         if (password == null) {
-            System.out.println("password is not correct.");
             nextMenu = parentMenu;
-            nextMenu.show();
-            nextMenu.execute();
+        }
+        try {
+            User user  = userController.login(userName , password);
+            OnlineGameMenu.setCurrentUser(user);
+            nextMenu = new UserMenu(this.parentMenu.getParentMenu() , user);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
         }
 
-        User user = userController.login(userName, password);
-
-        nextMenu = new UserMenu(this.parentMenu.getParentMenu() , user);
         nextMenu.show();
         nextMenu.execute();
     }
 
     private String  getUserName() {
         String userName;
-        while (true) {
-            userName = getInputFormatWithHelpText(".+", "Username :");
-            if(userController.checkUsername(userName))
+            userName = getInputFormatWithHelpText(".+|^(?i)back$".trim(), "Username :");
+            if(userName.equalsIgnoreCase("back"))
                 return null;
             else
                 return userName;
-
-        }
     }
 
     private String getPassword() {
-        String userName = getUserName();
         String password;
-        while (true){
-            password  = getInputFormatWithHelpText("^.+$" , "Password :");
-            if(userController.checkPassword(userName, password))
-                return password;
-            else{
+            password  = getInputFormatWithHelpText(".+|^(?i)back$".trim() , "Password :");
+            if(password.equalsIgnoreCase("back"))
                 return null;
+            else{
+                return password;
             }
-        }
-
     }
+
 
 }

@@ -383,16 +383,35 @@ public class GameController {
     }
 
 
-    public boolean isPathAvailableForFortifying(RiskGame riskGame ,Player player  , Country firstCountry , Country destinationCountry , ArrayList<Country> chosenCountries){
-       chosenCountries.add(firstCountry);
-       ArrayList<Country> neighboursCountries = getNeighboursCountriesWithPlayerColor(riskGame , player , firstCountry );
-        neighboursCountries.removeIf(chosenCountries::contains);
-       if (neighboursCountries.contains(destinationCountry))
-           return true;
-       for(Country country : neighboursCountries){
-           isPathAvailableForFortifying(riskGame , player , country , destinationCountry , chosenCountries);
+//    public boolean isPathAvailableForFortifying(RiskGame riskGame ,Player player  , Country firstCountry , Country destinationCountry , ArrayList<Country> chosenCountries , ArrayList<Country> paths){
+////       chosenCountries.add(firstCountry);
+//////       ArrayList<Country> neighboursCountriesWithPlayerColor = getNeighboursCountriesWithPlayerColor(riskGame , player , firstCountry);
+//////       paths.addAll(neighboursCountriesWithPlayerColor);
+//////       if(paths.contains(destinationCountry))
+//////           return true;
+//////       paths.removeAll(chosenCountries);
+//////       for(Country country : paths){
+//////           isPathAvailableForFortifying(riskGame , player , country , destinationCountry , chosenCountries , paths);
+//////        }
+//    }
+    public boolean isPathAvailableForFortifying(RiskGame riskGame , Player player , Country firstCountry , Country destinationCountry){
+       ArrayList<Country> chosenCountries = new ArrayList<>();
+       ArrayList<Country> connectedCountries = new ArrayList<>();
+       ArrayList<Country>  countries = new ArrayList<>();
+       connectedCountries.add(firstCountry);
+       while (true){
+           for(Country country : connectedCountries) {
+               chosenCountries.add(country);
+               countries.addAll(getNeighboursCountriesWithPlayerColor(riskGame, player, country));
+           }
+           countries.removeAll(chosenCountries);
+          if(countries.contains(destinationCountry))
+              return true;
+          if(countries.size() == 0 )
+              return false;
+          connectedCountries = countries;
+
        }
-       return false;
     }
 
     public ArrayList<Country> getNeighboursCountriesWithPlayerColor(RiskGame riskGame , Player player , Country country){

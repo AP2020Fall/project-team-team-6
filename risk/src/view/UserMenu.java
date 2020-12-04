@@ -13,6 +13,7 @@ public class UserMenu extends Menu {
 
     @Override
     public void show() {
+        System.out.println("1.Back");
         System.out.println("1.Edit user information");
         System.out.println("2.Friends menu");
         System.out.println("3.Games menu");
@@ -22,10 +23,24 @@ public class UserMenu extends Menu {
 
     @Override
     public void execute() {
+        Menu nextMenu = this;
         String inputString = getInputFormatWithHelpText("[1-5]" , "Enter a number:");
-        if (inputString.equals("1")) {
-
+        int input  = Integer.parseInt(inputString);
+        if(input == 1){
+            nextMenu = parentMenu;
+        }else if(input == 2){
+            //TODO
+        }else if(input == 3){
+            //TODO
+        }else if(input == 4){
+            //TODO
+        }else if(input == 5){
+            System.out.println("You have logged out  from system.");
+            OnlineGameMenu.setCurrentUser(null);
+            nextMenu = parentMenu;
         }
+        nextMenu.show();
+        nextMenu.execute();
     }
 
 
