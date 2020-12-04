@@ -102,6 +102,32 @@ public class RiskGameMenu extends Menu {
             if(input == 1){
                 nextMenu = parentMenu;
             }else if(input == 2){
+                Country firstCountry = getCountry("Enter the country coordinate that you want to move soldiers from or type back to return");
+                if(firstCountry == null) {
+                    nextMenu.show();
+                    nextMenu.execute();
+                }
+                Country destinationCountry = getCountry("Enter the country that you want to move soldiers to it or type back to return");
+                if(destinationCountry == null) {
+                    nextMenu.show();
+                    nextMenu.execute();
+                }
+                assert firstCountry != null;
+                int numberOfSoldier = getNumberOfSoldiersToMoveFromACountryToAnother(firstCountry);
+                if(numberOfSoldier == 0 ){
+                    nextMenu.show();
+                    nextMenu.execute();
+                }
+                if(gameController.isPathAvailableForFortifying(riskGame, currentPlayer , firstCountry , destinationCountry)) {
+                    try {
+                        System.out.println("Dahanaet service ");
+                        gameController.moveSoldiersFromACountryToAnotherCountry(firstCountry, destinationCountry, numberOfSoldier);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }else{
+                    System.err.println("There is no path for this country");
+                }
 
             }else if(input == 3){
                 gameController.goNextStage(riskGame);
@@ -439,6 +465,17 @@ public class RiskGameMenu extends Menu {
                 break;
         }
         return country;
+    }
+    private int getNumberOfSoldiersToMoveFromACountryToAnother(Country firstCountry){
+        int numberOfSoldiers = firstCountry.getNumberOfSoldiers();
+        while (true){
+           String inputInString = getInputFormatWithHelpText("\\d+|(?i)back" , "Enter number of soldiers you want to move or type back to return ");
+           if(inputInString.equalsIgnoreCase("back"))
+               return 0;
+           int input = Integer.parseInt(inputInString);
+           if(input >= 0 || input < numberOfSoldiers)
+               return input;
+        }
     }
 
 

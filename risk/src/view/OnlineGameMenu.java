@@ -14,6 +14,7 @@ public class OnlineGameMenu extends Menu {
 
     @Override
     public void show() {
+        subMenus.clear();
         calculateSubMenusForMainMeu();
         super.show();
     }
