@@ -296,6 +296,22 @@ public class GameController {
        riskGame.setHasGotSoldiersForDraft(!riskGame.isHasGotSoldiersForDraft());
     }
 
+    public boolean hasDoneFortify(RiskGame riskGame){
+     return riskGame.isHasDoneFortify();
+    }
+
+    public void setHashDoneFortify(RiskGame riskGame , boolean hasDoneFortify){
+      riskGame.setHasDoneFortify(hasDoneFortify);
+    }
+    public boolean hasGotOneCountryInAttack(RiskGame riskGame){
+     return riskGame.isHasOneSuccessAttack();
+    }
+    public void setHashGotOneCountryInAttack(RiskGame riskGame , boolean hasGotOneCountry){
+       riskGame.setHasOneSuccessAttack(hasGotOneCountry);
+    }
+
+
+
 
     public void placeSoldiers(Country country ,int numbersOfSoldiers , Player player ) throws Exception{
       if(numbersOfSoldiers > player.getNumberOfSoldiers())
@@ -382,18 +398,6 @@ public class GameController {
        addSoliderToCountry(second , numberOfSoldiers);
     }
 
-
-//    public boolean isPathAvailableForFortifying(RiskGame riskGame ,Player player  , Country firstCountry , Country destinationCountry , ArrayList<Country> chosenCountries , ArrayList<Country> paths){
-////       chosenCountries.add(firstCountry);
-//////       ArrayList<Country> neighboursCountriesWithPlayerColor = getNeighboursCountriesWithPlayerColor(riskGame , player , firstCountry);
-//////       paths.addAll(neighboursCountriesWithPlayerColor);
-//////       if(paths.contains(destinationCountry))
-//////           return true;
-//////       paths.removeAll(chosenCountries);
-//////       for(Country country : paths){
-//////           isPathAvailableForFortifying(riskGame , player , country , destinationCountry , chosenCountries , paths);
-//////        }
-//    }
     public boolean isPathAvailableForFortifying(RiskGame riskGame , Player player , Country firstCountry , Country destinationCountry){
        ArrayList<Country> chosenCountries = new ArrayList<>();
        ArrayList<Country> connectedCountries = new ArrayList<>();
@@ -409,7 +413,7 @@ public class GameController {
               return true;
           if(countries.size() == 0 )
               return false;
-          connectedCountries = countries;
+          connectedCountries.addAll(countries);
 
        }
     }
@@ -456,8 +460,15 @@ public class GameController {
         int numberOfDefenderDice = defenderDice.size();
         Collections.sort(attackerDice);
         Collections.reverse(attackerDice);
+        Collections.sort(defenderDice);
+        Collections.reverse(defenderDice);
         ArrayList<Integer> finalDice = new ArrayList<>();
-        for(int i = 0 ; i < numberOfDefenderDice; i++ ){
+        int numberOfRepeat;
+        if(numberOfDefenderDice > attackerDice.size())
+            numberOfRepeat = attackerDice.size();
+        else
+            numberOfRepeat = defenderDice.size();
+        for(int i = 0 ; i < numberOfRepeat; i++ ){
             finalDice.add(attackerDice.get(i) - defenderDice.get(i));
         }
         return finalDice;
@@ -488,12 +499,31 @@ public class GameController {
              throw new Exception("This country is not yours to attack");
          }
    }
+   public ArrayList<Integer> rollBizzard(RiskGame riskGame , Player player , Country attackerCountry , Country defenderCountry){
+     ArrayList<Integer> totalDice = new ArrayList<>();
+     while (true){
+         int maximumDiceForAttacker = getNumberOfDiceForAttacker(attackerCountry);
+         int maximumDiceForDefender = getNumberOfDiceForDefender(defenderCountry);
+         ArrayList<Integer> attackerDice = rollDice(maximumDiceForAttacker);
+         ArrayList<Integer> defenderDice = rollDice(maximumDiceForDefender);
+         totalDice.addAll(compareDiceForAttack(attackerDice , defenderDice));
+         try {
+            if(attack(riskGame , player , attackerCountry , defenderCountry , attackerDice , defenderDice)){
+                break;
+            }
+         } catch (Exception e) {
+          break;
+         }
+     }
+     return totalDice;
+
+   }
     public int getNumberOfDiceForAttacker(Country country){
       if(country.getNumberOfSoldiers() > 4)
           return 3;
-      else if(country.getNumberOfSoldiers() > 3)
+      else if(country.getNumberOfSoldiers() == 3)
           return 2;
-      else if(country.getNumberOfSoldiers() > 2 )
+      else if(country.getNumberOfSoldiers() == 2 )
           return 1;
       else
           return 0;

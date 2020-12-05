@@ -97,46 +97,7 @@ public class RiskGameMenu extends Menu {
         gameStages = riskGame.getGameStages();
         //Fortify Stage
         if(gameStages.equals(GameStages.FORTIFY)){
-            inputInString = getInputWithFormat("^1|2|3$");
-            int input = Integer.parseInt(inputInString);
-            if(input == 1){
-                nextMenu = parentMenu;
-            }else if(input == 2){
-                Country firstCountry = getCountry("Enter the country coordinate that you want to move soldiers from or type back to return");
-                if(firstCountry == null) {
-                    nextMenu.show();
-                    nextMenu.execute();
-                }
-                Country destinationCountry = getCountry("Enter the country that you want to move soldiers to it or type back to return");
-                if(destinationCountry == null) {
-                    nextMenu.show();
-                    nextMenu.execute();
-                }
-                assert firstCountry != null;
-                int numberOfSoldier = getNumberOfSoldiersToMoveFromACountryToAnother(firstCountry);
-                if(numberOfSoldier == 0 ){
-                    nextMenu.show();
-                    nextMenu.execute();
-                }
-                if(gameController.isPathAvailableForFortifying(riskGame, currentPlayer , firstCountry , destinationCountry)) {
-                    try {
-                        System.out.println("Dahanaet service ");
-                        gameController.moveSoldiersFromACountryToAnotherCountry(firstCountry, destinationCountry, numberOfSoldier);
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-                }else{
-                    System.err.println("There is no path for this country");
-                }
-
-            }else if(input == 3){
-                gameController.goNextStage(riskGame);
-                gameController.nextPlayer(riskGame);
-                gameController.calculateNumberOfSoldiersToAddInDraft(riskGame.getCurrentPlayer());
-                nextMenu = new RiskGameMenu(parentMenu , riskGame);
-                nextMenu.show();
-                nextMenu.execute();
-            }
+            fortify();
         }
         nextMenu.show();
         nextMenu.execute();
@@ -162,7 +123,8 @@ public class RiskGameMenu extends Menu {
         System.out.println("Number of soldiers : "+ currentPlayer.getNumberOfSoldiers());
         System.out.println("2.Place Soldiers");
         System.out.println("3.Use Cards");
-        System.out.println("4.Next Faze");
+        System.out.println("4.Countries Information");
+        System.out.println("5.Next Faze");
     }
 
     private void showCountriesInformationForDraft(Country country) {
@@ -220,13 +182,14 @@ public class RiskGameMenu extends Menu {
 
     private void showAttack(){
         System.out.println("2.Attack");
-        System.out.println("3.Next Stage");
+        System.out.println("3.Show Countries Information");
+        System.out.println("4.Next Stage");
     }
 
     private void draftStage(){
         Menu nextMenu = this;
         String inputInString;
-        inputInString = getInputFormatWithHelpText("^(1|2|3|4)$ ".trim() , "Enter a number :");
+        inputInString = getInputFormatWithHelpText("^(1|2|3|4|5)$ ".trim() , "Enter a number :");
         int input = Integer.parseInt(inputInString);
         if(input == 1){
             nextMenu = parentMenu;
@@ -248,11 +211,13 @@ public class RiskGameMenu extends Menu {
                         Country country = riskGame.getAllCountriesWithNumber().get(input);
                         showCountriesInformationForDraft(country);
                         System.out.println("Please Enter the number of soldiers you want to please our type back to return");
-                        inputInString = getInputWithFormat("\\d+|(?i)back");
+                        inputInString = getInputWithFormat("^\\d+$|^(?i)back$".trim());
                         if(!inputInString.equalsIgnoreCase("back")){
                             int numberOfSoldiers = Integer.parseInt(inputInString);
                             try {
                                 gameController.placeSoldiers(country , numberOfSoldiers , currentPlayer);
+                                System.out.println("You put " + numberOfSoldiers + " in " + country.getName());
+                                System.out.println("Number of soldiers : " + currentPlayer.getNumberOfSoldiers());
                             } catch (Exception e) {
                                 System.out.println(e.getMessage());
                             }
@@ -265,6 +230,13 @@ public class RiskGameMenu extends Menu {
         }else if(input == 3){
             //TODO cards
         }else if(input == 4){
+             inputInString = getInputFormatWithHelpText("^[1-9]$|^[1-3][0-9]$|^4[0-2]$|^(?i)back$".trim() , "Enter a country number or type back to return");
+             if(!inputInString.equals("back")){
+                 input = Integer.parseInt(inputInString);
+                 Country country = riskGame.getAllCountriesWithNumber().get(input);
+                 showCountriesInformationForAttack(country);
+             }
+        } else if(input == 5){
             if(currentPlayer.getNumberOfSoldiers() == 0)
                 gameController.goNextStage(riskGame);
             else{
@@ -285,9 +257,9 @@ public class RiskGameMenu extends Menu {
         System.out.print("1.Back\t");
         for(int i = 2; i < maximumNumberOfDice + 2 ; i++){
             int numberOfDice = i -1 ;
-            System.out.print(i+"."+ numberOfDice + "Dice\t");
+            System.out.print(i+". "+ numberOfDice + " Dice\t");
         }
-        System.out.println(maximumNumberOfDice + 2 + ".Bizzard");
+        System.out.println(maximumNumberOfDice + 2 + " . Bizzard");
     }
 
     private int getNumberOfDiceToRoll(Country country){
@@ -339,11 +311,15 @@ public class RiskGameMenu extends Menu {
         }
     }
     private void showCountriesInformationForAttack(Country country){
+        System.out.println();
+        System.out.println("----------------------------------------------------------------------------");
         System.out.println("Country Coordinate : " + country.getCountryCoordinate());
         System.out.println("Country Name : " + country.getName());
         System.out.println("Continent : " + country.getContinent());
         System.out.println("Color : " + country.getColor());
         System.out.println("Number Of soldiers : " + country.getNumberOfSoldiers());
+        System.out.println("----------------------------------------------------------------------------");
+        System.out.println();
     }
     private void showHowManySoldiersLost(ArrayList<Integer> totalDice){
         int defenderLost = 0;
@@ -381,7 +357,7 @@ public class RiskGameMenu extends Menu {
 
     private void attack(){
         Menu nextMenu = this;
-        String inputInString  = getInputFormatWithHelpText("^1|2|3$" , "Enter a number : ");
+        String inputInString  = getInputFormatWithHelpText("^1|2|3|4$" , "Enter a number : ");
         int input= Integer.parseInt(inputInString);
         if(input == 1){
             nextMenu = parentMenu;
@@ -406,9 +382,8 @@ public class RiskGameMenu extends Menu {
                                 showNumberOfDiceToChose(country);
                                 int numberOfDiceToAttack = getNumberOfDiceToRoll(country);
                                 if(numberOfDiceToAttack != 0){
-                                    //TODO if its bizzard .....
                                     Country defenderCountry = getCountriesToAttack(country);
-                                    if(defenderCountry != null) {
+                                    if(defenderCountry != null && numberOfDiceToAttack != 6) {
                                         ArrayList<Integer> attackerDice = gameController.rollDice(numberOfDiceToAttack);
                                         ArrayList<Integer> defendersDice = gameController.rollDice(gameController.getNumberOfDiceForDefender(defenderCountry));
                                         System.out.println("Attacker Dice : ");
@@ -420,6 +395,8 @@ public class RiskGameMenu extends Menu {
                                         boolean hasGotTheCountry = false;
                                         try {
                                             hasGotTheCountry = gameController.attack(riskGame , currentPlayer , country , defenderCountry ,attackerDice , defendersDice);
+                                            if(hasGotTheCountry)
+                                                gameController.setHashGotOneCountryInAttack(riskGame , true);
                                         } catch (Exception e) {
                                             System.out.println(e.getMessage());
                                         }
@@ -427,6 +404,28 @@ public class RiskGameMenu extends Menu {
                                             //TODO
                                             System.out.println("You got the " + defenderCountry.getName()+ " Country coordinate : " + defenderCountry.getCountryCoordinate());
                                             moveSoldiersAfterWinningACountry(country , defenderCountry , attackerDice.size());
+                                            showsCountries();
+                                        }
+                                    }else if(defenderCountry != null && numberOfDiceToAttack == 6){
+                                        int numberOfSoldiersForDefenderCountry = defenderCountry.getNumberOfSoldiers();
+                                        ArrayList<Integer> totalDice = gameController.rollBizzard(riskGame , currentPlayer , country , defenderCountry);
+                                        showHowManySoldiersLost(totalDice);
+                                        int numberOfSoldierThatDefenderHasLost = 0;
+                                        for(Integer i : totalDice){
+                                            if(i > 0 )
+                                                numberOfSoldierThatDefenderHasLost++;
+                                        }
+                                        if(numberOfSoldierThatDefenderHasLost == numberOfSoldiersForDefenderCountry) {
+                                            int attackerDice;
+                                            gameController.setHashGotOneCountryInAttack(riskGame, true);
+                                            System.out.println("You got the " + defenderCountry.getName()+ " Country coordinate : " + defenderCountry.getCountryCoordinate());
+                                            if(country.getNumberOfSoldiers() >= 4 )
+                                                 attackerDice = 3;
+                                            else if(country.getNumberOfSoldiers() == 3)
+                                                attackerDice = 2;
+                                            else
+                                                attackerDice = 1 ;
+                                            moveSoldiersAfterWinningACountry(country , defenderCountry , attackerDice);
                                             showsCountries();
                                         }
                                     }
@@ -442,7 +441,19 @@ public class RiskGameMenu extends Menu {
                     nextMenu.execute();
                 }
             };
-        }else if(input == 3 ){
+        }else if(input == 3){
+            inputInString = getInputFormatWithHelpText("^[1-9]$|^[1-3][0-9]$|^4[0-2]$|^(?i)back$".trim() , "Enter a country number or type back to return");
+            if(!inputInString.equals("back")){
+                input = Integer.parseInt(inputInString);
+                Country country = riskGame.getAllCountriesWithNumber().get(input);
+                showCountriesInformationForAttack(country);
+            }
+        }else if(input == 4){
+            boolean hasGotAnyCountry = riskGame.isHasOneSuccessAttack();
+            if(hasGotAnyCountry){
+                //TODO .....
+            }
+            gameController.setHashGotOneCountryInAttack(riskGame , false);
             gameController.goNextStage(riskGame);
         }
         nextMenu.show();
@@ -451,7 +462,8 @@ public class RiskGameMenu extends Menu {
 
     private void showFortify(){
         System.out.println("2.Fortify");
-        System.out.println("3.Next Player");
+        System.out.println("3.Show Countries information");
+        System.out.println("4.Next Player");
     }
     private Country getCountry(String massage){
         Country country ;
@@ -477,7 +489,66 @@ public class RiskGameMenu extends Menu {
                return input;
         }
     }
-
+    private void  fortify(){
+        String inputInString;
+        Menu nextMenu = this;
+        inputInString = getInputWithFormat("^1|2|3|4$");
+        int input = Integer.parseInt(inputInString);
+        if(input == 1){
+            nextMenu = parentMenu;
+        }else if(input == 2) {
+            if(!gameController.hasDoneFortify(riskGame)){
+            Country firstCountry = getCountry("Enter the country coordinate that you want to move soldiers from or type back to return");
+            if (firstCountry == null) {
+                nextMenu.show();
+                nextMenu.execute();
+            }
+            Country destinationCountry = getCountry("Enter the country that you want to move soldiers to it or type back to return");
+            if (destinationCountry == null) {
+                nextMenu.show();
+                nextMenu.execute();
+            }
+            assert firstCountry != null;
+            int numberOfSoldier = getNumberOfSoldiersToMoveFromACountryToAnother(firstCountry);
+            if (numberOfSoldier == 0) {
+                nextMenu.show();
+                nextMenu.execute();
+            }
+            if (gameController.isPathAvailableForFortifying(riskGame, currentPlayer, firstCountry, destinationCountry)) {
+                try {
+                    gameController.moveSoldiersFromACountryToAnotherCountry(firstCountry, destinationCountry, numberOfSoldier);
+                    gameController.setHashDoneFortify(riskGame , true);
+                    System.out.println("You moved " + numberOfSoldier + "from " + firstCountry.getName() + " to " + destinationCountry.getName());
+                    System.out.println("Number of soldiers in " + firstCountry.getName() + " : " + firstCountry.getNumberOfSoldiers());
+                    System.out.println("Number of soldiers in " + destinationCountry.getName() + " : " + destinationCountry.getNumberOfSoldiers());
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } else {
+                System.err.println("There is no path for this country");
+            }
+         }else{
+                System.err.println("You can't fortify anymore !");
+            }
+        }else if(input == 3){
+            inputInString = getInputFormatWithHelpText("^[1-9]$|^[1-3][0-9]$|^4[0-2]$|^(?i)back$".trim() , "Enter a country number or type back to return");
+            if(!inputInString.equals("back")) {
+                input = Integer.parseInt(inputInString);
+                Country country = riskGame.getAllCountriesWithNumber().get(input);
+                showCountriesInformationForAttack(country);
+            }
+        }else if(input == 4){
+            gameController.setHashDoneFortify(riskGame , false);
+            gameController.goNextStage(riskGame);
+            gameController.nextPlayer(riskGame);
+            gameController.calculateNumberOfSoldiersToAddInDraft(riskGame.getCurrentPlayer());
+            nextMenu = new RiskGameMenu(parentMenu , riskGame);
+            nextMenu.show();
+            nextMenu.execute();
+        }
+        nextMenu.show();
+        nextMenu.execute();
+    }
 
 
 
