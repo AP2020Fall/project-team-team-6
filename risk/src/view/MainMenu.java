@@ -148,13 +148,13 @@ public class MainMenu extends Menu {
         Player[] players = new Player[numberOfPlayers];
         System.out.println("Enter the names of the players or write back to return");
         for(int i = 0 ; i < numberOfPlayers ; i++) {
-            userName = getInputFormatWithHelpText(".+|(?i)back", "Please Enter a Username : ");
+            userName = getInputFormatWithHelpText("^.+$|^(?i)back$", "Please Enter a Username : ");
             if(userName.equalsIgnoreCase("back"))
                 return null;
             colorsToChose = gameController.getColorsToChose(colors);
             showColorsToChose(colorsToChose);
             while (true) {
-                inputInString = getInputWithFormat("\\d+|(?i)back");
+                inputInString = getInputWithFormat("^\\d+$|^(?i)back$");
                 if(inputInString.equalsIgnoreCase("back"))
                     return null;
                 int input = Integer.parseInt(inputInString);

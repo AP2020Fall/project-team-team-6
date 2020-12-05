@@ -16,7 +16,8 @@ public class RiskGame {
     private boolean isGameStarted;
     private GameStages gameStages;
     private  boolean hasGotSoldiersForDraft = false;
-    private boolean hasOneSuccessAttack;
+    private boolean hasOneSuccessAttack= false;
+    private boolean hasDoneFortify = false;
     private long timer;
     private boolean isMapManually;
     private Country[][] allCountriesInArray = new Country[8][23];
@@ -287,5 +288,13 @@ public class RiskGame {
 
     public void setHasGotSoldiersForDraft(boolean hasGotSoldiersForDraft) {
         this.hasGotSoldiersForDraft = hasGotSoldiersForDraft;
+    }
+
+    public boolean isHasDoneFortify() {
+        return hasDoneFortify;
+    }
+
+    public void setHasDoneFortify(boolean hasDoneFortify) {
+        this.hasDoneFortify = hasDoneFortify;
     }
 }
