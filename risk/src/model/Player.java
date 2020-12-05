@@ -10,7 +10,7 @@ public class  Player extends User{
     private double rate;
     private HashMap<Integer , GameLog> gameLogs;
     private HashMap<Integer , Player> friends;
-    private HashMap<Integer , Player> requestsForFriendShips;
+    private ArrayList<Player> requestsForFriendShips;
     private HashMap<Integer , RequestForPlaying> requestForPlaysList;
     private ArrayList<Card> playersCard;
     private HashMap<Integer , Country> playersCountry;
@@ -38,7 +38,7 @@ public class  Player extends User{
         this.rate = 0.0;
         this.gameLogs = new HashMap<>();
         this.friends = new HashMap<>();
-        this.requestsForFriendShips = new HashMap<>();
+        this.requestsForFriendShips = new ArrayList<>();
         this.requestForPlaysList = new HashMap<>();
         this.playersCard = new ArrayList<>();
         this.playersCountry = new HashMap<>();
@@ -164,7 +164,7 @@ public class  Player extends User{
         return playerID;
     }
 
-    public HashMap<Integer, Player> getRequestsForFriendShips() {
+    public ArrayList<Player> getRequestsForFriendShips() {
         return requestsForFriendShips;
     }
 

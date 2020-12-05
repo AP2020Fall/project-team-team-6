@@ -125,7 +125,7 @@ public class UserController {
     public HashMap<Integer, Player> getPlayersFriends(Player player){
         return player.getFriends();
     }
-    public HashMap<Integer, Player> getFriendsRequestsList(Player player){
+    public ArrayList<Player> getFriendsRequestsList(Player player){
         return player.getRequestsForFriendShips();
     }
     public void rejectFriend(Player player , Player secondPlayer){
@@ -149,6 +149,14 @@ public class UserController {
     }
     public void rejectInvitation(Player player , RequestForPlaying requestForPlaying){
         //TODO ....
+    }
+    public HashMap<Integer , Player> getFriendsList(Player player){
+        HashMap<Integer, Player> friendsList = new HashMap<>();
+        ArrayList<Player> friends = player.getRequestsForFriendShips();
+        for( int i = 2; i <= friends.size()+1; i++){
+            friendsList.put(i ,friends.get(i-2));
+        }
+        return friendsList;
     }
 
     public HashMap<Integer,GameLog> getAllGamesLogForPlayer(Player player){
