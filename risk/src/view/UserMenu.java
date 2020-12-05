@@ -1,5 +1,6 @@
 package view;
 
+import model.Player;
 import model.User;
 
 public class UserMenu extends Menu {
@@ -8,37 +9,45 @@ public class UserMenu extends Menu {
     public UserMenu(Menu parentMenu, User user) {
         super("Account", parentMenu);
         this.user = user;
+        subMenus.put(2 , new GamesMenu(this));
+        subMenus.put(3 , new FriendsMenu(this , (Player) user));
+        subMenus.put(4 , new EventMenu(this));
     }
+
 
 
     @Override
     public void show() {
-        System.out.println("1.Back");
-        System.out.println("1.Edit user information");
-        System.out.println("2.Friends menu");
-        System.out.println("3.Games menu");
-        System.out.println("4.Events");
-        System.out.println("5.Logout");
+        super.show();
+        System.out.println("5.Edit user information");
+        System.out.println("6.Logout");
     }
 
     @Override
     public void execute() {
         Menu nextMenu = this;
-        String inputString = getInputFormatWithHelpText("[1-5]" , "Enter a number:");
+        String inputString = getInputFormatWithHelpText("^[1-6]$".trim() , "Enter a number:");
         int input  = Integer.parseInt(inputString);
         if(input == 1){
             nextMenu = parentMenu;
         }else if(input == 2){
             //TODO
         }else if(input == 3){
-            //TODO
+           nextMenu =  subMenus.get(input);
         }else if(input == 4){
             //TODO
         }else if(input == 5){
+            try {
+                editUserInformation(user);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }else if(input == 6){
             System.out.println("You have logged out  from system.");
             OnlineGameMenu.setCurrentUser(null);
             nextMenu = parentMenu;
         }
+
         nextMenu.show();
         nextMenu.execute();
     }
