@@ -1,10 +1,13 @@
 package controller;
 
 import model.DataBase;
+import model.Event;
 import model.Player;
 import model.RiskGame;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EventController {
     private static EventController eventController = new EventController();
@@ -22,8 +25,10 @@ public class EventController {
     //creating event by admin methods
     //----------------------------------------------------------------------------------------------------------------------
 
-    public void createNewEvent(String start , String end , RiskGame riskGame , Double eventPoint) {
-        //TODO .....
+    public void createNewEvent(LocalDateTime startDate , LocalDateTime endDate , RiskGame riskGame , Double eventPoint) {
+        ArrayList<Event> allEvents = dataBase.getAllEvents();
+        Event event = new Event(startDate, endDate, riskGame, eventPoint);
+        allEvents.add(event);
     }
 
     public void startEvent(int eventID) {
@@ -35,7 +40,8 @@ public class EventController {
     }
 
     public void deleteEvent(int eventID) {
-        //TODO
+        ArrayList<Event> allEvents = dataBase.getAllEvents();
+        allEvents.remove(eventID);
     }
 
     public void inviteAllPLayers(int eventID) {
@@ -52,7 +58,10 @@ public class EventController {
     public void joinEvent(int userID , int eventId){
         //ToDo
     }
-
+    public ArrayList<Event> showAllEvents() {
+        ArrayList<Event> allEvents = dataBase.getAllEvents();
+        return allEvents;
+     }
 
 
 }

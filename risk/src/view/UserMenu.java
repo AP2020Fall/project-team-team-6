@@ -12,6 +12,7 @@ public class UserMenu extends Menu {
         subMenus.put(2 , new GamesMenu(this));
         subMenus.put(3 , new FriendsMenu(this , (Player) user));
         subMenus.put(4 , new EventMenu(this));
+        subMenus.put(5 , new EditInformationMenu(this, user));
     }
 
 
@@ -19,29 +20,25 @@ public class UserMenu extends Menu {
     @Override
     public void show() {
         super.show();
-        System.out.println("5.Edit user information");
         System.out.println("6.Logout");
     }
 
     @Override
     public void execute() {
+        String userName = user.getUsername();
         Menu nextMenu = this;
         String inputString = getInputFormatWithHelpText("^[1-6]$".trim() , "Enter a number:");
         int input  = Integer.parseInt(inputString);
         if(input == 1){
             nextMenu = parentMenu;
         }else if(input == 2){
-            //TODO
+            nextMenu = subMenus.get(input);
         }else if(input == 3){
            nextMenu =  subMenus.get(input);
         }else if(input == 4){
-            //TODO
+            nextMenu = subMenus.get(input);
         }else if(input == 5){
-            try {
-                editUserInformation(user);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+         nextMenu = subMenus.get(input);
         }else if(input == 6){
             System.out.println("You have logged out  from system.");
             OnlineGameMenu.setCurrentUser(null);
@@ -50,52 +47,5 @@ public class UserMenu extends Menu {
 
         nextMenu.show();
         nextMenu.execute();
-    }
-
-
-    private void editUserInformation(User user) throws Exception {
-        String userName = user.getUsername();
-        System.out.println("1.change user name");
-        System.out.println("2.change first name");
-        System.out.println("3.change last name");
-        System.out.println("4.change email address");
-        System.out.println("5.change telephone number");
-        System.out.println("6.change password");
-        System.out.println("7.back");
-        String input = getInputFormatWithHelpText("[1-7]", "Enter a number:");
-        if (input.equals("1")) {
-            String newUserName = getInputFormatWithHelpText(".+", "Enter new user name:");
-            userController.changeUsername(userName, newUserName);
-        }
-        if (input.equals("2")) {
-            String newFirstName = getInputFormatWithHelpText(".+", "Enter new first name:");
-            userController.changeFirstName(userName, newFirstName);
-        }
-        if (input.equals("3")) {
-            String newLastName = getInputFormatWithHelpText(".+", "Enter new last name:");
-            userController.changeLastName(userName, newLastName);
-        }
-        if (input.equals("4")) {
-            String newEmailAddress = getInputFormatWithHelpText("^.+\\@.+\\.com$", "Enter new email address:");
-            userController.changeEmailAddress(userName, newEmailAddress);
-        }
-        if (input.equals("5")) {
-            String newTelephoneNumber = getInputFormatWithHelpText("^\\d{11}$", "Enter new telephone number:");
-            userController.changeTelephoneNumber(userName, newTelephoneNumber);
-        }
-        if (input.equals("6")) {
-            while (true) {
-                String password = getInputFormatWithHelpText(".+", "Enter your password:");
-                if (password.equals(user.getPassword())) {
-                    String newPassword = getInputFormatWithHelpText(".+", "Enter new password:");
-                    String confirmNewPassword = getInputFormatWithHelpText(".+", "repeat password:");
-                    if (confirmNewPassword.equals(newPassword))
-                        userController.checkPassword(userName, newPassword);
-                    else
-                        System.out.println("enter new password one more time.");
-                } else
-                    System.out.println("password is not correct.");
-            }
-        }
     }
 }

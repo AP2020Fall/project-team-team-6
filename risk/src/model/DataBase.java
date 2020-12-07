@@ -8,13 +8,13 @@ public class DataBase {
     private HashMap<Integer,Player> allPlayersWithID;
     private HashMap<Integer,RiskGame> allRiskGames;
     private ArrayList<User> allUsers;
-    private HashMap<Integer , Event> allEvents;
+    private ArrayList<Event> allEvents;
     private Admin admin;
 
     private DataBase(){
        this.allPlayersWithID = new HashMap<>();
        this.allRiskGames = new HashMap<>();
-       this.allEvents = new HashMap<>();
+       this.allEvents = new ArrayList<>();
        this.allUsers = new ArrayList<>();
     }
 
@@ -39,11 +39,13 @@ public class DataBase {
         this.admin = admin;
     }
 
-    public HashMap<Integer, Event> getAllEvents() {
+    public ArrayList<Event> getAllEvents() {
         return allEvents;
     }
 
     public ArrayList<User> getAllUsers() {
         return allUsers;
     }
+
+
 }

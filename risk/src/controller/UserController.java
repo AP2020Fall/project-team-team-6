@@ -44,34 +44,24 @@ public class UserController {
         }
         return null;
     }
-    public void changeFirstName(String username , String newFirstName) throws Exception {
+    public void changeFirstName(String username , String newFirstName) {
         User user = findUserByUsername(username);
         user.setFirstName(newFirstName);
     }
-    public void changeLastName(String username , String newLastName) throws Exception {
+    public void changeLastName(String username , String newLastName) {
         User user = findUserByUsername(username);
         user.setLastName(newLastName);
     }
-    public void changeTelephoneNumber(String username , String newTelephoneNumber) throws Exception {
+    public void changeTelephoneNumber(String username , String newTelephoneNumber) {
         User user = findUserByUsername(username);
         user.setTelephoneNumber(newTelephoneNumber);
     }
-    public void changeEmailAddress(String username , String newEmailAddress) throws Exception {
+    public void changeEmailAddress(String username , String newEmailAddress) {
         User user = findUserByUsername(username);
         user.setEmailAddress(newEmailAddress);
     }
-    public void changePassword(String username , String newPassword , String confirmPassword) throws Exception {
+    public void changePassword(String username , String newPassword) {
         User user = findUserByUsername(username);
-        if(checkPassword(username , newPassword)){
-
-        }else{
-            throw  new Exception("Password is incorrect.");
-        }
-        if (newPassword.equals(confirmPassword)){
-
-        }else{
-            throw new Exception("Passwords didn't match.") ;
-        }
         user.setPassword(newPassword);
     }
     public void changeUsername(String username , String newUsername) throws Exception {
