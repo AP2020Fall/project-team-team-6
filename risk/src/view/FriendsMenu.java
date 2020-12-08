@@ -18,16 +18,17 @@ public class FriendsMenu extends Menu{
     public void show() {
         friendsList = userController.getFriendsList(player);
         System.out.println("1.Back");
-        System.out.println("2.Request");
-        System.out.println("3.Add friend");
+        System.out.println("2.show Requests");
+        System.out.println("3.send new friend request");
         System.out.println("4.Remove friend");
-        System.out.println("5.Manage Massages");
+        System.out.println("5.Manage masseges");
+        System.out.println("6.show friends");
     }
 
     @Override
     public void execute() {
         Menu nextMenu = this;
-        String inputString = getInputFormatWithHelpText("^1|2|3|4|5$" , "Enter a number : ");
+        String inputString = getInputFormatWithHelpText("^1|2|3|4|5|6$" , "Enter a number : ");
         int input = Integer.parseInt(inputString);
         if(input == 1){
             nextMenu = parentMenu;
@@ -45,12 +46,77 @@ public class FriendsMenu extends Menu{
                 }
             };
         }else if(input == 3){
+            nextMenu = new Menu("send new friend request",this) {
+                @Override
+                public void show() {
+                    System.out.println("1.Back");
+                    System.out.println("enter the user name or enter (1) ");
+                }
+
+                @Override
+                public void execute() {
+                    if (input == 1){
+                        nextMenu = parentMenu;
+                    }
+                        // TODO: 12/8/2020
+
+                }
+            };
+
 
         }else if(input == 4){
+            nextMenu = new Menu("remove frome friendlist",this) {
+                @Override
+                public void show() {
+                    System.out.println("1.Back");
+                    System.out.println(friendsList);
+                }
+
+                @Override
+                public void execute() {
+                    if (input == 1){
+                        nextMenu = parentMenu;
+                    }
+                    // TODO: 12/8/2020
+                }
+            };
 
         }else if(input == 5){
+            nextMenu = new Menu("manage masseges",this) {
+                @Override
+                public void show() {
+                    System.out.println("1.Back");
+                }
+
+                @Override
+                public void execute() {
+                    if (input == 1){
+                        nextMenu = parentMenu;
+                    }
+                    // TODO: 12/8/2020
+                }
+            };
+
+        }else if(input == 6){
+            nextMenu = new Menu("show friends",this) {
+                @Override
+                public void show() {
+                    System.out.println("1.Back");
+                    System.out.println(friendsList);
+                }
+
+                @Override
+                public void execute() {
+                    if (input == 1){
+                        nextMenu = parentMenu;
+                    }
+                    // TODO: 12/8/2020
+                }
+            };
 
         }
+
+
         nextMenu.show();
         nextMenu.execute();
     }
