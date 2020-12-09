@@ -1,26 +1,22 @@
 package model;
 
+
 import java.util.ArrayList;
 
 public class Card {
-    private Country country;
-    private Color color;
+    private static ArrayList<Card> allCards = makeAllCards();
+    private int countryID;
     private CardDesigns cardDesigns;
     private Player player;
 
-    private Card(Country country, Color color, CardDesigns cardsDesigns) {
-        this.country = country;
-        this.color = color;
+    public Card(int countryID, CardDesigns cardsDesigns) {
+        this.countryID = countryID;
         this.cardDesigns = cardsDesigns;
         this.player = null;
     }
 
-    public Country getCountry() {
-        return country;
-    }
-
-    public Color getColor() {
-        return color;
+    public int getCountryID() {
+        return countryID;
     }
 
     public CardDesigns getCardsDesigns() {
@@ -35,5 +31,20 @@ public class Card {
         this.player = player;
     }
 
-    public static void makeAllCards(ArrayList<Color> colors) {}
+    private static ArrayList<Card> makeAllCards(){
+        ArrayList<Card> allCards = new ArrayList<>();
+        for(int i = 1 ; i <= 42 ; i++){
+            Card card = new Card(i , CardDesigns.INFANTRY);
+            allCards.add(card);
+            card = new Card(i , CardDesigns.ARTILLERY);
+            allCards.add(card);
+            card = new Card(i , CardDesigns.CAVALRY);
+            allCards.add(card);
+        }
+        return allCards;
+    }
+
+    public static ArrayList<Card> getAllCards() {
+        return allCards;
+    }
 }

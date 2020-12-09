@@ -9,16 +9,14 @@ public class  Player extends User{
     private double credit;
     private double rate;
     private HashMap<Integer , GameLog> gameLogs;
-    private HashMap<Integer , Player> friends;
+    private ArrayList<Player> friends;
     private ArrayList<Player> requestsForFriendShips;
     private HashMap<Integer , RequestForPlaying> requestForPlaysList;
     private ArrayList<Card> playersCard;
     private HashMap<Integer , Country> playersCountry;
     private int numberOfSoldiers = 0;
     //This should change to HashMap<User , String >
-    private ArrayList<String> sentMessages;
-    private ArrayList<String> receivedMessages;
-    private ArrayList<String> allMessages;
+    private ArrayList<Massage> massages;
 
     private Color currentColor;
     private int numbersOfWin;
@@ -29,7 +27,7 @@ public class  Player extends User{
     public Player(String firstName, String lastName,
                   String username, String password,
                   String emailAddress, String telephoneNumber) {
-        super(firstName, lastName, username, password, emailAddress, telephoneNumber);
+        super(firstName, lastName, username, password, emailAddress, telephoneNumber , false);
 
         this.numbersOfDaysSinceRegistration = 0;
         this.credit = 0.0;
@@ -37,18 +35,26 @@ public class  Player extends User{
         this.numbersOfWin = 0;
         this.rate = 0.0;
         this.gameLogs = new HashMap<>();
-        this.friends = new HashMap<>();
+        this.friends = new ArrayList<>();
         this.requestsForFriendShips = new ArrayList<>();
         this.requestForPlaysList = new HashMap<>();
         this.playersCard = new ArrayList<>();
         this.playersCountry = new HashMap<>();
-        this.sentMessages = new ArrayList<>();
-        this.receivedMessages = new ArrayList<>();
-        this.allMessages = new ArrayList<>();
+        this.massages = new ArrayList<>();
         this.requestForFriendShipInGame = new ArrayList<>();
         this.friendInGame = null;
         this.currentColor = null;
-        setId();
+        playersCard.add(new Card(1 , CardDesigns.INFANTRY));
+        playersCard.add(new Card(1 , CardDesigns.INFANTRY));
+        playersCard.add(new Card(1 , CardDesigns.INFANTRY));
+        playersCard.add(new Card(1 , CardDesigns.ARTILLERY));
+        playersCard.add(new Card(1 , CardDesigns.ARTILLERY));
+        playersCard.add(new Card(1 , CardDesigns.ARTILLERY));
+        playersCard.add(new Card(1 , CardDesigns.CAVALRY));
+        playersCard.add(new Card(1 , CardDesigns.INFANTRY));
+        playersCard.add(new Card(1 , CardDesigns.ARTILLERY));
+
+//        setId();
     }
 
 
@@ -100,16 +106,8 @@ public class  Player extends User{
         return numberOfSoldiers;
     }
 
-    public ArrayList<String> getSentMessages() {
-        return sentMessages;
-    }
-
-    public ArrayList<String> getReceivedMessages() {
-        return receivedMessages;
-    }
-
-    public ArrayList<String> getAllMessages() {
-        return allMessages;
+    public ArrayList<Massage> getMassages() {
+        return massages;
     }
 
     public void setFirstName(String firstName) {
@@ -156,7 +154,7 @@ public class  Player extends User{
         return gameLogs;
     }
 
-    public HashMap<Integer, Player> getFriends() {
+    public ArrayList<Player> getFriends() {
         return friends;
     }
 
@@ -173,7 +171,7 @@ public class  Player extends User{
     }
 
     public void setId(){
-        this.playerID = DataBase.getDataBase().getAllPlayersWithID().size()+1;
+        this.playerID = DataBase.getDataBase().getAllPlayers().size()+1;
     }
 
     public int getNumbersOfWin() {

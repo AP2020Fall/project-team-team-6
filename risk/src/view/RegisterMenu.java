@@ -1,5 +1,6 @@
 package view;
 
+import model.Admin;
 import model.User;
 
 public class RegisterMenu extends Menu {
@@ -9,7 +10,11 @@ public class RegisterMenu extends Menu {
 
     @Override
     public void show() {
+        Admin admin = userController.getAdmin();
+        if(admin != null)
         System.out.println("Enter your information or type back to return .");
+        else
+            System.out.println("Please fill the information to make admin account");
     }
 
     @Override
@@ -52,9 +57,16 @@ public class RegisterMenu extends Menu {
             nextMenu.execute();
         }
         System.out.println("Your account has successfully created.");
-        User user = userController.signUp(firstName , lastName, userName , password , emailAddress , telephoneNumber);
-        OnlineGameMenu.setCurrentUser(user);
-        nextMenu = new UserMenu(this.parentMenu.getParentMenu() , user);
+        Admin admin = userController.getAdmin();
+        if(admin != null) {
+            User user = userController.signUpAsPlayer(firstName, lastName, userName, password, emailAddress, telephoneNumber);
+            OnlineGameMenu.setCurrentUser(user);
+            nextMenu = new PlayerMenu(this.parentMenu.getParentMenu(), user);
+        }else{
+            Admin admin1 = userController.signUpAsAdmin(firstName , lastName , userName , password , emailAddress , telephoneNumber);
+            OnlineGameMenu.setCurrentUser(admin1);
+            nextMenu = new AdminMenu(this , admin1);
+        }
         nextMenu.show();
         nextMenu.execute();
 

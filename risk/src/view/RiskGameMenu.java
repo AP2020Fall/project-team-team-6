@@ -228,7 +228,67 @@ public class RiskGameMenu extends Menu {
                 }
             };
         }else if(input == 3){
-            //TODO cards
+           nextMenu = new Menu("" , this) {
+               ArrayList<Card> cards = new ArrayList<>();
+               @Override
+               public void show() {
+                   if(cards.size() == 3) {
+                       System.out.println("You chose this cards do u wanna match them or not ?");
+                       showChosenCards(cards);
+                       System.out.println("Type yes to match or no to return ");
+                   }else {
+                       System.out.println("1.Back");
+                       ArrayList<Card>playersCard = currentPlayer.getPlayersCard();
+                       playersCard.removeAll(cards);
+                       HashMap<Integer , Card> getAllCards = gameController.getAllCardsInHashMap(playersCard);
+                       if(getAllCards.size() == 0){
+                           System.out.println("You don't have any card");
+                       }else {
+                           for (int i : getAllCards.keySet()) {
+                               System.out.println(i + ".");
+                               Card card = getAllCards.get(i);
+                               showCard(card);
+                               System.out.println();
+                           }
+                       }
+                   }
+               }
+               @Override
+               public void execute() {
+                   Menu nextMenu = this;
+                  if(cards.size() != 3){
+                      String inputInString = getInputFormatWithHelpText("^\\d+$" , "Enter a number :");
+                      int input = Integer.parseInt(inputInString);
+                      if(input == 1 )
+                          nextMenu = parentMenu;
+                      else if(input > currentPlayer.getPlayersCard().size() + 1 || input < 1 )
+                          System.err.println("Invalid number");
+                      else{
+                          ArrayList<Card>playersCard = currentPlayer.getPlayersCard();
+                          playersCard.removeAll(cards);
+                          HashMap<Integer , Card> getAllCards = gameController.getAllCardsInHashMap(playersCard);
+                          Card card = getAllCards.get(input);
+                          cards.add(card);
+                          System.out.println("You added this card for matching");
+                          showCard(card);
+                      }
+                  }else{
+                      String inputInString = getInputFormatWithHelpText("^(?i)yes|(?i)no$".trim() ,"");
+                      if(inputInString.equalsIgnoreCase("yes")){
+                          try {
+                              gameController.getSoldiersFromCards(currentPlayer , cards.get(0) ,cards.get(1) , cards.get(2));
+                              nextMenu = parentMenu;
+                          } catch (Exception e) {
+                              System.out.println(e.getMessage());
+                          }
+                      }else{
+                          nextMenu = parentMenu;
+                      }
+                  }
+                  nextMenu.show();
+                  nextMenu.execute();
+               }
+           };
         }else if(input == 4){
              inputInString = getInputFormatWithHelpText("^[1-9]$|^[1-3][0-9]$|^4[0-2]$|^(?i)back$".trim() , "Enter a country number or type back to return");
              if(!inputInString.equals("back")){
@@ -451,7 +511,7 @@ public class RiskGameMenu extends Menu {
         }else if(input == 4){
             boolean hasGotAnyCountry = riskGame.isHasOneSuccessAttack();
             if(hasGotAnyCountry){
-                //TODO .....
+                gameController.giveCardToPlayer(riskGame);
             }
             gameController.setHashGotOneCountryInAttack(riskGame , false);
             gameController.goNextStage(riskGame);
@@ -550,7 +610,23 @@ public class RiskGameMenu extends Menu {
         nextMenu.execute();
     }
 
+    private void showCardsToChose(){
 
+    }
+
+    private void showCard(Card card){
+        System.out.println("Card design : " + card.getCardsDesigns());
+        System.out.println("Country coordination : " + card.getCountryID());
+    }
+
+    private void showChosenCards(ArrayList<Card> cards){
+        if(cards.size() != 0 ) {
+            for (int i = 1; i <= cards.size(); i++) {
+                System.out.println(i + ".");
+                showCard(cards.get(i - 1));
+            }
+        }
+    }
 
 
 

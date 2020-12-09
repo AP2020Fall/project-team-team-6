@@ -12,7 +12,7 @@ public class MainMenu extends Menu {
     public MainMenu(Menu parentMenu) {
         super("Main Menu", parentMenu);
         offlineRiskGame = null;
-        subMenus.put(2,new OnlineGameMenu(this));
+        calculateSubMenusForMainMenu();
     }
 
     @Override
@@ -171,6 +171,15 @@ public class MainMenu extends Menu {
     private void showColorsToChose(HashMap<Integer , Color> colors){
         for(Integer i : colors.keySet()){
             System.out.print(i+"."+colors.get(i).toString()+"\t");
+        }
+    }
+
+    private void calculateSubMenusForMainMenu(){
+        Admin admin = userController.getAdmin();
+        if(admin == null){
+            subMenus.put(2, new RegisterMenu(this));
+        }else{
+            subMenus.put(2,new OnlineGameMenu(this));
         }
     }
 

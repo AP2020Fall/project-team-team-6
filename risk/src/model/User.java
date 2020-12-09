@@ -7,15 +7,17 @@ public class User {
     protected String password;
     protected String emailAddress;
     protected String telephoneNumber;
+    protected boolean isAdmin;
 
     public User(String firstName, String lastName, String username,
-                String password, String emailAddress, String telephoneNumber) {
+                String password, String emailAddress, String telephoneNumber , boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.emailAddress = emailAddress;
         this.telephoneNumber = telephoneNumber;
+        this.isAdmin = isAdmin;
     }
 
     public String getFirstName() {
@@ -64,5 +66,9 @@ public class User {
 
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 }
