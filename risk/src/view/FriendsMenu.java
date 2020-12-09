@@ -39,30 +39,65 @@ public class FriendsMenu extends Menu{
                 @Override
                 public void show() {
                     System.out.println("1.Back");
-                    System.out.println("enter the user name or enter back ");
+                    showRequest();
                 }
 
                 @Override
                 public void execute() {
-                    super.execute();
+                    Menu nextMenu = this;
+                    String inputString = getInputFormatWithHelpText("^\\d+$" , "Enter a number : ");
+                    int input = Integer.parseInt(inputString);
+                    if(input == 1){
+                        nextMenu = parentMenu;
+                    }else if(input <= player.getRequestsForFriendShips().size()+1){
+                        Player player1 = player.getRequestsForFriendShips().get(input - 2);
+                        showAccountInformation(player1);
+                        System.out.println("1.Back\t2.Accept\t3.Reject");
+                        inputString = getInputFormatWithHelpText("^1|2|3$" , "Enter a number : ");
+                        int newInput = Integer.parseInt(inputString);
+                        if(newInput == 2){
+                            try {
+                                userController.acceptFriendShip(player , player1);
+                                System.out.println("You added " + player1.getUsername() + " to your friends");
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }else if(newInput == 3){
+                            try {
+                                userController.rejectFriend(player , player1);
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                    }else{
+                        System.err.println("Invalid number");
+                    }
+                    nextMenu.show();
+                    nextMenu.execute();
                 }
             };
 
 
         }else if(input == 3){
-            nextMenu = new Menu("Send new friend request",this) {
-                @Override
-                public void show() {
-                    System.out.println("1.Back");
-                    System.out.println(friendsList);
+            //TODO bekhodet mitooni friend request befresti .....
+            while (true) {
+                String username = getInputFormatWithHelpText("^.+|(?i)back$", "Enter a username or type back to return");
+                if(username.equalsIgnoreCase("back"))
+                    break;
+                Player player1 = userController.findPlayerByUserName(username);
+                if(player1 != null){
+                 showAccountInformation(player1);
+                 System.out.println("Are you sure ? ");
+                 String confirm = getInputFormatWithHelpText("^(?i)yes|(?i)no$" , "Enter yes or no. ");
+                 if(confirm.equalsIgnoreCase("yes")) {
+                     player1.getRequestsForFriendShips().add(player);
+                     System.out.println("You have sent friend request for " + username);
+                     break;
+                 }
+                }else{
+                    System.err.println("There is no user by that username ");
                 }
-
-                @Override
-                public void execute() {
-                    super.execute();
-                }
-            };
-
+            }
         }else if(input == 4){
             nextMenu = new Menu("manage massages",this) {
                 @Override
@@ -75,7 +110,46 @@ public class FriendsMenu extends Menu{
 
                 @Override
                 public void execute() {
-                    super.execute();
+                    String inputString = getInputFormatWithHelpText("^\\d+$" , "Enter a number : ");
+                    int input = Integer.parseInt(inputString);
+                    ArrayList<Player> inbox = new ArrayList<>(userController.getAllPlayersThatHadMessageWith(player));
+                    Menu nextMenu = this;
+                    if(input == 1){
+                        nextMenu = parentMenu;
+                    }else if(input > inbox.size()+2){
+                        System.err.println("Invalid number");
+                    }else if(input == 2 ){
+                        //TODO agha bekhodet mitooni pm bedi
+                        //Send new Message
+                        String userName = getInputFormatWithHelpText("^.+|(?i)back$" , "Enter a username to send message :");
+                        Player player1 = userController.findPlayerByUserName(userName);
+                        if(player1 == null)
+                            System.err.println("There is no user by this username");
+                        else{
+                            while (true) {
+                                System.out.println("-------------------------------------------------------");
+                                showMessages(player1);
+                                String messageText = getInputFormatWithHelpText("^.+|(?i)back$", "Enter your text or type back to return");
+                                if (!messageText.equalsIgnoreCase("back"))
+                                    userController.sendMessage(player, player1, messageText);
+                                else if(messageText.equalsIgnoreCase("back"))
+                                    break;
+                            }
+                        }
+                    }else{
+                        Player friend = inbox.get(input - 3);
+                        while (true) {
+                            System.out.println("-------------------------------------------------------");
+                            showMessages(friend);
+                            String messageText = getInputFormatWithHelpText("^.+|(?i)back$", "Enter your text or type back to return");
+                            if (!messageText.equalsIgnoreCase("back"))
+                                userController.sendMessage(player, friend, messageText);
+                            else if(messageText.equalsIgnoreCase("back"))
+                                break;
+                        }
+                    }
+                    nextMenu.show();
+                    nextMenu.execute();
                 }
             };
 
@@ -108,12 +182,14 @@ public class FriendsMenu extends Menu{
                         inputInString = getInputFormatWithHelpText("^1|2|3$" , "Enter a number : ");
                         input = Integer.parseInt(inputInString);
                         if(input == 2){
-                            showMessages(friend);
                             while (true) {
+                                System.out.println("-------------------------------------------------------");
                                 showMessages(friend);
                                 String messageText = getInputFormatWithHelpText("^.+|(?i)back$", "Enter your text or type back to return");
                                 if (!messageText.equalsIgnoreCase("back"))
                                     userController.sendMessage(player, friend, messageText);
+                                else if(messageText.equalsIgnoreCase("back"))
+                                    break;
                             }
                         }else if(input == 3){
                             inputInString = getInputFormatWithHelpText("^(?i)yes|(?i)no$" , "Are you sure ?");
@@ -135,8 +211,8 @@ public class FriendsMenu extends Menu{
         nextMenu.execute();
     }
     private void showRequest(){
-        for(int i : friendsList.keySet()){
-            System.out.println(i+"."+friendsList.get(i).getUsername());
+        for(int i = 2;  i <= player.getRequestsForFriendShips().size()+1 ; i++){
+            System.out.println( i + ". " + player.getRequestsForFriendShips().get(i-2).getUsername());
         }
     }
 
@@ -162,7 +238,7 @@ public class FriendsMenu extends Menu{
             System.out.println("Empty");
         else{
             for(Massage massage : massages){
-                System.out.println(massage.getSender() + ":" + massage.getMassage());
+                System.out.println(massage.getSender().getUsername() + ":" + massage.getMassage());
             }
         }
     }
@@ -174,6 +250,12 @@ public class FriendsMenu extends Menu{
             System.out.println(i+"."+inboxInArray.get(i-3).getUsername());
         }
     }
+
+    private void showAccountInformation(Player player){
+        System.out.println("Username : " + player.getUsername());
+        System.out.println("Player's point : " + player.getRate());
+    }
+
 
 
 

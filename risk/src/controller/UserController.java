@@ -59,6 +59,25 @@ public class UserController {
         }
         return null;
     }
+
+    public Player findPlayerByUserName(String userName){
+        ArrayList<Player> allPlayers  = dataBase.getAllPlayers();
+        for(Player player : allPlayers) {
+            if (player.getUsername().equals(userName))
+                return player;
+        }
+        return null;
+    }
+    public void acceptFriendShip(Player player , Player secondPlayer) throws Exception {
+        ArrayList<Player> requestedPlayers = player.getRequestsForFriendShips();
+        if(requestedPlayers.contains(secondPlayer)){
+            player.getFriends().add(secondPlayer);
+            secondPlayer.getFriends().add(player);
+            player.getRequestsForFriendShips().remove(secondPlayer);
+        }else{
+            throw new Exception("Error player request");
+        }
+    }
     public void changeFirstName(String username , String newFirstName) {
         User user = findUserByUsername(username);
         user.setFirstName(newFirstName);
@@ -138,17 +157,15 @@ public class UserController {
     public ArrayList<Player> getFriendsRequestsList(Player player){
         return player.getRequestsForFriendShips();
     }
-    public void rejectFriend(Player player , Player secondPlayer){
-        //TODO
+    public void rejectFriend(Player player , Player secondPlayer) throws Exception {
+        ArrayList<Player> requestedPlayer = player.getRequestsForFriendShips();
+        if(requestedPlayer.contains(secondPlayer)){
+            player.getRequestsForFriendShips().remove(secondPlayer);
+        }else{
+            throw new Exception("Error friend Request");
+        }
     }
 
-    public void acceptFriend(Player player , Player secondPlayer){
-        //TODO ....
-    }
-
-    public void removePlayerFromFriendsList(Player firstPlayer , Player secondPlayer){
-        //TODO ......
-    }
 
     public void inviteToPlay(Player player , String username , RiskGame riskGame){
         //TODO ....
