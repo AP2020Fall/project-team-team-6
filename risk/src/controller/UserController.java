@@ -4,6 +4,7 @@ import model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class UserController {
     private static UserController userController = new UserController();
@@ -21,21 +22,35 @@ public class UserController {
 
     //Users Methods
     //-----------------------------------------------------------------------------------------------------------------
+    //TODO is admin is not complete
     public Admin getAdmin(){
         return dataBase.getAdmin();
     }
-    public void setAdmin(String firstName , String lastName , String username ,
+    public Admin signUpAsAdmin(String firstName , String lastName , String username ,
                          String password , String emailAddress ,String telephoneNumber){
         Admin admin = new Admin(firstName , lastName , username , password , emailAddress , telephoneNumber);
+        dataBase.getAllUsers().add(admin);
         dataBase.setAdmin(admin);
+        return admin;
     }
-    public User signUp(String firstName , String lastName , String username ,
-                       String password , String emailAddress ,String telephoneNumber){
+    //TODO is admin is not complete
+    public User signUpAsPlayer(String firstName , String lastName , String username ,
+                               String password , String emailAddress , String telephoneNumber){
         Player player = new Player(firstName , lastName , username , password , emailAddress , telephoneNumber);
-        dataBase.getAllPlayersWithID().put(player.getPlayerID(),player);
+        dataBase.getAllPlayers().add(player);
         dataBase.getAllUsers().add(player);
         return player;
     }
+
+    public Player getPlayerByUsername(String username) throws Exception {
+        ArrayList<Player> allPlayers = dataBase.getAllPlayers();
+            for (Player player : allPlayers) {
+                if (player.getUsername().equals(username))
+                    return player;
+            }
+            throw new Exception("There is no user by that username");
+    }
+
     public User findUserByUsername(String userName) {
         ArrayList<User> allUsers = dataBase.getAllUsers();
         for(User user : allUsers) {
@@ -113,7 +128,12 @@ public class UserController {
         //TODO .....
     }
     public HashMap<Integer, Player> getPlayersFriends(Player player){
-        return player.getFriends();
+        ArrayList<Player> friendsInArray = player.getFriends();
+        HashMap<Integer , Player> friendsInHashMap = new HashMap<>();
+        for(int i = 2 ; i <= friendsInArray.size() +1 ;i++){
+            friendsInHashMap.put(i , friendsInArray.get(i-2));
+        }
+        return friendsInHashMap;
     }
     public ArrayList<Player> getFriendsRequestsList(Player player){
         return player.getRequestsForFriendShips();
@@ -177,8 +197,35 @@ public class UserController {
         //ToDo
     }
 
-    public void sendMessage(Player player1, Player player2) {
-        //ToDo
+    public void sendMessage(Player sender, Player receiver , String massageText) {
+        Massage massage = new Massage(massageText , sender , receiver);
+        sender.getMassages().add(massage);
+        receiver.getMassages().add(massage);
+    }
+
+    public ArrayList<Massage> getPlayersMassage(Player currentPlayer , Player sender){
+        ArrayList<Massage> massages = new ArrayList<>();
+        ArrayList<Massage> playersMassages = currentPlayer.getMassages();
+        for(Massage massage  : playersMassages) {
+          if(massage.getReceiver().equals(sender) || massage.getSender().equals(sender)){
+              massages.add(massage);
+          }
+        }
+        return massages;
+    }
+    public HashSet<Player> getAllPlayersThatHadMessageWith(Player currentPlayer){
+        ArrayList<Massage> allMassages = currentPlayer.getMassages();
+        HashSet<Player> players = new HashSet<>();
+        for(Massage massage : allMassages){
+            Player sender = massage.getSender();
+            Player receiver = massage.getReceiver();
+            if(!sender.equals(currentPlayer))
+                players.add(sender);
+            else{
+                players.add(receiver);
+            }
+        }
+        return players;
     }
 
     public ArrayList<String> showAllMessages(Player player) {

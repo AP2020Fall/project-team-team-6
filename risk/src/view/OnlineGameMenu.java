@@ -37,7 +37,7 @@ public class OnlineGameMenu extends Menu {
             subMenus.put(2,new RegisterMenu(this));
             subMenus.put(3,new LoginMenu(this));
         }else{
-            subMenus.put(2,new UserMenu(this , currentUser));
+            subMenus.put(2,new PlayerMenu(this , currentUser));
         }
     }
 }

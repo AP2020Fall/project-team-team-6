@@ -30,7 +30,7 @@ public class LoginMenu extends Menu {
         try {
             User user  = userController.login(userName , password);
             OnlineGameMenu.setCurrentUser(user);
-            nextMenu = new UserMenu(this.parentMenu.getParentMenu() , user);
+            nextMenu = new PlayerMenu(this.parentMenu.getParentMenu() , user);
         }catch (Exception e){
             System.err.println(e.getMessage());
         }
