@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainMenu extends Menu {
-    private static Admin admin = null;
-    private static User currentUser = null;
     private RiskGame offlineRiskGame;
     public MainMenu(Menu parentMenu) {
         super("Main Menu", parentMenu);
@@ -17,6 +15,7 @@ public class MainMenu extends Menu {
 
     @Override
     public void show() {
+        calculateSubMenusForMainMenu();
         //This super shows 1.Back and 2.Online game
         super.show();
         //This shows 3.Play Offline game
@@ -182,6 +181,5 @@ public class MainMenu extends Menu {
             subMenus.put(2,new OnlineGameMenu(this));
         }
     }
-
 }
 

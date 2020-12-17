@@ -106,6 +106,9 @@ public class FriendsMenu extends Menu{
                     System.out.println("2.Send new Massage");
                     System.out.println("-----------------------------");
                     showInbox();
+                    System.out.println("-----------------------------");
+                    System.out.println("Admin massages : ");
+                    showAdminMassage();
                 }
 
                 @Override
@@ -254,6 +257,13 @@ public class FriendsMenu extends Menu{
     private void showAccountInformation(Player player){
         System.out.println("Username : " + player.getUsername());
         System.out.println("Player's point : " + player.getRate());
+    }
+
+    private void showAdminMassage(){
+        ArrayList<Massage> adminMassages = player.getAdminMassages();
+        for(Massage massage : adminMassages){
+            System.out.println("Admin : " + massage.getMassage());
+        }
     }
 
 

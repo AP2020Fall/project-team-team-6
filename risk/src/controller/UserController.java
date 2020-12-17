@@ -100,7 +100,7 @@ public class UserController {
     }
     public void changeUsername(String username , String newUsername) throws Exception {
         User user = findUserByUsername(username);
-        if(checkUsername(username)){
+        if(checkUsername(newUsername)){
             user.setUsername(newUsername);
         }else{
             throw new Exception("This username has already taken.");
@@ -113,10 +113,6 @@ public class UserController {
         }else{
             throw new Exception("Username or password are incorrect ! ");
         }
-    }
-
-    public void logout(){
-        //TODO .....
     }
 
     public boolean checkUsername(String username){
@@ -135,6 +131,11 @@ public class UserController {
         else{
             return password.equals(user.getPassword());
         }
+    }
+
+
+    public void deletePlayer(Player player){
+        dataBase.getAllPlayers().remove(player);
     }
 
     //End Users Methods
@@ -203,6 +204,10 @@ public class UserController {
         //TODO .....
     }
 
+    public ArrayList<Player> getAllPlayers(){
+        return dataBase.getAllPlayers();
+    }
+
     //new player methods
 //----------------------------------------------------------------------------------------------------------------
 
@@ -218,6 +223,10 @@ public class UserController {
         Massage massage = new Massage(massageText , sender , receiver);
         sender.getMassages().add(massage);
         receiver.getMassages().add(massage);
+    }
+    public void sendMessageFromAdmin(Admin sender, Player receiver , String massageText) {
+        Massage massage = new Massage(massageText , sender , receiver);
+        receiver.getAdminMassages().add(massage);
     }
 
     public ArrayList<Massage> getPlayersMassage(Player currentPlayer , Player sender){
