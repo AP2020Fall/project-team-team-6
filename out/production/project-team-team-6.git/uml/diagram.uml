@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="1146.0" y="0.0">model.Continent</node>
+    <node x="660.0" y="1257.0">model.RiskGameType</node>
+    <node x="0.0" y="1257.0">model.RequestForPlaying</node>
+    <node x="0.0" y="550.0">model.Admin</node>
+    <node x="180.0" y="0.0">model.User</node>
+    <node x="328.0" y="1257.0">model.GameLog</node>
+    <node x="534.0" y="1257.0">model.Color</node>
+    <node x="721.0" y="0.0">model.RiskGame</node>
+    <node x="704.0" y="943.0">model.Country</node>
+    <node x="332.0" y="255.0">model.Player</node>
+    <node x="0.0" y="943.0">model.Event</node>
+    <node x="1002.0" y="943.0">model.Card</node>
+    <node x="393.0" y="943.0">model.DataBase</node>
+    <node x="999.0" y="1257.0">model.GameStages</node>
+    <node x="833.0" y="1257.0">model.CardDesigns</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="model.Player" target="model.User">
+      <point x="0.0" y="-321.5" />
+      <point x="504.0" y="230.0" />
+      <point x="405.0" y="230.0" />
+      <point x="75.0" y="102.5" />
+    </edge>
+    <edge source="model.Admin" target="model.User">
+      <point x="0.0" y="-26.5" />
+      <point x="156.0" y="230.0" />
+      <point x="255.0" y="230.0" />
+      <point x="-75.0" y="102.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="240.5" y="34.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

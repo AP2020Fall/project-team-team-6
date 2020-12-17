@@ -7,6 +7,7 @@ import model.User;
 public class OnlineGameMenu extends Menu {
     private static Admin admin = null;
     private static User currentUser = null;
+
     public OnlineGameMenu(Menu parentMenu) {
         super("Play Online", parentMenu);
         calculateSubMenusForMainMeu();
@@ -33,14 +34,14 @@ public class OnlineGameMenu extends Menu {
         OnlineGameMenu.currentUser = currentUser;
     }
 
-    private void calculateSubMenusForMainMeu(){
-        if(currentUser == null){
-            subMenus.put(2,new RegisterMenu(this));
-            subMenus.put(3,new LoginMenu(this));
-        }else{
-            if(currentUser.isAdmin()){
-                subMenus.put(2 , new AdminMenu(this , userController.getAdmin()));
-            }else {
+    private void calculateSubMenusForMainMeu() {
+        if (currentUser == null) {
+            subMenus.put(2, new RegisterMenu(this));
+            subMenus.put(3, new LoginMenu(this));
+        } else {
+            if (currentUser.isAdmin()) {
+                subMenus.put(2, new AdminMenu(this, userController.getAdmin()));
+            } else {
                 Player player = userController.findPlayerByUserName(currentUser.getUsername());
                 subMenus.put(2, new PlayerMenu(this, player));
             }

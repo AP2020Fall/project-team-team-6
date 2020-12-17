@@ -9,12 +9,11 @@ public class PlayerMenu extends Menu {
     public PlayerMenu(Menu parentMenu, Player player) {
         super("Account", parentMenu);
         this.user = player;
-        subMenus.put(2 , new GamesMenu(this));
-        subMenus.put(3 , new FriendsMenu(this , player));
-        subMenus.put(4 , new EventMenu(this));
-        subMenus.put(5 , new EditInformationMenu(this, user));
+        subMenus.put(2, new GamesMenu(this));
+        subMenus.put(3, new FriendsMenu(this, player));
+        subMenus.put(4, new EventMenu(this));
+        subMenus.put(5, new EditInformationMenu(this, user));
     }
-
 
 
     @Override
@@ -27,19 +26,19 @@ public class PlayerMenu extends Menu {
     public void execute() {
         String userName = user.getUsername();
         Menu nextMenu = this;
-        String inputString = getInputFormatWithHelpText("^[1-6]$".trim() , "Enter a number:");
-        int input  = Integer.parseInt(inputString);
-        if(input == 1){
+        String inputString = getInputFormatWithHelpText("^[1-6]$".trim(), "Enter a number:");
+        int input = Integer.parseInt(inputString);
+        if (input == 1) {
             nextMenu = parentMenu;
-        }else if(input == 2){
+        } else if (input == 2) {
             nextMenu = subMenus.get(input);
-        }else if(input == 3){
-           nextMenu =  subMenus.get(input);
-        }else if(input == 4){
+        } else if (input == 3) {
             nextMenu = subMenus.get(input);
-        }else if(input == 5){
-         nextMenu = subMenus.get(input);
-        }else if(input == 6){
+        } else if (input == 4) {
+            nextMenu = subMenus.get(input);
+        } else if (input == 5) {
+            nextMenu = subMenus.get(input);
+        } else if (input == 6) {
             System.out.println("You have logged out  from system.");
             OnlineGameMenu.setCurrentUser(null);
             nextMenu = parentMenu;

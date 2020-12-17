@@ -6,8 +6,8 @@ import model.Event;
 import java.util.HashMap;
 
 public class EventMenu extends Menu {
-    public EventMenu(Menu parentMenu){
-        super("Events Menu " , parentMenu);
+    public EventMenu(Menu parentMenu) {
+        super("Events Menu ", parentMenu);
     }
 
     @Override

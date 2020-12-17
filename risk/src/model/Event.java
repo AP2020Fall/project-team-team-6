@@ -12,7 +12,7 @@ public class Event {
     private int eventID;
     private ArrayList<Player> invitedPlayers;
 
-    public Event(LocalDateTime startDate, LocalDateTime endDate, RiskGame riskGame,double eventPoint) {
+    public Event(LocalDateTime startDate, LocalDateTime endDate, RiskGame riskGame, double eventPoint) {
         this.gameName = riskGame.getName();
         this.startDate = startDate;
         this.endDate = endDate;
@@ -21,7 +21,8 @@ public class Event {
         this.invitedPlayers = DataBase.getDataBase().getAllPlayers();
         setEventID();
     }
-    public Event(LocalDateTime startDate, LocalDateTime endDate, RiskGame riskGame,double eventPoint , ArrayList<Player> invitedList) {
+
+    public Event(LocalDateTime startDate, LocalDateTime endDate, RiskGame riskGame, double eventPoint, ArrayList<Player> invitedList) {
         this.gameName = riskGame.getName();
         this.startDate = startDate;
         this.endDate = endDate;
@@ -79,8 +80,8 @@ public class Event {
         this.eventID = eventID;
     }
 
-    public void setEventID(){
-        eventID = DataBase.getDataBase().getAllEvents().size()+1;
+    public void setEventID() {
+        eventID = DataBase.getDataBase().getAllEvents().size() + 1;
     }
 
     public void setInvitedPlayers(ArrayList<Player> invitedPlayers) {

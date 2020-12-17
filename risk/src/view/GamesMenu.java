@@ -5,8 +5,9 @@ import model.RiskGame;
 import java.util.HashMap;
 
 public class GamesMenu extends Menu {
-    private HashMap<Integer , RiskGame> allGames;
-    public GamesMenu( Menu parentMenu) {
+    private HashMap<Integer, RiskGame> allGames;
+
+    public GamesMenu(Menu parentMenu) {
         super("Games Menu", parentMenu);
     }
 

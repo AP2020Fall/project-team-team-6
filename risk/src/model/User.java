@@ -10,7 +10,7 @@ public class User {
     protected boolean isAdmin;
 
     public User(String firstName, String lastName, String username,
-                String password, String emailAddress, String telephoneNumber , boolean isAdmin) {
+                String password, String emailAddress, String telephoneNumber, boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;

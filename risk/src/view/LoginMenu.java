@@ -30,16 +30,16 @@ public class LoginMenu extends Menu {
             nextMenu = parentMenu;
         }
         try {
-            User user  = userController.login(userName , password);
+            User user = userController.login(userName, password);
             OnlineGameMenu.setCurrentUser(user);
-            if(!user.isAdmin()) {
+            if (!user.isAdmin()) {
                 Player player = userController.findPlayerByUserName(userName);
                 nextMenu = new PlayerMenu(this.parentMenu.getParentMenu(), player);
-            }else{
+            } else {
                 Admin admin = userController.getAdmin();
-                nextMenu = new AdminMenu(this.parentMenu.getParentMenu()  , admin );
+                nextMenu = new AdminMenu(this.parentMenu.getParentMenu(), admin);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
@@ -47,23 +47,23 @@ public class LoginMenu extends Menu {
         nextMenu.execute();
     }
 
-    private String  getUserName() {
+    private String getUserName() {
         String userName;
-            userName = getInputFormatWithHelpText(".+|^(?i)back$".trim(), "Username :");
-            if(userName.equalsIgnoreCase("back"))
-                return null;
-            else
-                return userName;
+        userName = getInputFormatWithHelpText(".+|^(?i)back$".trim(), "Username :");
+        if (userName.equalsIgnoreCase("back"))
+            return null;
+        else
+            return userName;
     }
 
     private String getPassword() {
         String password;
-            password  = getInputFormatWithHelpText(".+|^(?i)back$".trim() , "Password :");
-            if(password.equalsIgnoreCase("back"))
-                return null;
-            else{
-                return password;
-            }
+        password = getInputFormatWithHelpText(".+|^(?i)back$".trim(), "Password :");
+        if (password.equalsIgnoreCase("back"))
+            return null;
+        else {
+            return password;
+        }
     }
 
 

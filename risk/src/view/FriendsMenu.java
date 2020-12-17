@@ -282,9 +282,9 @@ public class FriendsMenu extends Menu {
         System.out.println("Player's point : " + player.getRate());
     }
 
-    private void showAdminMassage(){
+    private void showAdminMassage() {
         ArrayList<Massage> adminMassages = player.getAdminMassages();
-        for(Massage massage : adminMassages){
+        for (Massage massage : adminMassages) {
             System.out.println("Admin : " + massage.getMassage());
         }
     }
