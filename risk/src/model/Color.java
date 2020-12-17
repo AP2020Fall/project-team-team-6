@@ -1,44 +1,44 @@
 package model;
 
 public enum Color {
-    RED{
+    RED {
         @Override
-        public String toString(){
+        public String toString() {
             return "red";
         }
     },
-    BLUE{
+    BLUE {
         @Override
-        public String toString(){
+        public String toString() {
             return "blue";
         }
     },
-    GRAY{
+    GRAY {
         @Override
-        public String toString(){
+        public String toString() {
             return "gray";
         }
     },
-    YELLOW{
+    YELLOW {
         @Override
-        public String toString(){
+        public String toString() {
             return "yellow";
         }
     },
-    BLACK{
+    BLACK {
         @Override
-        public String toString(){
+        public String toString() {
             return "black";
         }
     },
-    PURPLE{
+    PURPLE {
         @Override
-        public String toString(){
+        public String toString() {
             return "purple";
         }
     };
 
-    private static final Color[] defaultColor = {RED , BLUE , GRAY , YELLOW , BLACK , PURPLE};
+    private static final Color[] defaultColor = {RED, BLUE, GRAY, YELLOW, BLACK, PURPLE};
 
 
     public static Color[] getDefaultColor() {

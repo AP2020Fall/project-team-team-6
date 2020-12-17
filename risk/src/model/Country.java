@@ -5,20 +5,19 @@ import java.util.HashMap;
 
 public class Country {
 
-   private final int countryCoordinate;
-   private Color color;
-   private int numberOfSoldiers;
-   private ArrayList<Country> neighboringCountries;
-   private final Continent continent;
-   private final String name;
+    private final int countryCoordinate;
+    private Color color;
+    private int numberOfSoldiers;
+    private ArrayList<Country> neighboringCountries;
+    private final Continent continent;
+    private final String name;
 
 
-
-    public Country(final int countryCoordinate , final Continent continent, final String name) {
+    public Country(final int countryCoordinate, final Continent continent, final String name) {
         this.countryCoordinate = countryCoordinate;
         this.name = name;
         this.color = null;
-        this.numberOfSoldiers =0;
+        this.numberOfSoldiers = 0;
         this.neighboringCountries = new ArrayList<>();
         this.continent = continent;
     }

@@ -9,7 +9,7 @@ public class RequestForPlaying {
     private boolean isAvailable;
     private LocalDateTime inviteDate;
 
-    public RequestForPlaying(Player player,Player invitedPlayer, RiskGame riskGame) {
+    public RequestForPlaying(Player player, Player invitedPlayer, RiskGame riskGame) {
         this.player = player;
         this.invitedPlayer = invitedPlayer;
         this.riskGame = riskGame;

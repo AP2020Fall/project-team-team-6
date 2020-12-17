@@ -6,7 +6,7 @@ public class GameLog {
     private RiskGame game;
 
     public GameLog(RiskGame game) {
-         this.game = game;
+        this.game = game;
         this.pointsEarned = 0;
         //TODO pointsEarned
     }
@@ -22,7 +22,8 @@ public class GameLog {
     public RiskGame getGame() {
         return game;
     }
-    public  void setLogID(){
+
+    public void setLogID() {
         //TODO .....
     }
 }

@@ -6,7 +6,7 @@ public class EditInformationMenu extends Menu {
     private User user;
 
     public EditInformationMenu(Menu parentMenu, User user) {
-        super("edit information" , parentMenu);
+        super("edit information", parentMenu);
         this.user = user;
     }
 
@@ -25,9 +25,9 @@ public class EditInformationMenu extends Menu {
     public void execute() {
         Menu nextMenu = this;
         String userName = user.getUsername();
-        String inputString = getInputFormatWithHelpText("[1-7]" , "Enter a number:");
+        String inputString = getInputFormatWithHelpText("[1-7]", "Enter a number:");
         int input = Integer.parseInt(inputString);
-        if (input == 1){
+        if (input == 1) {
             nextMenu = parentMenu;
         } else if (input == 2) {
             String newUserName = editUsername();
@@ -57,7 +57,7 @@ public class EditInformationMenu extends Menu {
                 userController.changeEmailAddress(userName, newEmailAddress);
                 System.out.println("You successfully changed your email address to " + newEmailAddress);
             }
-        } else if(input == 6) {
+        } else if (input == 6) {
             String newTelephoneNumber = editTelephoneNumber();
             if (newTelephoneNumber != null) {
                 userController.changeTelephoneNumber(userName, newTelephoneNumber);
@@ -75,14 +75,14 @@ public class EditInformationMenu extends Menu {
     }
 
     private String editUsername() {
-        String newUserName = getInputFormatWithHelpText(".+|^back$" , "Enter new user name or type back to return:");
+        String newUserName = getInputFormatWithHelpText(".+|^back$", "Enter new user name or type back to return:");
         if (newUserName.equalsIgnoreCase("back"))
             return null;
         return newUserName;
     }
 
     private String editFirstName() {
-        String newFirstName = getInputFormatWithHelpText(".+|^back$" , "Enter new first name or type back to return:");
+        String newFirstName = getInputFormatWithHelpText(".+|^back$", "Enter new first name or type back to return:");
         if (newFirstName.equalsIgnoreCase("back"))
             return null;
 
@@ -90,21 +90,21 @@ public class EditInformationMenu extends Menu {
     }
 
     private String editLastName() {
-        String newLastName = getInputFormatWithHelpText(".+|^back$" , "Enter new last name or type back to return:");
+        String newLastName = getInputFormatWithHelpText(".+|^back$", "Enter new last name or type back to return:");
         if (newLastName.equalsIgnoreCase("back"))
             return null;
         return newLastName;
     }
 
     private String editEmailAddress() {
-        String newEmailAddress = getInputFormatWithHelpText(".+|^back$" , "Enter new email address or type back to return:");
+        String newEmailAddress = getInputFormatWithHelpText(".+|^back$", "Enter new email address or type back to return:");
         if (newEmailAddress.equalsIgnoreCase("back"))
             return null;
         return newEmailAddress;
     }
 
     private String editTelephoneNumber() {
-        String newTelephoneNumber = getInputFormatWithHelpText(".+|^back$" , "Enter new telephone number or type back to return:");
+        String newTelephoneNumber = getInputFormatWithHelpText(".+|^back$", "Enter new telephone number or type back to return:");
         if (newTelephoneNumber.equalsIgnoreCase("back"))
             return null;
         return newTelephoneNumber;
@@ -113,7 +113,7 @@ public class EditInformationMenu extends Menu {
     private String editPassword() {
         String newPassword;
         while (true) {
-            newPassword = getInputFormatWithHelpText(".+|^back$" , "Enter new password or type back to return:");
+            newPassword = getInputFormatWithHelpText(".+|^back$", "Enter new password or type back to return:");
             if (newPassword.equalsIgnoreCase("back"))
                 return null;
             else {

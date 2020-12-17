@@ -31,14 +31,14 @@ public class Card {
         this.player = player;
     }
 
-    private static ArrayList<Card> makeAllCards(){
+    private static ArrayList<Card> makeAllCards() {
         ArrayList<Card> allCards = new ArrayList<>();
-        for(int i = 1 ; i <= 42 ; i++){
-            Card card = new Card(i , CardDesigns.INFANTRY);
+        for (int i = 1; i <= 42; i++) {
+            Card card = new Card(i, CardDesigns.INFANTRY);
             allCards.add(card);
-            card = new Card(i , CardDesigns.ARTILLERY);
+            card = new Card(i, CardDesigns.ARTILLERY);
             allCards.add(card);
-            card = new Card(i , CardDesigns.CAVALRY);
+            card = new Card(i, CardDesigns.CAVALRY);
             allCards.add(card);
         }
         return allCards;

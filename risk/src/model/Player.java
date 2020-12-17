@@ -3,17 +3,17 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class  Player extends User{
+public class Player extends User {
     private int playerID;
     private int numbersOfDaysSinceRegistration;
     private double credit;
     private double rate;
-    private HashMap<Integer , GameLog> gameLogs;
+    private HashMap<Integer, GameLog> gameLogs;
     private ArrayList<Player> friends;
     private ArrayList<Player> requestsForFriendShips;
-    private HashMap<Integer , RequestForPlaying> requestForPlaysList;
+    private HashMap<Integer, RequestForPlaying> requestForPlaysList;
     private ArrayList<Card> playersCard;
-    private HashMap<Integer , Country> playersCountry;
+    private HashMap<Integer, Country> playersCountry;
     private int numberOfSoldiers = 0;
     //This should change to HashMap<User , String >
     private ArrayList<Massage> massages;
@@ -28,11 +28,11 @@ public class  Player extends User{
     public Player(String firstName, String lastName,
                   String username, String password,
                   String emailAddress, String telephoneNumber) {
-        super(firstName, lastName, username, password, emailAddress, telephoneNumber , false);
+        super(firstName, lastName, username, password, emailAddress, telephoneNumber, false);
 
         this.numbersOfDaysSinceRegistration = 0;
         this.credit = 0.0;
-        this.numbersOfGames= 0;
+        this.numbersOfGames = 0;
         this.numbersOfWin = 0;
         this.rate = 0.0;
         this.gameLogs = new HashMap<>();
@@ -46,15 +46,15 @@ public class  Player extends User{
         this.friendInGame = null;
         this.currentColor = null;
         this.adminMassages = new ArrayList<>();
-        playersCard.add(new Card(1 , CardDesigns.INFANTRY));
-        playersCard.add(new Card(1 , CardDesigns.INFANTRY));
-        playersCard.add(new Card(1 , CardDesigns.INFANTRY));
-        playersCard.add(new Card(1 , CardDesigns.ARTILLERY));
-        playersCard.add(new Card(1 , CardDesigns.ARTILLERY));
-        playersCard.add(new Card(1 , CardDesigns.ARTILLERY));
-        playersCard.add(new Card(1 , CardDesigns.CAVALRY));
-        playersCard.add(new Card(1 , CardDesigns.INFANTRY));
-        playersCard.add(new Card(1 , CardDesigns.ARTILLERY));
+        playersCard.add(new Card(1, CardDesigns.INFANTRY));
+        playersCard.add(new Card(1, CardDesigns.INFANTRY));
+        playersCard.add(new Card(1, CardDesigns.INFANTRY));
+        playersCard.add(new Card(1, CardDesigns.ARTILLERY));
+        playersCard.add(new Card(1, CardDesigns.ARTILLERY));
+        playersCard.add(new Card(1, CardDesigns.ARTILLERY));
+        playersCard.add(new Card(1, CardDesigns.CAVALRY));
+        playersCard.add(new Card(1, CardDesigns.INFANTRY));
+        playersCard.add(new Card(1, CardDesigns.ARTILLERY));
 
 //        setId();
     }
@@ -172,8 +172,8 @@ public class  Player extends User{
         return requestForPlaysList;
     }
 
-    public void setId(){
-        this.playerID = DataBase.getDataBase().getAllPlayers().size()+1;
+    public void setId() {
+        this.playerID = DataBase.getDataBase().getAllPlayers().size() + 1;
     }
 
     public int getNumbersOfWin() {

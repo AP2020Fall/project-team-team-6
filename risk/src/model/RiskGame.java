@@ -15,8 +15,8 @@ public class RiskGame {
     private static RiskGame offlineGame;
     private boolean isGameStarted;
     private GameStages gameStages;
-    private  boolean hasGotSoldiersForDraft = false;
-    private boolean hasOneSuccessAttack= false;
+    private boolean hasGotSoldiersForDraft = false;
+    private boolean hasOneSuccessAttack = false;
     private boolean hasDoneFortify = false;
     private long timer;
     private boolean isMapManually;
@@ -34,17 +34,17 @@ public class RiskGame {
     private String[][] riskMap = makeRiskMap();
 
 
-    private HashMap<Integer , Country> allCountriesWithNumber = new HashMap<>();
-    private HashMap<Integer , Country> allNorthAmericasCountries = new HashMap<>();
-    private HashMap<Integer , Country> allSouthAmericasCountries = new HashMap<>();
-    private HashMap<Integer , Country> allAfricaCountries = new HashMap<>();
-    private HashMap<Integer , Country> allEuropeCountries = new HashMap<>();
-    private HashMap<Integer , Country> allAsiaCountries = new HashMap<>();
-    private HashMap<Integer , Country> allAustraliaCountries = new HashMap<>();
+    private HashMap<Integer, Country> allCountriesWithNumber = new HashMap<>();
+    private HashMap<Integer, Country> allNorthAmericasCountries = new HashMap<>();
+    private HashMap<Integer, Country> allSouthAmericasCountries = new HashMap<>();
+    private HashMap<Integer, Country> allAfricaCountries = new HashMap<>();
+    private HashMap<Integer, Country> allEuropeCountries = new HashMap<>();
+    private HashMap<Integer, Country> allAsiaCountries = new HashMap<>();
+    private HashMap<Integer, Country> allAustraliaCountries = new HashMap<>();
 
 
     private int numberOfPlayers;
-    private Player winner ;
+    private Player winner;
     private Player currentPlayer;
 
     private ArrayList<Card> allCards;
@@ -58,8 +58,8 @@ public class RiskGame {
 
 
     //This constructor is for online
-    public RiskGame(String name ,Player creator , RiskGameType riskGameType ,
-                    int numberOfPlayers , int gamePoint , long timer , boolean isMapManually) {
+    public RiskGame(String name, Player creator, RiskGameType riskGameType,
+                    int numberOfPlayers, int gamePoint, long timer, boolean isMapManually) {
         this.name = name;
         this.numberOfPlayers = numberOfPlayers;
         GameController.makeAllCountries(this);
@@ -79,8 +79,9 @@ public class RiskGame {
         makeAllCountriesArray();
         setGameID();
     }
+
     //This constructor is for offline games
-    public RiskGame(String name , Player[] players  , int numberOfPlayers , long timer , boolean isMapManually) {
+    public RiskGame(String name, Player[] players, int numberOfPlayers, long timer, boolean isMapManually) {
         this.name = name;
         this.numberOfPlayers = numberOfPlayers;
 
@@ -97,7 +98,7 @@ public class RiskGame {
         this.currentPlayer = players[0];
         this.isGameStarted = true;
         this.gameStages = GameStages.STARTING;
-        this.gamePoint =0 ;
+        this.gamePoint = 0;
         this.hasOneSuccessAttack = false;
         GameController.getGameController().addSoldiersForStartingGame(this);
         makeAllCountriesArray();
@@ -106,9 +107,8 @@ public class RiskGame {
     }
 
 
-
-    public void setGameID(){
-        this.gameID = DataBase.getDataBase().getAllRiskGames().size()+1;
+    public void setGameID() {
+        this.gameID = DataBase.getDataBase().getAllRiskGames().size() + 1;
     }
 
     public String getName() {
@@ -235,12 +235,12 @@ public class RiskGame {
         return isMapManually;
     }
 
-    private String[][] makeRiskMap(){
+    private String[][] makeRiskMap() {
         String map[][] = new String[8][23];
         String[] defaultMap = RiskGame.defaultMap.split("\\s+");
-        for(int i = 0 ; i < 8 ; i++){
-            for(int j =0 ; j < 23 ; j++){
-                map[i][j] = defaultMap[i*23 + j];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 23; j++) {
+                map[i][j] = defaultMap[i * 23 + j];
             }
         }
         return map;
@@ -263,13 +263,13 @@ public class RiskGame {
         this.gameStages = gameStages;
     }
 
-    public void  makeAllCountriesArray(){
+    public void makeAllCountriesArray() {
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher;
-        for(int i = 0 ; i < 8 ; i++){
-            for(int j =0 ; j < 23 ; j++){
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 23; j++) {
                 matcher = pattern.matcher(riskMap[i][j]);
-                if(matcher.find()){
+                if (matcher.find()) {
                     int countryCoordinate = Integer.parseInt(riskMap[i][j]);
                     Country country = allCountriesWithNumber.get(countryCoordinate);
                     allCountriesInArray[i][j] = country;

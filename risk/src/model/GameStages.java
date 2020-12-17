@@ -1,7 +1,7 @@
 package model;
 
 public enum GameStages {
-    ATTACK , FORTIFY , DRAFT , STARTING;
+    ATTACK, FORTIFY, DRAFT, STARTING;
 
-    private static GameStages[] defaultGameStages = {DRAFT , ATTACK , FORTIFY};
+    private static GameStages[] defaultGameStages = {DRAFT, ATTACK, FORTIFY};
 }
