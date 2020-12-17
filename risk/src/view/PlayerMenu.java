@@ -4,13 +4,13 @@ import model.Player;
 import model.User;
 
 public class PlayerMenu extends Menu {
-    private User user;
+    private Player user;
 
-    public PlayerMenu(Menu parentMenu, User user) {
+    public PlayerMenu(Menu parentMenu, Player player) {
         super("Account", parentMenu);
-        this.user = user;
+        this.user = player;
         subMenus.put(2 , new GamesMenu(this));
-        subMenus.put(3 , new FriendsMenu(this , (Player) user));
+        subMenus.put(3 , new FriendsMenu(this , player));
         subMenus.put(4 , new EventMenu(this));
         subMenus.put(5 , new EditInformationMenu(this, user));
     }

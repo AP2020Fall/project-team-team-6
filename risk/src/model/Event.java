@@ -18,7 +18,16 @@ public class Event {
         this.endDate = endDate;
         this.eventPoint = eventPoint;
         this.game = riskGame;
-        this.invitedPlayers = new ArrayList<>();
+        this.invitedPlayers = DataBase.getDataBase().getAllPlayers();
+        setEventID();
+    }
+    public Event(LocalDateTime startDate, LocalDateTime endDate, RiskGame riskGame,double eventPoint , ArrayList<Player> invitedList) {
+        this.gameName = riskGame.getName();
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.eventPoint = eventPoint;
+        this.game = riskGame;
+        this.invitedPlayers = invitedList;
         setEventID();
     }
 
@@ -77,4 +86,6 @@ public class Event {
     public void setInvitedPlayers(ArrayList<Player> invitedPlayers) {
         this.invitedPlayers = invitedPlayers;
     }
+
+
 }

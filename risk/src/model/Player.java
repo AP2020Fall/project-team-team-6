@@ -17,6 +17,7 @@ public class  Player extends User{
     private int numberOfSoldiers = 0;
     //This should change to HashMap<User , String >
     private ArrayList<Massage> massages;
+    private ArrayList<Massage> adminMassages;
 
     private Color currentColor;
     private int numbersOfWin;
@@ -44,6 +45,7 @@ public class  Player extends User{
         this.requestForFriendShipInGame = new ArrayList<>();
         this.friendInGame = null;
         this.currentColor = null;
+        this.adminMassages = new ArrayList<>();
         playersCard.add(new Card(1 , CardDesigns.INFANTRY));
         playersCard.add(new Card(1 , CardDesigns.INFANTRY));
         playersCard.add(new Card(1 , CardDesigns.INFANTRY));
@@ -208,5 +210,9 @@ public class  Player extends User{
 
     public void setCurrentColor(Color currentColor) {
         this.currentColor = currentColor;
+    }
+
+    public ArrayList<Massage> getAdminMassages() {
+        return adminMassages;
     }
 }

@@ -1,6 +1,7 @@
 package view;
 
 import model.Admin;
+import model.Player;
 import model.User;
 
 public class OnlineGameMenu extends Menu {
@@ -37,7 +38,12 @@ public class OnlineGameMenu extends Menu {
             subMenus.put(2,new RegisterMenu(this));
             subMenus.put(3,new LoginMenu(this));
         }else{
-            subMenus.put(2,new PlayerMenu(this , currentUser));
+            if(currentUser.isAdmin()){
+                subMenus.put(2 , new AdminMenu(this , userController.getAdmin()));
+            }else {
+                Player player = userController.findPlayerByUserName(currentUser.getUsername());
+                subMenus.put(2, new PlayerMenu(this, player));
+            }
         }
     }
 }

@@ -34,30 +34,41 @@ public class EditInformationMenu extends Menu {
             if (newUserName != null) {
                 try {
                     userController.changeUsername(userName, newUserName);
+                    System.out.println("You successfully changed your username to " + newUserName);
                 } catch (Exception e) {
                     System.err.println(e.getMessage());
                 }
             }
         } else if (input == 3) {
             String newFirstName = editFirstName();
-            if (newFirstName != null)
-            userController.changeFirstName(userName, newFirstName);
+            if (newFirstName != null) {
+                userController.changeFirstName(userName, newFirstName);
+                System.out.println("You successfully changed your first name to " + newFirstName);
+            }
         } else if (input == 4) {
             String newLastName = editLastName();
-            if (newLastName != null)
-            userController.changeLastName(userName, newLastName);
+            if (newLastName != null) {
+                userController.changeLastName(userName, newLastName);
+                System.out.println("You successfully changed your last name to " + newLastName);
+            }
         } else if (input == 5) {
             String newEmailAddress = editEmailAddress();
-            if (newEmailAddress != null)
-            userController.changeEmailAddress(userName, newEmailAddress);
+            if (newEmailAddress != null) {
+                userController.changeEmailAddress(userName, newEmailAddress);
+                System.out.println("You successfully changed your email address to " + newEmailAddress);
+            }
         } else if(input == 6) {
             String newTelephoneNumber = editTelephoneNumber();
-            if (newTelephoneNumber != null)
-            userController.changeTelephoneNumber(userName, newTelephoneNumber);
+            if (newTelephoneNumber != null) {
+                userController.changeTelephoneNumber(userName, newTelephoneNumber);
+                System.out.println("You successfully changed your telephone number to " + newTelephoneNumber);
+            }
         } else if (input == 7) {
             String newPassword = editPassword();
-            if (newPassword != null)
-            userController.changePassword(userName, newPassword);
+            if (newPassword != null) {
+                userController.changePassword(userName, newPassword);
+                System.out.println("Your password has successfully changed");
+            }
         }
         nextMenu.show();
         nextMenu.execute();

@@ -1,6 +1,7 @@
 package view;
 
 import model.Admin;
+import model.Player;
 import model.User;
 
 public class RegisterMenu extends Menu {
@@ -61,7 +62,8 @@ public class RegisterMenu extends Menu {
         if(admin != null) {
             User user = userController.signUpAsPlayer(firstName, lastName, userName, password, emailAddress, telephoneNumber);
             OnlineGameMenu.setCurrentUser(user);
-            nextMenu = new PlayerMenu(this.parentMenu.getParentMenu(), user);
+            Player player = userController.findPlayerByUserName(userName);
+            nextMenu = new PlayerMenu(this.parentMenu.getParentMenu(), player);
         }else{
             Admin admin1 = userController.signUpAsAdmin(firstName , lastName , userName , password , emailAddress , telephoneNumber);
             OnlineGameMenu.setCurrentUser(admin1);
