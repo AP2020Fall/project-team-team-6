@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.graphic.gui.ChooseMap">
+   <children>
+      <Pane prefHeight="600.0" prefWidth="800.0">
+         <effect>
+            <ImageInput />
+         </effect>
+      </Pane>
+      <ImageView fitHeight="638.0" fitWidth="925.0" layoutX="-34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../255.jpg" />
+         </image>
+      </ImageView>
+      <Polygon layoutX="419.0" layoutY="96.0" points="-81.0, 29.0, 68.0, 20.0, 462.0, -21.999984741210938, -12.0, -50.0, -389.0, -21.999984741210938" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <Reflection />
+         </effect>
+         <fill>
+            <RadialGradient centerX="0.5055555555555555" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop color="#4600f545" />
+                  <Stop color="#e500e58d" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+      <Text layoutX="210.0" layoutY="87.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="battle your way to global domination in the original world of risk" textAlignment="CENTER" wrappingWidth="437.701171875">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="EXIT" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e600e6" height="51.0" layoutX="56.0" layoutY="232.0" opacity="0.6" stroke="BLACK" strokeType="INSIDE" width="252.0">
+         <effect>
+            <Reflection />
+         </effect></Rectangle>
+      <Text layoutX="75.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="manual placement">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e600e6" height="51.0" layoutX="56.0" layoutY="291.0" opacity="0.6" stroke="BLACK" strokeType="INSIDE" width="252.0">
+         <effect>
+            <Reflection />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="51.0" layoutX="56.0" layoutY="474.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" visible="false" width="252.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="51.0" layoutX="56.0" layoutY="414.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" visible="false" width="252.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e600e6" height="51.0" layoutX="56.0" layoutY="354.0" opacity="0.6" stroke="BLACK" strokeType="INSIDE" width="252.0">
+         <effect>
+            <Reflection />
+         </effect></Rectangle>
+      <ImageView fitHeight="51.0" fitWidth="57.0" layoutX="257.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="57.0" layoutX="257.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="57.0" layoutX="257.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="57.0" layoutX="257.0" layoutY="414.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../../../arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="57.0" layoutX="257.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../../../arrow.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="113.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="fog of war">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="120.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="blizzards" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e600e6" height="173.0" layoutX="333.0" layoutY="232.0" opacity="0.6" stroke="BLACK" strokeType="INSIDE" width="252.0">
+         <effect>
+            <Reflection />
+         </effect>
+      </Rectangle>
+      <CheckBox layoutX="346.0" layoutY="249.0" mnemonicParsing="false" text="on" />
+      <CheckBox layoutX="510.0" layoutY="249.0" mnemonicParsing="false" text="off" />
+      <CheckBox layoutX="510.0" layoutY="304.0" mnemonicParsing="false" text="off" />
+      <CheckBox layoutX="510.0" layoutY="366.0" mnemonicParsing="false" text="off" />
+      <CheckBox layoutX="346.0" layoutY="304.0" mnemonicParsing="false" text="on" />
+      <CheckBox layoutX="346.0" layoutY="366.0" mnemonicParsing="false" text="on" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="651.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../start.png" />
+         </image>
+         <effect>
+            <Reflection />
+         </effect>
+      </ImageView>
+   </children>
+</AnchorPane>
