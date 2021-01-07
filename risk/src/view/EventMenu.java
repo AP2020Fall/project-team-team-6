@@ -3,6 +3,7 @@ package view;
 
 import model.Event;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class EventMenu extends Menu {
@@ -13,12 +14,12 @@ public class EventMenu extends Menu {
     @Override
     public void show() {
         super.show();
+
     }
 
     @Override
     public void execute() {
         super.execute();
     }
-
 
 }
