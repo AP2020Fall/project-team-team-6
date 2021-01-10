@@ -1,0 +1,70 @@
+Index: risk/src/view/EventMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\n\r\nimport model.Event;\r\n\r\nimport java.util.HashMap;\r\n\r\npublic class EventMenu extends Menu {\r\n    public EventMenu(Menu parentMenu){\r\n        super(\"Events Menu \" , parentMenu);\r\n    }\r\n\r\n    @Override\r\n    public void show() {\r\n        super.show();\r\n    }\r\n\r\n    @Override\r\n    public void execute() {\r\n        super.execute();\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- risk/src/view/EventMenu.java	(revision 2bdf08dee929fb8a0e235fb2c5021e06f329b051)
++++ risk/src/view/EventMenu.java	(date 1607353499842)
+@@ -3,6 +3,7 @@
+ 
+ import model.Event;
+ 
++import java.util.ArrayList;
+ import java.util.HashMap;
+ 
+ public class EventMenu extends Menu {
+@@ -13,6 +14,7 @@
+     @Override
+     public void show() {
+         super.show();
++
+     }
+ 
+     @Override
+@@ -20,5 +22,4 @@
+         super.execute();
+     }
+ 
+-
+ }
+Index: risk/src/controller/EventController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\r\n\r\nimport model.DataBase;\r\nimport model.Event;\r\nimport model.Player;\r\nimport model.RiskGame;\r\n\r\nimport java.time.LocalDateTime;\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\n\r\npublic class EventController {\r\n    private static EventController eventController = new EventController();\r\n    private GameController gameController = GameController.getGameController();\r\n    private UserController userController = UserController.getUserController();\r\n    private DataBase dataBase;\r\n    private EventController() {\r\n        dataBase = DataBase.getDataBase();\r\n    }\r\n\r\n    public static EventController getEventController() {\r\n        return eventController;\r\n    }\r\n\r\n    //creating event by admin methods\r\n    //----------------------------------------------------------------------------------------------------------------------\r\n\r\n    public void createNewEvent(LocalDateTime startDate , LocalDateTime endDate , RiskGame riskGame , Double eventPoint) {\r\n        ArrayList<Event> allEvents = dataBase.getAllEvents();\r\n        Event event = new Event(startDate, endDate, riskGame, eventPoint);\r\n        allEvents.add(event);\r\n    }\r\n\r\n    public void startEvent(int eventID) {\r\n    //ToDO\r\n    }\r\n\r\n    public void endEvent(int eventID) {\r\n        //ToDO\r\n    }\r\n\r\n    public void deleteEvent(int eventID) {\r\n        ArrayList<Event> allEvents = dataBase.getAllEvents();\r\n        allEvents.remove(eventID);\r\n    }\r\n\r\n    public void inviteAllPLayers(int eventID) {\r\n        //ToDo\r\n    }\r\n\r\n    public void inviteChosenPlayers(int eventID, ArrayList<Player> chosenPlayers) {\r\n        //ToDo\r\n    }\r\n\r\n    public void changeEvent(int EventID ,String start , String endDate , double eventPoint){\r\n        //TODO\r\n    }\r\n    public void joinEvent(int userID , int eventId){\r\n        //ToDo\r\n    }\r\n    public ArrayList<Event> showAllEvents() {\r\n        ArrayList<Event> allEvents = dataBase.getAllEvents();\r\n        return allEvents;\r\n     }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- risk/src/controller/EventController.java	(revision 2bdf08dee929fb8a0e235fb2c5021e06f329b051)
++++ risk/src/controller/EventController.java	(date 1607354569996)
+@@ -32,7 +32,7 @@
+     }
+ 
+     public void startEvent(int eventID) {
+-    //ToDO
++        //ToDO
+     }
+ 
+     public void endEvent(int eventID) {
+@@ -58,10 +58,19 @@
+     public void joinEvent(int userID , int eventId){
+         //ToDo
+     }
+-    public ArrayList<Event> showAllEvents() {
++    public ArrayList<Event> getAllEvents() {
+         ArrayList<Event> allEvents = dataBase.getAllEvents();
+         return allEvents;
+      }
+ 
++    public HashMap<Integer,Event> getAllEventsToHashmap() {
++        ArrayList<Event> allEvents = getAllEvents();
++        HashMap<Integer,Event> allEventsHashmap= new HashMap<>();
++        for(int i =2 ;i < allEvents.size()+2;i++ ){
++            allEventsHashmap.put(i,allEvents.get(i-2));
++        }
++        return allEventsHashmap;
++    }
++
+ 
+ }
