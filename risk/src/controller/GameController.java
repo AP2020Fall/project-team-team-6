@@ -1,6 +1,8 @@
 package controller;
 
-import model.*;
+import model.database.LocalDataBase;
+import model.gamesModels.*;
+import model.usersModels.Player;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -11,10 +13,10 @@ public class GameController {
     private static GameController gameController = new GameController();
     private UserController userController = UserController.getUserController();
     private EventController eventController = EventController.getEventController();
-    private DataBase dataBase;
+    private LocalDataBase localDataBase;
 
     private GameController() {
-        this.dataBase = DataBase.getDataBase();
+        this.localDataBase = localDataBase.getLocalDataBase();
     }
 
     public static GameController getGameController() {
@@ -22,7 +24,7 @@ public class GameController {
     }
 
     public HashMap<Integer, RiskGame> getAllRiskGames() {
-        return dataBase.getAllRiskGames();
+        return localDataBase.getAllRiskGames();
     }
 
     public int matchCards(Card card1, Card card2, Card card3, Player player) {
@@ -72,7 +74,7 @@ public class GameController {
     }
 
     public static void makeAllSouthAmericasCountries(RiskGame riskGame) {
-        DataBase dataBase = DataBase.getDataBase();
+        LocalDataBase localDataBase = LocalDataBase.getLocalDataBase();
         String[] countriesName = {"Argentina", "Brazil", "Peru", "Venezuela"};
         HashMap<Integer, Country> allCountries = new HashMap<>();
         int counter = 0;

@@ -1,6 +1,10 @@
 package controller;
 
-import model.*;
+import model.database.LocalDataBase;
+import model.database.MySqlDataBase;
+import model.gamesModels.Event;
+import model.gamesModels.RiskGame;
+import model.usersModels.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,10 +14,12 @@ public class UserController {
     private static UserController userController = new UserController();
     private static EventController eventController = EventController.getEventController();
     private static GameController gameController = GameController.getGameController();
-    private DataBase dataBase;
+    private LocalDataBase localDataBase;
+    private MySqlDataBase dataBase;
 
     private UserController() {
-        dataBase = DataBase.getDataBase();
+        localDataBase = LocalDataBase.getLocalDataBase();
+        dataBase = MySqlDataBase.getMySqlDataBase();
     }
 
     public static UserController getUserController() {
@@ -24,14 +30,15 @@ public class UserController {
     //-----------------------------------------------------------------------------------------------------------------
     //TODO is admin is not complete
     public Admin getAdmin() {
-        return dataBase.getAdmin();
+        return localDataBase.getAdmin();
     }
 
     public Admin signUpAsAdmin(String firstName, String lastName, String username,
                                String password, String emailAddress, String telephoneNumber) {
         Admin admin = new Admin(firstName, lastName, username, password, emailAddress, telephoneNumber);
-        dataBase.getAllUsers().add(admin);
-        dataBase.setAdmin(admin);
+        localDataBase.getAllUsers().add(admin);
+        localDataBase.setAdmin(admin);
+        dataBase.addNewUserToDataBase(firstName , lastName , username , password , emailAddress , telephoneNumber , true);
         return admin;
     }
 
@@ -39,13 +46,13 @@ public class UserController {
     public User signUpAsPlayer(String firstName, String lastName, String username,
                                String password, String emailAddress, String telephoneNumber) {
         Player player = new Player(firstName, lastName, username, password, emailAddress, telephoneNumber);
-        dataBase.getAllPlayers().add(player);
-        dataBase.getAllUsers().add(player);
+        localDataBase.getAllPlayers().add(player);
+        localDataBase.getAllUsers().add(player);
         return player;
     }
 
     public Player getPlayerByUsername(String username) throws Exception {
-        ArrayList<Player> allPlayers = dataBase.getAllPlayers();
+        ArrayList<Player> allPlayers = localDataBase.getAllPlayers();
         for (Player player : allPlayers) {
             if (player.getUsername().equals(username))
                 return player;
@@ -54,7 +61,7 @@ public class UserController {
     }
 
     public User findUserByUsername(String userName) {
-        ArrayList<User> allUsers = dataBase.getAllUsers();
+        ArrayList<User> allUsers = localDataBase.getAllUsers();
         for (User user : allUsers) {
             if (user.getUsername().equals(userName))
                 return user;
@@ -63,7 +70,7 @@ public class UserController {
     }
 
     public Player findPlayerByUserName(String userName) {
-        ArrayList<Player> allPlayers = dataBase.getAllPlayers();
+        ArrayList<Player> allPlayers = localDataBase.getAllPlayers();
         for (Player player : allPlayers) {
             if (player.getUsername().equals(userName))
                 return player;
@@ -126,7 +133,7 @@ public class UserController {
     }
 
     public boolean checkUsername(String username) {
-        ArrayList<User> allUsers = dataBase.getAllUsers();
+        ArrayList<User> allUsers = localDataBase.getAllUsers();
         for (User user : allUsers) {
             if (user.getUsername().equals(username))
                 return false;
@@ -145,7 +152,10 @@ public class UserController {
 
 
     public void deletePlayer(Player player) {
-        dataBase.getAllPlayers().remove(player);
+        localDataBase.getAllPlayers().remove(player);
+        User user = findUserByUsername(player.getUsername());
+        localDataBase.getAllUsers().remove(user);
+        dataBase.removeUserFromDataBase(player.getID());
     }
 
     //End Users Methods
@@ -206,9 +216,6 @@ public class UserController {
         return player.getGameLogs();
     }
 
-    public double getPlayersCredit(Player player) {
-        return player.getCredit();
-    }
 
     public double getPlayersRate(Player player) {
         return player.getRate();
@@ -223,7 +230,7 @@ public class UserController {
     }
 
     public ArrayList<Player> getAllPlayers() {
-        return dataBase.getAllPlayers();
+        return localDataBase.getAllPlayers();
     }
 
     //new player methods
