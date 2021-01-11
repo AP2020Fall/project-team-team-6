@@ -29,16 +29,17 @@ public class MySqlDataBase {
 
 
     private  Connection creatConnection(){
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/plato" , "root" , "root");
-            System.out.println("Database is connected successfully");
-            return connection;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/plato" , "root" , "root");
+//            System.out.println("Database is connected successfully");
+//            return connection;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         return null;
     }
     public void getUsersInfo(){
+
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM users");
             ResultSet resultSet = statement.executeQuery();
@@ -114,14 +115,15 @@ public class MySqlDataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
     private void addNewPlayerToDataBae(int id , String date){
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO `players` (`player_id`, `register date`, `rate`, `game logs`, `friends`, `friend requests`, `play requests`, `cards`, `countires`, `number of soldiers`, `messages`, `admin messages`, `current color`, `number of win`, `number of game`, `ally in game`, `ally requests`) VALUES (?, ?, '0', '', '', '', '', '', '', '0', '', '', '', '0', '0', '', '')");
-            statement.setInt(1 , id);
-            statement.setString(2, date);
-            statement.execute();
-            statement.close();
+       try {
+           PreparedStatement statement = connection.prepareStatement("INSERT INTO `players` (`player_id`, `register date`, `rate`, `game logs`, `friends`, `friend requests`, `play requests`, `cards`, `countires`, `number of soldiers`, `messages`, `admin messages`, `current color`, `number of win`, `number of game`, `ally in game`, `ally requests`) VALUES (?, ?, '0', '', '', '', '', '', '', '0', '', '', '', '0', '0', '', '')");
+           statement.setInt(1 , id);
+           statement.setString(2, date);
+           statement.execute();
+           statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

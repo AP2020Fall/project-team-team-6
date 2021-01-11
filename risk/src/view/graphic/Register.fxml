@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.RegisterController">
+   <children>
+      <Pane prefHeight="650.0" prefWidth="1350.0">
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="1350.0" layoutX="-1.0">
+               <image>
+                  <Image url="@../../NotResoures/2.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="username" layoutX="758.0" layoutY="95.0" prefHeight="40.0" prefWidth="300.0" promptText="Username" style="-fx-background-radius: 20px; -fx-border-color: #2b2d42; -fx-border-radius: 20px;" />
+            <PasswordField fx:id="pass" layoutX="758.0" layoutY="445.0" prefHeight="40.0" prefWidth="300.0" promptText="Password" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #2b2d42;" />
+            <TextField fx:id="firstname" layoutX="758.0" layoutY="165.0" prefHeight="40.0" prefWidth="300.0" promptText="First name" style="-fx-background-radius: 20px; -fx-border-color: #2b2d42; -fx-border-radius: 20px;" />
+            <TextField fx:id="lastname" layoutX="758.0" layoutY="235.0" prefHeight="40.0" prefWidth="300.0" promptText="Last name" style="-fx-background-radius: 20px; -fx-border-color: #2b2d42; -fx-border-radius: 20px;" />
+            <TextField fx:id="phnumber" layoutX="758.0" layoutY="375.0" prefHeight="40.0" prefWidth="300.0" promptText="Phone number" style="-fx-background-radius: 20px; -fx-border-color: #2b2d42; -fx-border-radius: 20px;" />
+            <TextField fx:id="email" layoutX="758.0" layoutY="305.0" prefHeight="40.0" prefWidth="300.0" promptText="Email address" style="-fx-background-radius: 20px; -fx-border-color: #2b2d42; -fx-border-radius: 20px;" />
+            <PasswordField fx:id="repass" layoutX="758.0" layoutY="515.0" prefHeight="40.0" prefWidth="300.0" promptText="Repeat password" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #2b2d42;" />
+            <Button fx:id="back" layoutX="31.0" layoutY="602.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="112.0" text="Back " />
+            <Button fx:id="signup" layoutX="249.0" layoutY="335.0" mnemonicParsing="false" onAction="#signUp" prefHeight="30.0" prefWidth="112.0" text="sign up" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
