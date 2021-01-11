@@ -1,5 +1,6 @@
 package view.terminalMenu;
 
+import model.database.MySqlDataBase;
 import model.usersModels.Massage;
 import model.usersModels.Player;
 
@@ -95,6 +96,7 @@ public class FriendsMenu extends Menu {
                         String confirm = getInputFormatWithHelpText("^(?i)yes|(?i)no$", "Enter yes or no. ");
                         if (confirm.equalsIgnoreCase("yes")) {
                             player1.getRequestsForFriendShips().add(player);
+                            MySqlDataBase.getMySqlDataBase().updatePlayer(player1);
                             System.out.println("You have sent friend request for " + username);
                             break;
                         }
@@ -220,6 +222,7 @@ public class FriendsMenu extends Menu {
                             inputInString = getInputFormatWithHelpText("^(?i)yes|(?i)no$", "Are you sure ?");
                             if (inputInString.equalsIgnoreCase("yes")) {
                                 player.getFriends().remove(friend);
+                                MySqlDataBase.getMySqlDataBase().updatePlayer(player);
                                 System.out.println("You removed" + friend.getUsername() + " from your friends");
                             }
                         }

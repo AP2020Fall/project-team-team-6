@@ -223,8 +223,22 @@ public class Player extends User {
     public void getPlayersFriendsFromString(String friendsInString){
         String[] friendsInArray = friendsInString.split("\r\n");
         for (String p : friendsInArray){
-            Player player =UserController.getUserController().findPlayerByUserName(username);
+            Player player =UserController.getUserController().findPlayerByUserName(p);
             friends.add(player);
+        }
+    }
+    public String changeFriendsRequestToString(){
+        String friendsInString = "";
+        for(Player player : requestsForFriendShips){
+            friendsInString = player.getUsername() + "\r\n";
+        }
+        return friendsInString;
+    }
+    public void getPlayersFriendsRequestsFromString(String friendsInString){
+        String[] friendsInArray = friendsInString.split("\r\n");
+        for (String p : friendsInArray){
+            Player player =UserController.getUserController().findPlayerByUserName(p);
+            getRequestsForFriendShips().add(player);
         }
     }
 }

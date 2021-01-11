@@ -182,9 +182,6 @@ public class UserController {
 
     //Players Methods
     //-----------------------------------------------------------------------------------------------------------------
-    public void sendFriendRequest(Player firstPlayer, String secondPlayer) {
-        //TODO .....
-    }
 
     public HashMap<Integer, Player> getPlayersFriends(Player player) {
         ArrayList<Player> friendsInArray = player.getFriends();
@@ -198,6 +195,8 @@ public class UserController {
     public ArrayList<Player> getFriendsRequestsList(Player player) {
         return player.getRequestsForFriendShips();
     }
+
+
 
     public void rejectFriend(Player player, Player secondPlayer) throws Exception {
         ArrayList<Player> requestedPlayer = player.getRequestsForFriendShips();

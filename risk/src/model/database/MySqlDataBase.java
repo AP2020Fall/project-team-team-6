@@ -162,6 +162,8 @@ public class MySqlDataBase {
                     player.calculateRegisterDate(registerDate);
                     String friendsInString = resultSet.getString("friends");
                     player.getPlayersFriendsFromString(friendsInString);
+                    String requestForFriendShip = resultSet.getString("friend requests");
+                    player.getPlayersFriendsRequestsFromString(requestForFriendShip);
                 }
             }
         } catch (SQLException e) {
@@ -172,10 +174,12 @@ public class MySqlDataBase {
     public void updatePlayer(Player player){
         int id = player.getID();
         String playersFriendInString = player.changeFriendsToString();
+        String friendsRequests = player.changeFriendsRequestToString();
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE `players` SET  `friends` = ?  WHERE `players`.`player_id` =?;");
+            PreparedStatement statement = connection.prepareStatement("UPDATE `players` SET  `friends` = ? , `friend requests` = ?  WHERE `players`.`player_id` =?;");
             statement.setString(1 ,playersFriendInString );
-            statement.setInt(2 , id);
+            statement.setString(2 , friendsRequests);
+            statement.setInt(3 , id);
             statement.execute();
             statement.close();
         } catch (SQLException e) {
