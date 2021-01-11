@@ -1,9 +1,11 @@
 package model.database;
 
 import model.usersModels.Admin;
+import model.usersModels.Player;
 import model.usersModels.User;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class MySqlDataBase {
     private Connection connection;
@@ -51,6 +53,12 @@ public class MySqlDataBase {
                 dataBase.getAllUsers().add(user);
                 if(isAdmin)
                     dataBase.setAdmin(new Admin(firstName , lastName , username , password , emailAddress , telephoneNumber ));
+                else{
+                    Player player = new Player(firstName , lastName , username , password , emailAddress , telephoneNumber);
+                    player.setID(id);
+                    //TODO implement all other players infos
+                    dataBase.getAllPlayers().add(player);
+                }
             }
             statement.close();
             System.out.println("All users has added from database");
@@ -62,7 +70,7 @@ public class MySqlDataBase {
 
     public void addNewUserToDataBase(String firstName , String lastName , String username , String password , String emailAddress , String telephoneNumber , boolean isAdmin){
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO `users` (`user_id`, `first name`, `last name`, `username`, `password`, `email address`, `telephone number`, `isAdmin`) VALUES (NULL, ? ,?, ?, ?, ?, ?, ?);");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO `users` (`user_id`, `first name`, `last name`, `username`, `password`, `email address`, `telephone number`, `isAdmin`) VALUES (NULL, ? ,?, ?, ?, ?, ?, ?)" , Statement.RETURN_GENERATED_KEYS);
             statement.setString(1 , firstName);
             statement.setString(2, lastName);
             statement.setString(3 , username);
@@ -70,7 +78,15 @@ public class MySqlDataBase {
             statement.setString(5 , emailAddress);
             statement.setString(6, telephoneNumber);
             statement.setBoolean(7 , isAdmin);
-            statement.execute();
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if(!isAdmin) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt(1);
+                    LocalDate localDate = LocalDate.now();
+                    addNewPlayerToDataBae(id , localDate.toString());
+                }
+            }
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,5 +103,18 @@ public class MySqlDataBase {
             e.printStackTrace();
         }
     }
+    private void addNewPlayerToDataBae(int id , String date){
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO `players` (`player_id`, `register date`, `rate`, `game logs`, `friends`, `friend requests`, `play requests`, `cards`, `countires`, `number of soldiers`, `messages`, `admin messages`, `current color`, `number of win`, `number of game`, `ally in game`, `ally requests`) VALUES (?, ?, '0', '', '', '', '', '', '', '0', '', '', '', '0', '0', '', '')");
+            statement.setInt(1 , id);
+            statement.setString(2, date);
+            statement.execute();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

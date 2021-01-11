@@ -6,10 +6,13 @@ import model.gamesModels.CardDesigns;
 import model.gamesModels.Color;
 import model.gamesModels.Country;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player extends User {
+    private LocalDate localDate ;
     private int numbersOfDaysSinceRegistration;
     private double rate;
     private HashMap<Integer, GameLog> gameLogs;
@@ -37,6 +40,7 @@ public class Player extends User {
         this.numbersOfDaysSinceRegistration = 0;
         this.numbersOfGames = 0;
         this.numbersOfWin = 0;
+        this.localDate = LocalDate.now();
         this.rate = 0.0;
         this.gameLogs = new HashMap<>();
         this.friends = new ArrayList<>();
@@ -49,16 +53,6 @@ public class Player extends User {
         this.friendInGame = null;
         this.currentColor = null;
         this.adminMassages = new ArrayList<>();
-        playersCard.add(new Card(1, CardDesigns.INFANTRY));
-        playersCard.add(new Card(1, CardDesigns.INFANTRY));
-        playersCard.add(new Card(1, CardDesigns.INFANTRY));
-        playersCard.add(new Card(1, CardDesigns.ARTILLERY));
-        playersCard.add(new Card(1, CardDesigns.ARTILLERY));
-        playersCard.add(new Card(1, CardDesigns.ARTILLERY));
-        playersCard.add(new Card(1, CardDesigns.CAVALRY));
-        playersCard.add(new Card(1, CardDesigns.INFANTRY));
-        playersCard.add(new Card(1, CardDesigns.ARTILLERY));
-
     }
 
 
@@ -204,5 +198,9 @@ public class Player extends User {
 
     public ArrayList<Massage> getAdminMassages() {
         return adminMassages;
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
     }
 }

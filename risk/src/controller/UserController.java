@@ -48,6 +48,7 @@ public class UserController {
         Player player = new Player(firstName, lastName, username, password, emailAddress, telephoneNumber);
         localDataBase.getAllPlayers().add(player);
         localDataBase.getAllUsers().add(player);
+        dataBase.addNewUserToDataBase(firstName , lastName , username , password , emailAddress , telephoneNumber , false);
         return player;
     }
 

@@ -23,7 +23,6 @@ public class PlayerMenu extends Menu {
 
     @Override
     public void execute() {
-        String userName = user.getUsername();
         Menu nextMenu = this;
         String inputString = getInputFormatWithHelpText("^[1-6]$".trim(), "Enter a number:");
         int input = Integer.parseInt(inputString);
