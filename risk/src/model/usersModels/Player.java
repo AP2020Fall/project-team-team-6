@@ -1,5 +1,6 @@
 package model.usersModels;
 
+import controller.UserController;
 import model.database.LocalDataBase;
 import model.gamesModels.Card;
 import model.gamesModels.CardDesigns;
@@ -202,5 +203,28 @@ public class Player extends User {
 
     public LocalDate getLocalDate() {
         return localDate;
+    }
+
+    public void calculateRegisterDate(String date){
+        String[] dates = date.split("-");
+        int year = Integer.parseInt(dates[0]);
+        int month = Integer.parseInt(dates[1]);
+        int days = Integer.parseInt(dates[2]);
+        localDate = LocalDate.of(year , month , days);
+        numbersOfDaysSinceRegistration = LocalDate.now().compareTo(localDate);
+    }
+    public String changeFriendsToString(){
+        String friendsInString = "";
+        for(Player player : friends){
+            friendsInString = player.getUsername() + "\r\n";
+        }
+        return friendsInString;
+    }
+    public void getPlayersFriendsFromString(String friendsInString){
+        String[] friendsInArray = friendsInString.split("\r\n");
+        for (String p : friendsInArray){
+            Player player =UserController.getUserController().findPlayerByUserName(username);
+            friends.add(player);
+        }
     }
 }

@@ -80,6 +80,7 @@ public class AdminMenu extends Menu {
         System.out.println("Telephone number : " + player.getTelephoneNumber());
         System.out.println("Number of wins : " + player.getNumbersOfWin());
         System.out.println("Number of games : " + player.getNumbersOfGames());
+        System.out.println("Number of days since register : " + player.getNumbersOfDaysSinceRegistration());
         System.out.println("Point number : " + player.getRate());
         System.out.println("---------------------------------------------------------------");
     }
