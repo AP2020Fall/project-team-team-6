@@ -15,10 +15,10 @@ public class UserController {
     private static GameController gameController = GameController.getGameController();
     private  LocalDataBase localDataBase;
 
+
     private UserController() {
         this.localDataBase = LocalDataBase.getLocalDataBase();
 
-    }
 
     public static UserController getUserController() {
         return userController;
