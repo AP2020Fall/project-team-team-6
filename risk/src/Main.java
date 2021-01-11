@@ -1,10 +1,12 @@
-import model.Player;
-import view.MainMenu;
+import model.database.MySqlDataBase;
+import view.terminalMenu.MainMenu;
+
+import java.time.LocalDate;
 
 public class Main {
 
     public static void main(String[] args) {
-        //   Player player = new Player("amin","gh","amin","123","a@g.com","09876543212");
+        MySqlDataBase mySqlDataBase = MySqlDataBase.getMySqlDataBase();
         MainMenu mainMenu = new MainMenu(null);
         mainMenu.show();
         mainMenu.execute();

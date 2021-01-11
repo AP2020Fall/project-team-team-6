@@ -1,6 +1,10 @@
 package controller;
 
-import model.*;
+import model.database.LocalDataBase;
+import model.gamesModels.Event;
+import model.gamesModels.RiskGame;
+import model.usersModels.Admin;
+import model.usersModels.Player;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,9 +14,9 @@ public class EventController {
     private static EventController eventController = new EventController();
     private GameController gameController = GameController.getGameController();
     private UserController userController = UserController.getUserController();
-    private DataBase dataBase;
+    private LocalDataBase localDataBase;
     private EventController() {
-        dataBase = DataBase.getDataBase();
+        localDataBase = localDataBase.getLocalDataBase();
     }
 
     public static EventController getEventController() {
@@ -23,21 +27,21 @@ public class EventController {
     //----------------------------------------------------------------------------------------------------------------------
 
     public void createNewPublicEvent(LocalDateTime startDate , LocalDateTime endDate , RiskGame riskGame , Double eventPoint) {
-        ArrayList<Event> allEvents = dataBase.getAllEvents();
+        ArrayList<Event> allEvents = localDataBase.getAllEvents();
         Event event = new Event(startDate, endDate, riskGame, eventPoint);
         allEvents.add(event);
         sendInviteMassageFromAdmin(event);
     }
 
     private void sendInviteMassageFromAdmin(Event event){
-        Admin admin = dataBase.getAdmin();
+        Admin admin = localDataBase.getAdmin();
         ArrayList<Player> invitedPlayers = event.getInvitedPlayers();
         for(Player player : invitedPlayers){
             userController.sendMessageFromAdmin(admin , player , "You are invited to an event please check the events");
         }
     }
     public void createNewPrivateEvent(LocalDateTime startDate , LocalDateTime endDate , RiskGame riskGame , Double eventPoint , ArrayList<Player> invitedPlayer) {
-        ArrayList<Event> allEvents = dataBase.getAllEvents();
+        ArrayList<Event> allEvents = localDataBase.getAllEvents();
         Event event = new Event(startDate, endDate, riskGame, eventPoint , invitedPlayer);
         allEvents.add(event);
     }
@@ -51,7 +55,7 @@ public class EventController {
     }
 
     public void deleteEvent(int eventID) {
-        ArrayList<Event> allEvents = dataBase.getAllEvents();
+        ArrayList<Event> allEvents = localDataBase.getAllEvents();
         allEvents.remove(eventID);
     }
 
@@ -74,7 +78,7 @@ public class EventController {
 
     public HashMap<Integer , Event > getAllEventsInHashMap(){
         HashMap<Integer ,Event> allEventsInMap = new HashMap<>();
-        ArrayList<Event> allEvents = dataBase.getAllEvents();
+        ArrayList<Event> allEvents = localDataBase.getAllEvents();
         for(int i = 3 ; i < allEvents.size() + 3; i++){
             allEventsInMap.put(i , allEvents.get( i -3 ));
         }
