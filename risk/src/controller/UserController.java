@@ -17,7 +17,7 @@ public class UserController {
     private LocalDataBase localDataBase;
     private MySqlDataBase dataBase;
 
-    private UserController() {
+    public UserController() {
         localDataBase = LocalDataBase.getLocalDataBase();
         dataBase = MySqlDataBase.getMySqlDataBase();
     }
