@@ -17,6 +17,7 @@ public class PlayerMenu extends Menu {
 
     @Override
     public void show() {
+        showPlayerInformation(user);
         super.show();
         System.out.println("6.Logout");
     }
@@ -44,5 +45,18 @@ public class PlayerMenu extends Menu {
 
         nextMenu.show();
         nextMenu.execute();
+    }
+
+    private void showPlayerInformation(Player player) {
+        System.out.println("Username : " + player.getUsername());
+        System.out.println("First name : " + player.getFirstName());
+        System.out.println("Last name : " + player.getLastName());
+        System.out.println("Email Address : " + player.getEmailAddress());
+        System.out.println("Telephone number : " + player.getTelephoneNumber());
+        System.out.println("Number of wins : " + player.getNumbersOfWin());
+        System.out.println("Number of games : " + player.getNumbersOfGames());
+        System.out.println("Number of days since register : " + player.getNumbersOfDaysSinceRegistration());
+        System.out.println("Point number : " + player.getRate());
+        System.out.println("---------------------------------------------------------------");
     }
 }

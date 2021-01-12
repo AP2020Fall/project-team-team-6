@@ -1,5 +1,5 @@
-package controller;
 
+package controller;
 import model.database.LocalDataBase;
 import model.database.MySqlDataBase;
 import model.gamesModels.Event;
@@ -14,13 +14,12 @@ public class UserController {
     private static UserController userController = new UserController();
     private static EventController eventController = EventController.getEventController();
     private static GameController gameController = GameController.getGameController();
-    private LocalDataBase localDataBase;
-    private MySqlDataBase dataBase;
+    private  LocalDataBase localDataBase;
 
-    public UserController() {
-        localDataBase = LocalDataBase.getLocalDataBase();
-        dataBase = MySqlDataBase.getMySqlDataBase();
-    }
+
+    private UserController() {
+        this.localDataBase = LocalDataBase.getLocalDataBase();
+
 
     public static UserController getUserController() {
         return userController;
@@ -38,7 +37,8 @@ public class UserController {
         Admin admin = new Admin(firstName, lastName, username, password, emailAddress, telephoneNumber);
         localDataBase.getAllUsers().add(admin);
         localDataBase.setAdmin(admin);
-        dataBase.addNewUserToDataBase(firstName , lastName , username , password , emailAddress , telephoneNumber , true);
+        int id = MySqlDataBase.getMySqlDataBase().addNewUserToDataBase(firstName , lastName , username , password , emailAddress , telephoneNumber , true);
+        admin.setID(id);
         return admin;
     }
 
@@ -48,7 +48,8 @@ public class UserController {
         Player player = new Player(firstName, lastName, username, password, emailAddress, telephoneNumber);
         localDataBase.getAllPlayers().add(player);
         localDataBase.getAllUsers().add(player);
-        dataBase.addNewUserToDataBase(firstName , lastName , username , password , emailAddress , telephoneNumber , false);
+        int id = MySqlDataBase.getMySqlDataBase().addNewUserToDataBase(firstName , lastName , username , password , emailAddress , telephoneNumber , false);
+        player.setID(id);
         return player;
     }
 
@@ -85,6 +86,8 @@ public class UserController {
             player.getFriends().add(secondPlayer);
             secondPlayer.getFriends().add(player);
             player.getRequestsForFriendShips().remove(secondPlayer);
+            MySqlDataBase.getMySqlDataBase().updatePlayer(player);
+            MySqlDataBase.getMySqlDataBase().updatePlayer(secondPlayer);
         } else {
             throw new Exception("Error player request");
         }
@@ -93,32 +96,38 @@ public class UserController {
     public void changeFirstName(String username, String newFirstName) {
         User user = findUserByUsername(username);
         user.setFirstName(newFirstName);
+        MySqlDataBase.getMySqlDataBase().changeInfo(user);
     }
 
     public void changeLastName(String username, String newLastName) {
         User user = findUserByUsername(username);
         user.setLastName(newLastName);
+        MySqlDataBase.getMySqlDataBase().changeInfo(user);
     }
 
     public void changeTelephoneNumber(String username, String newTelephoneNumber) {
         User user = findUserByUsername(username);
         user.setTelephoneNumber(newTelephoneNumber);
+        MySqlDataBase.getMySqlDataBase().changeInfo(user);
     }
 
     public void changeEmailAddress(String username, String newEmailAddress) {
         User user = findUserByUsername(username);
         user.setEmailAddress(newEmailAddress);
+        MySqlDataBase.getMySqlDataBase().changeInfo(user);
     }
 
     public void changePassword(String username, String newPassword) {
         User user = findUserByUsername(username);
         user.setPassword(newPassword);
+        MySqlDataBase.getMySqlDataBase().changeInfo(user);
     }
 
     public void changeUsername(String username, String newUsername) throws Exception {
         User user = findUserByUsername(username);
         if (checkUsername(newUsername)) {
             user.setUsername(newUsername);
+            MySqlDataBase.getMySqlDataBase().changeInfo(user);
         } else {
             throw new Exception("This username has already taken.");
         }
@@ -156,7 +165,16 @@ public class UserController {
         localDataBase.getAllPlayers().remove(player);
         User user = findUserByUsername(player.getUsername());
         localDataBase.getAllUsers().remove(user);
-        dataBase.removeUserFromDataBase(player.getID());
+        MySqlDataBase.getMySqlDataBase().removeUserFromDataBase(player.getID());
+    }
+
+    public Player findPlayerById(int Id){
+        ArrayList<Player> allPlayers = localDataBase.getAllPlayers();
+        for(Player player : allPlayers){
+            if(player.getID() == Id)
+                return player;
+        }
+        return null;
     }
 
     //End Users Methods
@@ -230,11 +248,6 @@ public class UserController {
         //TODO .....
     }
 
-    public String getNumberOfFriends(String username){
-        Player player = findPlayerByUserName(username);
-        return String.valueOf(player.getFriends().size());
-
-    }
     public ArrayList<Player> getAllPlayers() {
         return localDataBase.getAllPlayers();
     }
@@ -339,3 +352,4 @@ public class UserController {
         //ToDo
     }
 }
+
