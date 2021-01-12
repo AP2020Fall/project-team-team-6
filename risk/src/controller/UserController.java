@@ -230,6 +230,11 @@ public class UserController {
         //TODO .....
     }
 
+    public String getNumberOfFriends(String username){
+        Player player = findPlayerByUserName(username);
+        return String.valueOf(player.getFriends().size());
+
+    }
     public ArrayList<Player> getAllPlayers() {
         return localDataBase.getAllPlayers();
     }

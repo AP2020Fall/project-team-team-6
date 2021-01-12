@@ -27,7 +27,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            URL url = new File("risk\\src\\view\\graphic\\Register.fxml").toURI().toURL();
+            URL url = new File("risk\\src\\view\\graphic\\Mainplato.fxml").toURI().toURL();
 
             AnchorPane root = FXMLLoader.load(url);
 

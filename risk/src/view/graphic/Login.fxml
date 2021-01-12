@@ -19,7 +19,7 @@
                   <Image url="@../../NotResoures/login.png" />
                </image>
             </ImageView>
-            <Button focusTraversable="false" layoutX="862.0" layoutY="491.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="174.0" style="-fx-background-color: edf2f4;" text="Create a new account" textFill="#e34110">
+            <Button fx:id="noaccount" focusTraversable="false" layoutX="862.0" layoutY="491.0" mnemonicParsing="false" onAction="#signup" prefHeight="51.0" prefWidth="174.0" style="-fx-background-color: edf2f4;" text="Create a new account" textFill="#e34110">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -27,9 +27,9 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <PasswordField layoutX="750.0" layoutY="270.0" prefHeight="38.0" prefWidth="283.0" promptText="Password" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #2c2c54;" />
-            <TextField layoutX="750.0" layoutY="157.0" prefHeight="38.0" prefWidth="280.0" promptText="Username" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #2c2c54;" />
-            <Button layoutX="932.0" layoutY="343.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="95.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 20px;" text="Sign in" textFill="WHITE">
+            <PasswordField fx:id="pass" layoutX="750.0" layoutY="270.0" prefHeight="38.0" prefWidth="283.0" promptText="Password" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #2c2c54;" />
+            <TextField fx:id="username" layoutX="750.0" layoutY="157.0" prefHeight="38.0" prefWidth="280.0" promptText="Username" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #2c2c54;" />
+            <Button fx:id="login" layoutX="932.0" layoutY="343.0" mnemonicParsing="false" onAction="#LoginController" prefHeight="37.0" prefWidth="95.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 20px;" text="Sign in" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
