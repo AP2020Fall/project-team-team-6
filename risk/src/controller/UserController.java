@@ -17,7 +17,6 @@ public class UserController {
 
     private UserController() {
         this.localDataBase = LocalDataBase.getLocalDataBase();
-
     }
 
     public static UserController getUserController() {

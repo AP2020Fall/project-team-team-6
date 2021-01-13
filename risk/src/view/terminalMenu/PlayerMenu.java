@@ -8,7 +8,7 @@ public class PlayerMenu extends Menu {
     public PlayerMenu(Menu parentMenu, Player player) {
         super("Account", parentMenu);
         this.user = player;
-        subMenus.put(2, new GamesMenu(this));
+        subMenus.put(2, new GamesMenu(user,this));
         subMenus.put(3, new FriendsMenu(this, player));
         subMenus.put(4, new EventMenu(this));
         subMenus.put(5, new EditInformationMenu(this, user));

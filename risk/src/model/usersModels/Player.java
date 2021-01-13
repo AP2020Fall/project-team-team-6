@@ -19,7 +19,7 @@ public class Player extends User {
     private HashMap<Integer, GameLog> gameLogs;
     private ArrayList<Player> friends;
     private ArrayList<Player> requestsForFriendShips;
-    private HashMap<Integer, RequestForPlaying> requestForPlaysList;
+    private ArrayList <RequestForPlaying> requestForPlaysList;
     private ArrayList<Card> playersCard;
     private HashMap<Integer, Country> playersCountry;
     private int numberOfSoldiers = 0;
@@ -46,7 +46,7 @@ public class Player extends User {
         this.gameLogs = new HashMap<>();
         this.friends = new ArrayList<>();
         this.requestsForFriendShips = new ArrayList<>();
-        this.requestForPlaysList = new HashMap<>();
+        this.requestForPlaysList = new ArrayList<>();
         this.playersCard = new ArrayList<>();
         this.playersCountry = new HashMap<>();
         this.massages = new ArrayList<>();
@@ -156,7 +156,7 @@ public class Player extends User {
         return requestsForFriendShips;
     }
 
-    public HashMap<Integer, RequestForPlaying> getRequestForPlaysList() {
+    public ArrayList<RequestForPlaying> getRequestForPlaysList() {
         return requestForPlaysList;
     }
 
@@ -224,11 +224,12 @@ public class Player extends User {
         String[] friendsInArray = friendsInString.split("\r\n");
         for (String p : friendsInArray){
             Player player =UserController.getUserController().findPlayerByUserName(p);
+            if(player != null)
             friends.add(player);
         }
     }
     public String changeFriendsRequestToString(){
-        String friendsInString = "";
+        String friendsInString ="";
         for(Player player : requestsForFriendShips){
             friendsInString = player.getUsername() + "\r\n";
         }
@@ -238,7 +239,24 @@ public class Player extends User {
         String[] friendsInArray = friendsInString.split("\r\n");
         for (String p : friendsInArray){
             Player player =UserController.getUserController().findPlayerByUserName(p);
+            if(player!= null)
             getRequestsForFriendShips().add(player);
+        }
+    }
+    public String changePlayerCardsIntoString(){
+        StringBuilder cardsInString = new StringBuilder();
+        for(Card card : playersCard){
+            cardsInString.append(card.changeCardInformationToString());
+        }
+        return cardsInString.toString();
+    }
+
+    public void getPlayersCardsFromString(String cards){
+        String[] cardsInArray = cards.split("\r\n");
+        for(String p : cardsInArray){
+            Card card = Card.getCardFromString(p);
+            if(card != null)
+            playersCard.add(card);
         }
     }
 }

@@ -15,7 +15,7 @@ import model.usersModels.Player;
 import model.usersModels.User;
 
 public class RegisterController {
-    protected static UserController userController = new UserController();
+    protected static UserController userController = UserController.getUserController();
 
     @FXML
     TextField username;

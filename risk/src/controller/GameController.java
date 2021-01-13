@@ -1,8 +1,10 @@
 package controller;
 
 import model.database.LocalDataBase;
+import model.database.MySqlDataBase;
 import model.gamesModels.*;
 import model.usersModels.Player;
+import model.usersModels.RequestForPlaying;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -23,7 +25,7 @@ public class GameController {
         return gameController;
     }
 
-    public HashMap<Integer, RiskGame> getAllRiskGames() {
+    public ArrayList<RiskGame> getAllRiskGames() {
         return localDataBase.getAllRiskGames();
     }
 
@@ -205,11 +207,20 @@ public class GameController {
         return player;
     }
 
+    public void invitePlayerToGame(Player player , RiskGame riskGame){
+        RequestForPlaying requestForPlaying = new RequestForPlaying(riskGame.getCreator() , player , riskGame);
+        player.getRequestForPlaysList().add(requestForPlaying);
+    }
+
+    public void deleteRiskGame(RiskGame riskGame){
+        localDataBase.getAllRiskGames().remove(riskGame);
+    }
+
 
     //GAMES METHODS ----------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------
-    public void makeOnlineGameForPlayer(String name, Player creator, RiskGameType riskGameType, int numberOfPlayers) {
-        //TODO......
+    public void addGameToLocalDataBase(RiskGame riskGame){
+        localDataBase.getAllRiskGames().add(riskGame);
     }
 
     public void makeOnlineGameForEvent(String name, RiskGameType riskGameType, int numberOfPlayers, int gamePoint) {
@@ -222,8 +233,12 @@ public class GameController {
     }
 
     public boolean checkGame(RiskGame riskGame) {
-        return true;
-        //TODO ......
+       int currentPlayersInGame =0 ;
+       for(Player player : riskGame.getPlayers()){
+           if(player != null)
+               currentPlayersInGame++;
+       }
+        return currentPlayersInGame > 1;
     }
 
     public RiskGame getOfflineGame() {
@@ -243,6 +258,67 @@ public class GameController {
             return true;
         }
     }
+
+    public RiskGame getPlayersGame(Player player){
+        ArrayList<RiskGame> allGames = localDataBase.getAllRiskGames();
+        for(RiskGame riskGame : allGames){
+            Player[] players =riskGame.getPlayers();
+            for(Player player1 : players){
+                if(player1 != null){
+                    if(player1.equals(player))
+                        return riskGame;
+                }
+            }
+        }
+        return null;
+    }
+    public void makeOnlineGameReadyToStart(RiskGame riskGame){
+        riskGame.setGameStarted(true);
+        gameController.addSoldiersForStartingGame(riskGame);
+        riskGame.setCurrentPlayer(riskGame.getCreator());
+    }
+    public void addPlayerToGame(Player player , RiskGame riskGame) throws Exception{
+        if(riskGame.isGameStarted()){
+            throw new Exception("You can't join this game cause it in the game");
+        }else {
+            Player[] players = riskGame.getPlayers();
+            int nullIndex = -1;
+            for (int i = 0; i < players.length; i++) {
+                Player player1 = players[i];
+                if (player1 == null) {
+                    nullIndex = i;
+                    break;
+                }
+            }
+            if (nullIndex == -1) {
+                throw new Exception("You can't join this game");
+            } else {
+                players[nullIndex] = player;
+            }
+        }
+    }
+    public void removePlayerFromGame(RiskGame riskGame , Player player){
+        Player[] players = riskGame.getPlayers();
+        for(int i =0 ; i < players.length ; i++){
+            Player player1 = players[i];
+            if(player1 != null && player1.equals(player))
+                players[i] = null;
+        }
+    }
+
+    public HashMap<Integer , RiskGame> getAllRequestedGamesForPlayers(Player player , int index){
+        ArrayList<RequestForPlaying> requestForPlayings = player.getRequestForPlaysList();
+        ArrayList<RiskGame> allRiskGames = localDataBase.getAllRiskGames();
+        HashMap<Integer , RiskGame> playerCreatedGames = new HashMap<>();
+        for(RequestForPlaying requestForPlaying : requestForPlayings){
+            if(allRiskGames.contains(requestForPlaying.getRiskGame())){
+                playerCreatedGames.put(index , requestForPlaying.getRiskGame());
+                index++;
+            }
+        }
+        return playerCreatedGames;
+    }
+
 
     public void startGame(RiskGame riskGame, Player creator) {
         //TODO.....
@@ -326,6 +402,7 @@ public class GameController {
         if (hasGotOneCountry) {
             Card card = makeRandomCard();
             currentPlayer.getPlayersCard().add(card);
+            MySqlDataBase.getMySqlDataBase().updatePlayer(riskGame.getCurrentPlayer());
         }
     }
 
@@ -721,6 +798,16 @@ public class GameController {
             counter++;
         }
         return colorsToChose;
+    }
+
+    public ArrayList<Color> getAvailableColors(RiskGame riskGame){
+        ArrayList<Color> defaultColors = getDefaultColors();
+        Player[] players = riskGame.getPlayers();
+        for(Player player : players){
+            if(player != null)
+                defaultColors.remove(player.getCurrentColor());
+        }
+        return defaultColors;
     }
 
     public boolean isStartingStageFinished(RiskGame riskGame) {
