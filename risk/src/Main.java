@@ -1,5 +1,3 @@
-package NotResoures;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,15 +12,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 
-public class Main{
+public class Main extends Application {
 
     public static void main(String[] args) {
-        MySqlDataBase mySqlDataBase = MySqlDataBase.getMySqlDataBase();
-//        launch(args);
+//        MySqlDataBase mySqlDataBase = MySqlDataBase.getMySqlDataBase();
+        launch(args);
 
-        MainMenu mainMenu = new MainMenu(null);
-        mainMenu.show();
-        mainMenu.execute();
+//        MainMenu mainMenu = new MainMenu(null);
+//        mainMenu.show();
+//        mainMenu.execute();
 
     }
 //
@@ -40,4 +38,19 @@ public class Main{
 //            e.printStackTrace();
 //        }
 //    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+            URL url = new File("risk\\src\\view\\graphic\\Mainplato.fxml").toURI().toURL();
+
+            AnchorPane root = FXMLLoader.load(url);
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
