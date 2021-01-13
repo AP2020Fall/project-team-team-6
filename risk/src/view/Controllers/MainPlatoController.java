@@ -1,6 +1,7 @@
 package view.Controllers;
 
 import controller.UserController;
+import javafx.collections.transformation.TransformationList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import model.usersModels.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -42,32 +44,65 @@ public class MainPlatoController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        setLabel();
+    public void initialize(URL location, ResourceBundle resources) {// setLabel();
+        //todo setlable kamente
     }
     @FXML
-    public void events(ActionEvent actionEvent) {
+    public void events(ActionEvent actionEvent) throws IOException {
+        URL url = new File("risk\\src\\view\\graphic\\ShowEvent.fxml").toURI().toURL();
+        Parent register = FXMLLoader.load(url);
+        Scene message = new Scene(register);
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(message);
+        window.show();
     }
     @FXML
     public void games(ActionEvent actionEvent) {
+        //todo.............
     }
     @FXML
-    public void messages(ActionEvent actionEvent) {
+    public void messages(ActionEvent actionEvent) throws IOException {
+        URL url = new File("risk\\src\\view\\graphic\\Messages.fxml").toURI().toURL();
+        Parent register = FXMLLoader.load(url);
+        Scene message = new Scene(register);
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(message);
+        window.show();
     }
     @FXML
     public void scoreboard(ActionEvent actionEvent) {
+        //todo..............
     }
     @FXML
     public void gameshistory(ActionEvent actionEvent) {
+        //todo..........
     }
     @FXML
-    public void requests(ActionEvent actionEvent) {
+    public void requests(ActionEvent actionEvent) throws IOException {
+        URL url = new File("risk\\src\\view\\graphic\\FriendsRequest.fxml").toURI().toURL();
+        Parent register = FXMLLoader.load(url);
+        Scene message = new Scene(register);
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(message);
+        window.show();
     }
     @FXML
-    public void friends(ActionEvent actionEvent) {
+    public void friends(ActionEvent actionEvent) throws IOException {
+        URL url = new File("risk\\src\\view\\graphic\\Friends.fxml").toURI().toURL();
+        Parent register = FXMLLoader.load(url);
+        Scene message = new Scene(register);
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(message);
+        window.show();
     }
     @FXML
-    public void editinformation(ActionEvent actionEvent) {
+    public void editinformation(ActionEvent actionEvent) throws IOException {
+        URL url = new File("risk\\src\\view\\graphic\\EditInformation.fxml").toURI().toURL();
+        Parent register = FXMLLoader.load(url);
+        Scene message = new Scene(register);
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(message);
+        window.show();
     }
     @FXML
     private void logout(ActionEvent event) throws IOException {
