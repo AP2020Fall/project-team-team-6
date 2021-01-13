@@ -14,7 +14,7 @@
       <Pane prefHeight="650.0" prefWidth="1350.0" />
       <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../NotResoures/show%20events.png" />
+            <Image url="@../../NotResoures/show_events.png" />
          </image>
       </ImageView>
       <ListView layoutX="644.0" layoutY="98.0" prefHeight="459.0" prefWidth="434.0" style="-fx-background-color: #d1d0d0;" />
