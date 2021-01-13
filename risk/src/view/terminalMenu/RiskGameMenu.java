@@ -234,18 +234,17 @@ public class RiskGameMenu extends Menu {
         } else if (input == 3) {
             nextMenu = new Menu("", this) {
                 ArrayList<Card> cards = new ArrayList<>();
+                ArrayList<Card> playerCards = currentPlayer.getPlayersCard();
 
                 @Override
-                public void show() {
+                public void show(){
                     if (cards.size() == 3) {
                         System.out.println("You chose this cards do u wanna match them or not ?");
                         showChosenCards(cards);
                         System.out.println("Type yes to match or no to return ");
                     } else {
                         System.out.println("1.Back");
-                        ArrayList<Card> playersCard = currentPlayer.getPlayersCard();
-                        playersCard.removeAll(cards);
-                        HashMap<Integer, Card> getAllCards = gameController.getAllCardsInHashMap(playersCard);
+                        HashMap<Integer, Card> getAllCards = gameController.getAllCardsInHashMap(playerCards , cards);
                         if (getAllCards.size() == 0) {
                             System.out.println("You don't have any card");
                         } else {
@@ -270,9 +269,7 @@ public class RiskGameMenu extends Menu {
                         else if (input > currentPlayer.getPlayersCard().size() + 1 || input < 1)
                             System.err.println("Invalid number");
                         else {
-                            ArrayList<Card> playersCard = currentPlayer.getPlayersCard();
-                            playersCard.removeAll(cards);
-                            HashMap<Integer, Card> getAllCards = gameController.getAllCardsInHashMap(playersCard);
+                            HashMap<Integer, Card> getAllCards = gameController.getAllCardsInHashMap(playerCards , cards);
                             Card card = getAllCards.get(input);
                             cards.add(card);
                             System.out.println("You added this card for matching");
@@ -282,7 +279,7 @@ public class RiskGameMenu extends Menu {
                         String inputInString = getInputFormatWithHelpText("^(?i)yes|(?i)no$".trim(), "");
                         if (inputInString.equalsIgnoreCase("yes")) {
                             try {
-                                gameController.getSoldiersFromCards(currentPlayer, cards.get(0), cards.get(1), cards.get(2));
+                                gameController.getSoldiersFromCards(currentPlayer, cards);
                                 nextMenu = parentMenu;
                             } catch (Exception e) {
                                 System.out.println(e.getMessage());
@@ -327,7 +324,7 @@ public class RiskGameMenu extends Menu {
             int numberOfDice = i - 1;
             System.out.print(i + ". " + numberOfDice + " Dice\t");
         }
-        System.out.println(maximumNumberOfDice + 2 + " . Bizzard");
+        System.out.println(maximumNumberOfDice + 2 + " . Blitz");
     }
 
     private int getNumberOfDiceToRoll(Country country) {
@@ -642,6 +639,7 @@ public class RiskGameMenu extends Menu {
             }
         }
     }
+
 
 
 }
