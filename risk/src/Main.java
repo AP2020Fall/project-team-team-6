@@ -23,6 +23,21 @@ public class Main extends Application {
 //        mainMenu.execute();
 
     }
+//
+//    @Override
+//    public void start(Stage primaryStage) {
+//        try {
+//            URL url = new File("risk\\src\\view\\graphic\\Register.fxml").toURI().toURL();
+//
+//            AnchorPane root = FXMLLoader.load(url);
+//
+//            Scene scene = new Scene(root);
+//            primaryStage.setScene(scene);
+//            primaryStage.show();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     public void start(Stage primaryStage) {

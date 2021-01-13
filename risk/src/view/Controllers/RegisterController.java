@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class RegisterController {
-    protected static UserController userController = new UserController();
+    protected static UserController userController = UserController.getUserController();
 
     @FXML
     TextField username;

@@ -150,7 +150,7 @@ public class MainMenu extends Menu {
         String inputInString;
         String userName;
         ArrayList<Color> colors = gameController.getDefaultColors();
-        HashMap<Integer, Color> colorsToChose = gameController.getColorsToChose(colors);
+        HashMap<Integer, Color> colorsToChose;
         Player[] players = new Player[numberOfPlayers];
         System.out.println("Enter the names of the players or write back to return");
         for (int i = 0; i < numberOfPlayers; i++) {

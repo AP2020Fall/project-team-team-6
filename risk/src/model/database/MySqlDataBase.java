@@ -29,13 +29,13 @@ public class MySqlDataBase {
 
 
     private  Connection creatConnection(){
-//        try {
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/plato" , "root" , "root");
-//            System.out.println("Database is connected successfully");
-//            return connection;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/plato" , "root" , "root");
+            System.out.println("Database is connected successfully");
+            return connection;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
     public void getUsersInfo(){
@@ -164,8 +164,13 @@ public class MySqlDataBase {
                     player.calculateRegisterDate(registerDate);
                     String friendsInString = resultSet.getString("friends");
                     player.getPlayersFriendsFromString(friendsInString);
+                    String requestForFriendShip = resultSet.getString("friend requests");
+                    player.getPlayersFriendsRequestsFromString(requestForFriendShip);
+                    String cardsInString = resultSet.getString("cards");
+                    player.getPlayersCardsFromString(cardsInString);
                 }
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -174,10 +179,14 @@ public class MySqlDataBase {
     public void updatePlayer(Player player){
         int id = player.getID();
         String playersFriendInString = player.changeFriendsToString();
+        String friendsRequests = player.changeFriendsRequestToString();
+        String playersCardsInString = player.changePlayerCardsIntoString();
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE `players` SET  `friends` = ?  WHERE `players`.`player_id` =?;");
+            PreparedStatement statement = connection.prepareStatement("UPDATE `players` SET  `friends` = ? , `friend requests` = ? , `cards` = ?  WHERE `players`.`player_id` =?;");
             statement.setString(1 ,playersFriendInString );
-            statement.setInt(2 , id);
+            statement.setString(2 , friendsRequests);
+            statement.setString(3, playersCardsInString);
+            statement.setInt(4 , id);
             statement.execute();
             statement.close();
         } catch (SQLException e) {
