@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class LoginController {
-    protected static UserController userController = new UserController();
+    protected static UserController userController =UserController.getUserController();
     private static User user = null;
 
     public static User getUser() {
