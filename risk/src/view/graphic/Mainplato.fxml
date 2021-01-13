@@ -90,12 +90,30 @@
                                     <Image url="@../../NotResoures/Gamesmenu.png" />
                                  </image>
                               </ImageView>
-                              <Button layoutX="30.0" layoutY="175.0" mnemonicParsing="false" onAction="#scoreboard" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
+                              <Pane disable="true" layoutX="2.0" layoutY="170.0" prefHeight="299.0" prefWidth="454.0">
+                                 <children>
+                                    <ImageView fitHeight="298.0" fitWidth="400.0" layoutX="33.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../NotResoures/games%20history.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <Pane disable="true" layoutX="2.0" layoutY="170.0" prefHeight="299.0" prefWidth="454.0">
+                                 <children>
+                                    <ImageView fitHeight="298.0" fitWidth="400.0" layoutX="33.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../NotResoures/Scoreboard.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <Button layoutX="31.0" layoutY="117.0" mnemonicParsing="false" onAction="#scoreboard" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button layoutX="30.0" layoutY="114.0" mnemonicParsing="false" onAction="#gameshistory" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
+                              <Button layoutX="29.0" layoutY="50.0" mnemonicParsing="false" onAction="#gameshistory" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
