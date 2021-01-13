@@ -18,7 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainPlatoController implements Initializable {
-    protected static UserController userController = new UserController();
+    protected static UserController userController = UserController.getUserController();
 
 
     @FXML

@@ -12,14 +12,14 @@ import java.util.HashMap;
 public class LocalDataBase {
     private static LocalDataBase localDataBase = new LocalDataBase();
     private ArrayList<Player> allPlayers;
-    private HashMap<Integer, RiskGame> allRiskGames;
+    private ArrayList<RiskGame> allRiskGames;
     private ArrayList<User> allUsers;
     private ArrayList<Event> allEvents;
     private Admin admin;
 
     private LocalDataBase() {
         this.allPlayers = new ArrayList<>();
-        this.allRiskGames = new HashMap<>();
+        this.allRiskGames = new ArrayList<>();
         this.allEvents = new ArrayList<>();
         this.allUsers = new ArrayList<>();
     }
@@ -33,7 +33,7 @@ public class LocalDataBase {
         return allPlayers;
     }
 
-    public HashMap<Integer, RiskGame> getAllRiskGames() {
+    public ArrayList<RiskGame> getAllRiskGames() {
         return allRiskGames;
     }
 
