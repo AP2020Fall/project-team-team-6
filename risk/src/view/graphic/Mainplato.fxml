@@ -92,18 +92,18 @@
                               </ImageView>
                               <Pane disable="true" layoutX="2.0" layoutY="170.0" prefHeight="299.0" prefWidth="454.0">
                                  <children>
-                                    <ImageView fitHeight="298.0" fitWidth="400.0" layoutX="33.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="298.0" fitWidth="400.0" layoutX="33.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                        <image>
-                                          <Image url="@../../NotResoures/games%20history.png" />
+                                          <Image url="@../../NotResoures/games_history.png" />
                                        </image>
                                     </ImageView>
                                  </children>
                               </Pane>
                               <Pane disable="true" layoutX="2.0" layoutY="170.0" prefHeight="299.0" prefWidth="454.0">
                                  <children>
-                                    <ImageView fitHeight="298.0" fitWidth="400.0" layoutX="33.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="298.0" fitWidth="400.0" layoutX="33.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                        <image>
-                                          <Image url="@../../NotResoures/Scoreboard.png" />
+                                          <Image url="@../../NotResoures/scoreboard.png" />
                                        </image>
                                     </ImageView>
                                  </children>
