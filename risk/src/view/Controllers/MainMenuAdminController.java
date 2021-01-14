@@ -20,17 +20,22 @@ public class MainMenuAdminController implements Initializable {
     Label adminname;
     @FXML
     public void players(ActionEvent actionEvent) {
+        //todo.............+ baghie farayand.......
     }
     @FXML    public void editinformation(ActionEvent actionEvent) {
+        //todo.............+ baghie farayand.......
     }
     @FXML
     public void messagesandreq(ActionEvent actionEvent) {
+        //todo.............+ baghie farayand.......
     }
     @FXML
     public void createevent(ActionEvent actionEvent) {
+        //todo.............+ baghie farayand.......
     }
     @FXML
     public void events(ActionEvent actionEvent) {
+        //todo.............+ baghie farayand.......
     }
     private void setLabel(){
         adminname.setText(LoginController.getUser().getUsername());

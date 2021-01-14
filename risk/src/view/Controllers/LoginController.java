@@ -73,5 +73,6 @@ public class LoginController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(message);
         window.show();
+        //todo.............+ baghie farayand.......
     }
 }
