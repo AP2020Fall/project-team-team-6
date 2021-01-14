@@ -230,7 +230,7 @@ public class UserController {
         return friendsList;
     }
 
-    public HashMap<Integer, GameLog> getAllGamesLogForPlayer(Player player) {
+    public ArrayList<GameLog> getAllGamesLogForPlayer(Player player) {
         return player.getGameLogs();
     }
 

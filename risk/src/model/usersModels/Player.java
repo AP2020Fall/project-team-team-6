@@ -16,7 +16,7 @@ public class Player extends User {
     private LocalDate localDate ;
     private int numbersOfDaysSinceRegistration;
     private double rate;
-    private HashMap<Integer, GameLog> gameLogs;
+    private ArrayList<GameLog> gameLogs;
     private ArrayList<Player> friends;
     private ArrayList<Player> requestsForFriendShips;
     private ArrayList <RequestForPlaying> requestForPlaysList;
@@ -43,7 +43,7 @@ public class Player extends User {
         this.numbersOfWin = 0;
         this.localDate = LocalDate.now();
         this.rate = 0.0;
-        this.gameLogs = new HashMap<>();
+        this.gameLogs = new ArrayList<>();
         this.friends = new ArrayList<>();
         this.requestsForFriendShips = new ArrayList<>();
         this.requestForPlaysList = new ArrayList<>();
@@ -143,7 +143,7 @@ public class Player extends User {
         this.numberOfSoldiers = numberOfSoldiers;
     }
 
-    public HashMap<Integer, GameLog> getGameLogs() {
+    public ArrayList<GameLog> getGameLogs() {
         return gameLogs;
     }
 

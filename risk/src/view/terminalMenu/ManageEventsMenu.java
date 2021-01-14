@@ -48,7 +48,7 @@ public class ManageEventsMenu extends Menu {
                 @Override
                 public void execute() {
                     Menu nextMenu = this;
-                    String inputString = getInputFormatWithHelpText("^1|2|3|4|5$", "Enter a number : ");
+                    String inputString = getInputFormatWithHelpText("^1|2|3|4|5|6$", "Enter a number : ");
                     int input = Integer.parseInt(inputString);
                     if (input == 1) {
                         nextMenu = parentMenu;
@@ -108,6 +108,10 @@ public class ManageEventsMenu extends Menu {
                             eventController.changeEvent(event, event.getStartDate(), event.getEndDate(), eventPoint, event.getInvitedPlayers());
                             System.out.println("You changed event point to " + eventPoint);
                         }
+                    }else if(input == 6){
+                        String inputInString = getInputFormatWithHelpText("^(?i)yes|(?i)no$" , "Are u sure you want to delete this event?");
+                        if(inputInString.equalsIgnoreCase("yes"))
+                            eventController.deleteEvent(event.getEventID());
                     }
                     nextMenu.show();
                     nextMenu.execute();
@@ -304,6 +308,7 @@ public class ManageEventsMenu extends Menu {
         System.out.println("3.End date");
         System.out.println("4.Change Invited Players");
         System.out.println("5.Event Point");
+        System.out.println("6.Delete Event");
     }
 
 }

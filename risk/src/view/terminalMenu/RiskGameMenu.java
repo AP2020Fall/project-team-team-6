@@ -29,6 +29,7 @@ public class RiskGameMenu extends Menu {
             if (!riskGame.isMapManually()) {
                 try {
                     gameController.putSoldiersForStartingStageUnManually(riskGame);
+//                  gameController.putSoldiersForTestingEndGame(riskGame);
                     gameController.goNextStage(riskGame);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -464,8 +465,9 @@ public class RiskGameMenu extends Menu {
                                         boolean hasGotTheCountry = false;
                                         try {
                                             hasGotTheCountry = gameController.attack(riskGame, currentPlayer, country, defenderCountry, attackerDice, defendersDice);
-                                            if (hasGotTheCountry)
+                                            if (hasGotTheCountry) {
                                                 gameController.setHashGotOneCountryInAttack(riskGame, true);
+                                            }
                                         } catch (Exception e) {
                                             System.out.println(e.getMessage());
                                         }
@@ -473,6 +475,12 @@ public class RiskGameMenu extends Menu {
                                             //TODO
                                             System.out.println("You got the " + defenderCountry.getName() + " Country coordinate : " + defenderCountry.getCountryCoordinate());
                                             moveSoldiersAfterWinningACountry(country, defenderCountry, attackerDice.size());
+                                            if(gameController.isGameFinished(riskGame)) {
+                                                System.out.println(currentPlayer.getUsername() + " have got all countries");
+                                                gameController.endGame(riskGame);
+                                                nextMenu = parentMenu.getParentMenu().getParentMenu();
+                                            }
+                                            giveAllDefenderCardsToAttacker(defenderCountry);
                                             showsCountries();
                                         }
                                     } else if (defenderCountry != null && numberOfDiceToAttack == 6) {
@@ -495,6 +503,12 @@ public class RiskGameMenu extends Menu {
                                             else
                                                 attackerDice = 1;
                                             moveSoldiersAfterWinningACountry(country, defenderCountry, attackerDice);
+                                            if(gameController.isGameFinished(riskGame)) {
+                                                System.out.println(currentPlayer.getUsername() + " have got all countries");
+                                                gameController.endGame(riskGame);
+                                                nextMenu = parentMenu.getParentMenu().getParentMenu();
+                                            }
+                                            giveAllDefenderCardsToAttacker(defenderCountry);
                                             showsCountries();
                                         }
                                     }
@@ -613,6 +627,13 @@ public class RiskGameMenu extends Menu {
             gameController.setHashDoneFortify(riskGame, false);
             gameController.goNextStage(riskGame);
             gameController.nextPlayer(riskGame);
+            currentPlayer = riskGame.getCurrentPlayer();
+            while (true){
+                if(gameController.checkIfPlayerHasAnyCountries(currentPlayer))
+                    break;
+                gameController.nextPlayer(riskGame);
+                currentPlayer = riskGame.getCurrentPlayer();
+            }
             gameController.calculateNumberOfSoldiersToAddInDraft(riskGame.getCurrentPlayer());
             nextMenu = new RiskGameMenu(parentMenu, riskGame);
             nextMenu.show();
@@ -622,9 +643,6 @@ public class RiskGameMenu extends Menu {
         nextMenu.execute();
     }
 
-    private void showCardsToChose() {
-
-    }
 
     private void showCard(Card card) {
         System.out.println("Card design : " + card.getCardsDesigns());
@@ -640,6 +658,18 @@ public class RiskGameMenu extends Menu {
         }
     }
 
+    private void giveAllDefenderCardsToAttacker(Country defenderCountry){
+        Player defender = null;
+        try {
+            defender = gameController.getDefenderByCountry(riskGame , defenderCountry);
+            if(defender.getPlayersCountry().size() == 1) {
+                System.out.println("You got all " + defender.getUsername() + " cards");
+                gameController.addAllPlayersCardToAnother(defender, currentPlayer);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
+    }
 
 }
