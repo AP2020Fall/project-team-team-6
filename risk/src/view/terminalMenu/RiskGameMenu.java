@@ -29,6 +29,7 @@ public class RiskGameMenu extends Menu {
             if (!riskGame.isMapManually()) {
                 try {
                     gameController.putSoldiersForStartingStageUnManually(riskGame);
+//                  gameController.putSoldiersForTestingEndGame(riskGame);
                     gameController.goNextStage(riskGame);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -234,18 +235,17 @@ public class RiskGameMenu extends Menu {
         } else if (input == 3) {
             nextMenu = new Menu("", this) {
                 ArrayList<Card> cards = new ArrayList<>();
+                ArrayList<Card> playerCards = currentPlayer.getPlayersCard();
 
                 @Override
-                public void show() {
+                public void show(){
                     if (cards.size() == 3) {
                         System.out.println("You chose this cards do u wanna match them or not ?");
                         showChosenCards(cards);
                         System.out.println("Type yes to match or no to return ");
                     } else {
                         System.out.println("1.Back");
-                        ArrayList<Card> playersCard = currentPlayer.getPlayersCard();
-                        playersCard.removeAll(cards);
-                        HashMap<Integer, Card> getAllCards = gameController.getAllCardsInHashMap(playersCard);
+                        HashMap<Integer, Card> getAllCards = gameController.getAllCardsInHashMap(playerCards , cards);
                         if (getAllCards.size() == 0) {
                             System.out.println("You don't have any card");
                         } else {
@@ -270,9 +270,7 @@ public class RiskGameMenu extends Menu {
                         else if (input > currentPlayer.getPlayersCard().size() + 1 || input < 1)
                             System.err.println("Invalid number");
                         else {
-                            ArrayList<Card> playersCard = currentPlayer.getPlayersCard();
-                            playersCard.removeAll(cards);
-                            HashMap<Integer, Card> getAllCards = gameController.getAllCardsInHashMap(playersCard);
+                            HashMap<Integer, Card> getAllCards = gameController.getAllCardsInHashMap(playerCards , cards);
                             Card card = getAllCards.get(input);
                             cards.add(card);
                             System.out.println("You added this card for matching");
@@ -282,7 +280,7 @@ public class RiskGameMenu extends Menu {
                         String inputInString = getInputFormatWithHelpText("^(?i)yes|(?i)no$".trim(), "");
                         if (inputInString.equalsIgnoreCase("yes")) {
                             try {
-                                gameController.getSoldiersFromCards(currentPlayer, cards.get(0), cards.get(1), cards.get(2));
+                                gameController.getSoldiersFromCards(currentPlayer, cards);
                                 nextMenu = parentMenu;
                             } catch (Exception e) {
                                 System.out.println(e.getMessage());
@@ -327,7 +325,7 @@ public class RiskGameMenu extends Menu {
             int numberOfDice = i - 1;
             System.out.print(i + ". " + numberOfDice + " Dice\t");
         }
-        System.out.println(maximumNumberOfDice + 2 + " . Bizzard");
+        System.out.println(maximumNumberOfDice + 2 + " . Blitz");
     }
 
     private int getNumberOfDiceToRoll(Country country) {
@@ -467,8 +465,9 @@ public class RiskGameMenu extends Menu {
                                         boolean hasGotTheCountry = false;
                                         try {
                                             hasGotTheCountry = gameController.attack(riskGame, currentPlayer, country, defenderCountry, attackerDice, defendersDice);
-                                            if (hasGotTheCountry)
+                                            if (hasGotTheCountry) {
                                                 gameController.setHashGotOneCountryInAttack(riskGame, true);
+                                            }
                                         } catch (Exception e) {
                                             System.out.println(e.getMessage());
                                         }
@@ -476,6 +475,12 @@ public class RiskGameMenu extends Menu {
                                             //TODO
                                             System.out.println("You got the " + defenderCountry.getName() + " Country coordinate : " + defenderCountry.getCountryCoordinate());
                                             moveSoldiersAfterWinningACountry(country, defenderCountry, attackerDice.size());
+                                            if(gameController.isGameFinished(riskGame)) {
+                                                System.out.println(currentPlayer.getUsername() + " have got all countries");
+                                                gameController.endGame(riskGame);
+                                                nextMenu = parentMenu.getParentMenu().getParentMenu();
+                                            }
+                                            giveAllDefenderCardsToAttacker(defenderCountry);
                                             showsCountries();
                                         }
                                     } else if (defenderCountry != null && numberOfDiceToAttack == 6) {
@@ -498,6 +503,12 @@ public class RiskGameMenu extends Menu {
                                             else
                                                 attackerDice = 1;
                                             moveSoldiersAfterWinningACountry(country, defenderCountry, attackerDice);
+                                            if(gameController.isGameFinished(riskGame)) {
+                                                System.out.println(currentPlayer.getUsername() + " have got all countries");
+                                                gameController.endGame(riskGame);
+                                                nextMenu = parentMenu.getParentMenu().getParentMenu();
+                                            }
+                                            giveAllDefenderCardsToAttacker(defenderCountry);
                                             showsCountries();
                                         }
                                     }
@@ -616,6 +627,13 @@ public class RiskGameMenu extends Menu {
             gameController.setHashDoneFortify(riskGame, false);
             gameController.goNextStage(riskGame);
             gameController.nextPlayer(riskGame);
+            currentPlayer = riskGame.getCurrentPlayer();
+            while (true){
+                if(gameController.checkIfPlayerHasAnyCountries(currentPlayer))
+                    break;
+                gameController.nextPlayer(riskGame);
+                currentPlayer = riskGame.getCurrentPlayer();
+            }
             gameController.calculateNumberOfSoldiersToAddInDraft(riskGame.getCurrentPlayer());
             nextMenu = new RiskGameMenu(parentMenu, riskGame);
             nextMenu.show();
@@ -625,9 +643,6 @@ public class RiskGameMenu extends Menu {
         nextMenu.execute();
     }
 
-    private void showCardsToChose() {
-
-    }
 
     private void showCard(Card card) {
         System.out.println("Card design : " + card.getCardsDesigns());
@@ -643,5 +658,18 @@ public class RiskGameMenu extends Menu {
         }
     }
 
+    private void giveAllDefenderCardsToAttacker(Country defenderCountry){
+        Player defender = null;
+        try {
+            defender = gameController.getDefenderByCountry(riskGame , defenderCountry);
+            if(defender.getPlayersCountry().size() == 1) {
+                System.out.println("You got all " + defender.getUsername() + " cards");
+                gameController.addAllPlayersCardToAnother(defender, currentPlayer);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
 
 }

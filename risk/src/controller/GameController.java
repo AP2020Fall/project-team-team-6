@@ -3,6 +3,7 @@ package controller;
 import model.database.LocalDataBase;
 import model.database.MySqlDataBase;
 import model.gamesModels.*;
+import model.usersModels.GameLog;
 import model.usersModels.Player;
 import model.usersModels.RequestForPlaying;
 
@@ -13,12 +14,12 @@ import java.util.regex.Pattern;
 public class GameController {
 
     private static GameController gameController = new GameController();
-    private UserController userController = UserController.getUserController();
-    private EventController eventController = EventController.getEventController();
-    private LocalDataBase localDataBase;
+    private static UserController userController = UserController.getUserController();
+    private static EventController eventController = EventController.getEventController();
+    private static LocalDataBase localDataBase = localDataBase = LocalDataBase.getLocalDataBase();
 
     private GameController() {
-        this.localDataBase = localDataBase.getLocalDataBase();
+
     }
 
     public static GameController getGameController() {
@@ -270,6 +271,16 @@ public class GameController {
                 }
             }
         }
+        ArrayList<RiskGame> allEventGames = EventController.getEventController().getAllEventGamesForPlayer(player);
+        for(RiskGame riskGame : allEventGames){
+            Player[] players =riskGame.getPlayers();
+            for(Player player1 : players){
+                if(player1 != null){
+                    if(player1.equals(player))
+                        return riskGame;
+                }
+            }
+        }
         return null;
     }
     public void makeOnlineGameReadyToStart(RiskGame riskGame){
@@ -294,6 +305,9 @@ public class GameController {
                 throw new Exception("You can't join this game");
             } else {
                 players[nullIndex] = player;
+                if(nullIndex ==0){
+                    riskGame.setCreator(player);
+                }
             }
         }
     }
@@ -318,6 +332,7 @@ public class GameController {
         }
         return playerCreatedGames;
     }
+
 
 
     public void startGame(RiskGame riskGame, Player creator) {
@@ -406,63 +421,57 @@ public class GameController {
         }
     }
 
-    public void getSoldiersFromCards(Player player, Card firstCard, Card secondCard, Card thirdCard) throws Exception {
+    public void getSoldiersFromCards(Player player, ArrayList<Card> cards) throws Exception {
         int numberOfSoldiers = 0;
         ArrayList<Card> playersCards = player.getPlayersCard();
-        if (playersCards.contains(firstCard) && playersCards.contains(secondCard) && playersCards.contains(thirdCard)) {
-            if (firstCard.getCardsDesigns().equals(secondCard.getCardsDesigns()) && secondCard.getCardsDesigns().equals(thirdCard.getCardsDesigns())) {
-                if (firstCard.getCardsDesigns().equals(CardDesigns.ARTILLERY)) {
-                    numberOfSoldiers = 4;
-                    if (checkIfCardsHaveSameCountriesWithPlayerCountries(player, firstCard, secondCard, thirdCard))
-                        numberOfSoldiers++;
-                    addSoldiers(player, numberOfSoldiers);
-                    player.getPlayersCard().remove(firstCard);
-                    player.getPlayersCard().remove(secondCard);
-                    player.getPlayersCard().remove(thirdCard);
-                } else if (firstCard.getCardsDesigns().equals(CardDesigns.CAVALRY)) {
-                    numberOfSoldiers = 6;
-                    if (checkIfCardsHaveSameCountriesWithPlayerCountries(player, firstCard, secondCard, thirdCard))
-                        numberOfSoldiers++;
-                    addSoldiers(player, numberOfSoldiers);
-                    player.getPlayersCard().remove(firstCard);
-                    player.getPlayersCard().remove(secondCard);
-                    player.getPlayersCard().remove(thirdCard);
-                } else if (firstCard.getCardsDesigns().equals(CardDesigns.INFANTRY)) {
-                    numberOfSoldiers = 8;
-                    if (checkIfCardsHaveSameCountriesWithPlayerCountries(player, firstCard, secondCard, thirdCard))
-                        numberOfSoldiers++;
-                    addSoldiers(player, numberOfSoldiers);
-                    player.getPlayersCard().remove(firstCard);
-                    player.getPlayersCard().remove(secondCard);
-                    player.getPlayersCard().remove(thirdCard);
-                }
-            } else if (!firstCard.getCardsDesigns().equals(secondCard.getCardsDesigns()) &&
-                    !secondCard.getCardsDesigns().equals(thirdCard.getCardsDesigns()) &&
-                    !firstCard.getCardsDesigns().equals(thirdCard.getCardsDesigns())) {
-                numberOfSoldiers = 10;
-                if (checkIfCardsHaveSameCountriesWithPlayerCountries(player, firstCard, secondCard, thirdCard))
-                    numberOfSoldiers++;
-                addSoldiers(player, numberOfSoldiers);
-                player.getPlayersCard().remove(firstCard);
-                player.getPlayersCard().remove(secondCard);
-                player.getPlayersCard().remove(thirdCard);
-            } else {
-                throw new Exception("You can't match this cards.  =( ");
+        if (playersCards.containsAll(cards)) {
+            int numberOfSameCards =0 ;
+            for(int i =0 ;i < 2 ; i++){
+                if(cards.get(i).getCardsDesigns().equals(cards.get(i+1)))
+                    numberOfSameCards++;
             }
-        } else {
-            throw new Exception("Error Cards");
+            if(numberOfSameCards == 2){
+                CardDesigns cardDesigns = cards.get(0).getCardsDesigns();
+                if(cardDesigns.equals(CardDesigns.ARTILLERY)){
+                    numberOfSoldiers+=4;
+                    if(checkIfCardsHaveSameCountriesWithPlayerCountries(player , cards))
+                        numberOfSoldiers += 2;
+                    player.getPlayersCard().removeAll(cards);
+                }else if(cardDesigns.equals(CardDesigns.CAVALRY)){
+                    numberOfSoldiers+=6;
+                    if(checkIfCardsHaveSameCountriesWithPlayerCountries(player , cards))
+                        numberOfSoldiers += 2;
+                    player.getPlayersCard().removeAll(cards);
+                }else{
+                    numberOfSoldiers+=8;
+                    if(checkIfCardsHaveSameCountriesWithPlayerCountries(player , cards))
+                        numberOfSoldiers += 2;
+                    player.getPlayersCard().removeAll(cards);
+                }
+            }else if(numberOfSameCards == 0){
+                numberOfSoldiers += 10;
+                if(checkIfCardsHaveSameCountriesWithPlayerCountries(player , cards))
+                    numberOfSoldiers += 2;
+                player.getPlayersCard().removeAll(cards);
+
+            }else{
+                throw new Exception("You can't match this cards");
+            }
+        }else{
+            throw new Exception("Invalid cards");
         }
+        gameController.addSoldiers(player , numberOfSoldiers);
 
     }
 
-    public boolean checkIfCardsHaveSameCountriesWithPlayerCountries(Player player, Card firstCard, Card secondCard, Card thirdCard) throws Exception {
+    public boolean checkIfCardsHaveSameCountriesWithPlayerCountries(Player player,ArrayList<Card> cards) throws Exception {
         ArrayList<Card> playersCards = player.getPlayersCard();
+        Card firstCard = cards.get(0);
+        Card secondCard = cards.get(1);
+        Card thirdCard = cards.get(2);
         ArrayList<Integer> playersCountriesId = new ArrayList<>(player.getPlayersCountry().keySet());
         if (playersCards.contains(firstCard) && playersCards.contains(secondCard) && playersCards.contains(thirdCard)) {
-            if (playersCountriesId.contains(firstCard.getCountryID()) || playersCountriesId.contains(secondCard.getCountryID()) || playersCountriesId.contains(thirdCard.getCountryID()))
-                return true;
-            else
-                return false;
+            return playersCountriesId.contains(firstCard.getCountryID()) || playersCountriesId.contains(secondCard.getCountryID()) || playersCountriesId.contains(thirdCard.getCountryID());
 
         } else
             throw new Exception("Error cards");
@@ -604,8 +613,8 @@ public class GameController {
     }
 
 
-    public void occupyingACountry(RiskGame riskGame, Player attacker, Country country) {
-        Player defender = getDefenderPlayerByCountryColor(riskGame, country);
+    public void occupyingACountry(RiskGame riskGame, Player attacker, Country country) throws Exception {
+        Player defender = getDefenderByCountry(riskGame, country);
         HashMap<Integer, Country> attackerCountries = attacker.getPlayersCountry();
         HashMap<Integer, Country> defenderCountries = defender.getPlayersCountry();
         defenderCountries.remove(country.getCountryCoordinate());
@@ -621,13 +630,12 @@ public class GameController {
         }
     }
 
-    public Player getDefenderPlayerByCountryColor(RiskGame riskGame, Country defenderCounter) {
-        Player[] players = riskGame.getPlayers();
-        for (Player player : players) {
-            if (player.getCurrentColor().equals(defenderCounter.getColor()))
+    public Player getDefenderByCountry(RiskGame riskGame, Country defenderCounter) throws Exception {
+        for(Player player : riskGame.getPlayers()){
+            if(player.getPlayersCountry().containsValue(defenderCounter))
                 return player;
         }
-        return null;
+        throw new Exception("Defender couldn't load");
     }
 
     public boolean isCountryForPlayer(Country country, Player player) {
@@ -761,11 +769,54 @@ public class GameController {
     }
 
     public void endGame(RiskGame riskGame) {
-        //TODO .....
+        if(riskGame.getRiskGameType().equals(RiskGameType.OFFLINE))
+            setOfflineGame(null);
+        else{
+            Player[] players = riskGame.getPlayers();
+            Player winner = riskGame.getCurrentPlayer();
+            addRateToPlayer(winner , riskGame.getGamePoint());
+            addNumberOfWin(winner);
+            for(Player player : players) {
+                GameLog gameLog = new GameLog(riskGame.getName(), riskGame.getGamePoint(), winner);
+                player.getGameLogs().add(gameLog);
+                addNumberOfGames(player);
+            }
+            setNewGameInformationForPlayers(players);
+            deleteRiskGame(riskGame);
+        }
+    }
+
+    public void addRateToPlayer(Player player , double rate){
+        double currentRate = player.getRate();
+        currentRate+= rate;
+        player.setRate(currentRate);
+    }
+    public void addNumberOfGames(Player player){
+        int currentNumberOfWins = player.getNumbersOfGames();
+        currentNumberOfWins++;
+        player.setNumbersOfGames(currentNumberOfWins);
+    }
+    public void addNumberOfWin(Player player ){
+        int currentNumberOfWins = player.getNumbersOfWin();
+        currentNumberOfWins++;
+        player.setNumbersOfWin(currentNumberOfWins);
+    }
+    public boolean isGameFinished(RiskGame riskGame){
+        Player[] players = riskGame.getPlayers();
+        for(Player player : players){
+            if (player.getPlayersCountry().size() == 42)
+                return true;
+        }
+     return false;
     }
 
     public void setNewGameInformationForPlayers(Player[] players) {
-        //TODO ......
+       for(Player player : players){
+           player.setCurrentColor(null);
+           player.setNumberOfSoldiers(0);
+           player.getPlayersCountry().clear();
+           player.getPlayersCard().clear();
+       }
     }
 
     public void doBlizzard(RiskGame riskGame) {
@@ -858,12 +909,46 @@ public class GameController {
         return random.nextInt(max);
     }
 
-    public HashMap<Integer, Card> getAllCardsInHashMap(ArrayList<Card> cards) {
+    public HashMap<Integer, Card> getAllCardsInHashMap(ArrayList<Card> cards , ArrayList<Card> chosenCards) {
         HashMap<Integer, Card> allCardsInHashMap = new HashMap<>();
-        for (int i = 2; i < cards.size() + 2; i++) {
-            allCardsInHashMap.put(i, cards.get(i - 2));
+        int index = 2;
+        for(Card card : cards){
+            if(!chosenCards.contains(card)){
+                allCardsInHashMap.put(index , card);
+                index++;
+            }
         }
         return allCardsInHashMap;
+    }
+    public boolean checkIfPlayerHasAnyCountries(Player player){
+        if(player.getPlayersCountry().size() == 0 )
+            return false;
+        return true;
+    }
+    public void addAllPlayersCardToAnother(Player player , Player secondPlayer){
+        secondPlayer.getPlayersCard().addAll(player.getPlayersCard());
+        player.getPlayersCard().clear();
+    }
+
+
+    public void putSoldiersForTestingEndGame(RiskGame riskGame) throws Exception {
+        Player[] players = riskGame.getPlayers();
+        Player firstPlayer = players[0];
+        Player secondPlayer = players[1];
+        for(Country country : riskGame.getAllCountriesWithNumber().values()){
+            if(country.getCountryCoordinate() != 1){
+                country.setNumberOfSoldiers(1);
+                country.setColor(firstPlayer.getCurrentColor());
+                firstPlayer.getPlayersCountry().put(country.getCountryCoordinate() , country);
+            }
+
+        }
+
+
+        Country firstCountry = riskGame.getAllCountriesWithNumber().get(1);
+        firstCountry.setColor(secondPlayer.getCurrentColor());
+        firstCountry.setNumberOfSoldiers(1);
+        secondPlayer.getPlayersCountry().put(firstCountry.getCountryCoordinate() , firstCountry);
     }
 
 

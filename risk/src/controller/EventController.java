@@ -16,7 +16,7 @@ public class EventController {
     private UserController userController = UserController.getUserController();
     private LocalDataBase localDataBase;
     private EventController() {
-        localDataBase = localDataBase.getLocalDataBase();
+        localDataBase = LocalDataBase.getLocalDataBase();
     }
 
     public static EventController getEventController() {
@@ -59,21 +59,14 @@ public class EventController {
         allEvents.remove(eventID);
     }
 
-    public void inviteAllPLayers(int eventID) {
-        //ToDo
-    }
-
-    public void inviteChosenPlayers(int eventID, ArrayList<Player> chosenPlayers) {
-        //ToDo
-    }
     public void changeEvent(Event event , LocalDateTime start , LocalDateTime endDate , double eventPoint , ArrayList<Player> invitedList){
         event.setStartDate(start);
         event.setEndDate(endDate);
         event.setEventPoint(eventPoint);
         event.setInvitedPlayers(invitedList);
     }
-    public void joinEvent(int userID , int eventId){
-        //ToDo
+    public void joinEvent(Player player , Event event) throws Exception {
+        gameController.addPlayerToGame(player , event.getGame());
     }
 
     public HashMap<Integer , Event > getAllEventsInHashMap(){
@@ -99,6 +92,46 @@ public class EventController {
             throw new Exception("This date is before start date");
         else
             return endDate;
+    }
+
+    public HashMap<Integer , Event> getEventForPlayer(Player player){
+        ArrayList<Event> allEvents = localDataBase.getAllEvents();
+        HashMap<Integer , Event> playersEvents = new HashMap<>();
+        int index = 2 ;
+        for(Event event : allEvents){
+            boolean isEventValid = eventController.isEventValid(event);
+            if(event.getInvitedPlayers().contains(player) && isEventValid){
+                playersEvents.put(index , event);
+                index++;
+            }
+        }
+        return playersEvents;
+    }
+    public ArrayList<RiskGame> getAllEventGamesForPlayer(Player player){
+        ArrayList<Event> allEvents = localDataBase.getAllEvents();
+        ArrayList<RiskGame> eventsGame = new ArrayList<>();
+        for(Event event : allEvents){
+            if(isEventValid(event)){
+                if(event.getInvitedPlayers().contains(player))
+                    eventsGame.add(event.getGame());
+            }
+        }
+        return eventsGame;
+    }
+    public HashMap<Integer , RiskGame> getEventsGameForPlayerInHashMap(Player player , int index){
+        ArrayList<RiskGame> eventGame = getAllEventGamesForPlayer(player);
+        HashMap<Integer , RiskGame> eventsGameInHashMap = new HashMap<>();
+        for(RiskGame riskGame : eventGame){
+            eventsGameInHashMap.put(index , riskGame);
+            index ++;
+        }
+        return eventsGameInHashMap;
+    }
+    public boolean isEventValid(Event event){
+        LocalDateTime startDate = event.getStartDate();
+        LocalDateTime endDate = event.getEndDate();
+//        return startDate.isBefore(LocalDateTime.now()) && endDate.isAfter(LocalDateTime.now());
+        return endDate.isAfter(LocalDateTime.now());
     }
 
 

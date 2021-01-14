@@ -4,6 +4,7 @@ import model.database.LocalDataBase;
 import model.gamesModels.Color;
 import model.gamesModels.RiskGame;
 import model.gamesModels.RiskGameType;
+import model.usersModels.GameLog;
 import model.usersModels.Player;
 import model.usersModels.User;
 
@@ -23,12 +24,13 @@ public class GamesMenu extends Menu {
         super.show();
         System.out.println("2.Create new Game");
         System.out.println("3.All Available risk games");
+        System.out.println("4.Game logs");
     }
 
     @Override
     public void execute() {
         Menu nextMenu = this;
-        String inputInString = getInputFormatWithHelpText("^1|2|3$" , "Enter a number:");
+        String inputInString = getInputFormatWithHelpText("^1|2|3|4$" , "Enter a number:");
         int input = Integer.parseInt(inputInString);
         if(input == 1 ){
             nextMenu = parentMenu;
@@ -85,10 +87,12 @@ public class GamesMenu extends Menu {
                 nextMenu = new Menu("", this) {
                     RiskGame playerGame = gameController.getPlayersGame(currentPlayer);
                     HashMap<Integer, RiskGame> requestedGames = gameController.getAllRequestedGamesForPlayers(currentPlayer, 2);
-
+                    int index = requestedGames.size() + 2;
+                    HashMap<Integer , RiskGame> eventGames = eventController.getEventsGameForPlayerInHashMap(currentPlayer , index);
                     @Override
                     public void show() {
                         System.out.println("1.back");
+                        requestedGames.putAll(eventGames);
                         if (playerGame != null) {
                             showRiskGameInformation(playerGame);
                             if (!currentPlayer.equals(playerGame.getCreator()) && !playerGame.isGameStarted()) {
@@ -172,7 +176,9 @@ public class GamesMenu extends Menu {
                         nextMenu.execute();
                     }
                 };
-            }
+            }else if(input == 4){
+            showGameLogs();
+        }
         nextMenu.show();
         nextMenu.execute();
     }
@@ -333,6 +339,18 @@ public class GamesMenu extends Menu {
         Color color = colors.get(input);
         currentPlayer.setCurrentColor(color);
         return color;
+    }
+    private void showGameLogs(){
+        System.out.println("----------------- Game Logs -------------------");
+        int index = 1;
+        if(currentPlayer.getGameLogs().size() == 0 ){
+            System.out.println("Empty");
+        }else {
+            for (GameLog gameLog : currentPlayer.getGameLogs()) {
+                System.out.println(index + ".\nGame name : " + gameLog.getRiskGameName() + "Point : " + gameLog.getPoints() + "Winner :" + gameLog.getWinner().getUsername() + "Date : " + gameLog.getLocalDateTime());
+                index++;
+            }
+        }
     }
 
 

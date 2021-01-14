@@ -21,7 +21,7 @@ public class MainPlatoForAdminController implements Initializable {
     @FXML
     public void players(ActionEvent actionEvent) {
     }
-    @FXML    public void editinformation(ActionEvent actionEvent) {
+    @FXML public void editinformation(ActionEvent actionEvent) {
     }
     @FXML
     public void messagesandreq(ActionEvent actionEvent) {
