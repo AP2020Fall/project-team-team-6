@@ -8,9 +8,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.usersModels.Admin;
+import model.usersModels.Player;
 import model.usersModels.User;
 
 import java.io.File;
@@ -20,6 +23,7 @@ import java.net.URL;
 public class LoginController {
     protected static UserController userController =UserController.getUserController();
     private static User user = null;
+    public Label errorLabel;
 
     public static User getUser() {
         return user;
@@ -43,8 +47,21 @@ public class LoginController {
 
         try {
             setUser(userController.login(username.getText(),pass.getText()));
+            URL url;
+            if(user.isAdmin()){
+                 url = new File("risk\\src\\view\\graphic\\MainMenuAdmin.fxml").toURI().toURL();
+            }else{
+                url = new File("risk\\src\\view\\graphic\\MainPlato.fxml").toURI().toURL();
+                Player player = userController.findPlayerByUserName(user.getUsername());
+                MainPlatoController.setPlayer(player);
+            }
+            Parent register = FXMLLoader.load(url);
+            Scene message = new Scene(register);
+            Stage window = (Stage) login.getScene().getWindow();
+            window.setScene(message);
+            window.show();
         } catch (Exception e) {
-            e.printStackTrace();
+            errorLabel.setVisible(true);
         }
 
     }

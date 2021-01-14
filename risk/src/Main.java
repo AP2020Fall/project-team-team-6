@@ -15,34 +15,15 @@ import java.time.LocalDate;
 public class Main extends Application {
 
     public static void main(String[] args) {
-//        MySqlDataBase mySqlDataBase = MySqlDataBase.getMySqlDataBase();
         launch(args);
-
-//        MainMenu mainMenu = new MainMenu(null);
-//        mainMenu.show();
-//        mainMenu.execute();
-
     }
-//
-//    @Override
-//    public void start(Stage primaryStage) {
-//        try {
-//            URL url = new File("risk\\src\\view\\graphic\\Register.fxml").toURI().toURL();
-//
-//            AnchorPane root = FXMLLoader.load(url);
-//
-//            Scene scene = new Scene(root);
-//            primaryStage.setScene(scene);
-//            primaryStage.show();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            URL url = new File("risk\\src\\view\\graphic\\Mainplato.fxml").toURI().toURL();
+            MySqlDataBase mySqlDataBase = MySqlDataBase.getMySqlDataBase();
+            URL url = new File("risk\\src\\view\\graphic\\Login.fxml").toURI().toURL();
 
             AnchorPane root = FXMLLoader.load(url);
 

@@ -1,7 +1,6 @@
 package view.Controllers;
 
 import controller.UserController;
-import javafx.collections.transformation.TransformationList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,13 +14,20 @@ import model.usersModels.Player;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainPlatoController implements Initializable {
+    private static Player player = null;
     protected static UserController userController = UserController.getUserController();
 
+    public static Player getPlayer() {
+        return player;
+    }
+
+    public static void setPlayer(Player player) {
+        MainPlatoController.player = player;
+    }
 
     @FXML
     Label friends;
@@ -34,18 +40,15 @@ public class MainPlatoController implements Initializable {
 
     @FXML
     private void setLabel(){
-        Player player = userController.findPlayerByUserName(LoginController.getUser().getUsername());
         friends.setText(String.valueOf(player.getFriends().size()));
         wins.setText(String.valueOf(player.getNumbersOfWin()));
         coins.setText(String.valueOf(player.getRate()));
         username.setText(LoginController.getUser().getUsername());
-
-
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {// setLabel();
-        //todo setlable kamente
+    public void initialize(URL location, ResourceBundle resources) {
+        setLabel();
     }
     @FXML
     public void events(ActionEvent actionEvent) throws IOException {
