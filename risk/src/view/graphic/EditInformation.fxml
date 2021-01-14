@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.EditInformationController">
    <children>
       <Pane prefHeight="650.0" prefWidth="1350.0" />
       <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
@@ -18,14 +18,14 @@
             <Image url="@../../NotResoures/edit_information.png" />
          </image>
       </ImageView>
-      <TextField layoutX="772.0" layoutY="101.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="username" />
-      <TextField layoutX="772.0" layoutY="375.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="phone number" />
-      <TextField layoutX="772.0" layoutY="240.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="lastname" />
-      <TextField layoutX="772.0" layoutY="172.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="firstname" />
-      <PasswordField layoutX="772.0" layoutY="443.0" prefHeight="37.0" prefWidth="317.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #2b2d42;" text="password" />
-      <TextField layoutX="772.0" layoutY="306.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="email-address" />
-      <PasswordField layoutX="772.0" layoutY="511.0" prefHeight="37.0" prefWidth="317.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #2b2d42;" text="repeat password" />
-      <Button layoutX="1223.0" layoutY="580.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="104.0" style="-fx-background-color: #e11469; -fx-background-radius: 10px;" text="Submit" textFill="WHITE">
+      <TextField fx:id="user" layoutX="772.0" layoutY="101.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="username" />
+      <TextField fx:id="phone" layoutX="772.0" layoutY="375.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="phone number" />
+      <TextField fx:id="last" layoutX="772.0" layoutY="240.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="lastname" />
+      <TextField fx:id="first" layoutX="772.0" layoutY="172.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="firstname" />
+      <PasswordField fx:id="pass" layoutX="772.0" layoutY="443.0" prefHeight="37.0" prefWidth="317.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #2b2d42;" text="password" />
+      <TextField fx:id="email" layoutX="772.0" layoutY="306.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="email-address" />
+      <PasswordField fx:id="repass" layoutX="772.0" layoutY="511.0" prefHeight="37.0" prefWidth="317.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #2b2d42;" text="repeat password" />
+      <Button layoutX="1223.0" layoutY="580.0" mnemonicParsing="false" onAction="#submit" prefHeight="44.0" prefWidth="104.0" style="-fx-background-color: #e11469; -fx-background-radius: 10px;" text="Submit" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -33,7 +33,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="44.0" layoutY="580.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="141.0" style="-fx-background-color: #e11469; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
+      <Button layoutX="44.0" layoutY="580.0" mnemonicParsing="false" onAction="#back" prefHeight="44.0" prefWidth="141.0" style="-fx-background-color: #e11469; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
