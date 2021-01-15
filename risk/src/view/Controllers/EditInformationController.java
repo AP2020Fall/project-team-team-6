@@ -1,39 +1,51 @@
 package view.Controllers;
 
+import controller.UserController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.usersModels.Player;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class EditInformationController {
+public class EditInformationController implements Initializable {
+    private static Player player = null;
+    protected static UserController userController = UserController.getUserController();
+
+    public static Player getPlayer() {
+        return player;
+    }
+    public static void setPlayer(Player player) {
+        EditInformationController.player = player;
+    }
     @FXML
-    TextField user; // TODO: 1/14/2021
+    TextField user;
     @FXML
-    TextField first; // TODO: 1/14/2021
+    TextField first;
     @FXML
-    TextField last;  // TODO: 1/14/2021
+    TextField last;
     @FXML
-    TextField email; // TODO: 1/14/2021
+    TextField email;
     @FXML
-    TextField phone; // TODO: 1/14/2021
+    TextField phone;
     @FXML
-    TextField pass; // TODO: 1/14/2021
+    TextField pass;
     @FXML
-    TextField repass; // TODO: 1/14/2021
+    TextField repass;
 
     @FXML
     public void submit(ActionEvent event) {
-    //todo............
+        // TODO: 1/15/2021  
     }
     @FXML
     public void back(ActionEvent event) throws IOException {
@@ -44,4 +56,21 @@ public class EditInformationController {
         window.setScene(message);
         window.show();
     }
+
+    @FXML
+    private void setLabel() {
+        phone.setText(String.valueOf(player.getTelephoneNumber()));
+        first.setText(LoginController.getUser().getFirstName());
+        last.setText(LoginController.getUser().getLastName());
+        email.setText(LoginController.getUser().getEmailAddress());
+        user.setText(LoginController.getUser().getUsername());
+        pass.setText(LoginController.getUser().getPassword());
+        repass.setText(LoginController.getUser().getPassword());
+    }
+    @FXML
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setLabel();
+    }
 }
+
