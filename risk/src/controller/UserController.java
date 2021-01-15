@@ -263,10 +263,16 @@ public class UserController {
     }
 
     public void sendMessage(Player sender, Player receiver, String massageText) {
-        Massage massage = new Massage(massageText, sender, receiver);
+        User userReceiver = findUserByUsername(receiver.getUsername());
+        User userSender = findUserByUsername(sender.getUsername());
+        Massage massage = new Massage(massageText, userSender, userReceiver);
         sender.getMassages().add(massage);
         receiver.getMassages().add(massage);
+        MySqlDataBase.getMySqlDataBase().updatePlayer(receiver);
+        MySqlDataBase.getMySqlDataBase().updatePlayer(sender);
     }
+
+
 
     public void sendMessageFromAdmin(Admin sender, Player receiver, String massageText) {
         Massage massage = new Massage(massageText, sender, receiver);
@@ -277,7 +283,9 @@ public class UserController {
         ArrayList<Massage> massages = new ArrayList<>();
         ArrayList<Massage> playersMassages = currentPlayer.getMassages();
         for (Massage massage : playersMassages) {
-            if (massage.getReceiver().equals(sender) || massage.getSender().equals(sender)) {
+            Player s = findPlayerByUserName(massage.getSender().getUsername());
+            Player r = findPlayerByUserName(massage.getReceiver().getUsername());
+            if (s.equals(sender) || r.equals(sender)) {
                 massages.add(massage);
             }
         }
@@ -286,17 +294,22 @@ public class UserController {
 
     public HashSet<Player> getAllPlayersThatHadMessageWith(Player currentPlayer) {
         ArrayList<Massage> allMassages = currentPlayer.getMassages();
-        HashSet<Player> players = new HashSet<>();
+        HashSet<Player> users = new HashSet<>();
         for (Massage massage : allMassages) {
-            Player sender = massage.getSender();
-            Player receiver = massage.getReceiver();
-            if (!sender.equals(currentPlayer))
-                players.add(sender);
-            else {
-                players.add(receiver);
+            User sender = massage.getSender();
+            User receiver = massage.getReceiver();
+            Player senderInPlayer = userController.findPlayerByUserName(sender.getUsername());
+            if (!senderInPlayer.equals(currentPlayer)) {
+                Player player = userController.findPlayerByUserName(sender.getUsername());
+                if(player != null)
+                users.add(player);
+            } else {
+                Player player = userController.findPlayerByUserName(receiver.getUsername());
+                if(player != null)
+                users.add(player);
             }
         }
-        return players;
+        return users;
     }
 
     public ArrayList<String> showAllMessages(Player player) {

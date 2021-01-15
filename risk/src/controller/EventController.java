@@ -1,6 +1,7 @@
 package controller;
 
 import model.database.LocalDataBase;
+import model.database.MySqlDataBase;
 import model.gamesModels.Event;
 import model.gamesModels.RiskGame;
 import model.usersModels.Admin;
@@ -31,6 +32,7 @@ public class EventController {
         Event event = new Event(startDate, endDate, riskGame, eventPoint);
         allEvents.add(event);
         sendInviteMassageFromAdmin(event);
+        MySqlDataBase.getMySqlDataBase().addNewEventToDataBase(event);
     }
 
     private void sendInviteMassageFromAdmin(Event event){
@@ -44,6 +46,7 @@ public class EventController {
         ArrayList<Event> allEvents = localDataBase.getAllEvents();
         Event event = new Event(startDate, endDate, riskGame, eventPoint , invitedPlayer);
         allEvents.add(event);
+        MySqlDataBase.getMySqlDataBase().addNewEventToDataBase(event);
     }
 
     public void startEvent(int eventID) {
@@ -132,6 +135,14 @@ public class EventController {
         LocalDateTime endDate = event.getEndDate();
 //        return startDate.isBefore(LocalDateTime.now()) && endDate.isAfter(LocalDateTime.now());
         return endDate.isAfter(LocalDateTime.now());
+    }
+
+    public Event findEventByEventId(int eventId){
+        for(Event event : localDataBase.getAllEvents()){
+            if(event.getEventID() == eventId)
+                return event;
+        }
+        return null;
     }
 
 

@@ -1,5 +1,6 @@
 package model.gamesModels;
 
+import controller.UserController;
 import model.database.LocalDataBase;
 import model.usersModels.Player;
 
@@ -14,6 +15,7 @@ public class Event {
     private double eventPoint;
     private int eventID;
     private ArrayList<Player> invitedPlayers;
+    private boolean isPublic;
 
     public Event(LocalDateTime startDate, LocalDateTime endDate, RiskGame riskGame, double eventPoint) {
         this.gameName = riskGame.getName();
@@ -21,6 +23,7 @@ public class Event {
         this.endDate = endDate;
         this.eventPoint = eventPoint;
         this.game = riskGame;
+        this.isPublic = true;
         this.invitedPlayers = LocalDataBase.getLocalDataBase().getAllPlayers();
         setEventID();
     }
@@ -32,6 +35,7 @@ public class Event {
         this.eventPoint = eventPoint;
         this.game = riskGame;
         this.invitedPlayers = invitedList;
+        this.isPublic = false;
         setEventID();
     }
 
@@ -90,6 +94,25 @@ public class Event {
     public void setInvitedPlayers(ArrayList<Player> invitedPlayers) {
         this.invitedPlayers = invitedPlayers;
     }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public static ArrayList<Player> getPlayersFromString(String playersInString){
+        String[] playersInArray = playersInString.split(",");
+        ArrayList<Player> players = new ArrayList<>();
+        for(String username : playersInArray){
+            Player player = UserController.getUserController().findPlayerByUserName(username);
+            if(player!=null){
+                players.add(player);
+            }
+        }
+        return players;
+    }
+
+
+
 
 
 }
