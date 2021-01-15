@@ -65,12 +65,12 @@ public class MainPlatoController implements Initializable {
     }
     @FXML
     public void messages(ActionEvent actionEvent) throws IOException {
-        URL url = new File("risk\\src\\view\\graphic\\Messages.fxml").toURI().toURL();
-        Parent register = FXMLLoader.load(url);
-        Scene message = new Scene(register);
-        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        window.setScene(message);
-        window.show();
+        URL url = new File("risk\\src\\view\\graphic\\messages.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+        Stage stage =  (Stage) username.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
     @FXML
     public void scoreboard(ActionEvent actionEvent) {
@@ -109,7 +109,7 @@ public class MainPlatoController implements Initializable {
     }
     @FXML
     private void logout(ActionEvent event) throws IOException {
-
+        MainPlatoController.setPlayer(null);
         URL url = new File("risk\\src\\view\\graphic\\Login.fxml").toURI().toURL();
         Parent register = FXMLLoader.load(url);
         Scene message = new Scene(register);

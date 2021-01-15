@@ -1,12 +1,16 @@
 package model.database;
 
 import controller.UserController;
+import model.gamesModels.Event;
+import model.gamesModels.RiskGame;
 import model.usersModels.Admin;
 import model.usersModels.Player;
 import model.usersModels.User;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class MySqlDataBase {
     private Connection connection;
@@ -21,6 +25,7 @@ public class MySqlDataBase {
         this.connection = creatConnection();
         getUsersInfo();
         getPlayerInfo();
+        getEventsInfo();
     }
 
     public  Connection getConnection() {
@@ -168,6 +173,8 @@ public class MySqlDataBase {
                     player.getPlayersFriendsRequestsFromString(requestForFriendShip);
                     String cardsInString = resultSet.getString("cards");
                     player.getPlayersCardsFromString(cardsInString);
+                    String messagesInString = resultSet.getString("messages");
+                    player.getAllMessageFromString(messagesInString);
                 }
             }
             statement.close();
@@ -181,17 +188,75 @@ public class MySqlDataBase {
         String playersFriendInString = player.changeFriendsToString();
         String friendsRequests = player.changeFriendsRequestToString();
         String playersCardsInString = player.changePlayerCardsIntoString();
+        String playersMessages = player.getAllPlayerMessagesInString();
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE `players` SET  `friends` = ? , `friend requests` = ? , `cards` = ?  WHERE `players`.`player_id` =?;");
+            PreparedStatement statement = connection.prepareStatement("UPDATE `players` SET  `friends` = ? , `friend requests` = ? , `cards` = ? ,`messages` = ?  WHERE `players`.`player_id` =?;");
             statement.setString(1 ,playersFriendInString );
             statement.setString(2 , friendsRequests);
             statement.setString(3, playersCardsInString);
-            statement.setInt(4 , id);
+            statement.setString(4 , playersMessages);
+            statement.setInt(5 , id);
             statement.execute();
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public void addNewEventToDataBase(Event event){
+        String startDate = String.valueOf(event.getStartDate());
+        String endDate = String.valueOf(event.getEndDate());
+        double point = event.getEventPoint();
+        StringBuilder players = new StringBuilder();
+        boolean isPublic = event.isPublic();
+        for(Player player : event.getInvitedPlayers()){
+            players.append(player.getUsername()).append(",");
+        }
+        String playersInString = String.valueOf(players);
+        String riskGame = RiskGame.changeOnlineRiskInformationToString(event.getGame());
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO `events` (`event_Id`, `start date`, `end date`, `event point`, `risk game`, `players` , `isPublic`) VALUES (NULL, ?, ?, ?, ?, ? , ?);" , Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1 , startDate);
+            statement.setString(2 , endDate);
+            statement.setDouble(3 , point);
+            statement.setString(4 , riskGame);
+            statement.setString(5 , playersInString);
+            statement.setBoolean(6 , isPublic);
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            while (resultSet.next()){
+                event.setEventID(resultSet.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void getEventsInfo(){
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM events");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                int eventID = resultSet.getInt("event_id");
+                LocalDateTime startDate = LocalDateTime.parse(resultSet.getString("start date"));
+                LocalDateTime endDate = LocalDateTime.parse(resultSet.getString("end date"));
+                double eventPoint = resultSet.getDouble("event point");
+                RiskGame riskGame = RiskGame.getOnlineRiskFromString(resultSet.getString("risk game"));
+                boolean isPublic = resultSet.getBoolean("isPublic");
+                if(!isPublic) {
+                    ArrayList<Player> players = Event.getPlayersFromString(resultSet.getString("players"));
+                    Event event = new Event(startDate, endDate, riskGame, eventPoint, players);
+                    event.setEventID(eventID);
+                    dataBase.getAllEvents().add(event);
+                }else{
+                    Event event = new Event(startDate , endDate , riskGame , eventPoint);
+                    event.setEventID(eventID);
+                    event.setInvitedPlayers(dataBase.getAllPlayers());
+                    dataBase.getAllEvents().add(event);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

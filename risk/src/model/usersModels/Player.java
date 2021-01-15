@@ -259,4 +259,19 @@ public class Player extends User {
             playersCard.add(card);
         }
     }
+    public String getAllPlayerMessagesInString(){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Massage massage : massages){
+            stringBuilder.append(Massage.changeMessageToString(massage)).append("\n");
+        }
+        return stringBuilder.toString();
+    }
+    public void getAllMessageFromString(String text){
+        String[] allMessagesInArray = text.split("\n");
+            for (String s : allMessagesInArray) {
+                Massage massage = Massage.changeMessageFromStringToMessage(s);
+                if(massage != null)
+                this.massages.add(massage);
+            }
+    }
 }
