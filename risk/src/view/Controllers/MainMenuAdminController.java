@@ -18,26 +18,33 @@ import java.util.ResourceBundle;
 public class MainMenuAdminController implements Initializable {
     @FXML
     Label adminname;
+
     @FXML
     public void players(ActionEvent actionEvent) {
         //todo.............+ baghie farayand.......
     }
-    @FXML    public void editinformation(ActionEvent actionEvent) {
+
+    @FXML
+    public void editinformation(ActionEvent actionEvent) {
         //todo.............+ baghie farayand.......
     }
+
     @FXML
     public void messagesandreq(ActionEvent actionEvent) {
         //todo.............+ baghie farayand.......
     }
+
     @FXML
     public void createevent(ActionEvent actionEvent) {
         //todo.............+ baghie farayand.......
     }
+
     @FXML
     public void events(ActionEvent actionEvent) {
         //todo.............+ baghie farayand.......
     }
-    private void setLabel(){
+
+    private void setLabel() {
         adminname.setText(LoginController.getUser().getUsername());
     }
 
@@ -45,6 +52,7 @@ public class MainMenuAdminController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setLabel();
     }
+
     private void logout(ActionEvent event) throws IOException {
 
         URL url = new File("risk\\src\\view\\graphic\\Login.fxml").toURI().toURL();

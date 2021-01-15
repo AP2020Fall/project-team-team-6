@@ -21,7 +21,8 @@ public class ShowAllPlayersController {
     @FXML
     ListView list; // TODO: 1/15/2021  
     @FXML
-    Button remove; // TODO: 1/15/2021  
+    Button remove; // TODO: 1/15/2021
+
     public void back(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\MainMenuAdmin.fxml").toURI().toURL();
         Parent register = FXMLLoader.load(url);

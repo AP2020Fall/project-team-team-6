@@ -301,12 +301,12 @@ public class RiskGame {
         this.hasDoneFortify = hasDoneFortify;
     }
 
-    public static  String changeOnlineRiskInformationToString(RiskGame riskGame){
+    public static String changeOnlineRiskInformationToString(RiskGame riskGame) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(riskGame.getName()).append(":");  //risk game name
-        if(riskGame.getCreator() != null)
-        stringBuilder.append(riskGame.getCreator().getUsername()).append(":"); // risk game creator[
-        else{
+        if (riskGame.getCreator() != null)
+            stringBuilder.append(riskGame.getCreator().getUsername()).append(":"); // risk game creator[
+        else {
             stringBuilder.append("null:");
         }
         stringBuilder.append(riskGame.getRiskGameType()).append(":"); //risk game type
@@ -316,28 +316,29 @@ public class RiskGame {
         stringBuilder.append(riskGame.isMapManually).append(":");// is map manually ?
         return stringBuilder.toString();
     }
-    public static RiskGame getOnlineRiskFromString(String riskInString){
+
+    public static RiskGame getOnlineRiskFromString(String riskInString) {
         String[] riskInArray = riskInString.split(":");
         Player creator = null;
         String riskName = riskInArray[0];
-        if(!riskInArray[1].equalsIgnoreCase("null")) {
-             creator = UserController.getUserController().findPlayerByUserName(riskInArray[1]);  //This may return null
+        if (!riskInArray[1].equalsIgnoreCase("null")) {
+            creator = UserController.getUserController().findPlayerByUserName(riskInArray[1]);  //This may return null
         }
-        RiskGameType riskGameType =  getRiskGameTypeFromString(riskInArray[2]);
+        RiskGameType riskGameType = getRiskGameTypeFromString(riskInArray[2]);
         int numberOfPlayer = Integer.parseInt(riskInArray[3]);
         int gamePoint = Integer.parseInt(riskInArray[4]);
         long timer = Long.parseLong(riskInArray[5]);
         boolean isMapManually = Boolean.parseBoolean(riskInArray[6]);
-        RiskGame riskGame = new RiskGame(riskName , creator , riskGameType , numberOfPlayer , gamePoint , timer , isMapManually);
+        RiskGame riskGame = new RiskGame(riskName, creator, riskGameType, numberOfPlayer, gamePoint, timer, isMapManually);
         return riskGame;
     }
 
-    public static RiskGameType getRiskGameTypeFromString(String string){
-        if(string.equalsIgnoreCase("Public"))
+    public static RiskGameType getRiskGameTypeFromString(String string) {
+        if (string.equalsIgnoreCase("Public"))
             return RiskGameType.PUBLIC;
-        else if(string.equalsIgnoreCase("Private"))
+        else if (string.equalsIgnoreCase("Private"))
             return RiskGameType.PRIVATE;
-        else if(string.equalsIgnoreCase("Offline"))
+        else if (string.equalsIgnoreCase("Offline"))
             return RiskGameType.OFFLINE;
         else
             return null;

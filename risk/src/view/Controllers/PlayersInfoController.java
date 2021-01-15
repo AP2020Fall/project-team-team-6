@@ -29,6 +29,7 @@ public class PlayersInfoController implements Initializable {
     public static void setPlayer(Player player) {
         PlayersInfoController.player = player;
     }
+
     @FXML
     Label user;
     @FXML
@@ -45,6 +46,7 @@ public class PlayersInfoController implements Initializable {
     Label records;
     @FXML
     Label coins;
+
     @FXML
     public void back(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\ShowAllPlayers.fxml").toURI().toURL();
@@ -54,19 +56,21 @@ public class PlayersInfoController implements Initializable {
         window.setScene(message);
         window.show();
     }
+
     @FXML
     private void setLabel() {
         wins.setText(String.valueOf(player.getNumbersOfWin()));
         coins.setText(String.valueOf(player.getRate()));
         phone.setText(String.valueOf(player.getTelephoneNumber()));
-       // records.setText(String.valueOf(player.get()));
+        // records.setText(String.valueOf(player.get()));
         first.setText(LoginController.getUser().getFirstName());
         last.setText(LoginController.getUser().getLastName());
         email.setText(LoginController.getUser().getEmailAddress());
         user.setText(LoginController.getUser().getUsername());
     }
+
     @FXML
-        @Override
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         setLabel();
     }

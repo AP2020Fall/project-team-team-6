@@ -108,9 +108,9 @@ public class ManageEventsMenu extends Menu {
                             eventController.changeEvent(event, event.getStartDate(), event.getEndDate(), eventPoint, event.getInvitedPlayers());
                             System.out.println("You changed event point to " + eventPoint);
                         }
-                    }else if(input == 6){
-                        String inputInString = getInputFormatWithHelpText("^(?i)yes|(?i)no$" , "Are u sure you want to delete this event?");
-                        if(inputInString.equalsIgnoreCase("yes"))
+                    } else if (input == 6) {
+                        String inputInString = getInputFormatWithHelpText("^(?i)yes|(?i)no$", "Are u sure you want to delete this event?");
+                        if (inputInString.equalsIgnoreCase("yes"))
                             eventController.deleteEvent(event.getEventID());
                     }
                     nextMenu.show();

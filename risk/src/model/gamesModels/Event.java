@@ -99,20 +99,17 @@ public class Event {
         return isPublic;
     }
 
-    public static ArrayList<Player> getPlayersFromString(String playersInString){
+    public static ArrayList<Player> getPlayersFromString(String playersInString) {
         String[] playersInArray = playersInString.split(",");
         ArrayList<Player> players = new ArrayList<>();
-        for(String username : playersInArray){
+        for (String username : playersInArray) {
             Player player = UserController.getUserController().findPlayerByUserName(username);
-            if(player!=null){
+            if (player != null) {
                 players.add(player);
             }
         }
         return players;
     }
-
-
-
 
 
 }

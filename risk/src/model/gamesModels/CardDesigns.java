@@ -3,21 +3,21 @@ package model.gamesModels;
 import java.util.ArrayList;
 
 public enum CardDesigns {
-    INFANTRY{
+    INFANTRY {
         @Override
-        public String toString(){
+        public String toString() {
             return "Infantry";
         }
     },
-    CAVALRY{
+    CAVALRY {
         @Override
-        public String toString(){
+        public String toString() {
             return "Cavalry";
         }
     },
-    ARTILLERY{
+    ARTILLERY {
         @Override
-        public String toString(){
+        public String toString() {
             return "Artillery";
         }
     };
