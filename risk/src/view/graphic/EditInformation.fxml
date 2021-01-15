@@ -2,7 +2,6 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -22,9 +21,7 @@
       <TextField fx:id="phone" layoutX="772.0" layoutY="375.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="phone number" />
       <TextField fx:id="last" layoutX="772.0" layoutY="240.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="lastname" />
       <TextField fx:id="first" layoutX="772.0" layoutY="172.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="firstname" />
-      <PasswordField fx:id="pass" layoutX="772.0" layoutY="443.0" prefHeight="37.0" prefWidth="317.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #2b2d42;" text="password" />
-      <TextField fx:id="email" layoutX="772.0" layoutY="306.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="email-address" />
-      <PasswordField fx:id="repass" layoutX="772.0" layoutY="511.0" prefHeight="37.0" prefWidth="317.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #2b2d42;" text="repeat password" />
+      <TextField fx:id="email" layoutX="772.0" layoutY="306.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="emailaddress" />
       <Button layoutX="1223.0" layoutY="580.0" mnemonicParsing="false" onAction="#submit" prefHeight="44.0" prefWidth="104.0" style="-fx-background-color: #e11469; -fx-background-radius: 10px;" text="Submit" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -41,5 +38,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <TextField fx:id="pass" layoutX="772.0" layoutY="440.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="password" />
+      <TextField fx:id="repass" layoutX="772.0" layoutY="511.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="reapet pass" />
    </children>
 </AnchorPane>

@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class LoginController {
-    protected static UserController userController =UserController.getUserController();
+    protected static UserController userController = UserController.getUserController();
     private static User user = null;
     public Label errorLabel;
 
@@ -46,11 +46,11 @@ public class LoginController {
     private void LoginController() {
 
         try {
-            setUser(userController.login(username.getText(),pass.getText()));
+            setUser(userController.login(username.getText(), pass.getText()));
             URL url;
-            if(user.isAdmin()){
-                 url = new File("risk\\src\\view\\graphic\\MainMenuAdmin.fxml").toURI().toURL();
-            }else{
+            if (user.isAdmin()) {
+                url = new File("risk\\src\\view\\graphic\\MainMenuAdmin.fxml").toURI().toURL();
+            } else {
                 url = new File("risk\\src\\view\\graphic\\MainPlato.fxml").toURI().toURL();
                 Player player = userController.findPlayerByUserName(user.getUsername());
                 MainPlatoController.setPlayer(player);
@@ -65,6 +65,7 @@ public class LoginController {
         }
 
     }
+
     @FXML
     private void signup(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\Register.fxml").toURI().toURL();
@@ -73,6 +74,5 @@ public class LoginController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(message);
         window.show();
-        //todo.............+ baghie farayand.......
     }
 }
