@@ -37,7 +37,7 @@ public class JoinEventController implements Initializable {
             URL url = new File("risk\\src\\view\\graphic\\ShowEvent.fxml").toURI().toURL();
             Stage stage = (Stage) backButton.getScene().getWindow();
             try {
-                Parent root= FXMLLoader.load(url);
+                Parent root = FXMLLoader.load(url);
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 setEvent(null);
@@ -66,11 +66,11 @@ public class JoinEventController implements Initializable {
         point.setText(String.valueOf(event.getEventPoint()));
     }
 
-    private String changeDateToString(LocalDateTime localDateTime){
+    private String changeDateToString(LocalDateTime localDateTime) {
         String dateInString = String.valueOf(localDateTime);
         String[] year = dateInString.split("T");
         String[] date = year[0].split("-");
-        String result = date[0]+"/"+date[1]+"/"+date[2];
+        String result = date[0] + "/" + date[1] + "/" + date[2];
         return result;
     }
 }

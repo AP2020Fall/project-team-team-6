@@ -10,29 +10,37 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.friendsController">
-   <children>
-      <Pane prefHeight="650.0" prefWidth="1350.0">
-         <children>
-            <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../NotResoures/friends.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="search" layoutX="813.0" layoutY="111.0" prefHeight="45.0" prefWidth="342.0" promptText="Search ..." style="-fx-background-color: #e6e7e8;">
-               <font>
-                  <Font size="21.0" />
-               </font></TextField>
-            <ListView fx:id="list" layoutX="801.0" layoutY="181.0" prefHeight="363.0" prefWidth="374.0" style="-fx-background-color: #cccccc;" />
-            <Button layoutX="32.0" layoutY="584.0" mnemonicParsing="false" onAction="#back" prefHeight="42.0" prefWidth="107.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #e11469;" text="Back" textFill="WHITE">
-               <font>
-                  <Font size="19.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </Pane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
+            prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.Controllers.friendsController">
+    <children>
+        <Pane prefHeight="650.0" prefWidth="1350.0">
+            <children>
+                <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../NotResoures/friends.png"/>
+                    </image>
+                </ImageView>
+                <TextField fx:id="search" layoutX="813.0" layoutY="111.0" prefHeight="45.0" prefWidth="342.0"
+                           promptText="Search ..." style="-fx-background-color: #e6e7e8;">
+                    <font>
+                        <Font size="21.0"/>
+                    </font>
+                </TextField>
+                <ListView fx:id="list" layoutX="801.0" layoutY="181.0" prefHeight="363.0" prefWidth="374.0"
+                          style="-fx-background-color: #cccccc;"/>
+                <Button layoutX="32.0" layoutY="584.0" mnemonicParsing="false" onAction="#back" prefHeight="42.0"
+                        prefWidth="107.0"
+                        style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #e11469;"
+                        text="Back" textFill="WHITE">
+                    <font>
+                        <Font size="19.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>

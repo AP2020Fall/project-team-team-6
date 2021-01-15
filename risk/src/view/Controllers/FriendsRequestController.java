@@ -17,6 +17,7 @@ import java.net.URL;
 public class FriendsRequestController {
     @FXML
     ListView list; //todo..............
+
     @FXML
     public void back(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\Mainplato.fxml").toURI().toURL();

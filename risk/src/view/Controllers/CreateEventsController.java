@@ -22,6 +22,7 @@ public class CreateEventsController {
     TextField end; //todo......................
     @FXML
     TextField winners; // TODO: 1/14/2021
+
     @FXML
     public void back(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\ShowEventsAdmin.fxml").toURI().toURL();
@@ -31,6 +32,7 @@ public class CreateEventsController {
         window.setScene(message);
         window.show();
     }
+
     @FXML
     public void invite(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\SendEventInvitation.fxml").toURI().toURL();
@@ -40,6 +42,7 @@ public class CreateEventsController {
         window.setScene(message);
         window.show();
     }
+
     @FXML
     public void create(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\ShowEventsAdmin.fxml").toURI().toURL();
@@ -47,6 +50,6 @@ public class CreateEventsController {
         Scene message = new Scene(register);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(message);
-        window.show(); 
+        window.show();
     }//todo................. + baghie faraiand create
 }

@@ -238,14 +238,14 @@ public class RiskGameMenu extends Menu {
                 ArrayList<Card> playerCards = currentPlayer.getPlayersCard();
 
                 @Override
-                public void show(){
+                public void show() {
                     if (cards.size() == 3) {
                         System.out.println("You chose this cards do u wanna match them or not ?");
                         showChosenCards(cards);
                         System.out.println("Type yes to match or no to return ");
                     } else {
                         System.out.println("1.Back");
-                        HashMap<Integer, Card> getAllCards = gameController.getAllCardsInHashMap(playerCards , cards);
+                        HashMap<Integer, Card> getAllCards = gameController.getAllCardsInHashMap(playerCards, cards);
                         if (getAllCards.size() == 0) {
                             System.out.println("You don't have any card");
                         } else {
@@ -270,7 +270,7 @@ public class RiskGameMenu extends Menu {
                         else if (input > currentPlayer.getPlayersCard().size() + 1 || input < 1)
                             System.err.println("Invalid number");
                         else {
-                            HashMap<Integer, Card> getAllCards = gameController.getAllCardsInHashMap(playerCards , cards);
+                            HashMap<Integer, Card> getAllCards = gameController.getAllCardsInHashMap(playerCards, cards);
                             Card card = getAllCards.get(input);
                             cards.add(card);
                             System.out.println("You added this card for matching");
@@ -475,7 +475,7 @@ public class RiskGameMenu extends Menu {
                                             //TODO
                                             System.out.println("You got the " + defenderCountry.getName() + " Country coordinate : " + defenderCountry.getCountryCoordinate());
                                             moveSoldiersAfterWinningACountry(country, defenderCountry, attackerDice.size());
-                                            if(gameController.isGameFinished(riskGame)) {
+                                            if (gameController.isGameFinished(riskGame)) {
                                                 System.out.println(currentPlayer.getUsername() + " have got all countries");
                                                 gameController.endGame(riskGame);
                                                 nextMenu = parentMenu.getParentMenu().getParentMenu();
@@ -503,7 +503,7 @@ public class RiskGameMenu extends Menu {
                                             else
                                                 attackerDice = 1;
                                             moveSoldiersAfterWinningACountry(country, defenderCountry, attackerDice);
-                                            if(gameController.isGameFinished(riskGame)) {
+                                            if (gameController.isGameFinished(riskGame)) {
                                                 System.out.println(currentPlayer.getUsername() + " have got all countries");
                                                 gameController.endGame(riskGame);
                                                 nextMenu = parentMenu.getParentMenu().getParentMenu();
@@ -628,8 +628,8 @@ public class RiskGameMenu extends Menu {
             gameController.goNextStage(riskGame);
             gameController.nextPlayer(riskGame);
             currentPlayer = riskGame.getCurrentPlayer();
-            while (true){
-                if(gameController.checkIfPlayerHasAnyCountries(currentPlayer))
+            while (true) {
+                if (gameController.checkIfPlayerHasAnyCountries(currentPlayer))
                     break;
                 gameController.nextPlayer(riskGame);
                 currentPlayer = riskGame.getCurrentPlayer();
@@ -658,11 +658,11 @@ public class RiskGameMenu extends Menu {
         }
     }
 
-    private void giveAllDefenderCardsToAttacker(Country defenderCountry){
+    private void giveAllDefenderCardsToAttacker(Country defenderCountry) {
         Player defender = null;
         try {
-            defender = gameController.getDefenderByCountry(riskGame , defenderCountry);
-            if(defender.getPlayersCountry().size() == 1) {
+            defender = gameController.getDefenderByCountry(riskGame, defenderCountry);
+            if (defender.getPlayersCountry().size() == 1) {
                 System.out.println("You got all " + defender.getUsername() + " cards");
                 gameController.addAllPlayersCardToAnother(defender, currentPlayer);
             }

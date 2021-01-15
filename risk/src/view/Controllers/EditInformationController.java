@@ -25,9 +25,11 @@ public class EditInformationController implements Initializable {
     public static Player getPlayer() {
         return player;
     }
+
     public static void setPlayer(Player player) {
         EditInformationController.player = player;
     }
+
     @FXML
     TextField user;
     @FXML
@@ -47,6 +49,7 @@ public class EditInformationController implements Initializable {
     public void submit(ActionEvent event) {
         // TODO: 1/15/2021  
     }
+
     @FXML
     public void back(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\Mainplato.fxml").toURI().toURL();
@@ -67,6 +70,7 @@ public class EditInformationController implements Initializable {
         pass.setText(LoginController.getUser().getPassword());
         repass.setText(LoginController.getUser().getPassword());
     }
+
     @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources) {

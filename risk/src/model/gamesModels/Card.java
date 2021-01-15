@@ -49,13 +49,15 @@ public class Card {
     public static ArrayList<Card> getAllCards() {
         return allCards;
     }
-    public String changeCardInformationToString(){
+
+    public String changeCardInformationToString() {
         String cardInformation = countryID + "," + cardDesigns + "\r\n";
         return cardInformation;
     }
-    public static Card getCardFromString(String string){
+
+    public static Card getCardFromString(String string) {
         String[] cardInformation = string.split(",");
-        if(cardInformation.length > 1 ) {
+        if (cardInformation.length > 1) {
             int countryID = Integer.parseInt(cardInformation[0]);
             String cardDesignInString = cardInformation[1];
             CardDesigns cardDesign;
