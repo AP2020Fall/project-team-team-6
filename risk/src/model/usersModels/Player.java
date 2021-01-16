@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Player extends User {
+public class Player extends User implements Comparable{
     private LocalDate localDate;
     private int numbersOfDaysSinceRegistration;
     private double rate;
@@ -214,6 +214,8 @@ public class Player extends User {
         numbersOfDaysSinceRegistration = LocalDate.now().compareTo(localDate);
     }
 
+
+
     public String changeFriendsToString() {
         String friendsInString = "";
         for (Player player : friends) {
@@ -298,4 +300,9 @@ public class Player extends User {
         }
     }
 
+    @Override
+    public int compareTo(Object o) {
+       Player player = (Player) o;
+       return (int) (this.rate - player.getRate());
+    }
 }
