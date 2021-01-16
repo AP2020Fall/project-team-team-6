@@ -178,6 +178,14 @@ public class MySqlDataBase {
                     player.getPlayersCardsFromString(cardsInString);
                     String messagesInString = resultSet.getString("messages");
                     player.getAllMessageFromString(messagesInString);
+                    String gameLogsInString = resultSet.getString("game logs");
+                    player.getAllGameLogsFromString(gameLogsInString);
+                    int numberOfGame = resultSet.getInt("number of game");
+                    player.setNumbersOfGames(numberOfGame);
+                    int numberOfWin = resultSet.getInt("number of win");
+                    player.setNumbersOfWin(numberOfWin);
+                    double rate = resultSet.getDouble("rate");
+                    player.setRate(rate);
                 }
             }
             statement.close();
@@ -193,13 +201,21 @@ public class MySqlDataBase {
         String friendsRequests = player.changeFriendsRequestToString();
         String playersCardsInString = player.changePlayerCardsIntoString();
         String playersMessages = player.getAllPlayerMessagesInString();
+        String gameLogs = player.changeGameLogsToString();
+        int numberOfWin = player.getNumbersOfWin();
+        int numberOfGames = player.getNumbersOfGames();
+        double rate = player.getRate();
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE `players` SET  `friends` = ? , `friend requests` = ? , `cards` = ? ,`messages` = ?  WHERE `players`.`player_id` =?;");
+            PreparedStatement statement = connection.prepareStatement("UPDATE `players` SET  `friends` = ? , `friend requests` = ? , `cards` = ? ,`messages` = ? ,`game logs` = ? ,`number of win` = ? ,`number of game` = ? ,`rate` = ? WHERE `players`.`player_id` =?;");
             statement.setString(1, playersFriendInString);
             statement.setString(2, friendsRequests);
             statement.setString(3, playersCardsInString);
             statement.setString(4, playersMessages);
-            statement.setInt(5, id);
+            statement.setString(5 , gameLogs);
+            statement.setInt(6 , numberOfWin);
+            statement.setInt(7 , numberOfGames);
+            statement.setDouble(8 , rate);
+            statement.setInt(9, id);
             statement.execute();
             statement.close();
         } catch (SQLException e) {

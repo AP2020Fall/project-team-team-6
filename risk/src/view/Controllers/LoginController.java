@@ -61,7 +61,10 @@ public class LoginController {
             window.setScene(message);
             window.show();
         } catch (Exception e) {
+            System.out.println(username.getText());
+            System.out.println(pass.getText());
             errorLabel.setVisible(true);
+            e.printStackTrace();
         }
 
     }
