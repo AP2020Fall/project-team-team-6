@@ -44,4 +44,5 @@
       <Label fx:id="passError" layoutX="820.0" layoutY="416.0" text="Passwords doesn't match" textFill="RED" visible="false" />
       <Label fx:id="blankError" layoutX="820.0" layoutY="481.0" text="Please fill all the blanks" textFill="RED" visible="false" />
    </children>
+
 </AnchorPane>

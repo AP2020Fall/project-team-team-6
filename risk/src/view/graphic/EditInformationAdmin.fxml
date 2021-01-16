@@ -10,39 +10,58 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Pane prefHeight="650.0" prefWidth="1350.0">
-         <children>
-            <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../NotResoures/EditInformationAdmin.png" />
-               </image>
-            </ImageView>
-            <TextField editable="false" layoutX="775.0" layoutY="102.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="username" />
-            <TextField editable="false" layoutX="775.0" layoutY="237.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="lastname" />
-            <TextField editable="false" layoutX="775.0" layoutY="168.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="first name" />
-            <TextField editable="false" layoutX="775.0" layoutY="306.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="email-address" />
-            <TextField editable="false" layoutX="775.0" layoutY="373.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="phone number" />
-            <PasswordField editable="false" layoutX="775.0" layoutY="443.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;" text="passowrd" />
-            <PasswordField editable="false" layoutX="775.0" layoutY="506.0" prefHeight="40.0" prefWidth="283.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;" text="repeat password" />
-            <Button layoutX="28.0" layoutY="586.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="129.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #2db09d;" text="Back" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="1181.0" layoutY="586.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="129.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #2db09d;" text="submit" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </Pane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
+            prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Pane prefHeight="650.0" prefWidth="1350.0">
+            <children>
+                <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../NotResoures/EditInformationAdmin.png"/>
+                    </image>
+                </ImageView>
+                <TextField editable="false" layoutX="775.0" layoutY="102.0" prefHeight="40.0" prefWidth="275.0"
+                           style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;"
+                           text="username"/>
+                <TextField editable="false" layoutX="775.0" layoutY="237.0" prefHeight="40.0" prefWidth="275.0"
+                           style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;"
+                           text="lastname"/>
+                <TextField editable="false" layoutX="775.0" layoutY="168.0" prefHeight="40.0" prefWidth="275.0"
+                           style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;"
+                           text="first name"/>
+                <TextField editable="false" layoutX="775.0" layoutY="306.0" prefHeight="40.0" prefWidth="275.0"
+                           style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;"
+                           text="email-address"/>
+                <TextField editable="false" layoutX="775.0" layoutY="373.0" prefHeight="40.0" prefWidth="275.0"
+                           style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;"
+                           text="phone number"/>
+                <PasswordField editable="false" layoutX="775.0" layoutY="443.0" prefHeight="40.0" prefWidth="275.0"
+                               style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;"
+                               text="passowrd"/>
+                <PasswordField editable="false" layoutX="775.0" layoutY="506.0" prefHeight="40.0" prefWidth="283.0"
+                               style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;"
+                               text="repeat password"/>
+                <Button layoutX="28.0" layoutY="586.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="129.0"
+                        style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #2db09d;"
+                        text="Back" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="24.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button layoutX="1181.0" layoutY="586.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="129.0"
+                        style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #2db09d;"
+                        text="submit" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="24.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>

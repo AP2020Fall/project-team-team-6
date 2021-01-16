@@ -10,8 +10,9 @@ import java.util.HashMap;
 
 public class EventMenu extends Menu {
     private Player currentPlayer;
-    private HashMap<Integer , Event> playersEvent;
-    public EventMenu(Menu parentMenu , Player currentPlayer) {
+    private HashMap<Integer, Event> playersEvent;
+
+    public EventMenu(Menu parentMenu, Player currentPlayer) {
         super("Events Menu ", parentMenu);
         this.currentPlayer = currentPlayer;
         playersEvent = eventController.getEventForPlayer(currentPlayer);
@@ -26,18 +27,18 @@ public class EventMenu extends Menu {
     @Override
     public void execute() {
         Menu nextMenu = this;
-        String inputInString = getInputFormatWithHelpText("^\\d+$" , "Enter a number : ");
+        String inputInString = getInputFormatWithHelpText("^\\d+$", "Enter a number : ");
         int input = Integer.parseInt(inputInString);
-        if(input == 1){
+        if (input == 1) {
             nextMenu = parentMenu;
-        }else if(input > playersEvent.size()+ 1){
+        } else if (input > playersEvent.size() + 1) {
             System.out.println("Invalid number");
-        }else{
+        } else {
             Event event = playersEvent.get(input);
-            String confirmJoin = getInputFormatWithHelpText("^(?i)yes|(?i)no$" , "Do you want to join this event ?");
-            if(confirmJoin.equalsIgnoreCase("yes")){
+            String confirmJoin = getInputFormatWithHelpText("^(?i)yes|(?i)no$", "Do you want to join this event ?");
+            if (confirmJoin.equalsIgnoreCase("yes")) {
                 try {
-                    eventController.joinEvent(currentPlayer , event);
+                    eventController.joinEvent(currentPlayer, event);
                     System.out.println("You have added to game please check your game menu");
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -47,7 +48,6 @@ public class EventMenu extends Menu {
         nextMenu.show();
         nextMenu.execute();
     }
-
 
 
     private void showRiskGameInformation(RiskGame riskGame) {
@@ -65,6 +65,7 @@ public class EventMenu extends Menu {
         } else
             System.out.println("There is no game for this event");
     }
+
     private void showEventInformation(Event event) {
         System.out.println("Event ID : " + event.getEventID());
         System.out.println("Start Date : " + event.getStartDate());
@@ -91,7 +92,8 @@ public class EventMenu extends Menu {
             System.out.println();
         }
     }
-    private void showEvents(HashMap<Integer , Event> playersEvent) {
+
+    private void showEvents(HashMap<Integer, Event> playersEvent) {
         for (int i : playersEvent.keySet()) {
             System.out.println(i + ".");
             showEventInformation(playersEvent.get(i));
