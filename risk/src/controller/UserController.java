@@ -8,6 +8,7 @@ import model.gamesModels.RiskGame;
 import model.usersModels.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -131,6 +132,22 @@ public class UserController {
         } else {
             throw new Exception("This username has already taken.");
         }
+    }
+    public HashMap<Integer , Player> getPlayersInRanks(){
+        ArrayList<Player> allPlayers = localDataBase.getAllPlayers();
+        HashMap<Integer , Player> playersInRank = new HashMap<>();
+        Collections.sort(allPlayers);
+        Collections.reverse(allPlayers);
+        int index = 1 ;
+        int playersSize = allPlayers.size();
+        for(Player player: allPlayers){
+            if(index > 20)
+                break;
+            playersInRank.put(index , player);
+            index ++;
+        }
+        return playersInRank;
+
     }
 
     public User login(String username, String password) throws Exception {

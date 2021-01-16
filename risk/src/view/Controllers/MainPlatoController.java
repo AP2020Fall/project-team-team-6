@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class MainPlatoController implements Initializable {
@@ -89,15 +90,16 @@ public class MainPlatoController implements Initializable {
 
     @FXML
     public void scoreboard(ActionEvent actionEvent) {
-        //todo..............
+        gameHistoryPane.setVisible(true);
+        gameHistoryPane.setDisable(false);
+        gameHistoryList.getItems().clear();
+        gameHistoryList.getItems().addAll(getAllPlayersInRank());
     }
 
     @FXML
     public void gameshistory(ActionEvent actionEvent) {
         gameHistoryPane.setVisible(true);
         gameHistoryPane.setDisable(false);
-//        scoreBoardPane.setVisible(false);
-//        scoreBoardPane.setDisable(true);
         gameHistoryList.getItems().clear();
         gameHistoryList.getItems().addAll(getAllGameLogs());
 
@@ -196,6 +198,48 @@ public class MainPlatoController implements Initializable {
         Label label = new Label(text +"\t");
         label.setStyle("-fx-font-size: 15px ; -fx-text-fill: black ; -fx-text-alignment: center; ");
         return label;
+    }
+    private HBox makeHBoxForRank(int rank , Player player){
+        HBox hBox = new HBox(50);
+        String rankInString = String.valueOf(rank);
+        Label rankLabel = new Label(rankInString);
+        rankLabel.setStyle("-fx-background-color: #ff006e ; -fx-background-radius: 200px ; -fx-border-radius: 200px ; -fx-border-color: #8338ec ; -fx-text-fill: navajowhite ; -fx-font-size: 20px ; -fx-font: bold ; -fx-text-alignment : center ");
+        rankLabel.setMinWidth(50);
+        rankLabel.setPadding(new Insets(0 , 0, 0 ,20));
+        String rate = String.valueOf(player.getRate());
+        Label username = new Label(player.getUsername());
+        username.setStyle("-fx-text-fill: white ; -fx-font-size: 18px ;-fx-text-alignment : center ");
+        username.setMinWidth(151);
+        username.setPadding(new Insets(0 , 0 , 0 , 55));
+        Label score = new Label(rate);
+        score.setStyle("-fx-text-fill: white ; -fx-font-size: 18px ;-fx-text-alignment : center ; ");
+        score.setMinWidth(50);
+        hBox.setStyle("-fx-background-color: #b6ccfe ; -fx-background-radius: 20px ; -fx-border-radius: 20px");
+        hBox.getChildren().addAll(rankLabel , username , score);
+        hBox.setPadding(new Insets(15 , 15 , 15 , 15));
+        return hBox;
+    }
+    private ArrayList<HBox> getAllPlayersInRank(){
+        HashMap<Integer , Player> playersInHashMap = UserController.getUserController().getPlayersInRanks();
+        ArrayList<HBox> allPlayersInRank= new ArrayList<>();
+        HBox hBox = new HBox();
+        Label rankLabel = new Label("Ranks");
+        rankLabel.setStyle("-fx-text-fill: white ; -fx-font-size: 20px ; -fx-font : bold ; -fx-text-alignment : center ");
+        rankLabel.setMinWidth(151);
+        Label userLabel = new Label("Username");
+        userLabel.setStyle("-fx-text-fill: white ; -fx-font-size: 20px ; -fx-font : bold ;-fx-text-alignment : center ");
+        userLabel.setMinWidth(151);
+        Label scoreLabel = new Label("Score");
+        scoreLabel.setStyle("-fx-text-fill: white ; -fx-font-size: 20px ; -fx-font : bold ;-fx-text-alignment : center ");
+        scoreLabel.setMinWidth(65);
+        hBox.setStyle("-fx-background-color: #0077b6 ; -fx-background-radius: 20px ; -fx-border-radius: 20px");
+        hBox.getChildren().addAll(rankLabel , userLabel , scoreLabel);
+        hBox.setPadding(new Insets(15 , 15 , 15 , 15));
+        allPlayersInRank.add(hBox);
+        for(int i : playersInHashMap.keySet()){
+            allPlayersInRank.add(makeHBoxForRank(i , playersInHashMap.get(i)));
+        }
+        return allPlayersInRank;
     }
 
 
