@@ -52,6 +52,4 @@ public class OfflineGame extends Menu {
     }
 
 
-
-
 }

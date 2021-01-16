@@ -1,5 +1,6 @@
 
 package controller;
+
 import model.database.LocalDataBase;
 import model.database.MySqlDataBase;
 import model.gamesModels.Event;
@@ -14,7 +15,7 @@ public class UserController {
     private static UserController userController = new UserController();
     private static EventController eventController = EventController.getEventController();
     private static GameController gameController = GameController.getGameController();
-    private  LocalDataBase localDataBase;
+    private LocalDataBase localDataBase;
 
     private UserController() {
         this.localDataBase = LocalDataBase.getLocalDataBase();
@@ -36,7 +37,7 @@ public class UserController {
         Admin admin = new Admin(firstName, lastName, username, password, emailAddress, telephoneNumber);
         localDataBase.getAllUsers().add(admin);
         localDataBase.setAdmin(admin);
-        int id = MySqlDataBase.getMySqlDataBase().addNewUserToDataBase(firstName , lastName , username , password , emailAddress , telephoneNumber , true);
+        int id = MySqlDataBase.getMySqlDataBase().addNewUserToDataBase(firstName, lastName, username, password, emailAddress, telephoneNumber, true);
         admin.setID(id);
         return admin;
     }
@@ -47,7 +48,7 @@ public class UserController {
         Player player = new Player(firstName, lastName, username, password, emailAddress, telephoneNumber);
         localDataBase.getAllPlayers().add(player);
         localDataBase.getAllUsers().add(player);
-        int id = MySqlDataBase.getMySqlDataBase().addNewUserToDataBase(firstName , lastName , username , password , emailAddress , telephoneNumber , false);
+        int id = MySqlDataBase.getMySqlDataBase().addNewUserToDataBase(firstName, lastName, username, password, emailAddress, telephoneNumber, false);
         player.setID(id);
         return player;
     }
@@ -178,10 +179,10 @@ public class UserController {
         MySqlDataBase.getMySqlDataBase().removeUserFromDataBase(player.getID());
     }
 
-    public Player findPlayerById(int Id){
+    public Player findPlayerById(int Id) {
         ArrayList<Player> allPlayers = localDataBase.getAllPlayers();
-        for(Player player : allPlayers){
-            if(player.getID() == Id)
+        for (Player player : allPlayers) {
+            if (player.getID() == Id)
                 return player;
         }
         return null;
@@ -284,7 +285,6 @@ public class UserController {
     }
 
 
-
     public void sendMessageFromAdmin(Admin sender, Player receiver, String massageText) {
         Massage massage = new Massage(massageText, sender, receiver);
         receiver.getAdminMassages().add(massage);
@@ -312,12 +312,12 @@ public class UserController {
             Player senderInPlayer = userController.findPlayerByUserName(sender.getUsername());
             if (!senderInPlayer.equals(currentPlayer)) {
                 Player player = userController.findPlayerByUserName(sender.getUsername());
-                if(player != null)
-                users.add(player);
+                if (player != null)
+                    users.add(player);
             } else {
                 Player player = userController.findPlayerByUserName(receiver.getUsername());
-                if(player != null)
-                users.add(player);
+                if (player != null)
+                    users.add(player);
             }
         }
         return users;

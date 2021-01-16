@@ -25,13 +25,14 @@ public class Massage {
         return receiver;
     }
 
-    public static String changeMessageToString(Massage message){
+    public static String changeMessageToString(Massage message) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(message.getSender().getUsername()).append(":"); // Sender
         stringBuilder.append(message.getReceiver().getUsername()).append(":"); // reciver
         stringBuilder.append(message.getMassage());
         return String.valueOf(stringBuilder);
     }
+
     public static Massage changeMessageFromStringToMessage(String string) {
         String[] messageInArray = string.split(":");
         if (messageInArray.length > 2) {

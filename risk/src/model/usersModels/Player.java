@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player extends User {
-    private LocalDate localDate ;
+    private LocalDate localDate;
     private int numbersOfDaysSinceRegistration;
     private double rate;
     private ArrayList<GameLog> gameLogs;
     private ArrayList<Player> friends;
     private ArrayList<Player> requestsForFriendShips;
-    private ArrayList <RequestForPlaying> requestForPlaysList;
+    private ArrayList<RequestForPlaying> requestForPlaysList;
     private ArrayList<Card> playersCard;
     private HashMap<Integer, Country> playersCountry;
     private int numberOfSoldiers = 0;
@@ -205,73 +205,80 @@ public class Player extends User {
         return localDate;
     }
 
-    public void calculateRegisterDate(String date){
+    public void calculateRegisterDate(String date) {
         String[] dates = date.split("-");
         int year = Integer.parseInt(dates[0]);
         int month = Integer.parseInt(dates[1]);
         int days = Integer.parseInt(dates[2]);
-        localDate = LocalDate.of(year , month , days);
+        localDate = LocalDate.of(year, month, days);
         numbersOfDaysSinceRegistration = LocalDate.now().compareTo(localDate);
     }
-    public String changeFriendsToString(){
+
+    public String changeFriendsToString() {
         String friendsInString = "";
-        for(Player player : friends){
+        for (Player player : friends) {
             friendsInString = player.getUsername() + "\r\n";
         }
         return friendsInString;
     }
-    public void getPlayersFriendsFromString(String friendsInString){
+
+    public void getPlayersFriendsFromString(String friendsInString) {
         String[] friendsInArray = friendsInString.split("\r\n");
-        for (String p : friendsInArray){
-            Player player =UserController.getUserController().findPlayerByUserName(p);
-            if(player != null)
-            friends.add(player);
+        for (String p : friendsInArray) {
+            Player player = UserController.getUserController().findPlayerByUserName(p);
+            if (player != null)
+                friends.add(player);
         }
     }
-    public String changeFriendsRequestToString(){
-        String friendsInString ="";
-        for(Player player : requestsForFriendShips){
+
+    public String changeFriendsRequestToString() {
+        String friendsInString = "";
+        for (Player player : requestsForFriendShips) {
             friendsInString = player.getUsername() + "\r\n";
         }
         return friendsInString;
     }
-    public void getPlayersFriendsRequestsFromString(String friendsInString){
+
+    public void getPlayersFriendsRequestsFromString(String friendsInString) {
         String[] friendsInArray = friendsInString.split("\r\n");
-        for (String p : friendsInArray){
-            Player player =UserController.getUserController().findPlayerByUserName(p);
-            if(player!= null)
-            getRequestsForFriendShips().add(player);
+        for (String p : friendsInArray) {
+            Player player = UserController.getUserController().findPlayerByUserName(p);
+            if (player != null)
+                getRequestsForFriendShips().add(player);
         }
     }
-    public String changePlayerCardsIntoString(){
+
+    public String changePlayerCardsIntoString() {
         StringBuilder cardsInString = new StringBuilder();
-        for(Card card : playersCard){
+        for (Card card : playersCard) {
             cardsInString.append(card.changeCardInformationToString());
         }
         return cardsInString.toString();
     }
 
-    public void getPlayersCardsFromString(String cards){
+    public void getPlayersCardsFromString(String cards) {
         String[] cardsInArray = cards.split("\r\n");
-        for(String p : cardsInArray){
+        for (String p : cardsInArray) {
             Card card = Card.getCardFromString(p);
-            if(card != null)
-            playersCard.add(card);
+            if (card != null)
+                playersCard.add(card);
         }
     }
-    public String getAllPlayerMessagesInString(){
+
+    public String getAllPlayerMessagesInString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for(Massage massage : massages){
+        for (Massage massage : massages) {
             stringBuilder.append(Massage.changeMessageToString(massage)).append("\n");
         }
         return stringBuilder.toString();
     }
-    public void getAllMessageFromString(String text){
+
+    public void getAllMessageFromString(String text) {
         String[] allMessagesInArray = text.split("\n");
-            for (String s : allMessagesInArray) {
-                Massage massage = Massage.changeMessageFromStringToMessage(s);
-                if(massage != null)
+        for (String s : allMessagesInArray) {
+            Massage massage = Massage.changeMessageFromStringToMessage(s);
+            if (massage != null)
                 this.massages.add(massage);
-            }
+        }
     }
 }

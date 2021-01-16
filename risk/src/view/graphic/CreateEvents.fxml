@@ -9,44 +9,55 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.CreateEventsController">
-   <children>
-      <Pane prefHeight="650.0" prefWidth="1350.0">
-         <children>
-            <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../NotResoures/create_new_event.png" />
-               </image>
-            </ImageView>
-            <Button layoutX="18.0" layoutY="574.0" mnemonicParsing="false" onAction="#back" prefHeight="41.0" prefWidth="153.0" style="-fx-background-color: #1eae98; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="607.0" layoutY="372.0" mnemonicParsing="false" onAction="#invite" prefHeight="57.0" prefWidth="191.0" style="-fx-background-color: #e6e7e8;" text="Invite players" textFill="#2c2c54">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="1011.0" layoutY="533.0" mnemonicParsing="false" onAction="#create" prefHeight="37.0" prefWidth="95.0" style="-fx-background-color: #e6e7e8;" text="Create" textFill="#2c2c54">
-               <font>
-                  <Font name="System Bold" size="19.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <TextField fx:id="name" layoutX="800.0" layoutY="118.0" prefHeight="38.0" prefWidth="258.0" style="-fx-border-color: #2e2c54; -fx-border-radius: 10px; -fx-background-radius: 10px;" />
-            <TextField fx:id="start" layoutX="800.0" layoutY="184.0" prefHeight="38.0" prefWidth="258.0" style="-fx-border-color: #2e2c54; -fx-background-radius: 10px; -fx-border-radius: 10px;" />
-            <TextField fx:id="end" layoutX="800.0" layoutY="248.0" prefHeight="38.0" prefWidth="258.0" style="-fx-border-color: #2e2c54; -fx-border-radius: 10px; -fx-background-radius: 10px;" />
-            <TextField fx:id="winners" layoutX="800.0" layoutY="316.0" prefHeight="38.0" prefWidth="258.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;" />
-         </children>
-      </Pane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
+            prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.Controllers.CreateEventsController">
+    <children>
+        <Pane prefHeight="650.0" prefWidth="1350.0">
+            <children>
+                <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../NotResoures/create_new_event.png"/>
+                    </image>
+                </ImageView>
+                <Button layoutX="18.0" layoutY="574.0" mnemonicParsing="false" onAction="#back" prefHeight="41.0"
+                        prefWidth="153.0" style="-fx-background-color: #1eae98; -fx-background-radius: 10px;"
+                        text="Back" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="28.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button layoutX="607.0" layoutY="372.0" mnemonicParsing="false" onAction="#invite" prefHeight="57.0"
+                        prefWidth="191.0" style="-fx-background-color: #e6e7e8;" text="Invite players"
+                        textFill="#2c2c54">
+                    <font>
+                        <Font name="System Bold" size="22.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button layoutX="1011.0" layoutY="533.0" mnemonicParsing="false" onAction="#create" prefHeight="37.0"
+                        prefWidth="95.0" style="-fx-background-color: #e6e7e8;" text="Create" textFill="#2c2c54">
+                    <font>
+                        <Font name="System Bold" size="19.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <TextField fx:id="name" layoutX="800.0" layoutY="118.0" prefHeight="38.0" prefWidth="258.0"
+                           style="-fx-border-color: #2e2c54; -fx-border-radius: 10px; -fx-background-radius: 10px;"/>
+                <TextField fx:id="start" layoutX="800.0" layoutY="184.0" prefHeight="38.0" prefWidth="258.0"
+                           style="-fx-border-color: #2e2c54; -fx-background-radius: 10px; -fx-border-radius: 10px;"/>
+                <TextField fx:id="end" layoutX="800.0" layoutY="248.0" prefHeight="38.0" prefWidth="258.0"
+                           style="-fx-border-color: #2e2c54; -fx-border-radius: 10px; -fx-background-radius: 10px;"/>
+                <TextField fx:id="winners" layoutX="800.0" layoutY="316.0" prefHeight="38.0" prefWidth="258.0"
+                           style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;"/>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>

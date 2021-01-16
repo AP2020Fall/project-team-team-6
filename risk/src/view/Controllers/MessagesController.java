@@ -31,12 +31,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 
-public class MessagesController implements Initializable{
+public class MessagesController implements Initializable {
     private Player player = MainPlatoController.getPlayer();
     @FXML
     TextField search; //todo............
     @FXML
     ListView list; //todo..........
+
     @FXML
     public void back(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\Mainplato.fxml").toURI().toURL();
@@ -49,22 +50,25 @@ public class MessagesController implements Initializable{
     }
 
 
-    public ArrayList<HBox> getInbox(){
+    public ArrayList<HBox> getInbox() {
         ArrayList<HBox> hBoxes = new ArrayList<>();
+
         HashSet<Player> inbox= UserController.getUserController().getAllPlayersThatHadMessageWith(player);
         for(Player player1 : inbox){
             hBoxes.add(makeHBoxFromMessages(player1));
         }
         return hBoxes;
     }
-    private Label makeNameLabel(String text){
+
+    private Label makeNameLabel(String text) {
         Label label = new Label(text);
         label.setStyle("-fx-font-size: 20 , bold ; -fx-text-fill: white");
         return label;
     }
+
     private HBox makeHBoxFromMessages(Player secondPlayer){
         HBox hBox = new HBox(5);
-        hBox.setPadding(new Insets(5 , 5 , 5, 5));
+        hBox.setPadding(new Insets(5, 5, 5, 5));
         hBox.setStyle("-fx-background-color: #ffc6ff ; -fx-border-radius: 10px ; -fx-background-radius: 10px");
         Image image = new Image("@../../NotResoures/purple player.png");
         ImageView imageView = new ImageView(image);
@@ -72,16 +76,16 @@ public class MessagesController implements Initializable{
         imageView.setFitWidth(40);
         VBox vBox = new VBox(5);
         Label usernameLabel = makeNameLabel(secondPlayer.getUsername());
-        usernameLabel.setPadding(new Insets(10 ,0 ,0 , 5 ));
+        usernameLabel.setPadding(new Insets(10, 0, 0, 5));
         vBox.getChildren().add(usernameLabel);
-        ArrayList<Massage> secondPlayersMessages = UserController.getUserController().getPlayersMassage(player , secondPlayer);
-        if(!secondPlayersMessages.isEmpty()){
+        ArrayList<Massage> secondPlayersMessages = UserController.getUserController().getPlayersMassage(player, secondPlayer);
+        if (!secondPlayersMessages.isEmpty()) {
             int lastMessageIndex = secondPlayersMessages.size() - 1;
             Label lastMessage = makeNameLabel(secondPlayersMessages.get(lastMessageIndex).getMassage());
             lastMessage.setStyle("-fx-font-size:15px");
             vBox.getChildren().add(lastMessage);
         }
-        hBox.getChildren().addAll(imageView , vBox);
+        hBox.getChildren().addAll(imageView, vBox);
         return hBox;
     }
     public HBox makeHBoxForSearchedPlayer(Player player){

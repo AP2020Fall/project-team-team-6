@@ -51,7 +51,7 @@ public class RegisterController {
     Button back;
 
     @FXML
-    private  void signUp(ActionEvent event) throws IOException {
+    private void signUp(ActionEvent event) throws IOException {
         System.out.println(pass.getText());
         System.out.println(repass.getText());
         Pattern pattern = Pattern.compile("^\\d{11}$");
@@ -63,21 +63,21 @@ public class RegisterController {
         boolean arePasswordsEqual = pass.getText().equals(repass.getText());
         boolean isUsernameAvailable = userController.checkUsername(username.getText());
 
-        if(isAnyFieldEmpty){
+        if (isAnyFieldEmpty) {
             invalidTextsError.setVisible(true);
         }
-        if(!isEmailCorrect){
+        if (!isEmailCorrect) {
             emailError.setVisible(true);
         }
-        if(!isPhoneNumberCorrect){
+        if (!isPhoneNumberCorrect) {
             phoneNumberError.setVisible(true);
         }
-        if (!arePasswordsEqual){
+        if (!arePasswordsEqual) {
             passwordError.setVisible(true);
         }
-        if(!isUsernameAvailable){
+        if (!isUsernameAvailable) {
             usernameError.setVisible(true);
-        }else if(!isAnyFieldEmpty && isEmailCorrect && isPhoneNumberCorrect && arePasswordsEqual && isUsernameAvailable) {
+        } else if (!isAnyFieldEmpty && isEmailCorrect && isPhoneNumberCorrect && arePasswordsEqual && isUsernameAvailable) {
             Admin admin = LocalDataBase.getLocalDataBase().getAdmin();
             if (admin != null) {
                 User user = userController.signUpAsPlayer(firstname.getText(), lastname.getText(), username.getText(), pass.getText(), email.getText(), phnumber.getText());
@@ -103,6 +103,7 @@ public class RegisterController {
         }
 
     }
+
     @FXML
     private void back(ActionEvent event) throws IOException {
 
@@ -114,16 +115,13 @@ public class RegisterController {
         window.show();
     }
 
-    private boolean isTextFieldEmpty(){
-        if(username.getText().isEmpty() || firstname.getText().isEmpty() ||
-           lastname.getText().isEmpty() || phnumber.getText().isEmpty()  ||
-            email.getText().isEmpty() || pass.getText().isEmpty() || repass.getText().isEmpty())
+    private boolean isTextFieldEmpty() {
+        if (username.getText().isEmpty() || firstname.getText().isEmpty() ||
+                lastname.getText().isEmpty() || phnumber.getText().isEmpty() ||
+                email.getText().isEmpty() || pass.getText().isEmpty() || repass.getText().isEmpty())
             return true;
         return false;
     }
-
-
-
 
 
 }

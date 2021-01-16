@@ -25,6 +25,7 @@ public class SendEventInvitationController {
     public void selectall(ActionEvent event) {
         // TODO: 1/14/2021  
     }
+
     @FXML
     public void send(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\CreateEvents.fxml").toURI().toURL();
@@ -35,6 +36,7 @@ public class SendEventInvitationController {
         window.show();
         // TODO: 1/14/2021 + baghie faraiand envit kardan
     }
+
     @FXML
     public void back(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\CreateEvents.fxml").toURI().toURL();
