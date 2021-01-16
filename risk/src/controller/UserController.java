@@ -125,7 +125,7 @@ public class UserController {
 
     public void changeUsername(String username, String newUsername) throws Exception {
         User user = findUserByUsername(username);
-        if (checkUsername(newUsername)) {
+        if (checkUsername(newUsername) || username.equals(newUsername)) {
             user.setUsername(newUsername);
             MySqlDataBase.getMySqlDataBase().changeInfo(user);
         } else {
@@ -149,6 +149,17 @@ public class UserController {
                 return false;
         }
         return true;
+    }
+
+    public ArrayList<Player> search(String text){
+        String searchText = "(?i)" + text + ".+";
+        ArrayList<Player> allPlayers = localDataBase.getAllPlayers();
+        ArrayList<Player> searchedPlayers = new ArrayList<>();
+        for(Player player : allPlayers){
+            if(player.getUsername().matches(searchText))
+                searchedPlayers.add(player);
+        }
+        return searchedPlayers;
     }
 
     public boolean checkPassword(String userName, String password) {
