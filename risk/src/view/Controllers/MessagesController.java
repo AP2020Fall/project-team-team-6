@@ -1,7 +1,10 @@
 package view.Controllers;
 
 import controller.UserController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,22 +12,20 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.usersModels.Massage;
 import model.usersModels.Player;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -47,15 +48,12 @@ public class MessagesController implements Initializable{
 
     }
 
-    public void search(InputMethodEvent inputMethodEvent) {
-
-    }
 
     public ArrayList<HBox> getInbox(){
         ArrayList<HBox> hBoxes = new ArrayList<>();
         HashSet<Player> inbox= UserController.getUserController().getAllPlayersThatHadMessageWith(player);
         for(Player player1 : inbox){
-            hBoxes.add(makeVBox(player1));
+            hBoxes.add(makeHBoxFromMessages(player1));
         }
         return hBoxes;
     }
@@ -64,7 +62,7 @@ public class MessagesController implements Initializable{
         label.setStyle("-fx-font-size: 20 , bold ; -fx-text-fill: white");
         return label;
     }
-    private HBox makeVBox(Player secondPlayer){
+    private HBox makeHBoxFromMessages(Player secondPlayer){
         HBox hBox = new HBox(5);
         hBox.setPadding(new Insets(5 , 5 , 5, 5));
         hBox.setStyle("-fx-background-color: #ffc6ff ; -fx-border-radius: 10px ; -fx-background-radius: 10px");
@@ -86,9 +84,64 @@ public class MessagesController implements Initializable{
         hBox.getChildren().addAll(imageView , vBox);
         return hBox;
     }
+    public HBox makeHBoxForSearchedPlayer(Player player){
+        HBox hBox = new HBox(5);
+        hBox.setPadding(new Insets(5 , 5, 5, 5));
+        hBox.setStyle("-fx-background-color: #c6def1 ; -fx-background-radius: 10px ; -fx-border-radius: 10px");
+        VBox vBox = new VBox(5);
+        vBox.setPadding(new Insets(5 , 5,  5, 5));
+        Image image = new Image("@../../NotResoures/blue player.png");
+        ImageView imageView =  new ImageView(image);
+        imageView.setFitHeight(80);
+        imageView.setFitWidth(40);
+        Label label = new Label("Username :");
+        label.setStyle("-fx-text-fill: #0b132b ; -fx-font-size: 18px, bold");
+
+        Label usernameLabel = new Label(player.getUsername());
+        usernameLabel.setStyle("-fx-text-fill: #22577a ; -fx-font-size: 15px");
+
+        Label label1 = new Label("Number of games :");
+        label1.setStyle("-fx-text-fill: #0b132b ; -fx-font-size: 18px, bold");
+
+        String numberOfGames = String.valueOf(player.getNumbersOfGames());
+        Label numberOfGameLabel = new Label(numberOfGames);
+        numberOfGameLabel.setStyle("-fx-text-fill: #22577a ; -fx-font-size: 15px");
+
+        Label label2 = new Label("Number of wins :");
+        label2.setStyle("-fx-text-fill: #0b132b ; -fx-font-size: 18px, bold");
+
+        String numberOfWin = String.valueOf(player.getNumbersOfWin());
+        Label numberOfWinLabel = new Label(numberOfWin);
+        numberOfWinLabel.setStyle("-fx-text-fill: #22577a ; -fx-font-size: 15px");
+        vBox.getChildren().addAll(label , usernameLabel , label1 , numberOfGameLabel , label2 , numberOfWinLabel);
+        hBox.getChildren().addAll(imageView , vBox);
+        return hBox;
+    }
+
+    public ArrayList<HBox> makeHboxesForSearching(ArrayList<Player> players){
+        ArrayList<HBox> hBoxes = new ArrayList<>();
+        for(Player player : players){
+            hBoxes.add(makeHBoxForSearchedPlayer(player));
+        }
+        return hBoxes;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         list.getItems().addAll(getInbox());
+        search.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(search.getText().isEmpty()){
+                    list.getItems().clear();
+                    list.getItems().addAll(getInbox());
+                }else{
+                    String searchText = search.getText();
+                    ArrayList<Player> players = UserController.getUserController().search(searchText);
+                    list.getItems().clear();
+                    list.getItems().addAll(makeHboxesForSearching(players));
+                }
+            }
+        });
     }
 }

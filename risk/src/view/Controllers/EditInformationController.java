@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.usersModels.Player;
 
@@ -72,10 +74,7 @@ public class EditInformationController implements Initializable {
         }
         if (!arePasswordsEqual){
             passError.setVisible(true);
-        }
-        if(!isUsernameAvailable){
-            usernameError.setVisible(true);
-        }else if(!isAnyFieldEmpty && isEmailCorrect && isPhoneNumberCorrect && arePasswordsEqual && isUsernameAvailable){
+        } else if(!isAnyFieldEmpty && isEmailCorrect && isPhoneNumberCorrect && arePasswordsEqual){
             String firstName = first.getText();
             String lastName = last.getText();
             String userName = user.getText();
@@ -91,9 +90,18 @@ public class EditInformationController implements Initializable {
             try {
                 userController.changeUsername(player.getUsername() , userName);
             } catch (Exception e) {
-                e.printStackTrace();
+                usernameError.setVisible(true);
             }
             userController.changePassword(player.getUsername() , password);
+            //TODO .....
+            Stage stage = new Stage();
+            stage.setTitle("Change information");
+            Label label = new Label("Your information have successfully changed");
+            Pane pane = new Pane();
+            pane.getChildren().addAll(label);
+            stage.setScene(new Scene(pane));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
         }
     }
     @FXML
@@ -108,7 +116,7 @@ public class EditInformationController implements Initializable {
 
     @FXML
     private void setLabel() {
-        phone.setText(String.valueOf(player.getTelephoneNumber()));
+        phone.setText(LoginController.getUser().getTelephoneNumber());
         first.setText(LoginController.getUser().getFirstName());
         last.setText(LoginController.getUser().getLastName());
         email.setText(LoginController.getUser().getEmailAddress());
