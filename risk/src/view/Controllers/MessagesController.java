@@ -1,8 +1,6 @@
 package view.Controllers;
 
 import controller.UserController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,12 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.usersModels.Massage;
 import model.usersModels.Player;
 
@@ -34,9 +30,9 @@ import java.util.ResourceBundle;
 public class MessagesController implements Initializable {
     private Player player = MainPlatoController.getPlayer();
     @FXML
-    TextField search; //todo............
+    TextField search;
     @FXML
-    ListView list; //todo..........
+    ListView list;
 
     @FXML
     public void back(ActionEvent event) throws IOException {
@@ -134,6 +130,7 @@ public class MessagesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         list.getItems().addAll(getInbox());
         search.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            //TODO chat menu
             @Override
             public void handle(KeyEvent event) {
                 if(search.getText().isEmpty()){

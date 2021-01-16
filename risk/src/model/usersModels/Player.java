@@ -281,4 +281,21 @@ public class Player extends User {
                 this.massages.add(massage);
         }
     }
+    public String changeGameLogsToString(){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (GameLog gameLog : gameLogs) {
+            stringBuilder.append(gameLog.changeGameLogToString(gameLog)).append("\n");
+        }
+        return stringBuilder.toString();
+    }
+    public void getAllGameLogsFromString(String text){
+        String[] allGameLogsInArray = text.split("\n");
+        for(String s: allGameLogsInArray){
+            GameLog gameLog = GameLog.changeStringToGameLog(s);
+            if(gameLog != null){
+                gameLogs.add(gameLog);
+            }
+        }
+    }
+
 }

@@ -778,10 +778,12 @@ public class GameController {
             Player winner = riskGame.getCurrentPlayer();
             addRateToPlayer(winner, riskGame.getGamePoint());
             addNumberOfWin(winner);
+            MySqlDataBase.getMySqlDataBase().updatePlayer(winner);
             for (Player player : players) {
                 GameLog gameLog = new GameLog(riskGame.getName(), riskGame.getGamePoint(), winner);
                 player.getGameLogs().add(gameLog);
                 addNumberOfGames(player);
+                MySqlDataBase.getMySqlDataBase().updatePlayer(player);
             }
             setNewGameInformationForPlayers(players);
             deleteRiskGame(riskGame);
