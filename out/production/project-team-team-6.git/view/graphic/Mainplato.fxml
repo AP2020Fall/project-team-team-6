@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.MainPlatoController">
+    <children>
+        <Pane prefHeight="650.0" prefWidth="1350.0">
+            <children>
+                <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../NotResoures/7.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="184.0" fitWidth="200.0" layoutX="301.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" />
+                <Label fx:id="username" layoutX="401.0" layoutY="306.0" prefHeight="43.0" prefWidth="174.0" text="Username">
+                    <font>
+                        <Font size="34.0" />
+                    </font>
+                    <effect>
+                        <Bloom>
+                            <input>
+                                <InnerShadow />
+                            </input>
+                        </Bloom>
+                    </effect>
+                </Label>
+                <Label fx:id="friends" layoutX="242.0" layoutY="469.0" prefHeight="30.0" prefWidth="81.0" text="  Friends ">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Label>
+                <Label fx:id="wins" layoutX="370.0" layoutY="469.0" prefHeight="30.0" prefWidth="81.0" text="   wins">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Label>
+                <Label fx:id="coins" layoutX="497.0" layoutY="469.0" prefHeight="30.0" prefWidth="81.0" text="  coins">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Label>
+                <TabPane layoutX="642.0" layoutY="76.0" prefHeight="510.0" prefWidth="461.0" side="BOTTOM" style="-fx-background-color: #edf2f4; -fx-border-color: #edf2f4;" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab text="Main menu">
+                            <content>
+                                <AnchorPane prefHeight="474.0" prefWidth="450.0">
+                                    <children>
+                                        <ImageView fitHeight="474.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../NotResoures/Mainmenu.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Button layoutX="19.0" layoutY="61.0" mnemonicParsing="false" onAction="#events" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                        <Button layoutX="19.0" layoutY="122.0" mnemonicParsing="false" onAction="#games" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                        <Button layoutX="19.0" layoutY="182.0" mnemonicParsing="false" onAction="#messages" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Games menu">
+                            <content>
+                                <AnchorPane prefHeight="474.0" prefWidth="450.0">
+                                    <children>
+                                        <ImageView fitHeight="474.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../NotResoures/Gamesmenu.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Pane fx:id="gameHistoryPane" disable="true" layoutX="2.0" layoutY="170.0" prefHeight="299.0" prefWidth="454.0" style="-fx-background-color: transparent;" visible="false">
+                                 <children>
+                                    <ListView fx:id="gameHistoryList" layoutY="1.0" prefHeight="299.0" prefWidth="453.0" style="-fx-background-color: transparent; -fx-background-radius: 20px; -fx-border-radius: 20px;" />
+                                 </children>
+                                        </Pane>
+                                        <Button layoutX="31.0" layoutY="117.0" mnemonicParsing="false" onAction="#scoreboard" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                        <Button layoutX="29.0" layoutY="50.0" mnemonicParsing="false" onAction="#gameshistory" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Friends menu">
+                            <content>
+                                <AnchorPane prefHeight="474.0" prefWidth="450.0">
+                                    <children>
+                                        <ImageView fitHeight="474.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../NotResoures/Friendsmenu.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Button layoutX="30.0" layoutY="175.0" mnemonicParsing="false" onAction="#requests" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                        <Button layoutX="30.0" layoutY="115.0" mnemonicParsing="false" onAction="#friends" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Profile">
+                            <content>
+                                <AnchorPane prefHeight="474.0" prefWidth="450.0">
+                                    <children>
+                                        <ImageView fitHeight="474.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../NotResoures/Profile.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Button layoutX="20.0" layoutY="175.0" mnemonicParsing="false" onAction="#editinformation" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                        <Button layoutX="20.0" layoutY="113.0" mnemonicParsing="false" onAction="#gameshistory" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: #2c2c54; -fx-background-radius: 50px; -fx-border-radius: 50px;">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                    </tabs>
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                    <effect>
+                        <Blend />
+                    </effect>
+                </TabPane>
+                <Button fx:id="logout" layoutX="34.0" layoutY="24.0" mnemonicParsing="false" onAction="#logout" prefHeight="50.0" prefWidth="124.0" style="-fx-background-color: #e11469; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="Log out" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="23.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Label layoutX="227.0" layoutY="306.0" prefHeight="43.0" prefWidth="174.0" text="Username :">
+                    <font>
+                        <Font size="34.0" />
+                    </font>
+                    <effect>
+                        <Bloom>
+                            <input>
+                                <InnerShadow />
+                            </input>
+                        </Bloom>
+                    </effect>
+                </Label>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
