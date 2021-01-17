@@ -14,6 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -22,6 +24,7 @@ import model.usersModels.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -141,6 +144,39 @@ public class MessagesController implements Initializable {
                     ArrayList<Player> players = UserController.getUserController().search(searchText);
                     list.getItems().clear();
                     list.getItems().addAll(makeHboxesForSearching(players));
+                }
+            }
+        });
+        list.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getButton().equals(MouseButton.PRIMARY)){
+                    if(event.getClickCount() == 2){
+                        if(search.getText().isEmpty()){
+                            HBox hBox = (HBox) list.getSelectionModel().getSelectedItem();
+                            VBox vBox = (VBox) hBox.getChildren().get(1);
+                            String username = ((Label) vBox.getChildren().get(0)).getText();
+                            Player player = UserController.getUserController().findPlayerByUserName(username);
+                            ChatController.setSecondPlayer(player);
+                        }else{
+                            HBox hBox = (HBox) list.getSelectionModel().getSelectedItem();
+                            VBox vBox = (VBox) hBox.getChildren().get(1);
+                            String username = ((Label) vBox.getChildren().get(1)).getText();
+                            Player player = UserController.getUserController().findPlayerByUserName(username);
+                            ChatController.setSecondPlayer(player);
+                        }
+                        URL url = null;
+                        try {
+                            url = new File("risk\\src\\view\\graphic\\Chat.fxml").toURI().toURL();
+                            Parent register = FXMLLoader.load(url);
+                            Scene message = new Scene(register);
+                            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            window.setScene(message);
+                            window.show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
         });
