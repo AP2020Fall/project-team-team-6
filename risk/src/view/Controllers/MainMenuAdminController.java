@@ -17,39 +17,43 @@ import java.util.ResourceBundle;
 
 public class MainMenuAdminController implements Initializable {
     @FXML
-    Label adminname;
+    Label name;
 
     @FXML
-    public void players(ActionEvent actionEvent) {
-        //todo.............+ baghie farayand.......
+    public void players(ActionEvent actionEvent) throws IOException {
+        URL url = new File("risk\\src\\view\\graphic\\ShowAllPlayers.fxml").toURI().toURL();
+        Parent register = FXMLLoader.load(url);
+        Scene message = new Scene(register);
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(message);
+        window.show();
     }
-
     @FXML
-    public void editinformation(ActionEvent actionEvent) {
-        //todo.............+ baghie farayand.......
+    public void events(ActionEvent actionEvent) throws IOException {
+        URL url = new File("risk\\src\\view\\graphic\\CreateEvents.fxml").toURI().toURL();
+        Parent register = FXMLLoader.load(url);
+        Scene message = new Scene(register);
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(message);
+        window.show();
     }
-
-    @FXML
-    public void messagesandreq(ActionEvent actionEvent) {
-        //todo.............+ baghie farayand.......
-    }
-
-    @FXML
-    public void createevent(ActionEvent actionEvent) {
-        //todo.............+ baghie farayand.......
-    }
-
-    @FXML
-    public void events(ActionEvent actionEvent) {
-        //todo.............+ baghie farayand.......
+    public void edit(ActionEvent event) throws IOException {
+        URL url = new File("risk\\src\\view\\graphic\\EditInformationAdmin.fxml").toURI().toURL();
+        Parent register = FXMLLoader.load(url);
+        Scene message = new Scene(register);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(message);
+        window.show();
     }
 
     private void setLabel() {
-        adminname.setText(LoginController.getUser().getUsername());
+
+        name.setText(LoginController.getUser().getUsername());
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         setLabel();
     }
 
@@ -62,4 +66,6 @@ public class MainMenuAdminController implements Initializable {
         window.setScene(message);
         window.show();
     }
+
+
 }
