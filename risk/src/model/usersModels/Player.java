@@ -217,15 +217,15 @@ public class Player extends User implements Comparable{
 
 
     public String changeFriendsToString() {
-        String friendsInString = "";
+        StringBuilder stringBuilder = new StringBuilder();
         for (Player player : friends) {
-            friendsInString = player.getUsername() + "\r\n";
+            stringBuilder.append(player.getUsername()).append("\n");
         }
-        return friendsInString;
+        return stringBuilder.toString();
     }
 
     public void getPlayersFriendsFromString(String friendsInString) {
-        String[] friendsInArray = friendsInString.split("\r\n");
+        String[] friendsInArray = friendsInString.split("\n");
         for (String p : friendsInArray) {
             Player player = UserController.getUserController().findPlayerByUserName(p);
             if (player != null)
@@ -234,15 +234,15 @@ public class Player extends User implements Comparable{
     }
 
     public String changeFriendsRequestToString() {
-        String friendsInString = "";
+        StringBuilder stringBuilder = new StringBuilder();
         for (Player player : requestsForFriendShips) {
-            friendsInString = player.getUsername() + "\r\n";
+            stringBuilder.append(player.getUsername()).append("\n");
         }
-        return friendsInString;
+        return stringBuilder.toString();
     }
 
     public void getPlayersFriendsRequestsFromString(String friendsInString) {
-        String[] friendsInArray = friendsInString.split("\r\n");
+        String[] friendsInArray = friendsInString.split("\n");
         for (String p : friendsInArray) {
             Player player = UserController.getUserController().findPlayerByUserName(p);
             if (player != null)
@@ -259,7 +259,7 @@ public class Player extends User implements Comparable{
     }
 
     public void getPlayersCardsFromString(String cards) {
-        String[] cardsInArray = cards.split("\r\n");
+        String[] cardsInArray = cards.split("\n");
         for (String p : cardsInArray) {
             Card card = Card.getCardFromString(p);
             if (card != null)
