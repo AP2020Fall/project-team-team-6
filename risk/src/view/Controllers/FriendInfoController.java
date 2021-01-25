@@ -28,6 +28,12 @@ public class FriendInfoController implements Initializable {
 
     private boolean isThisPlayerAFriend = false;
 
+    private static boolean isFromRequestPage = false;
+
+    public static void setIsFromRequestPage(boolean isFromRequestPage) {
+        FriendInfoController.isFromRequestPage = isFromRequestPage;
+    }
+
     public void setThisPlayerAFriend(boolean thisPlayerAFriend) {
         isThisPlayerAFriend = thisPlayerAFriend;
     }
@@ -65,7 +71,12 @@ public class FriendInfoController implements Initializable {
     void back(ActionEvent event) {
         URL url = null;
         try {
-            url = new File("risk\\src\\view\\graphic\\friends.fxml").toURI().toURL();
+            if(!isFromRequestPage) {
+                url = new File("risk\\src\\view\\graphic\\friends.fxml").toURI().toURL();
+            }
+            else {
+                url = new File("risk\\src\\view\\graphic\\FriendsRequest.fxml").toURI().toURL();
+            }
             Parent register = FXMLLoader.load(url);
             Scene message = new Scene(register);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -119,7 +130,7 @@ public class FriendInfoController implements Initializable {
                 e.printStackTrace();
             }
         }else{
-            currentPlayer.getRequestsForFriendShips().add(secondPlayer);
+            secondPlayer.getRequestsForFriendShips().add(currentPlayer);
             MySqlDataBase.getMySqlDataBase().updatePlayer(currentPlayer);
             Stage stage = new Stage();
             AlertController.setText("You have successfully send friend request \n to " + secondPlayer.getUsername());
