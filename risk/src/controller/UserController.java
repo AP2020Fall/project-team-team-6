@@ -169,7 +169,7 @@ public class UserController {
     }
 
     public ArrayList<Player> search(String text){
-        String searchText = "(?i)" + text + ".+";
+        String searchText = "(?i)" + text + "|"+text +".+";
         ArrayList<Player> allPlayers = localDataBase.getAllPlayers();
         ArrayList<Player> searchedPlayers = new ArrayList<>();
         for(Player player : allPlayers){

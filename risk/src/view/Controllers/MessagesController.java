@@ -168,6 +168,7 @@ public class MessagesController implements Initializable {
                             ChatController.setSecondPlayer(player);
                         }
                         URL url = null;
+                        ChatController.setIsFromPlayerInfoPage(false);
                         try {
                             url = new File("risk\\src\\view\\graphic\\Chat.fxml").toURI().toURL();
                             Parent register = FXMLLoader.load(url);
