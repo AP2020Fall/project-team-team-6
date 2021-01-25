@@ -32,6 +32,8 @@ import java.util.ResourceBundle;
 
 public class MessagesController implements Initializable {
     private Player player = MainPlatoController.getPlayer();
+
+
     @FXML
     TextField search;
     @FXML
