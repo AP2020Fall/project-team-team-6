@@ -28,8 +28,7 @@ public class RiskGameMenu extends Menu {
         if (gameStages.equals(GameStages.STARTING)) {
             if (!riskGame.isMapManually()) {
                 try {
-//                    gameController.putSoldiersForStartingStageUnManually(riskGame);
-                   gameController.putSoldiersForTestingEndGame(riskGame);
+                    gameController.putSoldiersForStartingStageUnManually(riskGame);
                     gameController.goNextStage(riskGame);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());

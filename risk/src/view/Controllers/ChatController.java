@@ -35,6 +35,15 @@ public class ChatController implements Initializable {
     private Player currentUser = MainPlatoController.getPlayer();
     private Admin admin = LocalDataBase.getLocalDataBase().getAdmin();
     private static  Player secondPlayer = null;
+    private static boolean isFromPlayerInfoPage = false;
+
+    public static boolean isIsFromPlayerInfoPage() {
+        return isFromPlayerInfoPage;
+    }
+
+    public static void setIsFromPlayerInfoPage(boolean isFromPlayerInfoPage) {
+        ChatController.isFromPlayerInfoPage = isFromPlayerInfoPage;
+    }
 
     @FXML
     private ListView<HBox> textLists;
@@ -101,7 +110,10 @@ public class ChatController implements Initializable {
     public void back(ActionEvent event) {
         URL url = null;
         try {
+            if(!isIsFromPlayerInfoPage())
             url = new File("risk\\src\\view\\graphic\\messages.fxml").toURI().toURL();
+            else
+                url = new File("risk\\src\\view\\graphic\\FriendInfo.fxml").toURI().toURL();
             Parent register = FXMLLoader.load(url);
             Scene message = new Scene(register);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
