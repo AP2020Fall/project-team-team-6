@@ -119,7 +119,25 @@ public class FriendInfoController implements Initializable {
                 e.printStackTrace();
             }
         }else{
-
+            currentPlayer.getRequestsForFriendShips().add(secondPlayer);
+            MySqlDataBase.getMySqlDataBase().updatePlayer(currentPlayer);
+            Stage stage = new Stage();
+            AlertController.setText("You have successfully send friend request \n to " + secondPlayer.getUsername());
+            try {
+                URL url = new File("risk\\src\\view\\graphic\\alert.fxml").toURI().toURL();
+                Parent root = FXMLLoader.load(url);
+                Scene scene = new Scene(root);
+                scene.setFill(Color.TRANSPARENT);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
