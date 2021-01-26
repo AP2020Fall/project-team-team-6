@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 
 public class PlayersInfoController implements Initializable {
     private static Player player = null;
+
     protected static UserController userController = UserController.getUserController();
 
     public static Player getPlayer() {
@@ -29,6 +30,7 @@ public class PlayersInfoController implements Initializable {
     public static void setPlayer(Player player) {
         PlayersInfoController.player = player;
     }
+
 
     @FXML
     Label user;
@@ -62,7 +64,7 @@ public class PlayersInfoController implements Initializable {
         wins.setText(String.valueOf(player.getNumbersOfWin()));
         coins.setText(String.valueOf(player.getRate()));
         phone.setText(String.valueOf(player.getTelephoneNumber()));
-        // records.setText(String.valueOf(player.get()));
+         records.setText(String.valueOf(player.getNumbersOfGames()));
         first.setText(LoginController.getUser().getFirstName());
         last.setText(LoginController.getUser().getLastName());
         email.setText(LoginController.getUser().getEmailAddress());
