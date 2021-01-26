@@ -56,7 +56,7 @@ public class MainMenuAdminController implements Initializable {
 
         setLabel();
     }
-
+    @FXML
     private void logout(ActionEvent event) throws IOException {
 
         URL url = new File("risk\\src\\view\\graphic\\Login.fxml").toURI().toURL();
