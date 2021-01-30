@@ -47,6 +47,5 @@ public class MessageFromAdminController implements Initializable {
        for(Player player : players){
            userNames.getItems().add(player.getUsername());
        }
-       userNames.setSelectionModel();
     }
 }
