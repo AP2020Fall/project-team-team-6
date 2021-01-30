@@ -22,6 +22,7 @@ import model.usersModels.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,7 +70,33 @@ public class ShowAllPlayersController implements Initializable {
         }
     }
 
-    public void messages(ActionEvent event) {
+    public void messages(ActionEvent event) throws IOException {
+        ArrayList<Player> chosenPlayers = new ArrayList<>();
+        for(Player player : checkBoxes.keySet()){
+            CheckBox checkBox = checkBoxes.get(player);
+            if(checkBox.isSelected()){
+                chosenPlayers.add(player);
+            }
+        }
+        if(chosenPlayers.size() == 1){
+            Player player = chosenPlayers.get(0);
+            ChatController.setSecondPlayer(player);
+            ChatController.setIsFromAdmin(true);
+            URL url = new File("risk\\src\\view\\graphic\\Chat.fxml").toURI().toURL();
+            Parent register = FXMLLoader.load(url);
+            Scene message = new Scene(register);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(message);
+            window.show();
+        }else if(chosenPlayers.size() > 1){
+            MessageFromAdminController.setPlayers(chosenPlayers);
+            URL url = new File("risk\\src\\view\\graphic\\MessageFromAdmin.fxml").toURI().toURL();
+            Parent register = FXMLLoader.load(url);
+            Scene message = new Scene(register);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(message);
+            window.show();
+        }
     }
 
     public void deletePlayers(ActionEvent event) {
@@ -81,7 +108,6 @@ public class ShowAllPlayersController implements Initializable {
             }
         }
         for(Player player : players) {
-//            System.out.println("You deleted " + player.getUsername());
             UserController.getUserController().deletePlayer(player);
             list.getItems().clear();
             list.getItems().addAll(showAllPlayers());

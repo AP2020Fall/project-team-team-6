@@ -292,36 +292,60 @@ public class UserController {
     }
 
     public void sendMessage(Player sender, Player receiver, String massageText) {
-        User userReceiver = findUserByUsername(receiver.getUsername());
-        User userSender = findUserByUsername(sender.getUsername());
-        Massage massage = new Massage(massageText, userSender, userReceiver);
-        sender.getMassages().add(massage);
-        receiver.getMassages().add(massage);
-        MySqlDataBase.getMySqlDataBase().updatePlayer(receiver);
-        MySqlDataBase.getMySqlDataBase().updatePlayer(sender);
+//        User userReceiver = findUserByUsername(receiver.getUsername());
+//        User userSender = findUserByUsername(sender.getUsername());
+        Massage massage = new Massage(massageText, sender, receiver);
+        sender.getMessages().add(massage);
+        receiver.getMessages().add(massage);
+        MySqlDataBase.getMySqlDataBase().updateUser(receiver);
+        MySqlDataBase.getMySqlDataBase().updateUser(sender);
+    }
+
+    public void sendMessageToAdmin(Player sender , String messageText){
+        Admin admin = LocalDataBase.getLocalDataBase().getAdmin();
+        Massage message = new Massage(messageText  ,sender , admin);
+        sender.getMessages().add(message);
+        admin.getMessages().add(message);
+        MySqlDataBase.getMySqlDataBase().updateUser(sender);
+        MySqlDataBase.getMySqlDataBase().updateUser(admin);
     }
 
 
-    public void sendMessageFromAdmin(Admin sender, Player receiver, String massageText) {
-        Massage massage = new Massage(massageText, sender, receiver);
-        receiver.getAdminMassages().add(massage);
+    public void sendMessageFromAdmin( Player receiver, String massageText) {
+        Admin admin = localDataBase.getAdmin();
+        User adminUser = findUserByUsername(admin.getUsername());
+        User receiverUser = findUserByUsername(receiver.getUsername());
+        Massage massage = new Massage(massageText, adminUser, receiverUser);
+        receiver.getMessages().add(massage);
+        admin.getMessages().add(massage);
+        MySqlDataBase.getMySqlDataBase().updateUser(receiver);
+        MySqlDataBase.getMySqlDataBase().updateUser(admin);
+    }
+    public ArrayList<Massage> getAdminMessages(Player player){
+//        User playerInUser = findUserByUsername(player.getUsername());
+        Admin admin = LocalDataBase.getLocalDataBase().getAdmin();
+        ArrayList<Massage> messages = new ArrayList<>();
+        for(Massage massage : admin.getMessages()){
+            if(massage.getSender().getID() == player.getID() ||  massage.getReceiver().getID() == player.getID())
+                messages.add(massage);
+        }
+        return messages;
     }
 
     public ArrayList<Massage> getPlayersMassage(Player currentPlayer, Player sender) {
         ArrayList<Massage> massages = new ArrayList<>();
-        ArrayList<Massage> playersMassages = currentPlayer.getMassages();
+        ArrayList<Massage> playersMassages = currentPlayer.getMessages();
         for (Massage massage : playersMassages) {
-            Player s = findPlayerByUserName(massage.getSender().getUsername());
-            Player r = findPlayerByUserName(massage.getReceiver().getUsername());
-            if (s.equals(sender) || r.equals(sender)) {
-                massages.add(massage);
-            }
+                if (sender.getID() == massage.getSender().getID() || sender.getID() == massage.getReceiver().getID()  ) {
+                    massages.add(massage);
+                }
         }
         return massages;
     }
 
     public HashSet<Player> getAllPlayersThatHadMessageWith(Player currentPlayer) {
-        ArrayList<Massage> allMassages = currentPlayer.getMassages();
+        User user = findPlayerByUserName(currentPlayer.getUsername());
+        ArrayList<Massage> allMassages = user.getMessages();
         HashSet<Player> users = new HashSet<>();
         for (Massage massage : allMassages) {
             User sender = massage.getSender();
