@@ -25,6 +25,7 @@ public class MySqlDataBase {
         this.connection = creatConnection();
         getUsersInfo();
         getPlayerInfo();
+        loadMessages();
         getEventsInfo();
     }
 
@@ -61,12 +62,14 @@ public class MySqlDataBase {
                 User user = new User(firstName, lastName, username, password, emailAddress, telephoneNumber, isAdmin);
                 user.setID(id);
                 dataBase.getAllUsers().add(user);
-                if (isAdmin)
-                    dataBase.setAdmin(new Admin(firstName, lastName, username, password, emailAddress, telephoneNumber));
+                if (isAdmin) {
+                    Admin admin = new Admin(firstName, lastName, username, password, emailAddress, telephoneNumber);
+                    admin.setID(id);
+                    dataBase.setAdmin(admin);
+                }
                 else {
                     Player player = new Player(firstName, lastName, username, password, emailAddress, telephoneNumber);
                     player.setID(id);
-                    //TODO implement all other players info
                     dataBase.getAllPlayers().add(player);
                 }
             }
@@ -76,6 +79,27 @@ public class MySqlDataBase {
             e.printStackTrace();
         }
 
+    }
+    public void loadMessages(){
+            try {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM users");
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    String username = resultSet.getString("username");
+                    String message = resultSet.getString("messages");
+                    User user = UserController.getUserController().findUserByUsername(username);
+                    if(user.isAdmin()){
+                        Admin admin = dataBase.getAdmin();
+                        admin.getAllMessageFromString(message);
+                    }else{
+                        Player player = UserController.getUserController().findPlayerByUserName(username);
+                        player.getAllMessageFromString(message);
+                    }
+                }
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
     }
 
     public int addNewUserToDataBase(String firstName, String lastName, String username, String password, String emailAddress, String telephoneNumber, boolean isAdmin) {
@@ -176,8 +200,8 @@ public class MySqlDataBase {
                     player.getPlayersFriendsRequestsFromString(requestForFriendShip);
                     String cardsInString = resultSet.getString("cards");
                     player.getPlayersCardsFromString(cardsInString);
-                    String messagesInString = resultSet.getString("messages");
-                    player.getAllMessageFromString(messagesInString);
+//                    String messagesInString = resultSet.getString("messages");
+//                    player.getAllMessageFromString(messagesInString);
                     String gameLogsInString = resultSet.getString("game logs");
                     player.getAllGameLogsFromString(gameLogsInString);
                     int numberOfGame = resultSet.getInt("number of game");
@@ -195,27 +219,39 @@ public class MySqlDataBase {
 
     }
 
+    public void updateUser(User user){
+        int id = user.getID();
+        String messagesInString = user.getAllPlayerMessagesInString();
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE `users` SET  `messages` = ?  WHERE `users`.`user_id` =?;");
+            statement.setString(1 , messagesInString);
+            statement.setInt(2 , id);
+            statement.execute();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void updatePlayer(Player player) {
         int id = player.getID();
         String playersFriendInString = player.changeFriendsToString();
         String friendsRequests = player.changeFriendsRequestToString();
         String playersCardsInString = player.changePlayerCardsIntoString();
-        String playersMessages = player.getAllPlayerMessagesInString();
         String gameLogs = player.changeGameLogsToString();
         int numberOfWin = player.getNumbersOfWin();
         int numberOfGames = player.getNumbersOfGames();
         double rate = player.getRate();
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE `players` SET  `friends` = ? , `friend requests` = ? , `cards` = ? ,`messages` = ? ,`game logs` = ? ,`number of win` = ? ,`number of game` = ? ,`rate` = ? WHERE `players`.`player_id` =?;");
+            PreparedStatement statement = connection.prepareStatement("UPDATE `players` SET  `friends` = ? , `friend requests` = ? , `cards` = ?  ,`game logs` = ? ,`number of win` = ? ,`number of game` = ? ,`rate` = ? WHERE `players`.`player_id` =?;");
             statement.setString(1, playersFriendInString);
             statement.setString(2, friendsRequests);
             statement.setString(3, playersCardsInString);
-            statement.setString(4, playersMessages);
-            statement.setString(5 , gameLogs);
-            statement.setInt(6 , numberOfWin);
-            statement.setInt(7 , numberOfGames);
-            statement.setDouble(8 , rate);
-            statement.setInt(9, id);
+            statement.setString(4 , gameLogs);
+            statement.setInt(5 , numberOfWin);
+            statement.setInt(6 , numberOfGames);
+            statement.setDouble(7 , rate);
+            statement.setInt(8, id);
             statement.execute();
             statement.close();
         } catch (SQLException e) {
