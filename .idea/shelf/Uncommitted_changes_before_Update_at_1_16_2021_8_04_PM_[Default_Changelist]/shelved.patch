@@ -1,0 +1,553 @@
+Index: risk/src/view/Controllers/EditInformationAdminController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view.Controllers;\r\n\r\nimport javafx.fxml.FXML;\r\n\r\npublic class EditInformationAdminController {\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/risk/src/view/Controllers/EditInformationAdminController.java b/risk/src/view/Controllers/EditInformationAdminController.java
+--- a/risk/src/view/Controllers/EditInformationAdminController.java	(revision d64c9252e2ff17015a3f2fc98fa50f98e4a582eb)
++++ b/risk/src/view/Controllers/EditInformationAdminController.java	(date 1610814888844)
+@@ -1,7 +1,50 @@
+ package view.Controllers;
+ 
++import javafx.event.ActionEvent;
+ import javafx.fxml.FXML;
++import javafx.fxml.FXMLLoader;
++import javafx.scene.Node;
++import javafx.scene.Parent;
++import javafx.scene.Scene;
++import javafx.scene.control.TextField;
++import javafx.stage.Stage;
++
++import java.io.File;
++import java.io.IOException;
++import java.net.URL;
+ 
+ public class EditInformationAdminController {
+-
++    @FXML
++    TextField user;
++    @FXML
++    TextField first;
++    @FXML
++    TextField last;
++    @FXML
++    TextField email;
++    @FXML
++    TextField phone;
++    @FXML
++    TextField pass;
++    @FXML
++    TextField repass;
++    @FXML
++    public void back(ActionEvent event) throws IOException {
++        URL url = new File("risk\\src\\view\\graphic\\MainMenuAdmin.fxml").toURI().toURL();
++        Parent register = FXMLLoader.load(url);
++        Scene message = new Scene(register);
++        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
++        window.setScene(message);
++        window.show();
++    }
++    @FXML
++    public void submit(ActionEvent event) throws IOException {
++        URL url = new File("risk\\src\\view\\graphic\\MainMenuAdmin.fxml").toURI().toURL();
++        Parent register = FXMLLoader.load(url);
++        Scene message = new Scene(register);
++        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
++        window.setScene(message);
++        window.show();
++        // TODO: 1/16/2021 ............. 
++    }
+ }
+Index: risk/src/view/graphic/EditInformationAdmin.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.Cursor?>\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.PasswordField?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.image.Image?>\r\n<?import javafx.scene.image.ImageView?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.Pane?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<AnchorPane maxHeight=\"-Infinity\" maxWidth=\"-Infinity\" minHeight=\"-Infinity\" minWidth=\"-Infinity\" prefHeight=\"650.0\"\r\n            prefWidth=\"1350.0\" xmlns=\"http://javafx.com/javafx/8.0.171\" xmlns:fx=\"http://javafx.com/fxml/1\">\r\n    <children>\r\n        <Pane prefHeight=\"650.0\" prefWidth=\"1350.0\">\r\n            <children>\r\n                <ImageView fitHeight=\"650.0\" fitWidth=\"1350.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n                    <image>\r\n                        <Image url=\"@../../NotResoures/EditInformationAdmin.png\"/>\r\n                    </image>\r\n                </ImageView>\r\n                <TextField editable=\"false\" layoutX=\"775.0\" layoutY=\"102.0\" prefHeight=\"40.0\" prefWidth=\"275.0\"\r\n                           style=\"-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;\"\r\n                           text=\"username\"/>\r\n                <TextField editable=\"false\" layoutX=\"775.0\" layoutY=\"237.0\" prefHeight=\"40.0\" prefWidth=\"275.0\"\r\n                           style=\"-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;\"\r\n                           text=\"lastname\"/>\r\n                <TextField editable=\"false\" layoutX=\"775.0\" layoutY=\"168.0\" prefHeight=\"40.0\" prefWidth=\"275.0\"\r\n                           style=\"-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;\"\r\n                           text=\"first name\"/>\r\n                <TextField editable=\"false\" layoutX=\"775.0\" layoutY=\"306.0\" prefHeight=\"40.0\" prefWidth=\"275.0\"\r\n                           style=\"-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;\"\r\n                           text=\"email-address\"/>\r\n                <TextField editable=\"false\" layoutX=\"775.0\" layoutY=\"373.0\" prefHeight=\"40.0\" prefWidth=\"275.0\"\r\n                           style=\"-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;\"\r\n                           text=\"phone number\"/>\r\n                <PasswordField editable=\"false\" layoutX=\"775.0\" layoutY=\"443.0\" prefHeight=\"40.0\" prefWidth=\"275.0\"\r\n                               style=\"-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;\"\r\n                               text=\"passowrd\"/>\r\n                <PasswordField editable=\"false\" layoutX=\"775.0\" layoutY=\"506.0\" prefHeight=\"40.0\" prefWidth=\"283.0\"\r\n                               style=\"-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;\"\r\n                               text=\"repeat password\"/>\r\n                <Button layoutX=\"28.0\" layoutY=\"586.0\" mnemonicParsing=\"false\" prefHeight=\"51.0\" prefWidth=\"129.0\"\r\n                        style=\"-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #2db09d;\"\r\n                        text=\"Back\" textFill=\"WHITE\">\r\n                    <font>\r\n                        <Font name=\"System Bold\" size=\"24.0\"/>\r\n                    </font>\r\n                    <cursor>\r\n                        <Cursor fx:constant=\"HAND\"/>\r\n                    </cursor>\r\n                </Button>\r\n                <Button layoutX=\"1181.0\" layoutY=\"586.0\" mnemonicParsing=\"false\" prefHeight=\"51.0\" prefWidth=\"129.0\"\r\n                        style=\"-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #2db09d;\"\r\n                        text=\"submit\" textFill=\"WHITE\">\r\n                    <font>\r\n                        <Font name=\"System Bold\" size=\"24.0\"/>\r\n                    </font>\r\n                    <cursor>\r\n                        <Cursor fx:constant=\"HAND\"/>\r\n                    </cursor>\r\n                </Button>\r\n            </children>\r\n        </Pane>\r\n    </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/risk/src/view/graphic/EditInformationAdmin.fxml b/risk/src/view/graphic/EditInformationAdmin.fxml
+--- a/risk/src/view/graphic/EditInformationAdmin.fxml	(revision d64c9252e2ff17015a3f2fc98fa50f98e4a582eb)
++++ b/risk/src/view/graphic/EditInformationAdmin.fxml	(date 1610814620989)
+@@ -2,7 +2,6 @@
+ 
+ <?import javafx.scene.Cursor?>
+ <?import javafx.scene.control.Button?>
+-<?import javafx.scene.control.PasswordField?>
+ <?import javafx.scene.control.TextField?>
+ <?import javafx.scene.image.Image?>
+ <?import javafx.scene.image.ImageView?>
+@@ -10,57 +9,38 @@
+ <?import javafx.scene.layout.Pane?>
+ <?import javafx.scene.text.Font?>
+ 
+-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
+-            prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
++<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.EditInformationAdminController">
+     <children>
+         <Pane prefHeight="650.0" prefWidth="1350.0">
+             <children>
+                 <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+-                        <Image url="@../../NotResoures/EditInformationAdmin.png"/>
++                        <Image url="@../../NotResoures/EditInformationAdmin.png" />
+                     </image>
+                 </ImageView>
+-                <TextField editable="false" layoutX="775.0" layoutY="102.0" prefHeight="40.0" prefWidth="275.0"
+-                           style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;"
+-                           text="username"/>
+-                <TextField editable="false" layoutX="775.0" layoutY="237.0" prefHeight="40.0" prefWidth="275.0"
+-                           style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;"
+-                           text="lastname"/>
+-                <TextField editable="false" layoutX="775.0" layoutY="168.0" prefHeight="40.0" prefWidth="275.0"
+-                           style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;"
+-                           text="first name"/>
+-                <TextField editable="false" layoutX="775.0" layoutY="306.0" prefHeight="40.0" prefWidth="275.0"
+-                           style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;"
+-                           text="email-address"/>
+-                <TextField editable="false" layoutX="775.0" layoutY="373.0" prefHeight="40.0" prefWidth="275.0"
+-                           style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;"
+-                           text="phone number"/>
+-                <PasswordField editable="false" layoutX="775.0" layoutY="443.0" prefHeight="40.0" prefWidth="275.0"
+-                               style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;"
+-                               text="passowrd"/>
+-                <PasswordField editable="false" layoutX="775.0" layoutY="506.0" prefHeight="40.0" prefWidth="283.0"
+-                               style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;"
+-                               text="repeat password"/>
+-                <Button layoutX="28.0" layoutY="586.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="129.0"
+-                        style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #2db09d;"
+-                        text="Back" textFill="WHITE">
++                <TextField fx:id="user" editable="false" layoutX="775.0" layoutY="102.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="username" />
++                <TextField fx:id="last" editable="false" layoutX="775.0" layoutY="237.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="lastname" />
++                <TextField fx:id="first" editable="false" layoutX="775.0" layoutY="168.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="first name" />
++                <TextField fx:id="email" editable="false" layoutX="775.0" layoutY="306.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="email-address" />
++                <TextField fx:id="phone" editable="false" layoutX="775.0" layoutY="373.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="phone number" />
++                <Button layoutX="28.0" layoutY="586.0" mnemonicParsing="false" onAction="#back" prefHeight="51.0" prefWidth="129.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #2db09d;" text="Back" textFill="WHITE">
+                     <font>
+-                        <Font name="System Bold" size="24.0"/>
++                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <cursor>
+-                        <Cursor fx:constant="HAND"/>
++                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                 </Button>
+-                <Button layoutX="1181.0" layoutY="586.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="129.0"
+-                        style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #2db09d;"
+-                        text="submit" textFill="WHITE">
++                <Button layoutX="1181.0" layoutY="586.0" mnemonicParsing="false" onAction="#submit" prefHeight="51.0" prefWidth="129.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #2db09d;" text="submit" textFill="WHITE">
+                     <font>
+-                        <Font name="System Bold" size="24.0"/>
++                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <cursor>
+-                        <Cursor fx:constant="HAND"/>
++                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                 </Button>
++            <TextField fx:id="pass" editable="false" layoutX="775.0" layoutY="439.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="password" />
++            <TextField fx:id="repass" editable="false" layoutX="775.0" layoutY="505.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="reapet password" />
+             </children>
+         </Pane>
+     </children>
+Index: risk/src/view/graphic/MainMenuAdmin.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.Cursor?>\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.image.Image?>\r\n<?import javafx.scene.image.ImageView?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.Pane?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<AnchorPane maxHeight=\"-Infinity\" maxWidth=\"-Infinity\" minHeight=\"-Infinity\" minWidth=\"-Infinity\" prefHeight=\"650.0\"\r\n            prefWidth=\"1350.0\" xmlns=\"http://javafx.com/javafx/8.0.171\" xmlns:fx=\"http://javafx.com/fxml/1\">\r\n    <children>\r\n        <Pane prefHeight=\"650.0\" prefWidth=\"1350.0\">\r\n            <children>\r\n                <ImageView fitHeight=\"650.0\" fitWidth=\"1350.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n                    <image>\r\n                        <Image url=\"@../../NotResoures/admin_main_menu.png\"/>\r\n                    </image>\r\n                </ImageView>\r\n                <Button layoutX=\"19.0\" layoutY=\"592.0\" mnemonicParsing=\"false\" prefHeight=\"42.0\" prefWidth=\"122.0\"\r\n                        style=\"-fx-background-color: #1eae98; -fx-background-radius: 10px; -fx-border-radius: 10px;\"\r\n                        text=\"Back\" textFill=\"WHITE\">\r\n                    <font>\r\n                        <Font name=\"System Bold\" size=\"19.0\"/>\r\n                    </font>\r\n                    <cursor>\r\n                        <Cursor fx:constant=\"HAND\"/>\r\n                    </cursor>\r\n                </Button>\r\n                <Button layoutX=\"665.0\" layoutY=\"129.0\" mnemonicParsing=\"false\" prefHeight=\"32.0\" prefWidth=\"36.0\"\r\n                        style=\"-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: #2c2c54;\">\r\n                    <cursor>\r\n                        <Cursor fx:constant=\"HAND\"/>\r\n                    </cursor>\r\n                </Button>\r\n                <Button layoutX=\"667.0\" layoutY=\"263.0\" mnemonicParsing=\"false\" prefHeight=\"32.0\" prefWidth=\"36.0\"\r\n                        style=\"-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: #2c2c54;\">\r\n                    <cursor>\r\n                        <Cursor fx:constant=\"HAND\"/>\r\n                    </cursor>\r\n                </Button>\r\n                <Button layoutX=\"666.0\" layoutY=\"193.0\" mnemonicParsing=\"false\" prefHeight=\"32.0\" prefWidth=\"36.0\"\r\n                        style=\"-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: #2c2c54;\">\r\n                    <cursor>\r\n                        <Cursor fx:constant=\"HAND\"/>\r\n                    </cursor>\r\n                </Button>\r\n                <Label layoutX=\"352.0\" layoutY=\"332.0\" prefHeight=\"41.0\" prefWidth=\"106.0\" text=\"Admin\">\r\n                    <font>\r\n                        <Font name=\"System Bold\" size=\"26.0\"/>\r\n                    </font>\r\n                </Label>\r\n            </children>\r\n        </Pane>\r\n    </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/risk/src/view/graphic/MainMenuAdmin.fxml b/risk/src/view/graphic/MainMenuAdmin.fxml
+--- a/risk/src/view/graphic/MainMenuAdmin.fxml	(revision d64c9252e2ff17015a3f2fc98fa50f98e4a582eb)
++++ b/risk/src/view/graphic/MainMenuAdmin.fxml	(date 1610814480039)
+@@ -9,47 +9,41 @@
+ <?import javafx.scene.layout.Pane?>
+ <?import javafx.scene.text.Font?>
+ 
+-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
+-            prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
++<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.MainMenuAdminController">
+     <children>
+         <Pane prefHeight="650.0" prefWidth="1350.0">
+             <children>
+                 <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+-                        <Image url="@../../NotResoures/admin_main_menu.png"/>
++                        <Image url="@../../NotResoures/admin_main_menu.png" />
+                     </image>
+                 </ImageView>
+-                <Button layoutX="19.0" layoutY="592.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="122.0"
+-                        style="-fx-background-color: #1eae98; -fx-background-radius: 10px; -fx-border-radius: 10px;"
+-                        text="Back" textFill="WHITE">
++                <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: #1eae98; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Log out" textFill="WHITE">
+                     <font>
+-                        <Font name="System Bold" size="19.0"/>
++                        <Font name="System Bold" size="19.0" />
+                     </font>
+                     <cursor>
+-                        <Cursor fx:constant="HAND"/>
++                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                 </Button>
+-                <Button layoutX="665.0" layoutY="129.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="36.0"
+-                        style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: #2c2c54;">
++                <Button layoutX="665.0" layoutY="129.0" mnemonicParsing="false" onAction="#players" prefHeight="32.0" prefWidth="36.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: #2c2c54;">
+                     <cursor>
+-                        <Cursor fx:constant="HAND"/>
++                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                 </Button>
+-                <Button layoutX="667.0" layoutY="263.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="36.0"
+-                        style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: #2c2c54;">
++                <Button layoutX="667.0" layoutY="263.0" mnemonicParsing="false" onAction="#edit" prefHeight="32.0" prefWidth="36.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: #2c2c54;">
+                     <cursor>
+-                        <Cursor fx:constant="HAND"/>
++                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                 </Button>
+-                <Button layoutX="666.0" layoutY="193.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="36.0"
+-                        style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: #2c2c54;">
++                <Button layoutX="666.0" layoutY="193.0" mnemonicParsing="false" onAction="#events" prefHeight="32.0" prefWidth="36.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: #2c2c54;">
+                     <cursor>
+-                        <Cursor fx:constant="HAND"/>
++                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                 </Button>
+-                <Label layoutX="352.0" layoutY="332.0" prefHeight="41.0" prefWidth="106.0" text="Admin">
++                <Label fx:id="name" layoutX="352.0" layoutY="332.0" prefHeight="41.0" prefWidth="106.0" text="Admin">
+                     <font>
+-                        <Font name="System Bold" size="26.0"/>
++                        <Font name="System Bold" size="26.0" />
+                     </font>
+                 </Label>
+             </children>
+Index: risk/src/view/graphic/EditEventAdmin.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.Cursor?>\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.image.Image?>\r\n<?import javafx.scene.image.ImageView?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.Pane?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<AnchorPane maxHeight=\"-Infinity\" maxWidth=\"-Infinity\" minHeight=\"-Infinity\" minWidth=\"-Infinity\" prefHeight=\"650.0\"\r\n            prefWidth=\"1350.0\" xmlns=\"http://javafx.com/javafx/8.0.171\" xmlns:fx=\"http://javafx.com/fxml/1\">\r\n    <children>\r\n        <Pane prefHeight=\"650.0\" prefWidth=\"1350.0\">\r\n            <children>\r\n                <ImageView fitHeight=\"650.0\" fitWidth=\"1350.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n                    <image>\r\n                        <Image url=\"@../../NotResoures/edit_event.png\"/>\r\n                    </image>\r\n                </ImageView>\r\n                <Button layoutX=\"13.0\" layoutY=\"586.0\" mnemonicParsing=\"false\" prefHeight=\"45.0\" prefWidth=\"131.0\"\r\n                        style=\"-fx-background-radius: 10px; -fx-background-color: #29a995;\" text=\"Back\"\r\n                        textFill=\"WHITE\">\r\n                    <font>\r\n                        <Font name=\"System Bold\" size=\"24.0\"/>\r\n                    </font>\r\n                    <cursor>\r\n                        <Cursor fx:constant=\"HAND\"/>\r\n                    </cursor>\r\n                </Button>\r\n                <Button layoutX=\"612.0\" layoutY=\"529.0\" mnemonicParsing=\"false\" prefHeight=\"48.0\" prefWidth=\"177.0\"\r\n                        style=\"-fx-background-color: #e6e7e8;\" text=\"Delete Event\" textFill=\"#2e2c54\">\r\n                    <font>\r\n                        <Font size=\"22.0\"/>\r\n                    </font>\r\n                    <cursor>\r\n                        <Cursor fx:constant=\"HAND\"/>\r\n                    </cursor>\r\n                </Button>\r\n                <Button layoutX=\"979.0\" layoutY=\"531.0\" mnemonicParsing=\"false\" prefHeight=\"25.0\" prefWidth=\"113.0\"\r\n                        style=\"-fx-background-color: #e6e7e8;\" text=\"Submit\" textFill=\"#2e2c54\">\r\n                    <font>\r\n                        <Font size=\"20.0\"/>\r\n                    </font>\r\n                    <cursor>\r\n                        <Cursor fx:constant=\"HAND\"/>\r\n                    </cursor>\r\n                </Button>\r\n                <TextField layoutX=\"820.0\" layoutY=\"120.0\" prefHeight=\"34.0\" prefWidth=\"278.0\"\r\n                           style=\"-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;\"/>\r\n                <TextField layoutX=\"820.0\" layoutY=\"251.0\" prefHeight=\"34.0\" prefWidth=\"278.0\"\r\n                           style=\"-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;\"/>\r\n                <TextField layoutX=\"820.0\" layoutY=\"186.0\" prefHeight=\"34.0\" prefWidth=\"278.0\"\r\n                           style=\"-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;\"/>\r\n                <TextField layoutX=\"820.0\" layoutY=\"320.0\" prefHeight=\"34.0\" prefWidth=\"278.0\"\r\n                           style=\"-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;\"/>\r\n                <TextField layoutX=\"820.0\" layoutY=\"384.0\" prefHeight=\"34.0\" prefWidth=\"278.0\"\r\n                           style=\"-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;\"/>\r\n            </children>\r\n        </Pane>\r\n    </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/risk/src/view/graphic/EditEventAdmin.fxml b/risk/src/view/graphic/EditEventAdmin.fxml
+--- a/risk/src/view/graphic/EditEventAdmin.fxml	(revision d64c9252e2ff17015a3f2fc98fa50f98e4a582eb)
++++ b/risk/src/view/graphic/EditEventAdmin.fxml	(date 1610812407051)
+@@ -9,54 +9,44 @@
+ <?import javafx.scene.layout.Pane?>
+ <?import javafx.scene.text.Font?>
+ 
+-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
+-            prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
++<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.EditEventAdminController">
+     <children>
+         <Pane prefHeight="650.0" prefWidth="1350.0">
+             <children>
+                 <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+-                        <Image url="@../../NotResoures/edit_event.png"/>
++                        <Image url="@../../NotResoures/edit_event.png" />
+                     </image>
+                 </ImageView>
+-                <Button layoutX="13.0" layoutY="586.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="131.0"
+-                        style="-fx-background-radius: 10px; -fx-background-color: #29a995;" text="Back"
+-                        textFill="WHITE">
++                <Button layoutX="13.0" layoutY="586.0" mnemonicParsing="false" onAction="#back" prefHeight="45.0" prefWidth="131.0" style="-fx-background-radius: 10px; -fx-background-color: #29a995;" text="Back" textFill="WHITE">
+                     <font>
+-                        <Font name="System Bold" size="24.0"/>
++                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <cursor>
+-                        <Cursor fx:constant="HAND"/>
++                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                 </Button>
+-                <Button layoutX="612.0" layoutY="529.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="177.0"
+-                        style="-fx-background-color: #e6e7e8;" text="Delete Event" textFill="#2e2c54">
++                <Button layoutX="612.0" layoutY="529.0" mnemonicParsing="false" onAction="#delete" prefHeight="48.0" prefWidth="177.0" style="-fx-background-color: #e6e7e8;" text="Delete Event" textFill="#2e2c54">
+                     <font>
+-                        <Font size="22.0"/>
++                        <Font size="22.0" />
+                     </font>
+                     <cursor>
+-                        <Cursor fx:constant="HAND"/>
++                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                 </Button>
+-                <Button layoutX="979.0" layoutY="531.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0"
+-                        style="-fx-background-color: #e6e7e8;" text="Submit" textFill="#2e2c54">
++                <Button layoutX="979.0" layoutY="531.0" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #e6e7e8;" text="Submit" textFill="#2e2c54">
+                     <font>
+-                        <Font size="20.0"/>
++                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+-                        <Cursor fx:constant="HAND"/>
++                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                 </Button>
+-                <TextField layoutX="820.0" layoutY="120.0" prefHeight="34.0" prefWidth="278.0"
+-                           style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;"/>
+-                <TextField layoutX="820.0" layoutY="251.0" prefHeight="34.0" prefWidth="278.0"
+-                           style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;"/>
+-                <TextField layoutX="820.0" layoutY="186.0" prefHeight="34.0" prefWidth="278.0"
+-                           style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;"/>
+-                <TextField layoutX="820.0" layoutY="320.0" prefHeight="34.0" prefWidth="278.0"
+-                           style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;"/>
+-                <TextField layoutX="820.0" layoutY="384.0" prefHeight="34.0" prefWidth="278.0"
+-                           style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;"/>
++                <TextField fx:id="name" layoutX="820.0" layoutY="120.0" prefHeight="34.0" prefWidth="278.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;" />
++                <TextField fx:id="end" layoutX="820.0" layoutY="251.0" prefHeight="34.0" prefWidth="278.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;" />
++                <TextField fx:id="start" layoutX="820.0" layoutY="186.0" prefHeight="34.0" prefWidth="278.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;" />
++                <TextField fx:id="winnercoins" layoutX="820.0" layoutY="320.0" prefHeight="34.0" prefWidth="278.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;" />
++                <TextField fx:id="invited" layoutX="820.0" layoutY="384.0" prefHeight="34.0" prefWidth="278.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #2e2c54;" />
+             </children>
+         </Pane>
+     </children>
+Index: risk/src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import javafx.application.Application;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.layout.AnchorPane;\r\nimport javafx.stage.Stage;\r\nimport javafx.stage.StageStyle;\r\nimport model.database.MySqlDataBase;\r\nimport view.terminalMenu.MainMenu;\r\n\r\nimport java.io.File;\r\nimport java.io.IOException;\r\nimport java.net.URL;\r\nimport java.time.LocalDate;\r\n\r\npublic class Main extends Application {\r\n\r\n    public static void main(String[] args) {\r\n        launch(args);\r\n    }\r\n\r\n\r\n    @Override\r\n    public void start(Stage primaryStage) {\r\n        try {\r\n            MySqlDataBase mySqlDataBase = MySqlDataBase.getMySqlDataBase();\r\n            URL url = new File(\"risk\\\\src\\\\view\\\\graphic\\\\Login.fxml\").toURI().toURL();\r\n\r\n            AnchorPane root = FXMLLoader.load(url);\r\n\r\n            Scene scene = new Scene(root);\r\n            primaryStage.setScene(scene);\r\n            primaryStage.show();\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/risk/src/Main.java b/risk/src/Main.java
+--- a/risk/src/Main.java	(revision d64c9252e2ff17015a3f2fc98fa50f98e4a582eb)
++++ b/risk/src/Main.java	(date 1610814386744)
+@@ -23,7 +23,7 @@
+     public void start(Stage primaryStage) {
+         try {
+             MySqlDataBase mySqlDataBase = MySqlDataBase.getMySqlDataBase();
+-            URL url = new File("risk\\src\\view\\graphic\\Login.fxml").toURI().toURL();
++            URL url = new File("risk\\src\\view\\graphic\\MainMenuAdmin.fxml").toURI().toURL();
+ 
+             AnchorPane root = FXMLLoader.load(url);
+ 
+Index: risk/src/view/Controllers/EditEventAdminController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view.Controllers;\r\n\r\npublic class EditEventAdminController {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/risk/src/view/Controllers/EditEventAdminController.java b/risk/src/view/Controllers/EditEventAdminController.java
+--- a/risk/src/view/Controllers/EditEventAdminController.java	(revision d64c9252e2ff17015a3f2fc98fa50f98e4a582eb)
++++ b/risk/src/view/Controllers/EditEventAdminController.java	(date 1610812723167)
+@@ -1,4 +1,57 @@
+ package view.Controllers;
+ 
++import javafx.event.ActionEvent;
++import javafx.fxml.FXML;
++import javafx.fxml.FXMLLoader;
++import javafx.scene.Node;
++import javafx.scene.Parent;
++import javafx.scene.Scene;
++import javafx.scene.control.TextField;
++import javafx.stage.Stage;
++
++import java.io.File;
++import java.io.IOException;
++import java.net.URL;
++
+ public class EditEventAdminController {
++    @FXML
++    TextField name;
++    @FXML
++    TextField start;
++    @FXML
++    TextField end;
++    @FXML
++    TextField winnercoins;
++    @FXML
++    TextField invited;
++
++    @FXML
++    public void back(ActionEvent event) throws IOException {
++        URL url = new File("risk\\src\\view\\graphic\\MainMenuAdmin.fxml").toURI().toURL();
++        Parent register = FXMLLoader.load(url);
++        Scene message = new Scene(register);
++        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
++        window.setScene(message);
++        window.show();
++    }
++    @FXML
++    public void delete(ActionEvent event) throws IOException {
++        URL url = new File("risk\\src\\view\\graphic\\MainMenuAdmin.fxml").toURI().toURL();
++        Parent register = FXMLLoader.load(url);
++        Scene message = new Scene(register);
++        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
++        window.setScene(message);
++        window.show();
++        // TODO: 1/16/2021 ..........................
++    }
++    @FXML
++    public void submit(ActionEvent event) throws IOException {
++        URL url = new File("risk\\src\\view\\graphic\\MainMenuAdmin.fxml").toURI().toURL();
++        Parent register = FXMLLoader.load(url);
++        Scene message = new Scene(register);
++        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
++        window.setScene(message);
++        window.show();
++        // TODO: 1/16/2021 ........................
++    }
+ }
+Index: risk/src/view/graphic/Messages.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.Cursor?>\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.ListView?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.image.Image?>\r\n<?import javafx.scene.image.ImageView?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.Pane?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<AnchorPane maxHeight=\"-Infinity\" maxWidth=\"-Infinity\" minHeight=\"-Infinity\" minWidth=\"-Infinity\" prefHeight=\"650.0\" prefWidth=\"1350.0\" xmlns=\"http://javafx.com/javafx/8.0.171\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"view.Controllers.MessagesController\">\r\n   <children>\r\n      <Pane prefHeight=\"650.0\" prefWidth=\"1350.0\">\r\n         <children>\r\n            <ImageView fitHeight=\"650.0\" fitWidth=\"1350.0\" layoutX=\"1.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n               <image>\r\n                  <Image url=\"@../../NotResoures/messages.png\" />\r\n               </image>\r\n            </ImageView>\r\n            <TextField fx:id=\"search\" layoutX=\"636.0\" layoutY=\"86.0\" prefHeight=\"50.0\" prefWidth=\"347.0\" promptText=\"search ...\" style=\"-fx-background-color: #d1d0d0;\">\r\n               <font>\r\n                  <Font size=\"23.0\" />\r\n               </font>\r\n            </TextField>\r\n            <ListView fx:id=\"list\" layoutX=\"623.0\" layoutY=\"158.0\" prefHeight=\"405.0\" prefWidth=\"367.0\" style=\"-fx-background-color: #d1d0d0;\" />\r\n            <Button layoutX=\"23.0\" layoutY=\"576.0\" mnemonicParsing=\"false\" onAction=\"#back\" prefHeight=\"45.0\" prefWidth=\"109.0\" style=\"-fx-border-radius: 10px; -fx-background-radius: 10px; -fx-background-color: #2c2c54;\" text=\"Back\" textFill=\"WHITE\">\r\n               <cursor>\r\n                  <Cursor fx:constant=\"HAND\" />\r\n               </cursor>\r\n               <font>\r\n                  <Font name=\"System Bold\" size=\"18.0\" />\r\n               </font>\r\n            </Button>\r\n         </children>\r\n      </Pane>\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/risk/src/view/graphic/Messages.fxml b/risk/src/view/graphic/Messages.fxml
+--- a/risk/src/view/graphic/Messages.fxml	(revision d64c9252e2ff17015a3f2fc98fa50f98e4a582eb)
++++ b/risk/src/view/graphic/Messages.fxml	(date 1610804333824)
+@@ -10,30 +10,38 @@
+ <?import javafx.scene.layout.Pane?>
+ <?import javafx.scene.text.Font?>
+ 
+-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.MessagesController">
+-   <children>
+-      <Pane prefHeight="650.0" prefWidth="1350.0">
+-         <children>
+-            <ImageView fitHeight="650.0" fitWidth="1350.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+-               <image>
+-                  <Image url="@../../NotResoures/messages.png" />
+-               </image>
+-            </ImageView>
+-            <TextField fx:id="search" layoutX="636.0" layoutY="86.0" prefHeight="50.0" prefWidth="347.0" promptText="search ..." style="-fx-background-color: #d1d0d0;">
+-               <font>
+-                  <Font size="23.0" />
+-               </font>
+-            </TextField>
+-            <ListView fx:id="list" layoutX="623.0" layoutY="158.0" prefHeight="405.0" prefWidth="367.0" style="-fx-background-color: #d1d0d0;" />
+-            <Button layoutX="23.0" layoutY="576.0" mnemonicParsing="false" onAction="#back" prefHeight="45.0" prefWidth="109.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px; -fx-background-color: #2c2c54;" text="Back" textFill="WHITE">
+-               <cursor>
+-                  <Cursor fx:constant="HAND" />
+-               </cursor>
+-               <font>
+-                  <Font name="System Bold" size="18.0" />
+-               </font>
+-            </Button>
+-         </children>
+-      </Pane>
+-   </children>
++<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
++            prefWidth="1350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
++            fx:controller="view.Controllers.MessagesController">
++    <children>
++        <Pane prefHeight="650.0" prefWidth="1350.0">
++            <children>
++                <ImageView fitHeight="650.0" fitWidth="1350.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
++                    <image>
++                        <Image url="@../../NotResoures/messages.png"/>
++                    </image>
++                </ImageView>
++                <TextField fx:id="search" layoutX="636.0" layoutY="86.0" onInputMethodTextChanged="#search"
++                           prefHeight="50.0" prefWidth="347.0" promptText="search ..."
++                           style="-fx-background-color: #d1d0d0;">
++                    <font>
++                        <Font name="System Bold" size="23.0"/>
++                    </font>
++                </TextField>
++                <ListView fx:id="list" layoutX="623.0" layoutY="158.0" prefHeight="405.0" prefWidth="367.0"
++                          style="-fx-background-color: #d1d0d0;"/>
++                <Button layoutX="23.0" layoutY="576.0" mnemonicParsing="false" onAction="#back" prefHeight="45.0"
++                        prefWidth="109.0"
++                        style="-fx-border-radius: 10px; -fx-background-radius: 10px; -fx-background-color: #2c2c54;"
++                        text="Back" textFill="WHITE">
++                    <cursor>
++                        <Cursor fx:constant="HAND"/>
++                    </cursor>
++                    <font>
++                        <Font name="System Bold" size="18.0"/>
++                    </font>
++                </Button>
++            </children>
++        </Pane>
++    </children>
+ </AnchorPane>
+Index: risk/src/view/Controllers/MainMenuAdminController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view.Controllers;\r\n\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.fxml.Initializable;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.Label;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.File;\r\nimport java.io.IOException;\r\nimport java.net.URL;\r\nimport java.util.ResourceBundle;\r\n\r\npublic class MainMenuAdminController implements Initializable {\r\n    @FXML\r\n    Label adminname;\r\n\r\n    @FXML\r\n    public void players(ActionEvent actionEvent) {\r\n        //todo.............+ baghie farayand.......\r\n    }\r\n\r\n    @FXML\r\n    public void editinformation(ActionEvent actionEvent) {\r\n        //todo.............+ baghie farayand.......\r\n    }\r\n\r\n    @FXML\r\n    public void messagesandreq(ActionEvent actionEvent) {\r\n        //todo.............+ baghie farayand.......\r\n    }\r\n\r\n    @FXML\r\n    public void createevent(ActionEvent actionEvent) {\r\n        //todo.............+ baghie farayand.......\r\n    }\r\n\r\n    @FXML\r\n    public void events(ActionEvent actionEvent) {\r\n        //todo.............+ baghie farayand.......\r\n    }\r\n\r\n    private void setLabel() {\r\n        adminname.setText(LoginController.getUser().getUsername());\r\n    }\r\n\r\n    @Override\r\n    public void initialize(URL location, ResourceBundle resources) {\r\n        setLabel();\r\n    }\r\n\r\n    private void logout(ActionEvent event) throws IOException {\r\n\r\n        URL url = new File(\"risk\\\\src\\\\view\\\\graphic\\\\Login.fxml\").toURI().toURL();\r\n        Parent register = FXMLLoader.load(url);\r\n        Scene message = new Scene(register);\r\n        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();\r\n        window.setScene(message);\r\n        window.show();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/risk/src/view/Controllers/MainMenuAdminController.java b/risk/src/view/Controllers/MainMenuAdminController.java
+--- a/risk/src/view/Controllers/MainMenuAdminController.java	(revision d64c9252e2ff17015a3f2fc98fa50f98e4a582eb)
++++ b/risk/src/view/Controllers/MainMenuAdminController.java	(date 1610814478027)
+@@ -17,42 +17,49 @@
+ 
+ public class MainMenuAdminController implements Initializable {
+     @FXML
+-    Label adminname;
+-
+-    @FXML
+-    public void players(ActionEvent actionEvent) {
+-        //todo.............+ baghie farayand.......
+-    }
++    Label name;
+ 
+     @FXML
+-    public void editinformation(ActionEvent actionEvent) {
+-        //todo.............+ baghie farayand.......
++    public void players(ActionEvent actionEvent) throws IOException {
++        URL url = new File("risk\\src\\view\\graphic\\ShowAllPlayers.fxml").toURI().toURL();
++        Parent register = FXMLLoader.load(url);
++        Scene message = new Scene(register);
++        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
++        window.setScene(message);
++        window.show();
+     }
+ 
+     @FXML
+-    public void messagesandreq(ActionEvent actionEvent) {
+-        //todo.............+ baghie farayand.......
++    public void events(ActionEvent actionEvent) throws IOException {
++        URL url = new File("risk\\src\\view\\graphic\\CreateEvents.fxml").toURI().toURL();
++        Parent register = FXMLLoader.load(url);
++        Scene message = new Scene(register);
++        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
++        window.setScene(message);
++        window.show();
+     }
+-
+     @FXML
+-    public void createevent(ActionEvent actionEvent) {
+-        //todo.............+ baghie farayand.......
+-    }
+-
+-    @FXML
+-    public void events(ActionEvent actionEvent) {
+-        //todo.............+ baghie farayand.......
++    public void edit(ActionEvent event) throws IOException {
++        URL url = new File("risk\\src\\view\\graphic\\EditInformationAdmin.fxml").toURI().toURL();
++        Parent register = FXMLLoader.load(url);
++        Scene message = new Scene(register);
++        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
++        window.setScene(message);
++        window.show();
+     }
+ 
+     private void setLabel() {
+-        adminname.setText(LoginController.getUser().getUsername());
++
++        name.setText(LoginController.getUser().getUsername());
+     }
+ 
+     @Override
+     public void initialize(URL location, ResourceBundle resources) {
++
+         setLabel();
+     }
+ 
++    @FXML
+     private void logout(ActionEvent event) throws IOException {
+ 
+         URL url = new File("risk\\src\\view\\graphic\\Login.fxml").toURI().toURL();
+@@ -62,4 +69,6 @@
+         window.setScene(message);
+         window.show();
+     }
++
++
+ }
