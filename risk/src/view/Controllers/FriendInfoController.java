@@ -156,6 +156,8 @@ public class FriendInfoController implements Initializable {
         URL url = null;
         ChatController.setSecondPlayer(secondPlayer);
         ChatController.setIsFromPlayerInfoPage(true);
+        ChatController.setIsFromAdmin(false);
+        ChatController.setCurrentUser(currentPlayer);
         try {
             url = new File("risk\\src\\view\\graphic\\chat.fxml").toURI().toURL();
             Parent register = FXMLLoader.load(url);
