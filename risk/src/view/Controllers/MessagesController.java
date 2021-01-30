@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.usersModels.Admin;
 import model.usersModels.Massage;
 import model.usersModels.Player;
 
@@ -53,7 +54,7 @@ public class MessagesController implements Initializable {
 
     public ArrayList<HBox> getInbox() {
         ArrayList<HBox> hBoxes = new ArrayList<>();
-
+        hBoxes.add(makeHBoxFromAdminMessages());
         HashSet<Player> inbox= UserController.getUserController().getAllPlayersThatHadMessageWith(player);
         for(Player player1 : inbox){
             hBoxes.add(makeHBoxFromMessages(player1));
@@ -79,10 +80,37 @@ public class MessagesController implements Initializable {
         Label usernameLabel = makeNameLabel(secondPlayer.getUsername());
         usernameLabel.setPadding(new Insets(10, 0, 0, 5));
         vBox.getChildren().add(usernameLabel);
-        ArrayList<Massage> secondPlayersMessages = UserController.getUserController().getPlayersMassage(player, secondPlayer);
+        ArrayList<Massage> secondPlayersMessages= null;
+        if(secondPlayer != null)
+            secondPlayersMessages = UserController.getUserController().getPlayersMassage(player, secondPlayer);
+        else{
+            secondPlayersMessages = UserController.getUserController().getAdminMessages(player);
+        }
         if (!secondPlayersMessages.isEmpty()) {
             int lastMessageIndex = secondPlayersMessages.size() - 1;
             Label lastMessage = makeNameLabel(secondPlayersMessages.get(lastMessageIndex).getMassage());
+            lastMessage.setStyle("-fx-font-size:15px");
+            vBox.getChildren().add(lastMessage);
+        }
+        hBox.getChildren().addAll(imageView, vBox);
+        return hBox;
+    }
+    public HBox makeHBoxFromAdminMessages(){
+        ArrayList<Massage> adminMessages = UserController.getUserController().getAdminMessages(player);
+        HBox hBox = new HBox(5);
+        hBox.setPadding(new Insets(5, 5, 5, 5));
+        hBox.setStyle("-fx-background-color: #6d597a ; -fx-border-radius: 10px ; -fx-background-radius: 10px");
+        Image image = new Image("@../../NotResoures/purple player.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(80);
+        imageView.setFitWidth(40);
+        VBox vBox = new VBox(5);
+        Label usernameLabel = makeNameLabel("Admin");
+        usernameLabel.setPadding(new Insets(10, 0, 0, 5));
+        vBox.getChildren().add(usernameLabel);
+        if (!adminMessages.isEmpty()) {
+            int lastMessageIndex = adminMessages.size() - 1;
+            Label lastMessage = makeNameLabel(adminMessages.get(lastMessageIndex).getMassage());
             lastMessage.setStyle("-fx-font-size:15px");
             vBox.getChildren().add(lastMessage);
         }
@@ -155,11 +183,15 @@ public class MessagesController implements Initializable {
                 if(event.getButton().equals(MouseButton.PRIMARY)){
                     if(event.getClickCount() == 2){
                         if(search.getText().isEmpty()){
-                            HBox hBox = (HBox) list.getSelectionModel().getSelectedItem();
-                            VBox vBox = (VBox) hBox.getChildren().get(1);
-                            String username = ((Label) vBox.getChildren().get(0)).getText();
-                            Player player = UserController.getUserController().findPlayerByUserName(username);
-                            ChatController.setSecondPlayer(player);
+                            if(!list.getSelectionModel().getSelectedItem().equals(list.getItems().get(0))) {
+                                HBox hBox = (HBox) list.getSelectionModel().getSelectedItem();
+                                VBox vBox = (VBox) hBox.getChildren().get(1);
+                                String username = ((Label) vBox.getChildren().get(0)).getText();
+                                Player player = UserController.getUserController().findPlayerByUserName(username);
+                                ChatController.setSecondPlayer(player);
+                            }else{
+                                Admin admin = UserController.getUserController().getAdmin();
+                            }
                         }else{
                             HBox hBox = (HBox) list.getSelectionModel().getSelectedItem();
                             VBox vBox = (VBox) hBox.getChildren().get(1);
@@ -168,6 +200,7 @@ public class MessagesController implements Initializable {
                             ChatController.setSecondPlayer(player);
                         }
                         URL url = null;
+                        ChatController.setIsFromPlayerInfoPage(false);
                         try {
                             url = new File("risk\\src\\view\\graphic\\Chat.fxml").toURI().toURL();
                             Parent register = FXMLLoader.load(url);

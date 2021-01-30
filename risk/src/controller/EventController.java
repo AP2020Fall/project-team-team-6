@@ -40,7 +40,7 @@ public class EventController {
         Admin admin = localDataBase.getAdmin();
         ArrayList<Player> invitedPlayers = event.getInvitedPlayers();
         for (Player player : invitedPlayers) {
-            userController.sendMessageFromAdmin(admin, player, "You are invited to an event please check the events");
+            userController.sendMessageFromAdmin( player, "You are invited to an event please check the events");
         }
     }
 

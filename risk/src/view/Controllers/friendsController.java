@@ -163,6 +163,7 @@ public class friendsController implements Initializable {
                         }
                         URL url = null;
                         try {
+                            FriendInfoController.setIsFromRequestPage(false);
                             url = new File("risk\\src\\view\\graphic\\FriendInfo.fxml").toURI().toURL();
                             Parent register = FXMLLoader.load(url);
                             Scene message = new Scene(register);

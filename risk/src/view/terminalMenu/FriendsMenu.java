@@ -1,5 +1,6 @@
 package view.terminalMenu;
 
+import controller.UserController;
 import model.database.MySqlDataBase;
 import model.usersModels.Massage;
 import model.usersModels.Player;
@@ -286,7 +287,7 @@ public class FriendsMenu extends Menu {
     }
 
     private void showAdminMassage() {
-        ArrayList<Massage> adminMassages = player.getAdminMassages();
+        ArrayList<Massage> adminMassages = UserController.getUserController().getAdminMessages(player);
         for (Massage massage : adminMassages) {
             System.out.println("Admin : " + massage.getMassage());
         }

@@ -24,8 +24,7 @@ public class Player extends User implements Comparable{
     private HashMap<Integer, Country> playersCountry;
     private int numberOfSoldiers = 0;
     //This should change to HashMap<User , String >
-    private ArrayList<Massage> massages;
-    private ArrayList<Massage> adminMassages;
+
 
     private Color currentColor;
     private int numbersOfWin;
@@ -49,11 +48,9 @@ public class Player extends User implements Comparable{
         this.requestForPlaysList = new ArrayList<>();
         this.playersCard = new ArrayList<>();
         this.playersCountry = new HashMap<>();
-        this.massages = new ArrayList<>();
         this.requestForFriendShipInGame = new ArrayList<>();
         this.friendInGame = null;
         this.currentColor = null;
-        this.adminMassages = new ArrayList<>();
     }
 
 
@@ -100,10 +97,6 @@ public class Player extends User implements Comparable{
 
     public int getNumberOfSoldiers() {
         return numberOfSoldiers;
-    }
-
-    public ArrayList<Massage> getMassages() {
-        return massages;
     }
 
     public void setFirstName(String firstName) {
@@ -197,10 +190,6 @@ public class Player extends User implements Comparable{
         this.currentColor = currentColor;
     }
 
-    public ArrayList<Massage> getAdminMassages() {
-        return adminMassages;
-    }
-
     public LocalDate getLocalDate() {
         return localDate;
     }
@@ -267,22 +256,7 @@ public class Player extends User implements Comparable{
         }
     }
 
-    public String getAllPlayerMessagesInString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Massage massage : massages) {
-            stringBuilder.append(Massage.changeMessageToString(massage)).append("\n");
-        }
-        return stringBuilder.toString();
-    }
 
-    public void getAllMessageFromString(String text) {
-        String[] allMessagesInArray = text.split("\n");
-        for (String s : allMessagesInArray) {
-            Massage massage = Massage.changeMessageFromStringToMessage(s);
-            if (massage != null)
-                this.massages.add(massage);
-        }
-    }
     public String changeGameLogsToString(){
         StringBuilder stringBuilder = new StringBuilder();
         for (GameLog gameLog : gameLogs) {
