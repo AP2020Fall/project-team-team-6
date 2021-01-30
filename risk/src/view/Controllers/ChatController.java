@@ -34,9 +34,9 @@ import java.util.ResourceBundle;
 public class ChatController implements Initializable {
     private Player currentUser = MainPlatoController.getPlayer();
     private Admin admin = LocalDataBase.getLocalDataBase().getAdmin();
-    private static  Player secondPlayer = null;
+    private static Player secondPlayer = null;
     private static boolean isFromPlayerInfoPage = false;
-    private static  boolean isFromAdmin = false;
+    private static boolean isFromAdmin = false;
 
     public static boolean isIsFromAdmin() {
         return isFromAdmin;
@@ -81,33 +81,34 @@ public class ChatController implements Initializable {
     public static void setSecondPlayer(Player secondPlayer) {
         ChatController.secondPlayer = secondPlayer;
     }
-    public ArrayList<HBox> loadInBox(){
+
+    public ArrayList<HBox> loadInBox() {
         ArrayList<Massage> getPlayerMessagesWhitSecondPlayer = null;
-        if(secondPlayer != null && currentUser != null)
-            getPlayerMessagesWhitSecondPlayer= UserController.getUserController().getPlayersMassage(currentUser , secondPlayer );
-        else if(currentUser == null){
+        if (secondPlayer != null && currentUser != null)
+            getPlayerMessagesWhitSecondPlayer = UserController.getUserController().getPlayersMassage(currentUser, secondPlayer);
+        else if (currentUser == null) {
             getPlayerMessagesWhitSecondPlayer = UserController.getUserController().getAdminMessages(secondPlayer);
         }
         ArrayList<HBox> hBoxes = new ArrayList<>();
-        for(Massage message : getPlayerMessagesWhitSecondPlayer){
+        for (Massage message : getPlayerMessagesWhitSecondPlayer) {
             HBox hBox = new HBox();
-            hBox.setPadding(new Insets(5 , 5 , 5 , 5));
+            hBox.setPadding(new Insets(5, 5, 5, 5));
             String messageText = message.getMassage();
             Label text = new Label(messageText);
-            text.setPadding(new Insets(5 , 5, 5, 5));
-            if( currentUser != null  && message.getSender().getID() == currentUser.getID()){
+            text.setPadding(new Insets(5, 5, 5, 5));
+            if (currentUser != null && message.getSender().getID() == currentUser.getID()) {
                 hBox.setAlignment(Pos.TOP_RIGHT);
                 text.setStyle("-fx-background-color: #dee2e6 ; -fx-text-fill: #4d194d ; -fx-background-radius: 10px ; -fx-border-radius: 10px ;-fx-font-size: 20px ; -fx-text-alignment: right");
                 hBox.getChildren().add(text);
-            }else if(message.getSender().getID() == secondPlayer.getID()){
+            } else if (message.getSender().getID() == secondPlayer.getID()) {
                 hBox.setAlignment(Pos.TOP_LEFT);
                 text.setStyle("-fx-background-color: #4d194d ; -fx-text-fill: #dee2e6 ; -fx-background-radius: 10px ; -fx-border-radius: 10px ;-fx-font-size: 20px ; -fx-text-alignment: left");
                 hBox.getChildren().add(text);
-            }else if(currentUser != null && message.getSender().getID() == admin.getID()){
+            } else if (currentUser != null && message.getSender().getID() == admin.getID()) {
                 hBox.setAlignment(Pos.TOP_LEFT);
                 text.setStyle("-fx-background-color: #4d194d ; -fx-text-fill: #dee2e6 ; -fx-background-radius: 10px ; -fx-border-radius: 10px ;-fx-font-size: 20px ; -fx-text-alignment: left");
                 hBox.getChildren().add(text);
-            }else if(currentUser == null && message.getSender().getID() == admin.getID()){
+            } else if (currentUser == null && message.getSender().getID() == admin.getID()) {
                 hBox.setAlignment(Pos.TOP_RIGHT);
                 text.setStyle("-fx-background-color: #dee2e6 ; -fx-text-fill: #4d194d ; -fx-background-radius: 10px ; -fx-border-radius: 10px ;-fx-font-size: 20px ; -fx-text-alignment: right");
                 hBox.getChildren().add(text);
@@ -120,9 +121,9 @@ public class ChatController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(secondPlayer != null)
-        usernameLabel.setText(secondPlayer.getUsername());
-        else{
+        if (secondPlayer != null)
+            usernameLabel.setText(secondPlayer.getUsername());
+        else {
             usernameLabel.setText("Admin");
         }
         textLists.getItems().addAll(loadInBox());
@@ -134,13 +135,11 @@ public class ChatController implements Initializable {
         URL url = null;
         secondPlayer = null;
         try {
-            if(!isIsFromPlayerInfoPage() && !isFromAdmin) {
+            if (!isIsFromPlayerInfoPage() && !isFromAdmin) {
                 url = new File("risk\\src\\view\\graphic\\messages.fxml").toURI().toURL();
-            }
-            else if(isFromAdmin){
+            } else if (isFromAdmin) {
                 url = new File("risk\\src\\view\\graphic\\ShowAllPlayers.fxml").toURI().toURL();
-            }
-            else {
+            } else {
                 url = new File("risk\\src\\view\\graphic\\FriendInfo.fxml").toURI().toURL();
             }
             Parent register = FXMLLoader.load(url);
@@ -157,11 +156,11 @@ public class ChatController implements Initializable {
 
     public void sendMessage(MouseEvent event) {
         String message = textField.getText();
-        if(!message.isEmpty()){
-            if(secondPlayer != null && currentUser != null)
-            UserController.getUserController().sendMessage(currentUser , secondPlayer , message );
-            else if(currentUser == null){
-                UserController.getUserController().sendMessageFromAdmin(secondPlayer , message);
+        if (!message.isEmpty()) {
+            if (secondPlayer != null && currentUser != null)
+                UserController.getUserController().sendMessage(currentUser, secondPlayer, message);
+            else if (currentUser == null) {
+                UserController.getUserController().sendMessageFromAdmin(secondPlayer, message);
             }
             textField.setText("");
             textLists.getItems().clear();
