@@ -30,7 +30,7 @@ public class MainMenuAdminController implements Initializable {
     }
     @FXML
     public void events(ActionEvent actionEvent) throws IOException {
-        URL url = new File("risk\\src\\view\\graphic\\CreateEvents.fxml").toURI().toURL();
+        URL url = new File("risk\\src\\view\\graphic\\ShowEventsAdmin.fxml").toURI().toURL();
         Parent register = FXMLLoader.load(url);
         Scene message = new Scene(register);
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

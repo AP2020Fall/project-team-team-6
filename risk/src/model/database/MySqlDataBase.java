@@ -105,7 +105,7 @@ public class MySqlDataBase {
     public int addNewUserToDataBase(String firstName, String lastName, String username, String password, String emailAddress, String telephoneNumber, boolean isAdmin) {
         int id = 0;
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO `users` (`user_id`, `first name`, `last name`, `username`, `password`, `email address`, `telephone number`, `isAdmin`) VALUES (NULL, ? ,?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO `users` (`user_id`, `first name`, `last name`, `username`, `password`, `email address`, `telephone number`, `isAdmin`, `messages`) VALUES (NULL, ? ,?, ?, ?, ?, ?, ? , ?)", Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, firstName);
             statement.setString(2, lastName);
             statement.setString(3, username);
@@ -113,6 +113,7 @@ public class MySqlDataBase {
             statement.setString(5, emailAddress);
             statement.setString(6, telephoneNumber);
             statement.setBoolean(7, isAdmin);
+            statement.setString(8 , "");
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (!isAdmin) {
@@ -150,7 +151,7 @@ public class MySqlDataBase {
 
     private void addNewPlayerToDataBae(int id, String date) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO `players` (`player_id`, `register date`, `rate`, `game logs`, `friends`, `friend requests`, `play requests`, `cards`, `countires`, `number of soldiers`, `messages`, `admin messages`, `current color`, `number of win`, `number of game`, `ally in game`, `ally requests`) VALUES (?, ?, '0', '', '', '', '', '', '', '0', '', '', '', '0', '0', '', '')");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO `players` (`player_id`, `register date`, `rate`, `game logs`, `friends`, `friend requests`, `play requests`, `cards`, `countires`, `number of soldiers`, `admin messages`, `current color`, `number of win`, `number of game`, `ally in game`, `ally requests`) VALUES (?, ?, '0', '', '', '', '', '', '', '0', '', '', '0', '0', '', '')");
             statement.setInt(1, id);
             statement.setString(2, date);
             statement.execute();

@@ -7,19 +7,25 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.usersModels.Player;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 
 public class SendEventInvitationController {
     @FXML
     TextField search; // TODO: 1/14/2021  
     @FXML
-    ListView list; // TODO: 1/14/2021  
+    ListView list; // TODO: 1/14/2021
+
+    private HashMap<Player, CheckBox> checkBoxes = new HashMap<>();
+    private boolean isAllPlayersSelected = false;
 
 
     public void selectall(ActionEvent event) {
