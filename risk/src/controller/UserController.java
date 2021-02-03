@@ -28,7 +28,6 @@ public class UserController {
 
     //Users Methods
     //-----------------------------------------------------------------------------------------------------------------
-    //TODO is admin is not complete
     public Admin getAdmin() {
         return localDataBase.getAdmin();
     }
@@ -42,8 +41,6 @@ public class UserController {
         admin.setID(id);
         return admin;
     }
-
-    //TODO is admin is not complete
     public User signUpAsPlayer(String firstName, String lastName, String username,
                                String password, String emailAddress, String telephoneNumber) {
         Player player = new Player(firstName, lastName, username, password, emailAddress, telephoneNumber);
@@ -211,9 +208,7 @@ public class UserController {
 
     //Players Methods
     //-----------------------------------------------------------------------------------------------------------------
-    public void sendFriendRequest(Player firstPlayer, String secondPlayer) {
-        //TODO .....
-    }
+
 
     public HashMap<Integer, Player> getPlayersFriends(Player player) {
         ArrayList<Player> friendsInArray = player.getFriends();
@@ -238,18 +233,6 @@ public class UserController {
     }
 
 
-    public void inviteToPlay(Player player, String username, RiskGame riskGame) {
-        //TODO ....
-    }
-
-    public void acceptInvitation(Player player, RequestForPlaying requestForPlaying) {
-        //TODO ....
-    }
-
-    public void rejectInvitation(Player player, RequestForPlaying requestForPlaying) {
-        //TODO ....
-    }
-
     public HashMap<Integer, Player> getFriendsList(Player player) {
         HashMap<Integer, Player> friendsList = new HashMap<>();
         ArrayList<Player> friends = player.getRequestsForFriendShips();
@@ -268,13 +251,6 @@ public class UserController {
         return player.getRate();
     }
 
-    public void addCreditForPlayer(Player player, double credit) {
-        //TODO ....
-    }
-
-    public void reduceCreditForPlayer(Player player, double credit) {
-        //TODO .....
-    }
 
     public ArrayList<Player> getAllPlayers() {
         return localDataBase.getAllPlayers();
@@ -283,13 +259,6 @@ public class UserController {
     //new player methods
 //----------------------------------------------------------------------------------------------------------------
 
-    public void acceptEvent(Event event) {
-        //ToDo
-    }
-
-    public void rejectEvent(Event event) {
-        //ToDo
-    }
 
     public void sendMessage(Player sender, Player receiver, String massageText) {
 //        User userReceiver = findUserByUsername(receiver.getUsername());
@@ -378,18 +347,6 @@ public class UserController {
         return null;
     }
 
-    public int getNumbersOfWin(Player player) {
-        //TODO
-
-        return 0;
-    }
-
-    public int getNumbersOfPlayer(Player player) {
-        //TODO
-
-
-        return 0;
-    }
 
     public void sendRequestForFriendShipInGame(Player firstPlayer, Player secondPlayer, RiskGame riskGame) {
         //TODO .....
@@ -410,12 +367,5 @@ public class UserController {
 
     //Admin methods
 //------------------------------------------------------------------------------------------------------------------
-    public void sendMessageToAllPlayers() {
-        //ToDo
-    }
-
-    public void sendMessageToChosenPlayers(ArrayList<Player> chosenPlayers) {
-        //ToDo
-    }
 }
 
