@@ -56,6 +56,7 @@ public class MessageFromAdminController implements Initializable {
         text.setPadding(new Insets(5 , 5, 5, 5));
         hBox.setAlignment(Pos.TOP_RIGHT);
         text.setStyle("-fx-background-color: #dee2e6 ; -fx-text-fill: #4d194d ; -fx-background-radius: 10px ; -fx-border-radius: 10px ;-fx-font-size: 20px ; -fx-text-alignment: right");
+        hBox.getChildren().addAll(text);
         textField.setText("");
         this.hBoxes.add(hBox);
     }

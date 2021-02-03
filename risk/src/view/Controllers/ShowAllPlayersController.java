@@ -39,6 +39,7 @@ public class ShowAllPlayersController implements Initializable {
 
     private HashMap<Player , CheckBox> checkBoxes = new HashMap<>();
     private boolean isAllPlayersSelected = false;
+    
 
     public void back(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\MainMenuAdmin.fxml").toURI().toURL();
