@@ -351,14 +351,16 @@ public class UserController {
             User sender = massage.getSender();
             User receiver = massage.getReceiver();
             Player senderInPlayer = userController.findPlayerByUserName(sender.getUsername());
-            if (!senderInPlayer.equals(currentPlayer)) {
-                Player player = userController.findPlayerByUserName(sender.getUsername());
-                if (player != null)
-                    users.add(player);
-            } else {
-                Player player = userController.findPlayerByUserName(receiver.getUsername());
-                if (player != null)
-                    users.add(player);
+            if(senderInPlayer != null) {
+                if (!senderInPlayer.equals(currentPlayer)) {
+                    Player player = userController.findPlayerByUserName(sender.getUsername());
+                    if (player != null)
+                        users.add(player);
+                } else {
+                    Player player = userController.findPlayerByUserName(receiver.getUsername());
+                    if (player != null)
+                        users.add(player);
+                }
             }
         }
         return users;

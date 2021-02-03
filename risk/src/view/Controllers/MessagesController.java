@@ -189,8 +189,6 @@ public class MessagesController implements Initializable {
                                 String username = ((Label) vBox.getChildren().get(0)).getText();
                                 Player player = UserController.getUserController().findPlayerByUserName(username);
                                 ChatController.setSecondPlayer(player);
-                            }else{
-                                Admin admin = UserController.getUserController().getAdmin();
                             }
                         }else{
                             HBox hBox = (HBox) list.getSelectionModel().getSelectedItem();
@@ -201,6 +199,8 @@ public class MessagesController implements Initializable {
                         }
                         URL url = null;
                         ChatController.setIsFromPlayerInfoPage(false);
+                        ChatController.setIsFromAdmin(false);
+                        ChatController.setCurrentUser(MainPlatoController.getPlayer());
                         try {
                             url = new File("risk\\src\\view\\graphic\\Chat.fxml").toURI().toURL();
                             Parent register = FXMLLoader.load(url);
