@@ -163,7 +163,6 @@ public class MessagesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         list.getItems().addAll(getInbox());
         search.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            //TODO chat menu
             @Override
             public void handle(KeyEvent event) {
                 if(search.getText().isEmpty()){

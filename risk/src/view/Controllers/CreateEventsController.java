@@ -37,13 +37,13 @@ public class CreateEventsController implements Initializable {
     private  static String coinString = "";
 
     @FXML
-    TextField name; //todo................
+    TextField name;
     @FXML
-    TextField start; //todo..................
+    TextField start;
     @FXML
-    TextField end; //todo......................
+    TextField end;
     @FXML
-    TextField winners; // TODO: 1/14/2021
+    TextField winners;
 
     public static ArrayList<Player> getInvitedPlayers() {
         return invitedPlayers;
