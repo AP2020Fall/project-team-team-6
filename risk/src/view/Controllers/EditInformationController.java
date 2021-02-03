@@ -95,7 +95,6 @@ public class EditInformationController implements Initializable {
                 usernameError.setVisible(true);
             }
             userController.changePassword(player.getUsername() , password);
-            //TODO .....
             Stage stage = new Stage();
             stage.setTitle("Change information");
             Label label = new Label("Your information have successfully changed");

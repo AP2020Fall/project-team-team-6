@@ -38,21 +38,7 @@ public class GameController {
         return null;
     }
 
-    public static ArrayList<Card> makeAllCardsForGame() {
-        //TODO
 
-        return null;
-    }
-
-    public ArrayList<Card> playerCards(Player player) {
-        //todo
-        return null;
-    }
-
-    public ArrayList<Card> giveAllPlayerCards(Player player1, Player player2) {
-        //todo
-        return null;
-    }
 
 
     public static void makeAllCountries(RiskGame riskGame) {
@@ -224,10 +210,6 @@ public class GameController {
         localDataBase.getAllRiskGames().add(riskGame);
     }
 
-    public void makeOnlineGameForEvent(String name, RiskGameType riskGameType, int numberOfPlayers, int gamePoint) {
-        //TODO......
-    }
-
     public void makeOfflineGame(String name, Player[] players, int numberOfPlayers, long timer, boolean isMapManually) {
         RiskGame offlineGame = new RiskGame(name, players, numberOfPlayers, timer, isMapManually);
         RiskGame.setOfflineGame(offlineGame);
@@ -337,14 +319,6 @@ public class GameController {
     }
 
 
-    public void startGame(RiskGame riskGame, Player creator) {
-        //TODO.....
-    }
-
-    public boolean isGameStarted(RiskGame riskGame) {
-        //TODO ....
-        return true;
-    }
 
     public void addSoldiersForStartingGame(RiskGame riskGame) {
         int numberOfPlayers = riskGame.getNumberOfPlayers();
@@ -578,7 +552,6 @@ public class GameController {
         player.setNumberOfSoldiers(numberOfCurrentSoldiers);
     }
 
-    //TODO ....
     public void moveSoldiersFromACountryToAnotherCountry(Country first, Country second, int numberOfSoldiers) throws Exception {
         removeSoldierFormCountry(first, numberOfSoldiers);
         addSoliderToCountry(second, numberOfSoldiers);
@@ -740,21 +713,7 @@ public class GameController {
         return r.nextInt(high - low) + low;
     }
 
-    public void endAttack(Player player, RiskGame riskGame) {
-        //TODO
-    }
 
-    public void moveSoldiers(Player player, RiskGame riskGame) {
-
-    }
-
-    public void endFortify(Player player, RiskGame riskGame) {
-
-    }
-
-    public void addCardToPlayer(RiskGame riskGame, Player player) {
-        //TODO
-    }
 
     public void nextPlayer(RiskGame riskGame) {
         Player[] players = riskGame.getPlayers();
