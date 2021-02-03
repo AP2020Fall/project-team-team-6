@@ -130,7 +130,6 @@ public class friendsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         list.getItems().addAll(makeHBoxesForFriends());
         search.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            //TODO chat menu
             @Override
             public void handle(KeyEvent event) {
                 if(search.getText().isEmpty()){

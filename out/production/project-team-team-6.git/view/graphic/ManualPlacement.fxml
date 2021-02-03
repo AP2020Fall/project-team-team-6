@@ -2,46 +2,54 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
-            prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.ManualPlacementController">
     <children>
         <Pane prefHeight="650.0" prefWidth="1350.0">
             <children>
                 <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../NotResoures/manual_placement.png"/>
+                        <Image url="@../../NotResoures/manual_placement.png" />
                     </image>
                 </ImageView>
-                <CheckBox layoutX="805.0" layoutY="174.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="21.0"
-                          style="-fx-background-radius: 10px; -fx-border-radius: 10px;"/>
-                <CheckBox layoutX="610.0" layoutY="174.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="21.0"
-                          style="-fx-background-radius: 10px; -fx-border-radius: 10px;"/>
-                <CheckBox layoutX="805.0" layoutY="327.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="21.0"
-                          style="-fx-background-radius: 10px; -fx-border-radius: 10px;"/>
-                <CheckBox layoutX="610.0" layoutY="327.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="21.0"
-                          style="-fx-background-radius: 10px; -fx-border-radius: 10px;"/>
-                <CheckBox layoutX="805.0" layoutY="477.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="21.0"
-                          style="-fx-background-radius: 10px; -fx-border-radius: 10px;"/>
-                <CheckBox layoutX="610.0" layoutY="477.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="21.0"
-                          style="-fx-background-radius: 10px; -fx-border-radius: 10px;"/>
-                <Button layoutX="31.0" layoutY="581.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="96.0"
-                        style="-fx-background-color: #545d9e; -fx-background-radius: 10px;" text="Back"
-                        textFill="WHITE">
+                <Button layoutX="31.0" layoutY="581.0" mnemonicParsing="false" onAction="#back" prefHeight="43.0" prefWidth="96.0" style="-fx-background-color: #545d9e; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                     <font>
-                        <Font name="System Bold" size="22.0"/>
+                        <Font name="System Bold" size="22.0" />
                     </font>
                 </Button>
+            <RadioButton fx:id="mpoff" layoutX="529.0" layoutY="179.0" mnemonicParsing="false" selected="true">
+               <toggleGroup>
+                  <ToggleGroup fx:id="manual" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="mpon" layoutX="731.0" layoutY="179.0" mnemonicParsing="false" toggleGroup="$manual" />
+            <RadioButton fx:id="fogon" layoutX="731.0" layoutY="331.0" mnemonicParsing="false">
+               <toggleGroup>
+                  <ToggleGroup fx:id="fog" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="fogoff" layoutX="529.0" layoutY="331.0" mnemonicParsing="false" selected="true" toggleGroup="$fog" />
+            <RadioButton fx:id="blizzardoff" layoutX="529.0" layoutY="479.0" mnemonicParsing="false" selected="true">
+               <toggleGroup>
+                  <ToggleGroup fx:id="blizzard" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="blizzardon" layoutX="731.0" layoutY="479.0" mnemonicParsing="false" toggleGroup="$blizzard" />
+            <Button layoutX="1240.0" layoutY="588.0" mnemonicParsing="false" onAction="#create" prefHeight="43.0" prefWidth="96.0" style="-fx-background-color: #545d9e; -fx-background-radius: 10px;" text="create" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
             </children>
         </Pane>
     </children>
