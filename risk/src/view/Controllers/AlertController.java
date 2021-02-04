@@ -18,7 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AlertController implements Initializable{
+public class AlertController implements Initializable {
 
 
     public ImageView exitButton;
@@ -37,7 +37,6 @@ public class AlertController implements Initializable{
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
-
 
 
     @Override

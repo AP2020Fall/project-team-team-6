@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,10 +25,13 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ImageView>
-            <RadioButton fx:id="D1" layoutX="644.0" layoutY="268.0" mnemonicParsing="false" />
-            <RadioButton fx:id="D2" layoutX="644.0" layoutY="332.0" mnemonicParsing="false" />
-            <RadioButton fx:id="D3" layoutX="644.0" layoutY="393.0" mnemonicParsing="false" />
-            <RadioButton fx:id="Blitz" layoutX="644.0" layoutY="461.0" mnemonicParsing="false" />
+                <RadioButton fx:id="D1" layoutX="644.0" layoutY="268.0" mnemonicParsing="false">
+               <toggleGroup>
+                  <ToggleGroup fx:id="dice" />
+               </toggleGroup></RadioButton>
+                <RadioButton fx:id="D2" layoutX="644.0" layoutY="332.0" mnemonicParsing="false" toggleGroup="$dice" />
+                <RadioButton fx:id="D3" layoutX="644.0" layoutY="393.0" mnemonicParsing="false" toggleGroup="$dice" />
+                <RadioButton fx:id="Blitz" layoutX="644.0" layoutY="461.0" mnemonicParsing="false" toggleGroup="$dice" />
             </children>
         </Pane>
     </children>

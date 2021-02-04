@@ -74,8 +74,13 @@ public class MainPlatoController implements Initializable {
     }
 
     @FXML
-    public void games(ActionEvent actionEvent) {
-        //todo.............
+    public void games(ActionEvent actionEvent) throws IOException {
+        URL url = new File("risk\\src\\view\\graphic\\Playonline-ofline.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) username.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

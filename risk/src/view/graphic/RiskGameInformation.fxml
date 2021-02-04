@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -40,14 +41,20 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <RadioButton fx:id="N2" layoutX="481.0" layoutY="331.0" mnemonicParsing="false" />
-            <RadioButton fx:id="N3" layoutX="562.0" layoutY="331.0" mnemonicParsing="false" />
-            <RadioButton fx:id="N4" layoutX="654.0" layoutY="331.0" mnemonicParsing="false" />
-            <RadioButton fx:id="N5" layoutX="739.0" layoutY="333.0" mnemonicParsing="false" />
-            <RadioButton fx:id="N6" layoutX="831.0" layoutY="333.0" mnemonicParsing="false" />
-            <RadioButton fx:id="M3" layoutX="481.0" layoutY="481.0" mnemonicParsing="false" />
-            <RadioButton fx:id="M5" layoutX="624.0" layoutY="481.0" mnemonicParsing="false" />
-            <RadioButton fx:id="M7" layoutX="773.0" layoutY="481.0" mnemonicParsing="false" />
+            <RadioButton fx:id="N2" layoutX="481.0" layoutY="331.0" mnemonicParsing="false" selected="true">
+               <toggleGroup>
+                  <ToggleGroup fx:id="numberofplayers" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="N3" layoutX="562.0" layoutY="331.0" mnemonicParsing="false" toggleGroup="$numberofplayers" />
+            <RadioButton fx:id="N4" layoutX="654.0" layoutY="331.0" mnemonicParsing="false" toggleGroup="$numberofplayers" />
+            <RadioButton fx:id="N5" layoutX="739.0" layoutY="333.0" mnemonicParsing="false" toggleGroup="$numberofplayers" />
+            <RadioButton fx:id="N6" layoutX="831.0" layoutY="333.0" mnemonicParsing="false" toggleGroup="$numberofplayers" />
+            <RadioButton fx:id="M3" layoutX="481.0" layoutY="481.0" mnemonicParsing="false" selected="true">
+               <toggleGroup>
+                  <ToggleGroup fx:id="time" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="M5" layoutX="624.0" layoutY="481.0" mnemonicParsing="false" toggleGroup="$time" />
+            <RadioButton fx:id="M7" layoutX="773.0" layoutY="481.0" mnemonicParsing="false" toggleGroup="$time" />
             </children>
         </Pane>
     </children>

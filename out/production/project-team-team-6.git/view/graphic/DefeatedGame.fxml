@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.Pane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
-            prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+            prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.Controllers.DefeatedGameController">
     <children>
         <Pane prefHeight="650.0" prefWidth="1350.0">
             <children>
@@ -16,8 +17,8 @@
                         <Image url="@../../NotResoures/defeated-background.png"/>
                     </image>
                 </ImageView>
-                <ImageView fitHeight="100.0" fitWidth="200.0" layoutX="20.0" layoutY="530.0" pickOnBounds="true"
-                           preserveRatio="true">
+                <ImageView fitHeight="100.0" fitWidth="200.0" layoutX="20.0" layoutY="530.0" onDragDetected="#back"
+                           pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../NotResoures/next_phase_button.png"/>
                     </image>
