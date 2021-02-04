@@ -1,5 +1,6 @@
 package view.Controllers;
 
+import controller.GameController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -44,6 +46,11 @@ public class RiskGameInformationController {
     @FXML
     private RadioButton M7;
 
+    @FXML
+    private ToggleGroup numberofplayers;
+
+    @FXML
+    private ToggleGroup time;
 
     public void back(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\Playonline-ofline.fxml").toURI().toURL();
@@ -55,6 +62,12 @@ public class RiskGameInformationController {
     }
 
     public void submit(ActionEvent event) throws IOException {
+        RadioButton selectedRadioButtonTime = (RadioButton) time.getSelectedToggle();
+        String timegroup = selectedRadioButtonTime.getText();
+        RadioButton selectedRadioButtonNumber = (RadioButton) numberofplayers.getSelectedToggle();
+        String numbergroup = selectedRadioButtonNumber.getText();
+        String gamenametext = gamename.getText();
+
         URL url = new File("risk\\src\\view\\graphic\\ManualPlacement.fxml").toURI().toURL();
         Parent register = FXMLLoader.load(url);
         Scene message = new Scene(register);
