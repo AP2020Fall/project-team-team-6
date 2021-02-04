@@ -1,19 +1,38 @@
 package view.Controllers;
 
+import controller.GameController;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import model.gamesModels.Country;
+import model.gamesModels.GameStages;
+import model.gamesModels.RiskGame;
+import model.usersModels.Player;
+import view.terminalMenu.RiskGameMenu;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MapGamesController {
+public class MapGamesController implements Initializable {
+    private static RiskGame riskGame = null;
+    private GameController gameController = GameController.getGameController();
+
+    public static RiskGame getRiskGame() {
+        return riskGame;
+    }
+
+    public static void setRiskGame(RiskGame riskGame) {
+        MapGamesController.riskGame = riskGame;
+    }
+
     // TODO: 1/30/2021 ................................................hamash moondeh
     @FXML
     private Circle C1;
@@ -172,6 +191,42 @@ public class MapGamesController {
         Stage stage = (Stage) username.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            checkIfMapIsManually(riskGame);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void checkIfMapIsManually(RiskGame riskGame) throws Exception {
+        GameStages gameStages = riskGame.getGameStages();
+        if(gameStages.equals(GameStages.STARTING)){
+            if(!riskGame.isMapManually()){
+                if (!riskGame.isHasGotSoldiersForDraft()) {
+                    gameController.putSoldiersForStartingStageUnManually(riskGame);
+                    gameController.goNextStage(riskGame);
+                }
+            }
+        }
+    }
+
+
+    public void countryClick(MouseEvent event) {
+        GameStages gameStages = riskGame.getGameStages();
+        if(gameStages.equals(GameStages.STARTING)){
+
+        }else if(gameStages.equals(GameStages.DRAFT)){
+
+        }else if(gameStages.equals(GameStages.ATTACK)){
+
+        }else if(gameStages.equals(GameStages.FORTIFY)){
+
+        }
     }
 }
 
