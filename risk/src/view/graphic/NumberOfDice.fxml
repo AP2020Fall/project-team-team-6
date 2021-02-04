@@ -8,30 +8,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.NumberOfDiceController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
+            prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.Controllers.NumberOfDiceController">
     <children>
         <Pane prefHeight="650.0" prefWidth="1350.0">
             <children>
                 <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../NotResoures/number-of-dices.png" />
+                        <Image url="@../../NotResoures/number-of-dices.png"/>
                     </image>
                 </ImageView>
-                <ImageView fitHeight="100.0" fitWidth="200.0" layoutX="20.0" layoutY="530.0" onDragDetected="#back" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="100.0" fitWidth="200.0" layoutX="20.0" layoutY="530.0" onDragDetected="#back"
+                           pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../NotResoures/back.png" />
+                        <Image url="@../../NotResoures/back.png"/>
                     </image>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </ImageView>
                 <RadioButton fx:id="D1" layoutX="644.0" layoutY="268.0" mnemonicParsing="false">
-               <toggleGroup>
-                  <ToggleGroup fx:id="dice" />
-               </toggleGroup></RadioButton>
-                <RadioButton fx:id="D2" layoutX="644.0" layoutY="332.0" mnemonicParsing="false" toggleGroup="$dice" />
-                <RadioButton fx:id="D3" layoutX="644.0" layoutY="393.0" mnemonicParsing="false" toggleGroup="$dice" />
-                <RadioButton fx:id="Blitz" layoutX="644.0" layoutY="461.0" mnemonicParsing="false" toggleGroup="$dice" />
+                    <toggleGroup>
+                        <ToggleGroup fx:id="dice"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="D2" layoutX="644.0" layoutY="332.0" mnemonicParsing="false" toggleGroup="$dice"/>
+                <RadioButton fx:id="D3" layoutX="644.0" layoutY="393.0" mnemonicParsing="false" toggleGroup="$dice"/>
+                <RadioButton fx:id="Blitz" layoutX="644.0" layoutY="461.0" mnemonicParsing="false" toggleGroup="$dice"/>
             </children>
         </Pane>
     </children>
