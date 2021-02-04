@@ -26,6 +26,18 @@ public class GameController {
         return gameController;
     }
 
+    public static ArrayList<Card> makeAllCardsForGame() {
+        ArrayList<Card> allCards = new ArrayList<>();
+        CardDesigns[] cardDesigns = {CardDesigns.ARTILLERY , CardDesigns.CAVALRY , CardDesigns.INFANTRY};
+        for(CardDesigns cardDesigns1 : cardDesigns){
+            for(int i = 1 ; i  < 43 ; i++){
+                Card card = new Card(i , cardDesigns1);
+                allCards.add(card);
+            }
+        }
+        return allCards;
+    }
+
     public ArrayList<RiskGame> getAllRiskGames() {
         return localDataBase.getAllRiskGames();
     }
