@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.MapGamesController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.MapGamesController">
    <children>
       <Pane prefHeight="650.0" prefWidth="1350.0">
          <children>
@@ -29,7 +29,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-6.0" layoutY="-13.0" text="0">
+                  <Label fx:id="L1" layoutX="-6.0" layoutY="-13.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -44,7 +44,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-6.0" layoutY="-12.0" text="0">
+                  <Label fx:id="L2" layoutX="-6.0" layoutY="-12.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -63,7 +63,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-12.0" text="0">
+                  <Label fx:id="L9" layoutX="-5.0" layoutY="-12.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -77,7 +77,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-6.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L6" layoutX="-6.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -93,7 +93,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-6.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L7" layoutX="-6.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -107,7 +107,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-12.0" text="0">
+                  <Label fx:id="L3" layoutX="-5.0" layoutY="-12.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -122,7 +122,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L5" layoutX="-5.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -136,7 +136,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-16.0" text="0">
+                  <Label fx:id="L4" layoutX="-5.0" layoutY="-16.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -150,7 +150,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L8" layoutX="-5.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -164,7 +164,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L10" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -178,7 +178,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-13.0" text="0">
+                  <Label fx:id="L11" layoutX="-5.0" layoutY="-13.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -192,7 +192,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-13.0" text="0">
+                  <Label fx:id="L12" layoutX="-5.0" layoutY="-13.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -206,7 +206,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-13.0" text="0">
+                  <Label fx:id="L13" layoutX="-5.0" layoutY="-13.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -221,7 +221,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L24" layoutX="-4.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -235,7 +235,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L22" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -249,7 +249,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L26" layoutX="-5.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -263,7 +263,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L20" layoutX="-5.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -277,7 +277,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L21" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -291,7 +291,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L25" layoutX="-4.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -305,7 +305,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L23" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -319,7 +319,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L17" layoutX="-5.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -333,7 +333,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L15" layoutX="-5.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -347,7 +347,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L16" layoutX="-5.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -361,7 +361,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L19" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -375,7 +375,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L14" layoutX="-5.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -390,7 +390,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-13.0" text="0">
+                  <Label fx:id="L18" layoutX="-4.0" layoutY="-13.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -404,7 +404,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L41" layoutX="-5.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -419,7 +419,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L40" layoutX="-4.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -434,7 +434,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L39" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -448,7 +448,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L42" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -462,7 +462,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L27" layoutX="-4.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -476,7 +476,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L33" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -490,7 +490,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L37" layoutX="-4.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -504,7 +504,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L36" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -518,7 +518,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-13.0" text="0">
+                  <Label fx:id="L28" layoutX="-4.0" layoutY="-13.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -532,7 +532,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L29" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -546,7 +546,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L35" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -560,7 +560,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L34" layoutX="-4.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -574,7 +574,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L30" layoutX="-4.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -588,7 +588,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L38" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -602,7 +602,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-5.0" layoutY="-15.0" text="0">
+                  <Label fx:id="L31" layoutX="-5.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -616,7 +616,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label layoutX="-4.0" layoutY="-14.0" text="0">
+                  <Label fx:id="L32" layoutX="-4.0" layoutY="-14.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>

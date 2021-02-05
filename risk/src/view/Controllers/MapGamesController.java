@@ -1,19 +1,31 @@
 package view.Controllers;
 
+import com.sun.org.apache.bcel.internal.generic.LADD;
 import controller.GameController;
 import javafx.embed.swing.JFXPanel;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Control;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.gamesModels.Country;
 import model.gamesModels.GameStages;
 import model.gamesModels.RiskGame;
 import model.usersModels.Player;
+import view.terminalMenu.Menu;
 import view.terminalMenu.RiskGameMenu;
 
 import java.io.File;
@@ -35,130 +47,259 @@ public class MapGamesController implements Initializable {
 
     // TODO: 1/30/2021 ................................................hamash moondeh
     @FXML
+    private AnchorPane pane;
+
+    @FXML
     private Circle C1;
+
+    @FXML
+    private Label L1;
 
     @FXML
     private Circle C2;
 
     @FXML
+    private Label L2;
+
+    @FXML
     private Circle C9;
+
+    @FXML
+    private Label L9;
 
     @FXML
     private Circle C6;
 
     @FXML
+    private Label L6;
+
+    @FXML
     private Circle C7;
+
+    @FXML
+    private Label L7;
 
     @FXML
     private Circle C3;
 
     @FXML
+    private Label L3;
+
+    @FXML
     private Circle C5;
+
+    @FXML
+    private Label L5;
 
     @FXML
     private Circle C4;
 
     @FXML
+    private Label L4;
+
+    @FXML
     private Circle C8;
+
+    @FXML
+    private Label L8;
 
     @FXML
     private Circle C10;
 
     @FXML
+    private Label L10;
+
+    @FXML
     private Circle C11;
+
+    @FXML
+    private Label L11;
 
     @FXML
     private Circle C12;
 
     @FXML
+    private Label L12;
+
+    @FXML
     private Circle C13;
+
+    @FXML
+    private Label L13;
 
     @FXML
     private Circle C24;
 
     @FXML
+    private Label L24;
+
+    @FXML
     private Circle C22;
+
+    @FXML
+    private Label L22;
 
     @FXML
     private Circle C26;
 
     @FXML
+    private Label L26;
+
+    @FXML
     private Circle C20;
+
+    @FXML
+    private Label L20;
 
     @FXML
     private Circle C21;
 
     @FXML
+    private Label L21;
+
+    @FXML
     private Circle C25;
+
+    @FXML
+    private Label L25;
 
     @FXML
     private Circle C23;
 
     @FXML
+    private Label L23;
+
+    @FXML
     private Circle C17;
+
+    @FXML
+    private Label L17;
 
     @FXML
     private Circle C15;
 
     @FXML
+    private Label L15;
+
+    @FXML
     private Circle C16;
+
+    @FXML
+    private Label L16;
 
     @FXML
     private Circle C19;
 
     @FXML
+    private Label L19;
+
+    @FXML
     private Circle C14;
+
+    @FXML
+    private Label L14;
 
     @FXML
     private Circle C18;
 
     @FXML
+    private Label L18;
+
+    @FXML
     private Circle C41;
+
+    @FXML
+    private Label L41;
 
     @FXML
     private Circle C40;
 
     @FXML
+    private Label L40;
+
+    @FXML
     private Circle C39;
+
+    @FXML
+    private Label L39;
 
     @FXML
     private Circle C42;
 
     @FXML
+    private Label L42;
+
+    @FXML
     private Circle C27;
+
+    @FXML
+    private Label L27;
 
     @FXML
     private Circle C33;
 
     @FXML
+    private Label L33;
+
+    @FXML
     private Circle C37;
+
+    @FXML
+    private Label L37;
 
     @FXML
     private Circle C36;
 
     @FXML
+    private Label L36;
+
+    @FXML
     private Circle C28;
+
+    @FXML
+    private Label L28;
 
     @FXML
     private Circle C29;
 
     @FXML
+    private Label L29;
+
+    @FXML
     private Circle C35;
+
+    @FXML
+    private Label L35;
 
     @FXML
     private Circle C34;
 
     @FXML
+    private Label L34;
+
+    @FXML
     private Circle C30;
+
+    @FXML
+    private Label L30;
 
     @FXML
     private Circle C38;
 
     @FXML
+    private Label L38;
+
+    @FXML
     private Circle C31;
 
     @FXML
+    private Label L31;
+
+    @FXML
     private Circle C32;
+
+    @FXML
+    private Label L32;
 
     @FXML
     public void back(MouseEvent mouseEvent) throws IOException {
@@ -216,17 +357,95 @@ public class MapGamesController implements Initializable {
     }
 
 
-    public void countryClick(MouseEvent event) {
+    public void countryClick(MouseEvent event) throws Exception {
         GameStages gameStages = riskGame.getGameStages();
+        String id = ((Control) event.getSource()).getId();
         if(gameStages.equals(GameStages.STARTING)){
-
+            startGameStartingStage(id);
         }else if(gameStages.equals(GameStages.DRAFT)){
-
+            HBox hBox = new HBox(10);
+            Image image = new Image("@../../NotResoures/exit.png");
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(40);
+            imageView.setFitWidth(20);
+            imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if(event.getButton().equals(MouseButton.PRIMARY)){
+                        pane.getChildren().remove(hBox);
+                    }
+                }
+            });
+            double x = ((Control) event.getSource()).getLayoutX();
+            double y = ((Control) event.getSource()).getLayoutY();
+            Button addButton = new Button("+");
+            addButton.setStyle("-fx-text-fill: white ; -fx-background-color: #90be6d ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
+            Button subButton = new Button("-");
+            addButton.setOnAction(e ->{
+                int countryId = getCountryCoordination(id).getCountryCoordinate();
+                Label countryLabel = findLabelByCountryCoordinate(countryId);
+                int numberOfSoldiers = Integer.parseInt(countryLabel.getText());
+                numberOfSoldiers++;
+                countryLabel.setText(String.valueOf(numberOfSoldiers));
+            });
+            subButton.setStyle("-fx-text-fill: white ; -fx-background-color: #ff006e ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
+            Image secondImage = new Image("@../../NotResoures/send button.png");
+            ImageView secondImageView = new ImageView(secondImage);
+            secondImageView.setFitHeight(40);
+            secondImageView.setFitWidth(20);
+            //TODO ....
+            hBox.setLayoutX(x-20);
+            hBox.setLayoutY(y-20);
+            hBox.getChildren().addAll(imageView , subButton , addButton , secondImageView);
+            pane.getChildren().add(hBox);
+            startDraftStage(id);
         }else if(gameStages.equals(GameStages.ATTACK)){
 
         }else if(gameStages.equals(GameStages.FORTIFY)){
 
         }
+    }
+
+    private void startGameStartingStage(String countryCoordinate) throws Exception {
+        Player currentPlayer = riskGame.getCurrentPlayer();
+        if (riskGame.isMapManually()) {
+            while (true) {
+                if (gameController.isStartingStageFinished(riskGame))
+                    break;
+                    Country country = getCountryCoordination(countryCoordinate);
+                    try {
+                        gameController.placeSoldiersForStartingStage(riskGame, country, currentPlayer);
+                        gameController.nextPlayer(riskGame);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+            }
+        }
+        gameController.goNextStage(riskGame);
+        gameController.calculateNumberOfSoldiersToAddInDraft(currentPlayer);
+    }
+    private void startDraftStage(String id){
+        Player currentPlayer = riskGame.getCurrentPlayer();
+        Country country = getCountryCoordination(id);
+
+    }
+
+    private Country getCountryCoordination(String countryId){
+        String[] countryArray = countryId.split("C");
+        int countryIdInInt = Integer.parseInt(countryArray[0]);
+        return riskGame.getAllCountriesWithNumber().get(countryIdInInt);
+    }
+
+    private Label findLabelByCountryCoordinate(int countryCoordinate){
+        StringBuilder stringBuilder = new StringBuilder();
+        String countryId = String.valueOf(countryCoordinate);
+        stringBuilder.append("L").append(countryId);
+       for(Node node : pane.getChildren()){
+           if(node.getId().equals(stringBuilder.toString())){
+               return (Label) node;
+           }
+       }
+       return null;
     }
 }
 
