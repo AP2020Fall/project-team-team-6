@@ -1,6 +1,5 @@
 package view.Controllers;
 
-import com.sun.org.apache.bcel.internal.generic.LADD;
 import controller.GameController;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.EventHandler;
@@ -25,12 +24,11 @@ import model.gamesModels.Country;
 import model.gamesModels.GameStages;
 import model.gamesModels.RiskGame;
 import model.usersModels.Player;
-import view.terminalMenu.Menu;
-import view.terminalMenu.RiskGameMenu;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MapGamesController implements Initializable {
@@ -46,6 +44,9 @@ public class MapGamesController implements Initializable {
     }
 
     // TODO: 1/30/2021 ................................................hamash moondeh
+    private static Country firstCountry = null;
+    private static Country secondCountry = null;
+
     @FXML
     private AnchorPane pane;
 
@@ -409,7 +410,8 @@ public class MapGamesController implements Initializable {
                 int countryId = country.getCountryCoordinate();
                 Label countryLabel = findLabelByCountryCoordinate(countryId);
                 int numberOfSoldiers = Integer.parseInt(countryLabel.getText());
-                if(numberOfSoldiers >  0 ) {
+                int minimumSoldiers = country.getNumberOfSoldiers();
+                if(numberOfSoldiers >  minimumSoldiers) {
                     numberOfSoldiers--;
                     countryLabel.setText(String.valueOf(numberOfSoldiers));
                 }
@@ -432,9 +434,128 @@ public class MapGamesController implements Initializable {
                 }
             });
         }else if(gameStages.equals(GameStages.ATTACK)){
-
+            if(firstCountry == null){
+            Country country = getCountryCoordination(id);
+            boolean isCountryForPlayer = GameController.getGameController().isCountryForPlayer(country , riskGame.getCurrentPlayer());
+            if(isCountryForPlayer) {
+                if (country.getNumberOfSoldiers() != 1) {
+                    firstCountry = country;
+                    ArrayList<Country> neighbourCountries = new ArrayList<>();
+                    for (Country country1 : country.getNeighboringCountries()) {
+                        if (!GameController.getGameController().isCountryForPlayer(country1, riskGame.getCurrentPlayer())) {
+                            neighbourCountries.add(country1);
+                        }
+                    }
+                    for (Country country1 : neighbourCountries) {
+                        Circle circle = findShapeByCountryCoordinate(country1.getCountryCoordinate());
+                        circle.setStyle("-fx-border-color: #8338ec ; -fx-border-width: 1px");
+                    }
+                }
+               }
+            }else if(secondCountry == null){
+                ArrayList<Country> neighbourCountries = new ArrayList<>();
+                for (Country country1 : firstCountry.getNeighboringCountries()) {
+                    if (!GameController.getGameController().isCountryForPlayer(country1, riskGame.getCurrentPlayer())) {
+                        neighbourCountries.add(country1);
+                    }
+                }
+                Country country = getCountryCoordination(id);
+                if(neighbourCountries.contains(country)){
+                    secondCountry = country;
+                }
+                //TODO number of dice
+                //TODO attack
+                firstCountry = null;
+                secondCountry = null;
+            }
         }else if(gameStages.equals(GameStages.FORTIFY)){
-
+            Country country = getCountryCoordination(id);
+            if (!gameController.hasDoneFortify(riskGame)){
+                if(gameController.isCountryForPlayer(country , riskGame.getCurrentPlayer())){
+                    if(firstCountry == null)
+                    firstCountry = country;
+                    else {
+                        if(gameController.isPathAvailableForFortifying(riskGame, riskGame.getCurrentPlayer(), firstCountry, country)){
+                            secondCountry = country;
+                            HBox hBox = new HBox(10);
+                            Image image = new Image("@../../NotResoures/exit.png");
+                            ImageView imageView = new ImageView(image);
+                            imageView.setFitHeight(40);
+                            imageView.setFitWidth(20);
+                            double x = ((Control) event.getSource()).getLayoutX();
+                            double y = ((Control) event.getSource()).getLayoutY();
+                            Button addButton = new Button("+");
+                            addButton.setStyle("-fx-text-fill: white ; -fx-background-color: #90be6d ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
+                            Button subButton = new Button("-");
+                            subButton.setStyle("-fx-text-fill: white ; -fx-background-color: #ff006e ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
+                            Image secondImage = new Image("@../../NotResoures/send button.png");
+                            ImageView secondImageView = new ImageView(secondImage);
+                            secondImageView.setFitHeight(40);
+                            secondImageView.setFitWidth(20);
+                            hBox.setLayoutX(x-20);
+                            hBox.setLayoutY(y-20);
+                            hBox.getChildren().addAll(imageView , subButton , addButton , secondImageView);
+                            pane.getChildren().add(hBox);
+                            //Exit button
+                            imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    if(event.getButton().equals(MouseButton.PRIMARY)){
+                                        pane.getChildren().remove(hBox);
+                                    }
+                                }
+                            });
+                            //Add button
+                            addButton.setOnAction(e ->{
+                                Label firstCountryLabel = findLabelByCountryCoordinate(firstCountry.getCountryCoordinate());
+                                int numberOfSoldiersInFirstCountry = Integer.parseInt(firstCountryLabel.getText());
+                                Label secondCountryLabel = findLabelByCountryCoordinate(secondCountry.getCountryCoordinate());
+                                int numberOfSoldiersInSecondCountry = Integer.parseInt(secondCountryLabel.getText());
+                                if(numberOfSoldiersInFirstCountry > 1 ){
+                                    numberOfSoldiersInFirstCountry--;
+                                    numberOfSoldiersInSecondCountry++;
+                                    firstCountryLabel.setText(String.valueOf(numberOfSoldiersInFirstCountry));
+                                    secondCountryLabel.setText(String.valueOf(numberOfSoldiersInSecondCountry));
+                                    //This will change the value in the labels
+                                }
+                            });
+                            //Sub button
+                            subButton.setOnAction(e ->{
+                                Label firstCountryLabel = findLabelByCountryCoordinate(firstCountry.getCountryCoordinate());
+                                int numberOfSoldiersInFirstCountry = Integer.parseInt(firstCountryLabel.getText());
+                                Label secondCountryLabel = findLabelByCountryCoordinate(secondCountry.getCountryCoordinate());
+                                int numberOfSoldiersInSecondCountry = Integer.parseInt(secondCountryLabel.getText());
+                                if(numberOfSoldiersInSecondCountry > 1 ){
+                                    numberOfSoldiersInFirstCountry++;
+                                    numberOfSoldiersInSecondCountry--;
+                                    firstCountryLabel.setText(String.valueOf(numberOfSoldiersInFirstCountry));
+                                    secondCountryLabel.setText(String.valueOf(numberOfSoldiersInSecondCountry));
+                                    //This will change the value in the labels
+                                }
+                            });
+                            //Submit button
+                            secondImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    if(event.getButton().equals(MouseButton.PRIMARY)){
+                                        Label secondCountryLabel = findLabelByCountryCoordinate(secondCountry.getCountryCoordinate());
+                                        int numberOfSoldiersInLabel = Integer.parseInt(secondCountryLabel.getText());
+                                        int numberOfSoldier = secondCountry.getNumberOfSoldiers() - numberOfSoldiersInLabel;
+                                        if(numberOfSoldier < 0 )
+                                            numberOfSoldier *= -1;
+                                        try {
+                                            gameController.moveSoldiersFromACountryToAnotherCountry(firstCountry, secondCountry, numberOfSoldier);
+                                            gameController.setHashDoneFortify(riskGame, true);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -456,11 +577,6 @@ public class MapGamesController implements Initializable {
         gameController.goNextStage(riskGame);
         gameController.calculateNumberOfSoldiersToAddInDraft(currentPlayer);
     }
-    private void startDraftStage(String id){
-        Player currentPlayer = riskGame.getCurrentPlayer();
-        Country country = getCountryCoordination(id);
-
-    }
 
     private Country getCountryCoordination(String countryId){
         String[] countryArray = countryId.split("C");
@@ -478,6 +594,17 @@ public class MapGamesController implements Initializable {
            }
        }
        return null;
+    }
+    private Circle findShapeByCountryCoordinate(int countryCoordinate){
+        StringBuilder stringBuilder = new StringBuilder();
+        String countryId = String.valueOf(countryCoordinate);
+        stringBuilder.append("C").append(countryId);
+        for(Node node : pane.getChildren()){
+            if(node.getId().equals(stringBuilder.toString())){
+                return (Circle) node;
+            }
+        }
+        return null;
     }
 }
 
