@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -30,7 +31,13 @@ public class NumberOfDiceController {
     private RadioButton Blitz;
 
     @FXML
+    private ToggleGroup dice;
+    RadioButton selectedRadioButtonDice = (RadioButton) dice.getSelectedToggle();
+    String dicegroup = selectedRadioButtonDice.getText();
+
+    @FXML
     public void back(MouseEvent mouseEvent) throws IOException {
+
         URL url = new File("risk\\src\\view\\graphic\\MapGames.fxml").toURI().toURL();
         Parent register = FXMLLoader.load(url);
         Scene message = new Scene(register);
