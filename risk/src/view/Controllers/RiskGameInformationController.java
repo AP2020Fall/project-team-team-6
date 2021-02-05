@@ -55,7 +55,7 @@ public class RiskGameInformationController {
 
     @FXML
     private Label nameerror;
-
+    @FXML
     public void back(ActionEvent event) throws IOException {
         URL url = new File("risk\\src\\view\\graphic\\Playonline-ofline.fxml").toURI().toURL();
         Parent register = FXMLLoader.load(url);
@@ -64,7 +64,7 @@ public class RiskGameInformationController {
         window.setScene(message);
         window.show();
     }
-
+    @FXML
     public void submit(ActionEvent event) throws IOException {
         RadioButton selectedRadioButtonTime = (RadioButton) time.getSelectedToggle();
         String timegroup = selectedRadioButtonTime.getText();
