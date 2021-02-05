@@ -368,26 +368,11 @@ public class MapGamesController implements Initializable {
             ImageView imageView = new ImageView(image);
             imageView.setFitHeight(40);
             imageView.setFitWidth(20);
-            imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    if(event.getButton().equals(MouseButton.PRIMARY)){
-                        pane.getChildren().remove(hBox);
-                    }
-                }
-            });
             double x = ((Control) event.getSource()).getLayoutX();
             double y = ((Control) event.getSource()).getLayoutY();
             Button addButton = new Button("+");
             addButton.setStyle("-fx-text-fill: white ; -fx-background-color: #90be6d ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
             Button subButton = new Button("-");
-            addButton.setOnAction(e ->{
-                int countryId = getCountryCoordination(id).getCountryCoordinate();
-                Label countryLabel = findLabelByCountryCoordinate(countryId);
-                int numberOfSoldiers = Integer.parseInt(countryLabel.getText());
-                numberOfSoldiers++;
-                countryLabel.setText(String.valueOf(numberOfSoldiers));
-            });
             subButton.setStyle("-fx-text-fill: white ; -fx-background-color: #ff006e ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
             Image secondImage = new Image("@../../NotResoures/send button.png");
             ImageView secondImageView = new ImageView(secondImage);
@@ -398,7 +383,54 @@ public class MapGamesController implements Initializable {
             hBox.setLayoutY(y-20);
             hBox.getChildren().addAll(imageView , subButton , addButton , secondImageView);
             pane.getChildren().add(hBox);
-            startDraftStage(id);
+            //Exit button
+            imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if(event.getButton().equals(MouseButton.PRIMARY)){
+                        pane.getChildren().remove(hBox);
+                    }
+                }
+            });
+            //Add button
+            addButton.setOnAction(e ->{
+                Player currentPlayer =riskGame.getCurrentPlayer();
+                int countryId = getCountryCoordination(id).getCountryCoordinate();
+                Label countryLabel = findLabelByCountryCoordinate(countryId);
+                int numberOfSoldiers = Integer.parseInt(countryLabel.getText());
+                if(numberOfSoldiers < currentPlayer.getNumberOfSoldiers()) {
+                    numberOfSoldiers++;
+                    countryLabel.setText(String.valueOf(numberOfSoldiers));
+                }
+            });
+            //Sub button
+            subButton.setOnAction(e->{
+                Country country = getCountryCoordination(id);
+                int countryId = country.getCountryCoordinate();
+                Label countryLabel = findLabelByCountryCoordinate(countryId);
+                int numberOfSoldiers = Integer.parseInt(countryLabel.getText());
+                if(numberOfSoldiers >  0 ) {
+                    numberOfSoldiers--;
+                    countryLabel.setText(String.valueOf(numberOfSoldiers));
+                }
+            });
+            //Submit button
+            secondImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if(event.getButton().equals(MouseButton.PRIMARY)){
+                        Country country = getCountryCoordination(id);
+                        Label countryLabel = findLabelByCountryCoordinate(country.getCountryCoordinate());
+                        int numberOfSolider = Integer.parseInt(countryLabel.getText());
+                        try {
+                            //TODO check if number of soldiers has already changed
+                            GameController.getGameController().placeSoldiers(country , numberOfSolider , riskGame.getCurrentPlayer());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
         }else if(gameStages.equals(GameStages.ATTACK)){
 
         }else if(gameStages.equals(GameStages.FORTIFY)){
