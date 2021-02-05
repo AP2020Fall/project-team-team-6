@@ -81,11 +81,9 @@ public class RiskGameInformationController {
             String numbergroup = selectedRadioButtonNumber.getText();
             if (selectedRadioButtonTime.getText().equals(3)) {
                 int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
-            }
-            if (selectedRadioButtonTime.getText().equals(5)) {
+            }else if (selectedRadioButtonTime.getText().equals(5)) {
                 int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
-            }
-            if (selectedRadioButtonTime.getText().equals(7)) {
+            }else if (selectedRadioButtonTime.getText().equals(7)) {
                 int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
             }
             String gamenametext = gamename.getText();
