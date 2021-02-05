@@ -13,10 +13,10 @@ public enum Color {
             return "blue";
         }
     },
-    GRAY {
+    GREEN {
         @Override
         public String toString() {
-            return "gray";
+            return "green";
         }
     },
     YELLOW {
@@ -25,10 +25,10 @@ public enum Color {
             return "yellow";
         }
     },
-    BLACK {
+    ORANGE {
         @Override
         public String toString() {
-            return "black";
+            return "orange";
         }
     },
     PURPLE {
@@ -38,7 +38,7 @@ public enum Color {
         }
     };
 
-    private static final Color[] defaultColor = {RED, BLUE, GRAY, YELLOW, BLACK, PURPLE};
+    private static final Color[] defaultColor = {RED, BLUE, GREEN, YELLOW, ORANGE, PURPLE};
 
 
     public static Color[] getDefaultColor() {

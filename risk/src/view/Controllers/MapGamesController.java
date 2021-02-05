@@ -18,6 +18,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.gamesModels.Country;
@@ -49,6 +50,13 @@ public class MapGamesController implements Initializable {
 
     @FXML
     private AnchorPane pane;
+
+
+    @FXML
+    private VBox vbox;
+
+    @FXML
+    private HBox hbox;
 
     @FXML
     private Circle C1;

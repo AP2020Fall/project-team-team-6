@@ -83,18 +83,18 @@ public class ManualPlacementController {
     }
 
     public void next(ActionEvent event) throws IOException {
+        boolean manualValue = false;
         RadioButton selectedRadioButtonBlizzard = (RadioButton) blizzard.getSelectedToggle();
         String blizzardgroup = selectedRadioButtonBlizzard.getText();
         RadioButton selectedRadioButtonManual = (RadioButton) manual.getSelectedToggle();
         String manualgroup = selectedRadioButtonBlizzard.getText();
-        if (selectedRadioButtonManual.getId().equals(mpon)) {
-            boolean manual = true;
-        } else if (selectedRadioButtonManual.getId().equals(mpoff)) {
-            boolean manual = false;
+        if (selectedRadioButtonManual.getId().equals("mpon")) {
+            manualValue = true;
         }
         RadioButton selectedRadioButtonFof = (RadioButton) fog.getSelectedToggle();
         String foggroup = selectedRadioButtonBlizzard.getText();
-        URL url = new File("risk\\src\\view\\graphic\\MapGames.fxml").toURI().toURL();
+        PlayerInformationController.setManual(manualValue);
+        URL url = new File("risk\\src\\view\\graphic\\PlayerInformation.fxml").toURI().toURL();
         Parent register = FXMLLoader.load(url);
         Scene message = new Scene(register);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

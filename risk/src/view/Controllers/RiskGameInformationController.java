@@ -66,31 +66,36 @@ public class RiskGameInformationController {
     }
     @FXML
     public void submit(ActionEvent event) throws IOException {
+        int numberOfPlayers = 0 ;
+        double timeValue = 0;
         RadioButton selectedRadioButtonTime = (RadioButton) time.getSelectedToggle();
         String timegroup = selectedRadioButtonTime.getText();
-        if (selectedRadioButtonTime.getText().equals(3)) {
-            double time = (Double.parseDouble(selectedRadioButtonTime.getText())) * 60;
-        } else if (selectedRadioButtonTime.getText().equals(5)) {
-            double time = (Double.parseDouble(selectedRadioButtonTime.getText())) * 60;
-        } else if (selectedRadioButtonTime.getText().equals(7)) {
-            double time = (Double.parseDouble(selectedRadioButtonTime.getText())) * 60;
+        if (timegroup.equals("3")) {
+            timeValue = (Double.parseDouble(selectedRadioButtonTime.getText())) * 60;
+        } else if (timegroup.equals("5")) {
+            timeValue = (Double.parseDouble(selectedRadioButtonTime.getText())) * 60;
+        } else if (timegroup.equals("7")) {
+            timeValue = (Double.parseDouble(selectedRadioButtonTime.getText())) * 60;
+        }
 
             RadioButton selectedRadioButtonNumber = (RadioButton) numberofplayers.getSelectedToggle();
             String numbergroup = selectedRadioButtonNumber.getText();
-            if (selectedRadioButtonTime.getText().equals(2)) {
-                int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
-
-            } else if (selectedRadioButtonTime.getText().equals(3)) {
-                int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
-            } else if (selectedRadioButtonTime.getText().equals(4)) {
-                int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
-            } else if (selectedRadioButtonTime.getText().equals(5)) {
-                int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
-            } else if (selectedRadioButtonTime.getText().equals(6)) {
-                int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
+            if (numbergroup.equals("2")) {
+                 numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
+            } else if (numbergroup.equals("3")) {
+                 numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
+            } else if (numbergroup.equals("4")) {
+                 numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
+            } else if (numbergroup.equals("5")) {
+                 numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
+            } else if (numbergroup.equals("6")) {
+                 numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
             }
             String gamenametext = gamename.getText();
-            if (!gamenametext.isEmpty()) {
+            if (!gamenametext.isEmpty() && numberOfPlayers != 0 && timeValue != 0 ) {
+                ManualPlacementController.setGameName(gamenametext);
+                ManualPlacementController.setNumberOfPlayers(numberOfPlayers);
+                ManualPlacementController.setTime(timeValue);
                 URL url = new File("risk\\src\\view\\graphic\\ManualPlacement.fxml").toURI().toURL();
                 Parent register = FXMLLoader.load(url);
                 Scene message = new Scene(register);
@@ -100,8 +105,5 @@ public class RiskGameInformationController {
             } else {
                 nameerror.setVisible(true);
             }
-
-
         }
     }
-}
