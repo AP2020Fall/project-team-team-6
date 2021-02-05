@@ -24,6 +24,7 @@ public class ManualPlacementController {
     public static int getNumberOfPlayers() {
         return numberOfPlayers;
     }
+
     private static double time;
 
     public static void setTime(double time) {
@@ -33,6 +34,7 @@ public class ManualPlacementController {
     public static double getTime() {
         return time;
     }
+
     private static String gameName;
 
     public static String getGameName() {
@@ -85,6 +87,11 @@ public class ManualPlacementController {
         String blizzardgroup = selectedRadioButtonBlizzard.getText();
         RadioButton selectedRadioButtonManual = (RadioButton) manual.getSelectedToggle();
         String manualgroup = selectedRadioButtonBlizzard.getText();
+        if (selectedRadioButtonManual.getId().equals(mpon)) {
+            boolean manual = true;
+        } else if (selectedRadioButtonManual.getId().equals(mpoff)) {
+            boolean manual = false;
+        }
         RadioButton selectedRadioButtonFof = (RadioButton) fog.getSelectedToggle();
         String foggroup = selectedRadioButtonBlizzard.getText();
         URL url = new File("risk\\src\\view\\graphic\\MapGames.fxml").toURI().toURL();
@@ -93,5 +100,5 @@ public class ManualPlacementController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(message);
         window.show();
-    } // TODO: 1/30/2021 ..........baghie create
+    }
 }
