@@ -15,6 +15,33 @@ import java.io.IOException;
 import java.net.URL;
 
 public class ManualPlacementController {
+    private static int numberOfPlayers;
+
+    public static void setNumberOfPlayers(int numberOfPlayers) {
+        ManualPlacementController.numberOfPlayers = numberOfPlayers;
+    }
+
+    public static int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+    private static double time;
+
+    public static void setTime(double time) {
+        ManualPlacementController.time = time;
+    }
+
+    public static double getTime() {
+        return time;
+    }
+    private static String gameName;
+
+    public static String getGameName() {
+        return gameName;
+    }
+
+    public static void setGameName(String gameName) {
+        ManualPlacementController.gameName = gameName;
+    }
 
     @FXML
     private RadioButton mpoff;
@@ -42,7 +69,6 @@ public class ManualPlacementController {
 
     @FXML
     private ToggleGroup fog;
-
 
 
     public void back(ActionEvent event) throws IOException {
