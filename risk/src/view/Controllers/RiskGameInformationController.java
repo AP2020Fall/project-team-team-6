@@ -70,22 +70,22 @@ public class RiskGameInformationController {
         String timegroup = selectedRadioButtonTime.getText();
         if (selectedRadioButtonTime.getText().equals(3)) {
             double time = (Double.parseDouble(selectedRadioButtonTime.getText())) * 60;
-        }
-        if (selectedRadioButtonTime.getText().equals(5)) {
+        } else if (selectedRadioButtonTime.getText().equals(5)) {
             double time = (Double.parseDouble(selectedRadioButtonTime.getText())) * 60;
-        }
-        if (selectedRadioButtonTime.getText().equals(7)) {
+        } else if (selectedRadioButtonTime.getText().equals(7)) {
             double time = (Double.parseDouble(selectedRadioButtonTime.getText())) * 60;
 
             RadioButton selectedRadioButtonNumber = (RadioButton) numberofplayers.getSelectedToggle();
             String numbergroup = selectedRadioButtonNumber.getText();
-            if (selectedRadioButtonTime.getText().equals(3)) {
+            if (selectedRadioButtonTime.getText().equals(2)) {
                 int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
-            }
-            if (selectedRadioButtonTime.getText().equals(5)) {
+            } else if (selectedRadioButtonTime.getText().equals(3)) {
                 int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
-            }
-            if (selectedRadioButtonTime.getText().equals(7)) {
+            } else if (selectedRadioButtonTime.getText().equals(4)) {
+                int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
+            } else if (selectedRadioButtonTime.getText().equals(5)) {
+                int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
+            } else if (selectedRadioButtonTime.getText().equals(6)) {
                 int numberOfPlayers = Integer.parseInt(selectedRadioButtonNumber.getText());
             }
             String gamenametext = gamename.getText();
