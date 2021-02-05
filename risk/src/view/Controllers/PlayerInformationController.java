@@ -1,5 +1,6 @@
 package view.Controllers;
 
+import controller.GameController;
 import controller.UserController;
 import javafx.collections.transformation.TransformationList;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.gamesModels.Color;
 import model.usersModels.Player;
 
 import java.io.File;
@@ -112,10 +114,22 @@ public class PlayerInformationController implements Initializable {
             emptierror.setVisible(true);
         }
     }
+    public ArrayList<Color> availableColors(){
+        ArrayList<Color> allColors = GameController.getGameController().getDefaultColors();
+        for(Player player : players){
+            allColors.remove(player.getCurrentColor());
+        }
+        return allColors;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        players.add(MainPlatoController.getPlayer());
+        if(players.size() ==0 ){
+            username.setText(MainPlatoController.getPlayer().getUsername());
+            username.setEditable(false);
+        }else{
+            username.setEditable(true);
+        }
     }
 }
 
