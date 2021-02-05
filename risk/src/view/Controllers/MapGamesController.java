@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -350,6 +352,10 @@ public class MapGamesController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        for(Player player : riskGame.getPlayers()){
+            Pane group = creatInformationTable(player);
+            vbox.getChildren().add(group);
+        }
 
     }
 
@@ -613,6 +619,25 @@ public class MapGamesController implements Initializable {
             }
         }
         return null;
+    }
+    private AnchorPane creatInformationTable(Player player){
+        AnchorPane group = new AnchorPane();
+        String color = player.getCurrentColor().toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("@../../NotResoures/").append(color).append("_information.png");
+        String url = String.valueOf(stringBuilder);
+        Image image = new Image(url);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(180);
+        imageView.setFitHeight(180);
+        Label label = new Label(player.getUsername());
+        double x =imageView.getLayoutX();
+        double y = imageView.getLayoutY();
+        label.setLayoutX(x);
+        label.setLayoutY(y);
+        label.setStyle("-fx-background-color: transparent ; -fx-font-size: 20px ; -fx-text-fill: white");
+        group.getChildren().addAll(imageView , label);
+        return group;
     }
 }
 

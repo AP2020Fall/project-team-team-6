@@ -648,7 +648,7 @@
                </cursor>
             </ImageView>
             <Line endX="45.00001525878906" endY="8.0" layoutX="183.0" layoutY="119.0" startX="26.0" startY="8.0" />
-            <VBox fx:id="vbox" layoutX="1134.0" layoutY="84.0" prefHeight="465.0" prefWidth="215.0" />
+            <VBox fx:id="vbox" alignment="CENTER" layoutX="1134.0" layoutY="84.0" prefHeight="465.0" prefWidth="215.0" />
             <HBox fx:id="hbox" layoutX="240.0" layoutY="547.0" prefHeight="74.0" prefWidth="585.0" />
             <Line endX="44.0" endY="-3.0" layoutX="139.0" layoutY="217.0" startX="44.0" startY="6.0" />
             <Line endX="28.66668701171875" endY="8.0" layoutX="155.0" layoutY="275.0" startX="28.66668701171875" />
