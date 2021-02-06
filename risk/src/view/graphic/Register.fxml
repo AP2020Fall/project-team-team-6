@@ -19,7 +19,7 @@
             <children>
                 <ImageView fitHeight="650.0" fitWidth="1350.0" layoutX="-1.0">
                     <image>
-                        <Image url="@../../NotResoures/2.png"/>
+                        <Image url="@../../NotResoures/images/2.png"/>
                     </image>
                 </ImageView>
                 <TextField fx:id="username" layoutX="758.0" layoutY="95.0" prefHeight="40.0" prefWidth="300.0"

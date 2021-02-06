@@ -15,7 +15,7 @@
       <Pane prefHeight="650.0" prefWidth="1350.0" />
       <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../NotResoures/edit_information.png" />
+            <Image url="@../../NotResoures/images/edit_information.png" />
          </image>
       </ImageView>
       <TextField fx:id="user" layoutX="772.0" layoutY="101.0" prefHeight="37.0" prefWidth="317.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #2b2d42;" text="username" />

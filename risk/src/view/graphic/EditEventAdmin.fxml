@@ -15,7 +15,7 @@
             <children>
                 <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../NotResoures/edit_event.png" />
+                        <Image url="@../../NotResoures/images/edit_event.png" />
                     </image>
                 </ImageView>
                 <Button layoutX="13.0" layoutY="586.0" mnemonicParsing="false" onAction="#back" prefHeight="45.0" prefWidth="131.0" style="-fx-background-radius: 10px; -fx-background-color: #29a995;" text="Back" textFill="WHITE">

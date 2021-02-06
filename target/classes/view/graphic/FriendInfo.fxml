@@ -15,7 +15,7 @@
             <children>
                 <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../NotResoures/friends_info.png" />
+                        <Image url="@../../NotResoures/images/friends_info.png" />
                     </image>
                 </ImageView>
                 <Button fx:id="sendMessageButton" layoutX="742.0" layoutY="514.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="46.5" prefWidth="176.0" style="-fx-background-color: #cccccc;" text="Send Message" textFill="#2b2d42">

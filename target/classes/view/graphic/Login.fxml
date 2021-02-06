@@ -19,7 +19,7 @@
             <children>
                 <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../NotResoures/login.png"/>
+                        <Image url="@../../NotResoures/images/login.png"/>
                     </image>
                 </ImageView>
                 <Button fx:id="noaccount" focusTraversable="false" layoutX="862.0" layoutY="491.0"

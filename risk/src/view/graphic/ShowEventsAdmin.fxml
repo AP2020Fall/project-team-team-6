@@ -17,7 +17,7 @@
             <children>
                 <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../NotResoures/ShowEventsAdmin.png"/>
+                        <Image url="@../../NotResoures/images/ShowEventsAdmin.png"/>
                     </image>
                 </ImageView>
                 <Button layoutX="859.0" layoutY="538.0" mnemonicParsing="false" onAction="#newevent" prefHeight="37.0"

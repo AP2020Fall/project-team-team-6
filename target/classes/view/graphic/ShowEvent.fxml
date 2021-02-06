@@ -23,7 +23,7 @@
         <Pane prefHeight="650.0" prefWidth="1350.0"/>
         <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../NotResoures/show_events.png"/>
+                <Image url="@../../NotResoures/images/show_events.png"/>
             </image>
         </ImageView>
         <ListView fx:id="eventslist" layoutX="632.0" layoutY="115.0" prefHeight="430.0" prefWidth="463.0"

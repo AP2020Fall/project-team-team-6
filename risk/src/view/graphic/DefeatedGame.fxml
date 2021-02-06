@@ -14,13 +14,13 @@
             <children>
                 <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../NotResoures/defeated-background.png"/>
+                        <Image url="@../../NotResoures/images/defeated-background.png"/>
                     </image>
                 </ImageView>
                 <ImageView fitHeight="100.0" fitWidth="200.0" layoutX="20.0" layoutY="530.0" onDragDetected="#back"
                            pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../NotResoures/next_phase_button.png"/>
+                        <Image url="@../../NotResoures/images/next_phase_button.png"/>
                     </image>
                     <cursor>
                         <Cursor fx:constant="HAND"/>

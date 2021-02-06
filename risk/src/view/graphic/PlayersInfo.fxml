@@ -17,7 +17,7 @@
             <children>
                 <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../NotResoures/players_info.png"/>
+                        <Image url="@../../NotResoures/images/players_info.png"/>
                     </image>
                 </ImageView>
                 <Button layoutX="26.0" layoutY="578.0" mnemonicParsing="false" onAction="#back" prefHeight="51.0"

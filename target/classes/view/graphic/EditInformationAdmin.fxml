@@ -16,7 +16,7 @@
             <children>
                 <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../NotResoures/EditInformationAdmin.png" />
+                        <Image url="@../../NotResoures/images/EditInformationAdmin.png" />
                     </image>
                 </ImageView>
                 <TextField fx:id="user" editable="false" layoutX="775.0" layoutY="102.0" prefHeight="40.0" prefWidth="275.0" style="-fx-background-radius: 10px; -fx-border-color: #2e2c54; -fx-border-radius: 10px;" text="username" />

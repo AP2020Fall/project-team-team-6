@@ -11,13 +11,13 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.MapGamesController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controllers.MapGamesController">
    <children>
-      <Pane fx:id="pane" prefHeight="650.0" prefWidth="1350.0">
+      <Pane prefHeight="650.0" prefWidth="1350.0">
          <children>
             <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../NotResoures/boardgame-background.png" />
+                  <Image url="@../../NotResoures/images/boardgame-background.png" />
                </image>
             </ImageView>
             <Group layoutX="183.0" layoutY="127.0">
@@ -56,7 +56,7 @@
             </Group>
             <Group layoutX="183.0" layoutY="249.0" onMouseClicked="#countryClick">
                <children>
-                  <Circle fx:id="C9" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                  <Circle fx:id="C9" fill="#9d9d9d" radius="26.0" stroke="BLACK" strokeType="INSIDE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -185,7 +185,7 @@
             </Group>
             <Group layoutX="183.0" layoutY="496.0" onMouseClicked="#countryClick">
                <children>
-                  <Circle fx:id="C12" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                  <Circle fx:id="C12" fill="#9d9d9d" radius="26.0" stroke="BLACK" strokeType="INSIDE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -228,7 +228,7 @@
             </Group>
             <Group layoutX="529.0" layoutY="191.0" onMouseClicked="#countryClick">
                <children>
-                  <Circle fx:id="C22" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                  <Circle fx:id="C22" fill="#9d9d9d" radius="26.0" stroke="BLACK" strokeType="INSIDE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -256,7 +256,7 @@
             </Group>
             <Group layoutX="461.0" layoutY="191.0" onMouseClicked="#countryClick">
                <children>
-                  <Circle fx:id="C20" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                  <Circle fx:id="C20" fill="#9d9d9d" radius="26.0" stroke="BLACK" strokeType="INSIDE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -340,7 +340,7 @@
             </Group>
             <Group layoutX="529.0" layoutY="371.0" onMouseClicked="#countryClick">
                <children>
-                  <Circle fx:id="C16" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                  <Circle fx:id="C16" fill="#9d9d9d" radius="26.0" stroke="BLACK" strokeType="INSIDE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -397,7 +397,7 @@
             </Group>
             <Group layoutX="872.0" layoutY="426.0" onMouseClicked="#countryClick">
                <children>
-                  <Circle fx:id="C41" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                  <Circle fx:id="C41" fill="#9d9d9d" radius="26.0" stroke="BLACK" strokeType="INSIDE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -427,7 +427,7 @@
             </Group>
             <Group layoutX="872.0" layoutY="496.0" onMouseClicked="#countryClick">
                <children>
-                  <Circle fx:id="C39" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                  <Circle fx:id="C39" fill="#9d9d9d" radius="26.0" stroke="BLACK" strokeType="INSIDE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -469,7 +469,7 @@
             </Group>
             <Group layoutX="725.0" layoutY="308.0" onMouseClicked="#countryClick">
                <children>
-                  <Circle fx:id="C33" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                  <Circle fx:id="C33" fill="#9d9d9d" radius="26.0" stroke="BLACK" strokeType="INSIDE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -600,7 +600,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Label fx:id="L31" layoutX="-5.0" layoutY="-15.0" onMouseClicked="#countryClick" text="0">
+                  <Label fx:id="L31" layoutX="-5.0" layoutY="-15.0" text="0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -623,7 +623,7 @@
             </Group>
             <ImageView fitHeight="105.0" fitWidth="88.0" layoutX="13.0" onDragDetected="#back" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../NotResoures/exit.png" />
+                  <Image url="@../../NotResoures/images/exit.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -631,7 +631,7 @@
             </ImageView>
             <ImageView disable="true" fitHeight="105.0" fitWidth="88.0" layoutX="212.0" onDragDetected="#dice" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../../NotResoures/dice.png" />
+                  <Image url="@../../NotResoures/images/dice.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -639,7 +639,7 @@
             </ImageView>
             <ImageView disable="true" fitHeight="105.0" fitWidth="88.0" layoutX="111.0" onDragDetected="#cards" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../../NotResoures/card.png" />
+                  <Image url="@../../NotResoures/images/card.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -726,24 +726,27 @@
             <Line endX="27.5555419921875" endY="12.77777099609375" layoutX="838.0" layoutY="219.0" startX="-12.0" startY="-16.111099243164062" />
             <Line endX="27.5555419921875" endY="12.77777099609375" layoutX="757.0" layoutY="280.0" startX="-12.0" startY="-16.111099243164062" />
             <Line endX="27.5555419921875" endY="12.77777099609375" layoutX="837.0" layoutY="280.0" startX="-12.0" startY="-16.111099243164062" />
-            <Label fx:id="currentPlayerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="617.0" layoutY="17.0" prefHeight="55.0" prefWidth="256.0" text="Label" textFill="#f5f5f5">
+            <Label fx:id="currentPlayer" alignment="CENTER" contentDisplay="CENTER" layoutX="617.0" layoutY="17.0" prefHeight="55.0" prefWidth="256.0" text="Label" textFill="#f5f5f5">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
             <ImageView fx:id="playerImage" fitHeight="122.0" fitWidth="84.0" layoutX="231.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../NotResoures/purple%20player.png" />
+               </image>
             </ImageView>
             <ImageView fx:id="nextPhase" fitHeight="72.0" fitWidth="76.0" layoutX="725.0" layoutY="552.0" onMouseClicked="#goNextPhase" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../NotResoures/next_phase_button.png" />
+                  <Image url="@../../NotResoures/images/next_phase_button.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="174.0" fitWidth="98.0" layoutX="628.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../NotResoures/20.png" />
+                  <Image url="@../../NotResoures/images/20.png" />
                </image>
             </ImageView>
-            <Label fx:id="gameStageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="342.0" layoutY="564.0" prefHeight="40.0" prefWidth="274.0" text="Label" textFill="#fffdfd">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="342.0" layoutY="564.0" prefHeight="40.0" prefWidth="274.0" text="Label" textFill="#fffdfd">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
