@@ -1,6 +1,7 @@
 package view.Controllers;
 
 import controller.GameController;
+import javafx.collections.transformation.TransformationList;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -67,7 +68,7 @@ public class MapGamesController implements Initializable {
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
         JFXPanel username = null;
-        Stage stage = (Stage) username.getScene().getWindow();
+        Stage stage = (Stage) pane.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
@@ -96,6 +97,20 @@ public class MapGamesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getButton().equals(MouseButton.SECONDARY)){
+                    firstCountry = null;
+                    secondCountry = null;
+                    for(Country country : riskGame.getAllCountriesWithNumber().values()){
+                        Circle circle = findShapeByCountryCoordinate(country.getCountryCoordinate());
+                        circle.setStroke(null);
+                    }
+
+                }
+            }
+        });
         try {
             checkIfMapIsManually(riskGame);
         } catch (Exception e) {
@@ -264,6 +279,7 @@ public class MapGamesController implements Initializable {
                     });
                 }
             } else if (gameStages.equals(GameStages.ATTACK)) {
+
                 if (firstCountry == null) {
                     Country country = getCountryCoordination(id);
                     boolean isCountryForPlayer = GameController.getGameController().isCountryForPlayer(country, riskGame.getCurrentPlayer());
@@ -297,45 +313,70 @@ public class MapGamesController implements Initializable {
                                 Circle circle = findShapeByCountryCoordinate(country1.getCountryCoordinate());
                                 assert circle != null;
                                 circle.setStroke(null);
+                            }
                                 int numberOfDice = GameController.getGameController().getNumberOfDiceForAttacker(firstCountry);
                                 int numberOfDiceForDefend = GameController.getGameController().getNumberOfDiceForDefender(secondCountry);
-                                HBox hBox = new HBox(10);
+                                HBox hBox = new HBox();
                                 Button cancelButton = new Button("Cancel");
                                 cancelButton.setStyle("-fx-text-fill: white ; -fx-background-color: #0077b6 ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
-                                cancelButton.setOnAction(e->{
-                                    firstCountry = null;
-                                    secondCountry = null;
-                                    Circle firstCountryCircle = findShapeByCountryCoordinate(firstCountry.getCountryCoordinate());
-                                    Circle secondCountryCircle = findShapeByCountryCoordinate(secondCountry.getCountryCoordinate());
-                                    firstCountryCircle.setStroke(null);
-                                    secondCountryCircle.setStroke(null);
-                                    loadGameMap();
-                                });
-                                Button oneDice = new Button("one dice");
+                                hBox.getChildren().add(cancelButton);
+                                Button oneDice = new Button("One dice");
                                 oneDice.setStyle("-fx-text-fill: white ; -fx-background-color: #0077b6 ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
                                 oneDice.setOnAction(e-> {
-                                    //TODO ...
+                                    attack(1 , hBox);
                                 });
+                                hBox.getChildren().add(oneDice);
                                 if(numberOfDice == 2 ){
                                     Button twoDice = new Button("Two dice");
                                     twoDice.setStyle("-fx-text-fill: white ; -fx-background-color: #0077b6 ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
+                                    twoDice.setOnAction(e->{
+                                        attack(2 , hBox);
+                                    });
+                                    hBox.getChildren().add(twoDice);
                                 }else if(numberOfDice == 3){
-                                    Button twoDice = new Button("one dice");
+                                    Button twoDice = new Button("Two dice");
                                     twoDice.setStyle("-fx-text-fill: white ; -fx-background-color: #0077b6 ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
-                                    Button threeDice = new Button("one dice");
+                                    twoDice.setOnAction(e->{
+                                        attack(2 , hBox);
+                                    });
+                                    hBox.getChildren().add(twoDice);
+                                    Button threeDice = new Button("Three dice");
                                     threeDice.setStyle("-fx-text-fill: white ; -fx-background-color: #0077b6 ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
+                                    threeDice.setOnAction(e->{
+                                        attack(3 , hBox);
+                                    });
+                                    hBox.getChildren().add(threeDice);
                                 }
                                 Button blitzDice = new Button("Blitz");
                                 blitzDice.setStyle("-fx-text-fill: white ; -fx-background-color: #0077b6 ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
+                                //TODO
+                                Node node = (Node) event.getSource();
+                                Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
+                                double x = boundsInScene.getMinX();
+                                double y = boundsInScene.getMinY();
+                                hBox.setLayoutX(x-30);
+                                hBox.setLayoutY(y - 30);
+                                pane.getChildren().add(hBox);
+                                cancelButton.setOnMouseClicked(e->{
+                                    if(e.getButton().equals(MouseButton.PRIMARY)) {
+                                        pane.getChildren().remove(hBox);
+                                        Circle firstCountryCircle = findShapeByCountryCoordinate(firstCountry.getCountryCoordinate());
+                                        Circle secondCountryCircle = findShapeByCountryCoordinate(secondCountry.getCountryCoordinate());
+                                        firstCountryCircle.setStroke(null);
+                                        secondCountryCircle.setStroke(null);
+                                        firstCountry = null;
+                                        secondCountry = null;
+                                    }
+                                });
                             }
+
                         }
+
                         Circle circle = findShapeByCountryCoordinate(firstCountry.getCountryCoordinate());
                         circle.setStroke(Color.AQUA);
-                    }
                     //TODO number of dice
                     //TODO attack
-                    firstCountry = null;
-                    secondCountry = null;
+
                 }
             } else if (gameStages.equals(GameStages.FORTIFY)) {
                 Country country = getCountryCoordination(id);
@@ -510,7 +551,8 @@ public class MapGamesController implements Initializable {
         loadGameMap();
         loadCurrentPlayer();
     }
-    private void attack(int numberOfDice){
+    private void attack(int numberOfDice , HBox hBox){
+        pane.getChildren().remove(hBox);
         int numberOfDiceForDefend = gameController.getNumberOfDiceForDefender(secondCountry);
         //With out blitz
         ArrayList<Integer> attackerDice = gameController.rollDice(numberOfDice);
@@ -519,7 +561,25 @@ public class MapGamesController implements Initializable {
             boolean hasGotTheCountry = gameController.attack(riskGame, riskGame.getCurrentPlayer(), firstCountry, secondCountry, attackerDice, defendersDice);
             if (hasGotTheCountry) {
                 gameController.setHashGotOneCountryInAttack(riskGame, true);
+                moveSoldiersAfterAttack(numberOfDice);
+                if (gameController.isGameFinished(riskGame)) {
+                    gameController.endGame(riskGame);
+                    String color = riskGame.getCurrentPlayer().getCurrentColor().toString();
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("@../../NotResoures/").append(color).append("_player.png");
+                    String urlInString = String.valueOf(stringBuilder);
+                    Image image = new Image(urlInString);
+                    VictoryHintController.setWinnerImage(image);
+                    URL url = new File("risk\\src\\view\\graphic\\VictoryHint.fxml").toURI().toURL();
+                    Parent register = FXMLLoader.load(url);
+                    Scene message = new Scene(register);
+                    TransformationList<Object, Object> event = null;
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.setScene(message);
+                    window.show();
+                }
             }
+            loadGameMap();
             //TODO cards load
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -551,15 +611,41 @@ public class MapGamesController implements Initializable {
         pane.getChildren().add(hBox);
         addButton.setOnAction(e->{
             int numberOfSoldiers = Integer.parseInt(secondCountryLabel.getText());
+            int numberOfSoldiers2 = Integer.parseInt(firstCountryLabel.getText());
             if(numberOfSoldiers < maximumSoldierToMove){
                 numberOfSoldiers++;
+                numberOfSoldiers2--;
+                firstCountryLabel.setText(String.valueOf(numberOfSoldiers2));
+                secondCountryLabel.setText(String.valueOf(numberOfSoldiers));
             }
         });
         subButton.setOnAction(e->{
-
+            int numberOfSoldiers = Integer.parseInt(secondCountryLabel.getText());
+            int numberOfSoldiers2 = Integer.parseInt(firstCountryLabel.getText());
+            if(numberOfSoldiers  > numberOfDice){
+                numberOfSoldiers--;
+                numberOfSoldiers2++;
+                firstCountryLabel.setText(String.valueOf(numberOfSoldiers2));
+                secondCountryLabel.setText(String.valueOf(numberOfSoldiers));
+            }
         });
-        okButton.setOnAction(e->{
-
+        okButton.setOnMouseClicked(e->{
+            if(e.getButton().equals(MouseButton.PRIMARY)) {
+                int numberOfSoldier = Integer.parseInt(secondCountryLabel.getText());
+                try {
+                    gameController.moveSoldiersFromACountryToAnotherCountry(firstCountry, secondCountry, numberOfSoldier);
+                    gameController.occupyingACountry(riskGame, riskGame.getCurrentPlayer(), secondCountry);
+                    pane.getChildren().remove(hBox);
+                    secondCountryCircle.setStroke(null);
+                    Circle firstCountryCircle = findShapeByCountryCoordinate(firstCountry.getCountryCoordinate());
+                    firstCountryCircle.setStroke(null);
+                    firstCountry = null;
+                    secondCountry = null;
+                    loadGameMap();
+                } catch (Exception e1) {
+                    System.out.println(e1.getMessage());
+                }
+            }
         });
 
     }
