@@ -1,6 +1,7 @@
 package view.Controllers;
 
 import controller.UserController;
+import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,9 +14,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import model.gamesModels.GameStatus;
 import model.usersModels.GameLog;
 import model.usersModels.Player;
 
@@ -42,6 +48,8 @@ public class MainPlatoController implements Initializable {
     }
 
     @FXML
+    Button gameBtn;
+    @FXML
     Label friends;
     @FXML
     Label wins;
@@ -49,7 +57,14 @@ public class MainPlatoController implements Initializable {
     Label coins;
     @FXML
     Label username;
-
+    @FXML
+    ImageView ladyyy;
+    @FXML
+    TextArea tozihatid;
+    @FXML
+    Label notaccesableerroe;
+    @FXML
+    Label updatingerror;
     @FXML
     private void setLabel() {
         friends.setText(String.valueOf(player.getFriends().size()));
@@ -60,6 +75,11 @@ public class MainPlatoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if(GameStatus.getUninstall()){
+            gameBtn.setDisable(false);
+        }else
+            gameBtn.setDisable(true);
+        tAnimation();
         setLabel();
     }
 
@@ -75,6 +95,14 @@ public class MainPlatoController implements Initializable {
 
     @FXML
     public void games(ActionEvent actionEvent) throws IOException {
+        if (!GameStatus.getPass()){
+            notaccesableerroe.setVisible(true);
+            return;
+        }
+        if (!GameStatus.getUpdate()) {
+            updatingerror.setVisible(true);
+            return;
+        }
         URL url = new File("risk\\src\\view\\graphic\\Playonline-ofline.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
@@ -246,7 +274,16 @@ public class MainPlatoController implements Initializable {
         }
         return allPlayersInRank;
     }
+    public void tAnimation(){
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(10),ladyyy);
+        rotateTransition.setByAngle(360);
+        rotateTransition.setRate(10);
+        rotateTransition.setCycleCount(10);
+        rotateTransition.play();
+    }
 
 
-
+    public void tozihat(MouseEvent mouseEvent) {
+        tozihatid.setVisible(true);
+    }
 }
