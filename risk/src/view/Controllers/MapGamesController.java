@@ -67,7 +67,6 @@ public class MapGamesController implements Initializable {
         URL url = new File("risk\\src\\view\\graphic\\Mainplato.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
-        JFXPanel username = null;
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
