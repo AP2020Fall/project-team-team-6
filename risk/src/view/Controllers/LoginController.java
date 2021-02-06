@@ -4,6 +4,7 @@ import controller.UserController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.usersModels.Admin;
 import model.usersModels.Player;
@@ -19,8 +22,9 @@ import model.usersModels.User;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController implements Initializable {
     protected static UserController userController = UserController.getUserController();
     private static User user = null;
     public Label errorLabel;
@@ -44,6 +48,7 @@ public class LoginController {
 
     @FXML
     private void LoginController() {
+        playMouseSound();
 
         try {
             setUser(userController.login(username.getText(), pass.getText()));
@@ -71,11 +76,27 @@ public class LoginController {
 
     @FXML
     private void signup(ActionEvent event) throws IOException {
+        playMouseSound();
         URL url = new File("risk\\src\\view\\graphic\\Register.fxml").toURI().toURL();
         Parent register = FXMLLoader.load(url);
         Scene message = new Scene(register);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(message);
         window.show();
+    }
+    private static final File file = new File("risk/src/NotResoures/sounds/20401330.mp3");
+    protected static Media media = new Media(file.toURI().toString());
+    protected static MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        mediaPlayer.setVolume(0.1);
+        mediaPlayer.play();
+    }
+    public void playMouseSound(){
+        File file = new File("risk/src/NotResoures/sounds/Click.mp3");
+        Media media = new Media(file.toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
     }
 }

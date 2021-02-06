@@ -17,7 +17,7 @@
          <children>
             <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../NotResoures/boardgame-background.png" />
+                  <Image url="@../../NotResoures/images/boardgame-background.png" />
                </image>
             </ImageView>
             <Group layoutX="183.0" layoutY="127.0">
@@ -623,7 +623,7 @@
             </Group>
             <ImageView fitHeight="105.0" fitWidth="88.0" layoutX="13.0" onDragDetected="#back" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../NotResoures/exit.png" />
+                  <Image url="@../../NotResoures/images/exit.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -631,7 +631,7 @@
             </ImageView>
             <ImageView disable="true" fitHeight="105.0" fitWidth="88.0" layoutX="212.0" onDragDetected="#dice" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../../NotResoures/dice.png" />
+                  <Image url="@../../NotResoures/images/dice.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -639,7 +639,7 @@
             </ImageView>
             <ImageView disable="true" fitHeight="105.0" fitWidth="88.0" layoutX="111.0" onDragDetected="#cards" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../../NotResoures/card.png" />
+                  <Image url="@../../NotResoures/images/card.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -735,12 +735,12 @@
             </ImageView>
             <ImageView fx:id="nextPhase" fitHeight="72.0" fitWidth="76.0" layoutX="725.0" layoutY="552.0" onMouseClicked="#goNextPhase" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../NotResoures/next_phase_button.png" />
+                  <Image url="@../../NotResoures/images/next_phase_button.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="174.0" fitWidth="98.0" layoutX="628.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../NotResoures/20.png" />
+                  <Image url="@../../NotResoures/images/20.png" />
                </image>
             </ImageView>
             <Label fx:id="gameStageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="342.0" layoutY="564.0" prefHeight="40.0" prefWidth="274.0" text="Label" textFill="#fffdfd">
