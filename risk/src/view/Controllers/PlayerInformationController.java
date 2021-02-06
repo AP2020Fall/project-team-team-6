@@ -160,13 +160,7 @@ public class PlayerInformationController implements Initializable {
             submitButton.setStyle("opacity: 0.5%");
         }
     }
-    public ArrayList<Color> availableColors(){
-        ArrayList<Color> allColors = GameController.getGameController().getDefaultColors();
-        for(Player player : players){
-            allColors.remove(player.getCurrentColor());
-        }
-        return allColors;
-    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

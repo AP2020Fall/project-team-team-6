@@ -67,7 +67,6 @@ public class MapGamesController implements Initializable {
         URL url = new File("risk\\src\\view\\graphic\\Mainplato.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
-        JFXPanel username = null;
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
@@ -124,7 +123,7 @@ public class MapGamesController implements Initializable {
     private void loadCurrentPlayer() {
         String color = riskGame.getCurrentPlayer().getCurrentColor().toString();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("@../../NotResoures/").append(color).append("_player.png");
+        stringBuilder.append("@../../NotResoures/images/").append(color).append("_player.png");
         String url = String.valueOf(stringBuilder);
         playerImage.setImage(new Image(url));
         currentPlayerLabel.setText(riskGame.getCurrentPlayer().getUsername());
@@ -204,7 +203,7 @@ public class MapGamesController implements Initializable {
                 if (!hasClickedOnce && country.getColor().equals(riskGame.getCurrentPlayer().getCurrentColor()) && riskGame.getCurrentPlayer().getNumberOfSoldiers() > 0) {
                     hasClickedOnce = true;
                     HBox hBox = new HBox(10);
-                    Image image = new Image("@../../NotResoures/exit.png");
+                    Image image = new Image("@../../NotResoures/images/exit.png");
                     ImageView imageView = new ImageView(image);
                     imageView.setFitHeight(40);
                     imageView.setFitWidth(20);
@@ -323,6 +322,7 @@ public class MapGamesController implements Initializable {
                                 Button oneDice = new Button("One dice");
                                 oneDice.setStyle("-fx-text-fill: white ; -fx-background-color: #0077b6 ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
                                 oneDice.setOnAction(e-> {
+                                    pane.getChildren().remove(hBox);
                                     attack(1 , hBox);
                                 });
                                 hBox.getChildren().add(oneDice);
@@ -330,6 +330,7 @@ public class MapGamesController implements Initializable {
                                     Button twoDice = new Button("Two dice");
                                     twoDice.setStyle("-fx-text-fill: white ; -fx-background-color: #0077b6 ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
                                     twoDice.setOnAction(e->{
+                                        pane.getChildren().remove(hBox);
                                         attack(2 , hBox);
                                     });
                                     hBox.getChildren().add(twoDice);
@@ -337,12 +338,14 @@ public class MapGamesController implements Initializable {
                                     Button twoDice = new Button("Two dice");
                                     twoDice.setStyle("-fx-text-fill: white ; -fx-background-color: #0077b6 ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
                                     twoDice.setOnAction(e->{
+                                        pane.getChildren().remove(hBox);
                                         attack(2 , hBox);
                                     });
                                     hBox.getChildren().add(twoDice);
                                     Button threeDice = new Button("Three dice");
                                     threeDice.setStyle("-fx-text-fill: white ; -fx-background-color: #0077b6 ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
                                     threeDice.setOnAction(e->{
+                                        pane.getChildren().remove(hBox);
                                         attack(3 , hBox);
                                     });
                                     hBox.getChildren().add(threeDice);
@@ -376,34 +379,40 @@ public class MapGamesController implements Initializable {
                         circle.setStroke(Color.AQUA);
                     //TODO number of dice
                     //TODO attack
-
                 }
             } else if (gameStages.equals(GameStages.FORTIFY)) {
                 Country country = getCountryCoordination(id);
                 if (!gameController.hasDoneFortify(riskGame)) {
                     if (gameController.isCountryForPlayer(country, riskGame.getCurrentPlayer())) {
-                        if (firstCountry == null)
+                        if (firstCountry == null) {
                             firstCountry = country;
+                            Circle circle = findShapeByCountryCoordinate(firstCountry.getCountryCoordinate());
+                            circle.setStroke(Color.AQUA);
+                        }
                         else {
                             if (gameController.isPathAvailableForFortifying(riskGame, riskGame.getCurrentPlayer(), firstCountry, country)) {
                                 secondCountry = country;
+                                Circle circle = findShapeByCountryCoordinate(secondCountry.getCountryCoordinate());
+                                circle.setStroke(Color.AQUA);
                                 HBox hBox = new HBox(10);
-                                Image image = new Image("@../../NotResoures/exit.png");
+                                Image image = new Image("@../../NotResoures/images/exit.png");
                                 ImageView imageView = new ImageView(image);
                                 imageView.setFitHeight(40);
                                 imageView.setFitWidth(20);
-                                double x = ((Control) event.getSource()).getLayoutX();
-                                double y = ((Control) event.getSource()).getLayoutY();
+                                Node node = (Node) event.getSource();
+                                Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
+                                double x = boundsInScene.getMinX();
+                                double y = boundsInScene.getMinY();
                                 Button addButton = new Button("+");
                                 addButton.setStyle("-fx-text-fill: white ; -fx-background-color: #90be6d ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
                                 Button subButton = new Button("-");
                                 subButton.setStyle("-fx-text-fill: white ; -fx-background-color: #ff006e ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
-                                Image secondImage = new Image("@../../NotResoures/send button.png");
+                                Image secondImage = new Image("@../../NotResoures/images/send button.png");
                                 ImageView secondImageView = new ImageView(secondImage);
                                 secondImageView.setFitHeight(40);
                                 secondImageView.setFitWidth(20);
-                                hBox.setLayoutX(x - 20);
-                                hBox.setLayoutY(y - 20);
+                                hBox.setLayoutX(x - 30);
+                                hBox.setLayoutY(y - 30);
                                 hBox.getChildren().addAll(imageView, subButton, addButton, secondImageView);
                                 pane.getChildren().add(hBox);
                                 //Exit button
@@ -456,6 +465,7 @@ public class MapGamesController implements Initializable {
                                             try {
                                                 gameController.moveSoldiersFromACountryToAnotherCountry(firstCountry, secondCountry, numberOfSoldier);
                                                 gameController.setHashDoneFortify(riskGame, true);
+                                                pane.getChildren().remove(hBox);
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
@@ -544,9 +554,25 @@ public class MapGamesController implements Initializable {
            if (riskGame.getCurrentPlayer().getNumberOfSoldiers() == 0)
                gameController.goNextStage(riskGame);
        }else if(riskGame.getGameStages().equals(GameStages.ATTACK)){
-
+        //todo darim faghat kart
+           boolean hasGotAnyCountry = riskGame.isHasOneSuccessAttack();
+           if (hasGotAnyCountry) {
+               gameController.giveCardToPlayer(riskGame);
+           }
+           gameController.setHashGotOneCountryInAttack(riskGame, false);
+           gameController.goNextStage(riskGame);
        }else if(riskGame.getGameStages().equals(GameStages.FORTIFY)){
-
+           gameController.setHashDoneFortify(riskGame, false);
+           gameController.goNextStage(riskGame);
+           gameController.nextPlayer(riskGame);
+           Player currentPlayer = riskGame.getCurrentPlayer();
+           while (true) {
+               if (gameController.checkIfPlayerHasAnyCountries(currentPlayer))
+                   break;
+               gameController.nextPlayer(riskGame);
+               currentPlayer = riskGame.getCurrentPlayer();
+           }
+           gameController.calculateNumberOfSoldiersToAddInDraft(riskGame.getCurrentPlayer());
        }
         loadGameMap();
         loadCurrentPlayer();
@@ -559,6 +585,7 @@ public class MapGamesController implements Initializable {
         ArrayList<Integer> defendersDice = gameController.rollDice(numberOfDiceForDefend);
         try {
             boolean hasGotTheCountry = gameController.attack(riskGame, riskGame.getCurrentPlayer(), firstCountry, secondCountry, attackerDice, defendersDice);
+            pane.getChildren().remove(hBox);
             if (hasGotTheCountry) {
                 gameController.setHashGotOneCountryInAttack(riskGame, true);
                 moveSoldiersAfterAttack(numberOfDice);
@@ -566,7 +593,7 @@ public class MapGamesController implements Initializable {
                     gameController.endGame(riskGame);
                     String color = riskGame.getCurrentPlayer().getCurrentColor().toString();
                     StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("@../../NotResoures/").append(color).append("_player.png");
+                    stringBuilder.append("@../../NotResoures/images").append(color).append("_player.png");
                     String urlInString = String.valueOf(stringBuilder);
                     Image image = new Image(urlInString);
                     VictoryHintController.setWinnerImage(image);
