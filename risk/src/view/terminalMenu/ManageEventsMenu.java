@@ -5,6 +5,7 @@ import model.usersModels.Player;
 import model.gamesModels.RiskGame;
 import model.gamesModels.RiskGameType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,13 +54,13 @@ public class ManageEventsMenu extends Menu {
                     if (input == 1) {
                         nextMenu = parentMenu;
                     } else if (input == 2) {
-                        LocalDateTime startDate = null;
+                        LocalDate startDate = null;
                         while (true) {
                             System.out.println("Start date : ");
                             String startDateInString = getInputFormatWithHelpText("^20[2-9][0-9]-(0[0-9])|(1[0-2])-([0-2][0-9])|30T([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])|(?i)back$", "Example :2020-12-03T09:12:24 or enter back to return");
                             if (startDateInString.equalsIgnoreCase("back"))
                                 break;
-                            startDate = LocalDateTime.parse(startDateInString);
+                            startDate = LocalDate.parse(startDateInString);
                             try {
                                 startDate = eventController.checkStartDate(startDate);
                                 break;
@@ -73,13 +74,13 @@ public class ManageEventsMenu extends Menu {
                         }
 
                     } else if (input == 3) {
-                        LocalDateTime endDate = null;
+                        LocalDate endDate = null;
                         while (true) {
                             System.out.println("End date : ");
                             String startDateInString = getInputFormatWithHelpText("^20[2-9][0-9]-(0[0-9])|(1[0-2])-([0-2][0-9])|30T([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])|(?i)back$", "Example :2020-12-03T09:12:24 or enter back to return");
                             if (startDateInString.equalsIgnoreCase("back"))
                                 break;
-                            endDate = LocalDateTime.parse(startDateInString);
+                            endDate = LocalDate.parse(startDateInString);
                             try {
                                 endDate = eventController.checkEndDate(endDate, event.getStartDate());
                                 break;
@@ -179,14 +180,14 @@ public class ManageEventsMenu extends Menu {
 
 
     private boolean makeNewEvent() {
-        LocalDateTime startDate = null;
-        LocalDateTime endDate = null;
+        LocalDate startDate = null;
+        LocalDate endDate = null;
         while (true) {
             System.out.println("Start date : ");
             String startDateInString = getInputFormatWithHelpText("^20[2-9][0-9]-(0[0-9])|(1[0-2])-([0-2][0-9])|30T([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])|(?i)back$", "Example :2020-12-03T09:12:24 or enter back to return");
             if (startDateInString.equalsIgnoreCase("back"))
                 return false;
-            startDate = LocalDateTime.parse(startDateInString);
+            startDate = LocalDate.parse(startDateInString);
             try {
                 startDate = eventController.checkStartDate(startDate);
                 break;
@@ -199,7 +200,7 @@ public class ManageEventsMenu extends Menu {
             String endDateString = getInputFormatWithHelpText("^20[2-9][0-9]-(0[0-9])|(1[0-2])-([0-2][0-9])|30T([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])|(?i)back$", "Example :2020-12-03T09:12:24 or enter back to return");
             if (endDateString.equalsIgnoreCase("back"))
                 return false;
-            endDate = LocalDateTime.parse(endDateString);
+            endDate = LocalDate.parse(endDateString);
             try {
                 endDate = eventController.checkEndDate(endDate, startDate);
                 break;
@@ -220,11 +221,11 @@ public class ManageEventsMenu extends Menu {
         if (input == 1) {
             return false;
         } else if (input == 2) {
-            eventController.createNewPublicEvent(startDate, endDate, riskGame, eventPoint);
+            eventController.createNewPublicEvent(startDate, endDate, riskGame);
         } else if (input == 3) {
             ArrayList<Player> invitedPlayers = getPlayersForEvent();
             if (invitedPlayers != null)
-                eventController.createNewPrivateEvent(startDate, endDate, riskGame, eventPoint, invitedPlayers);
+                eventController.createNewPrivateEvent(startDate, endDate, riskGame, invitedPlayers);
             else
                 return false;
         }

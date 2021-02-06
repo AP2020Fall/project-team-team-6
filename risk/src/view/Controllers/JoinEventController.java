@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
@@ -66,8 +67,8 @@ public class JoinEventController implements Initializable {
         point.setText(String.valueOf(event.getEventPoint()));
     }
 
-    private String changeDateToString(LocalDateTime localDateTime) {
-        String dateInString = String.valueOf(localDateTime);
+    private String changeDateToString(LocalDate localDate) {
+        String dateInString = String.valueOf(localDate);
         String[] year = dateInString.split("T");
         String[] date = year[0].split("-");
         String result = date[0] + "/" + date[1] + "/" + date[2];

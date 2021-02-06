@@ -295,18 +295,18 @@ public class MySqlDataBase {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int eventID = resultSet.getInt("event_id");
-                LocalDateTime startDate = LocalDateTime.parse(resultSet.getString("start date"));
-                LocalDateTime endDate = LocalDateTime.parse(resultSet.getString("end date"));
+                LocalDate startDate = LocalDate.parse(resultSet.getString("start date"));
+                LocalDate endDate = LocalDate.parse(resultSet.getString("end date"));
                 double eventPoint = resultSet.getDouble("event point");
                 RiskGame riskGame = RiskGame.getOnlineRiskFromString(resultSet.getString("risk game"));
                 boolean isPublic = resultSet.getBoolean("isPublic");
                 if (!isPublic) {
                     ArrayList<Player> players = Event.getPlayersFromString(resultSet.getString("players"));
-                    Event event = new Event(startDate, endDate, riskGame, eventPoint, players);
+                    Event event = new Event(startDate, endDate, riskGame, players);
                     event.setEventID(eventID);
                     dataBase.getAllEvents().add(event);
                 } else {
-                    Event event = new Event(startDate, endDate, riskGame, eventPoint);
+                    Event event = new Event(startDate, endDate, riskGame);
                     event.setEventID(eventID);
                     event.setInvitedPlayers(dataBase.getAllPlayers());
                     dataBase.getAllEvents().add(event);

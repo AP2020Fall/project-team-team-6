@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.gamesModels.RiskGame;
+import model.gamesModels.RiskGameType;
 import model.usersModels.Player;
 
 import java.io.File;
@@ -76,8 +78,8 @@ public class CreateEventsController implements Initializable {
 
     @FXML
     public void create(ActionEvent event) throws Exception {
-        LocalDateTime startDate = null;
-        LocalDateTime endDate = null;
+        LocalDate startDate = null;
+        LocalDate endDate = null;
         Pattern pattern = Pattern.compile("^20[2-9][0-9]\\/([1-9]|1[0-2])\\/([1-9]|1[0-9]|2[0-9]|30)$");
         if(name.getText().isEmpty()){
             errorName.setVisible(true);
@@ -94,7 +96,7 @@ public class CreateEventsController implements Initializable {
                 int year = Integer.parseInt(dateInString[0]);
                 int month = Integer.parseInt(dateInString[1]);
                 int day = Integer.parseInt(dateInString[2]);
-                LocalDateTime startDateTime = LocalDateTime.from(LocalDate.of(year , month , day));
+                LocalDate startDateTime =LocalDate.of(year , month , day);
                 startDate = EventController.getEventController().checkStartDate(startDateTime);
                 if(startDate == null){
                     errorDate.setVisible(true);
@@ -113,7 +115,7 @@ public class CreateEventsController implements Initializable {
                 int year = Integer.parseInt(dateInString[0]);
                 int month = Integer.parseInt(dateInString[1]);
                 int day = Integer.parseInt(dateInString[2]);
-                LocalDateTime endDateTime = LocalDateTime.from(LocalDate.of(year , month , day));
+                LocalDate endDateTime = LocalDate.of(year , month , day);
                 endDate = EventController.getEventController().checkEndDate(endDateTime , startDate);
                 if(endDate == null){
                     errorDate.setVisible(true);
@@ -127,6 +129,9 @@ public class CreateEventsController implements Initializable {
             errorInvite.setVisible(true);
         }
         if(!winners.getText().isEmpty() && !name.getText().isEmpty() && !start.getText().isEmpty() && !end.getText().isEmpty() && startDate != null && endDate != null && invitedPlayers.size() != 0) {
+            double eventPoint = Double.parseDouble(winners.getText());
+            RiskGame riskGame = new RiskGame(name.getText() , null, RiskGameType.PRIVATE, 6,(int)eventPoint , 180, true);
+            EventController.getEventController().createNewPrivateEvent(startDate, endDate, riskGame, invitedPlayers);
             URL url = new File("risk\\src\\view\\graphic\\ShowEventsAdmin.fxml").toURI().toURL();
             Parent register = FXMLLoader.load(url);
             Scene message = new Scene(register);
