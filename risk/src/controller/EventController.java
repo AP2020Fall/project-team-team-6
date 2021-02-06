@@ -7,6 +7,7 @@ import model.gamesModels.RiskGame;
 import model.usersModels.Admin;
 import model.usersModels.Player;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,9 +29,9 @@ public class EventController {
     //creating event by admin methods
     //----------------------------------------------------------------------------------------------------------------------
 
-    public void createNewPublicEvent(LocalDateTime startDate, LocalDateTime endDate, RiskGame riskGame, Double eventPoint) {
+    public void createNewPublicEvent(LocalDate startDate, LocalDate endDate, RiskGame riskGame) {
         ArrayList<Event> allEvents = localDataBase.getAllEvents();
-        Event event = new Event(startDate, endDate, riskGame, eventPoint);
+        Event event = new Event(startDate, endDate, riskGame);
         allEvents.add(event);
         sendInviteMassageFromAdmin(event);
         MySqlDataBase.getMySqlDataBase().addNewEventToDataBase(event);
@@ -44,9 +45,9 @@ public class EventController {
         }
     }
 
-    public void createNewPrivateEvent(LocalDateTime startDate, LocalDateTime endDate, RiskGame riskGame, Double eventPoint, ArrayList<Player> invitedPlayer) {
+    public void createNewPrivateEvent(LocalDate startDate, LocalDate endDate, RiskGame riskGame,  ArrayList<Player> invitedPlayer) {
         ArrayList<Event> allEvents = localDataBase.getAllEvents();
-        Event event = new Event(startDate, endDate, riskGame, eventPoint, invitedPlayer);
+        Event event = new Event(startDate, endDate, riskGame, invitedPlayer);
         allEvents.add(event);
         MySqlDataBase.getMySqlDataBase().addNewEventToDataBase(event);
     }
@@ -64,7 +65,7 @@ public class EventController {
         allEvents.remove(eventID);
     }
 
-    public void changeEvent(Event event, LocalDateTime start, LocalDateTime endDate, double eventPoint, ArrayList<Player> invitedList) {
+    public void changeEvent(Event event, LocalDate start, LocalDate endDate, double eventPoint, ArrayList<Player> invitedList) {
         event.setStartDate(start);
         event.setEndDate(endDate);
         event.setEventPoint(eventPoint);
@@ -84,15 +85,15 @@ public class EventController {
         return allEventsInMap;
     }
 
-    public LocalDateTime checkStartDate(LocalDateTime startDate) throws Exception {
-        if (startDate.isBefore(LocalDateTime.now()))
+    public LocalDate checkStartDate(LocalDate startDate) throws Exception {
+        if (startDate.isBefore(LocalDate.now()))
             throw new Exception("This date is before now");
         else
             return startDate;
     }
 
-    public LocalDateTime checkEndDate(LocalDateTime endDate, LocalDateTime startDate) throws Exception {
-        if (endDate.isBefore(LocalDateTime.now()))
+    public LocalDate checkEndDate(LocalDate endDate, LocalDate startDate) throws Exception {
+        if (endDate.isBefore(LocalDate.now()))
             throw new Exception("This date is before now");
         else if (endDate.isBefore(startDate))
             throw new Exception("This date is before start date");
@@ -137,10 +138,10 @@ public class EventController {
     }
 
     public boolean isEventValid(Event event) {
-        LocalDateTime startDate = event.getStartDate();
-        LocalDateTime endDate = event.getEndDate();
+        LocalDate startDate = event.getStartDate();
+        LocalDate endDate = event.getEndDate();
 //        return startDate.isBefore(LocalDateTime.now()) && endDate.isAfter(LocalDateTime.now());
-        return endDate.isAfter(LocalDateTime.now());
+        return endDate.isAfter(LocalDate.now());
     }
 
     public Event findEventByEventId(int eventId) {

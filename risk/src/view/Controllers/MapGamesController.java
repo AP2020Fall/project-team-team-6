@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -17,10 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.gamesModels.Country;
@@ -352,8 +350,9 @@ public class MapGamesController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        vbox.setSpacing(0);
         for(Player player : riskGame.getPlayers()){
-            Pane group = creatInformationTable(player);
+            HBox group = creatInformationTable(player);
             vbox.getChildren().add(group);
         }
 
@@ -620,7 +619,7 @@ public class MapGamesController implements Initializable {
         }
         return null;
     }
-    private AnchorPane creatInformationTable(Player player){
+    private HBox creatInformationTable(Player player){
         AnchorPane group = new AnchorPane();
         String color = player.getCurrentColor().toString();
         StringBuilder stringBuilder = new StringBuilder();
@@ -628,16 +627,14 @@ public class MapGamesController implements Initializable {
         String url = String.valueOf(stringBuilder);
         Image image = new Image(url);
         ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(180);
-        imageView.setFitHeight(180);
+        imageView.setFitWidth(150);
+        imageView.setFitHeight(150);
         Label label = new Label(player.getUsername());
-        double x =imageView.getLayoutX();
-        double y = imageView.getLayoutY();
-        label.setLayoutX(x);
-        label.setLayoutY(y);
-        label.setStyle("-fx-background-color: transparent ; -fx-font-size: 20px ; -fx-text-fill: white");
-        group.getChildren().addAll(imageView , label);
-        return group;
+        label.setStyle("-fx-background-color: transparent ; -fx-font-size: 20px ; -fx-text-fill: white ;");
+        label.setPadding(new Insets(30 , 0 , 0 , 0 ));
+        HBox hBox1 = new HBox(5);
+        hBox1.getChildren().addAll(label , imageView);
+        return hBox1;
     }
 }
 

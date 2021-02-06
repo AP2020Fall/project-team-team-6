@@ -4,35 +4,36 @@ import controller.UserController;
 import model.database.LocalDataBase;
 import model.usersModels.Player;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Event {
     private String gameName;
     private RiskGame game;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private double eventPoint;
     private int eventID;
     private ArrayList<Player> invitedPlayers;
     private boolean isPublic;
 
-    public Event(LocalDateTime startDate, LocalDateTime endDate, RiskGame riskGame, double eventPoint) {
+    public Event(LocalDate startDate, LocalDate endDate, RiskGame riskGame) {
         this.gameName = riskGame.getName();
         this.startDate = startDate;
         this.endDate = endDate;
-        this.eventPoint = eventPoint;
+        this.eventPoint = riskGame.getGamePoint();
         this.game = riskGame;
         this.isPublic = true;
         this.invitedPlayers = LocalDataBase.getLocalDataBase().getAllPlayers();
         setEventID();
     }
 
-    public Event(LocalDateTime startDate, LocalDateTime endDate, RiskGame riskGame, double eventPoint, ArrayList<Player> invitedList) {
+    public Event(LocalDate startDate, LocalDate endDate, RiskGame riskGame, ArrayList<Player> invitedList) {
         this.gameName = riskGame.getName();
         this.startDate = startDate;
         this.endDate = endDate;
-        this.eventPoint = eventPoint;
+        this.eventPoint = riskGame.getGamePoint();
         this.game = riskGame;
         this.invitedPlayers = invitedList;
         this.isPublic = false;
@@ -43,13 +44,6 @@ public class Event {
         return gameName;
     }
 
-    public LocalDateTime getStartDate() {
-        return startDate;
-    }
-
-    public LocalDateTime getEndDate() {
-        return endDate;
-    }
 
     public double getEventPoint() {
         return eventPoint;
@@ -71,11 +65,19 @@ public class Event {
         this.game = game;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
