@@ -48,7 +48,7 @@ public class FriendsRequestController implements Initializable {
     public HBox makeFriendRequestHBox(Player player){
         HBox hBox = new HBox(15);
         hBox.setPadding(new Insets(10 , 10 , 10 , 10));
-        Image image = new Image("@../../NotResoures/19.png");
+        Image image = new Image("@../../NotResoures/images/19.png");
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(80);
         imageView.setFitWidth(40);

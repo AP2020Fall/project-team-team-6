@@ -136,7 +136,7 @@ public class ShowAllPlayersController implements Initializable {
         hBox.setMinWidth(331);
         VBox vBox = new VBox(5);
         vBox.setPadding(new Insets(5 , 5,  5, 5));
-        Image image = new Image("@../../NotResoures/purple player.png");
+        Image image = new Image("@../../NotResoures/images/purple player.png");
         ImageView imageView =  new ImageView(image);
         imageView.setFitHeight(80);
         imageView.setFitWidth(40);

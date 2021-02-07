@@ -53,7 +53,7 @@ public class friendsController implements Initializable {
         hBox.setStyle("-fx-background-color: #c6def1 ; -fx-background-radius: 10px ; -fx-border-radius: 10px");
         VBox vBox = new VBox(5);
         vBox.setPadding(new Insets(5 , 5,  5, 5));
-        javafx.scene.image.Image image = new Image("@../../NotResoures/blue player.png");
+        javafx.scene.image.Image image = new Image("@../../NotResoures/images/blue player.png");
         ImageView imageView =  new ImageView(image);
         imageView.setFitHeight(80);
         imageView.setFitWidth(40);
@@ -90,7 +90,7 @@ public class friendsController implements Initializable {
         }else{
             hBox.setStyle("-fx-background-color: #97a7b3 ; -fx-background-radius: 10px ; -fx-border-radius: 10px");
         }
-        javafx.scene.image.Image image = new Image("@../../NotResoures/purple player.png");
+        javafx.scene.image.Image image = new Image("@../../NotResoures/images/purple player.png");
         ImageView imageView =  new ImageView(image);
         imageView.setFitHeight(80);
         imageView.setFitWidth(40);
