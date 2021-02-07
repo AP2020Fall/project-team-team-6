@@ -41,6 +41,7 @@ public class MapGamesController implements Initializable {
     public ImageView nextPhase;
     public Label currentPlayerLabel;
     private boolean hasClickedOnce = false;
+    private boolean hasHBox = false;
     private GameController gameController = GameController.getGameController();
 
     public static RiskGame getRiskGame() {
@@ -308,13 +309,13 @@ public class MapGamesController implements Initializable {
                     if (neighbourCountries.contains(country)) {
                         secondCountry = country;
                         for (Country country1 : neighbourCountries) {
-                            if(!country1.equals(secondCountry)) {
+                            if (!country1.equals(secondCountry)) {
                                 Circle circle = findShapeByCountryCoordinate(country1.getCountryCoordinate());
                                 assert circle != null;
                                 circle.setStroke(null);
                             }
+                        }
                                 int numberOfDice = GameController.getGameController().getNumberOfDiceForAttacker(firstCountry);
-                                int numberOfDiceForDefend = GameController.getGameController().getNumberOfDiceForDefender(secondCountry);
                                 HBox hBox = new HBox();
                                 Button cancelButton = new Button("Cancel");
                                 cancelButton.setStyle("-fx-text-fill: white ; -fx-background-color: #0077b6 ; -fx-font-size: 15px ; -fx-font:bold; -fx-background-radius: 50px ; -fx-border-radius: 50px ");
@@ -362,23 +363,18 @@ public class MapGamesController implements Initializable {
                                 pane.getChildren().add(hBox);
                                 cancelButton.setOnMouseClicked(e->{
                                     if(e.getButton().equals(MouseButton.PRIMARY)) {
-                                        pane.getChildren().remove(hBox);
                                         Circle firstCountryCircle = findShapeByCountryCoordinate(firstCountry.getCountryCoordinate());
                                         Circle secondCountryCircle = findShapeByCountryCoordinate(secondCountry.getCountryCoordinate());
                                         firstCountryCircle.setStroke(null);
                                         secondCountryCircle.setStroke(null);
                                         firstCountry = null;
                                         secondCountry = null;
+                                        pane.getChildren().remove(hBox);
                                     }
                                 });
                             }
-
-                        }
-
                         Circle circle = findShapeByCountryCoordinate(firstCountry.getCountryCoordinate());
                         circle.setStroke(Color.AQUA);
-                    //TODO number of dice
-                    //TODO attack
                 }
             } else if (gameStages.equals(GameStages.FORTIFY)) {
                 Country country = getCountryCoordination(id);
@@ -605,8 +601,15 @@ public class MapGamesController implements Initializable {
                     window.setScene(message);
                     window.show();
                 }
+            }else{
+                Circle firstCountryCircle = findShapeByCountryCoordinate(firstCountry.getCountryCoordinate());
+                Circle secondCountryCircle = findShapeByCountryCoordinate(secondCountry.getCountryCoordinate());
+                firstCountryCircle.setStroke(null);
+                secondCountryCircle.setStroke(null);
+                firstCountry = null;
+                secondCountry = null;
+                loadGameMap();
             }
-            loadGameMap();
             //TODO cards load
         } catch (Exception ex) {
             ex.printStackTrace();
