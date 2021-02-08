@@ -52,6 +52,6 @@ public class PlayOnlineOfflineController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LoginController.mediaPlayer.pause();
-        mediaPlayer.play();
+//        mediaPlayer.play();
     }
 }

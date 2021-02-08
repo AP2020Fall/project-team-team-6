@@ -91,12 +91,12 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         mediaPlayer.setVolume(0.1);
-        mediaPlayer.play();
+//        mediaPlayer.play();
     }
     public void playMouseSound(){
         File file = new File("risk/src/NotResoures/sounds/Click.mp3");
         Media media = new Media(file.toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
+//        mediaPlayer.play();
     }
 }
