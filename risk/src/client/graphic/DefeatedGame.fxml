@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
+            prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="client.Controllers.DefeatedGameController">
+    <children>
+        <Pane prefHeight="650.0" prefWidth="1350.0">
+            <children>
+                <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../NotResoures/images/defeated-background.png"/>
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="100.0" fitWidth="200.0" layoutX="20.0" layoutY="530.0" onDragDetected="#back"
+                           pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../NotResoures/images/next_phase_button.png"/>
+                    </image>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </ImageView>
+                <Pane layoutX="519.0" layoutY="230.0" prefHeight="254.0" prefWidth="306.0">
+                    <children>
+                        <ImageView fitHeight="402.0" fitWidth="630.0" layoutX="42.0" layoutY="-92.0" pickOnBounds="true"
+                                   preserveRatio="true"/>
+                    </children>
+                </Pane>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
