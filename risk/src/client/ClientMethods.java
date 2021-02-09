@@ -6,6 +6,7 @@ import server.model.usersModels.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class ClientMethods {
     private static ClientMethods clientMethods;
@@ -79,5 +80,12 @@ public class ClientMethods {
         Admin admin = new Admin(user.getFirstName() , user.getLastName() , user.getUsername() , user.getPassword() , user.getEmailAddress() , user.getTelephoneNumber());
         admin.setID(user.getID());
         return admin;
+    }
+
+    public HashSet<Player> getInbox(String input) throws IOException {
+        Client.getDataOutputStream().writeUTF(input);
+        Client.getDataOutputStream().flush();
+        String answer = Client.getDataInputStream().readUTF();
+        return null;
     }
 }

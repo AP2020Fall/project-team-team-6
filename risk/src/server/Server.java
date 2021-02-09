@@ -12,6 +12,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Server {
     public static void main(String[] args) throws IOException {
@@ -150,6 +151,10 @@ public class Server {
                 String telephoneNumber = inputs[6];
                 Admin admin = userController.signUpAsAdmin(firstName , lastName , username , password , emailAddress , telephoneNumber);
                 return admin.changeUserToString();
+            }else if(input.startsWith("all players had message$")){
+                String[] inputs = input.split("\\$");
+                Player player = userController.findPlayerByUserName(inputs[1]);
+                HashSet<Player> players = userController.getAllPlayersThatHadMessageWith(player);
             }
             return null;
         }

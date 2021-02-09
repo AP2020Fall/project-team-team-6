@@ -53,6 +53,8 @@ public class MessagesController implements Initializable {
     public ArrayList<HBox> getInbox() {
         ArrayList<HBox> hBoxes = new ArrayList<>();
         hBoxes.add(makeHBoxFromAdminMessages());
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("all players had message$").append(player.getUsername());
         HashSet<Player> inbox= UserController.getUserController().getAllPlayersThatHadMessageWith(player);
         for(Player player1 : inbox){
             hBoxes.add(makeHBoxFromMessages(player1));

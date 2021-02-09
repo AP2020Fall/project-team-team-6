@@ -319,7 +319,6 @@ public class Player extends User implements Comparable{
         }
         player.setID(ID);
 
-
         return player;
     }
 }
