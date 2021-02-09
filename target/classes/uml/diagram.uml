@@ -3,31 +3,31 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="1146.0" y="0.0">model.Continent</node>
-    <node x="660.0" y="1257.0">model.RiskGameType</node>
-    <node x="0.0" y="1257.0">model.RequestForPlaying</node>
-    <node x="0.0" y="550.0">model.Admin</node>
-    <node x="180.0" y="0.0">model.User</node>
-    <node x="328.0" y="1257.0">model.GameLog</node>
-    <node x="534.0" y="1257.0">model.Color</node>
-    <node x="721.0" y="0.0">model.RiskGame</node>
-    <node x="704.0" y="943.0">model.Country</node>
-    <node x="332.0" y="255.0">model.Player</node>
-    <node x="0.0" y="943.0">model.Event</node>
-    <node x="1002.0" y="943.0">model.Card</node>
-    <node x="393.0" y="943.0">model.DataBase</node>
-    <node x="999.0" y="1257.0">model.GameStages</node>
-    <node x="833.0" y="1257.0">model.CardDesigns</node>
+    <node x="1146.0" y="0.0">Server.model.Continent</node>
+    <node x="660.0" y="1257.0">Server.model.RiskGameType</node>
+    <node x="0.0" y="1257.0">Server.model.RequestForPlaying</node>
+    <node x="0.0" y="550.0">Server.model.Admin</node>
+    <node x="180.0" y="0.0">Server.model.User</node>
+    <node x="328.0" y="1257.0">Server.model.GameLog</node>
+    <node x="534.0" y="1257.0">Server.model.Color</node>
+    <node x="721.0" y="0.0">Server.model.RiskGame</node>
+    <node x="704.0" y="943.0">Server.model.Country</node>
+    <node x="332.0" y="255.0">Server.model.Player</node>
+    <node x="0.0" y="943.0">Server.model.Event</node>
+    <node x="1002.0" y="943.0">Server.model.Card</node>
+    <node x="393.0" y="943.0">Server.model.DataBase</node>
+    <node x="999.0" y="1257.0">Server.model.GameStages</node>
+    <node x="833.0" y="1257.0">Server.model.CardDesigns</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="model.Player" target="model.User">
+    <edge source="Server.model.Player" target="Server.model.User">
       <point x="0.0" y="-321.5" />
       <point x="504.0" y="230.0" />
       <point x="405.0" y="230.0" />
       <point x="75.0" y="102.5" />
     </edge>
-    <edge source="model.Admin" target="model.User">
+    <edge source="Server.model.Admin" target="Server.model.User">
       <point x="0.0" y="-26.5" />
       <point x="156.0" y="230.0" />
       <point x="255.0" y="230.0" />

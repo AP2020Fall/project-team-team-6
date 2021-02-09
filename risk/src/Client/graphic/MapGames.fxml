@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controllers.MapGamesController">
+   <children>
+      <Pane fx:id="pane" prefHeight="650.0" prefWidth="1350.0">
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../NotResoures/images/boardgame-background.png" />
+               </image>
+            </ImageView>
+            <Group layoutX="183.0" layoutY="127.0">
+               <children>
+                  <Circle fx:id="C1" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L1" layoutX="-6.0" layoutY="-13.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Line endX="12.0" endY="24.666671752929688" layoutX="-12.0" layoutY="12.0" startX="12.0" startY="14.0" />
+               </children>
+            </Group>
+            <Group layoutX="183.0" layoutY="188.0">
+               <children>
+                  <Circle fx:id="C2" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L2" layoutX="-6.0" layoutY="-12.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </Label>
+                  <Line endX="86.0" layoutX="26.0" startX="70.0" />
+                  <Line endX="21.33331298828125" layoutX="26.0" />
+               </children>
+            </Group>
+            <Group layoutX="183.0" layoutY="249.0" onMouseClicked="#countryClick">
+               <children>
+                  <Circle fx:id="C9" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L9" layoutX="-5.0" layoutY="-12.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="254.0" layoutY="127.0">
+               <children>
+                  <Circle fx:id="C6" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L6" layoutX="-6.0" layoutY="-15.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Line endX="15.66668701171875" endY="1.52587890625E-5" layoutX="26.0" layoutY="-1.0" startY="1.52587890625E-5" />
+                  <Line endX="23.0" endY="-8.666671752929688" layoutX="26.0" layoutY="26.0" startX="-7.66668701171875" startY="16.0" />
+               </children>
+            </Group>
+            <Group layoutX="254.0" layoutY="188.0">
+               <children>
+                  <Circle fx:id="C7" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L7" layoutX="-6.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="183.0" layoutY="308.0">
+               <children>
+                  <Circle fx:id="C3" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L3" layoutX="-5.0" layoutY="-12.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Line endX="29.33331298828125" endY="-9.666656494140625" layoutX="26.0" layoutY="-26.0" startY="17.0" />
+               </children>
+            </Group>
+            <Group layoutX="321.0" layoutY="127.0">
+               <children>
+                  <Circle fx:id="C5" fill="#9d9d9d" layoutY="-1.0" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L5" layoutX="-5.0" layoutY="-15.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="254.0" layoutY="253.0">
+               <children>
+                  <Circle fx:id="C4" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L4" layoutX="-5.0" layoutY="-16.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="321.0" layoutY="191.0">
+               <children>
+                  <Circle fx:id="C8" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L8" layoutX="-5.0" layoutY="-15.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="254.0" layoutY="496.0">
+               <children>
+                  <Circle fx:id="C10" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L10" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="254.0" layoutY="426.0">
+               <children>
+                  <Circle fx:id="C11" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L11" layoutX="-5.0" layoutY="-13.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="183.0" layoutY="496.0" onMouseClicked="#countryClick">
+               <children>
+                  <Circle fx:id="C12" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L12" layoutX="-5.0" layoutY="-13.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="183.0" layoutY="426.0">
+               <children>
+                  <Circle fx:id="C13" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L13" layoutX="-5.0" layoutY="-13.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Line endX="26.111129760742188" layoutX="20.0" startX="6.0" />
+               </children>
+            </Group>
+            <Group layoutX="529.0" layoutY="253.0">
+               <children>
+                  <Circle fx:id="C24" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L24" layoutX="-4.0" layoutY="-15.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="529.0" layoutY="191.0" onMouseClicked="#countryClick">
+               <children>
+                  <Circle fx:id="C22" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L22" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="461.0" layoutY="253.0">
+               <children>
+                  <Circle fx:id="C26" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L26" layoutX="-5.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="461.0" layoutY="191.0" onMouseClicked="#countryClick">
+               <children>
+                  <Circle fx:id="C20" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L20" layoutX="-5.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="461.0" layoutY="127.0">
+               <children>
+                  <Circle fx:id="C21" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L21" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="595.0" layoutY="191.0">
+               <children>
+                  <Circle fx:id="C25" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L25" layoutX="-4.0" layoutY="-15.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="529.0" layoutY="127.0">
+               <children>
+                  <Circle fx:id="C23" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L23" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="529.0" layoutY="501.0">
+               <children>
+                  <Circle fx:id="C17" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L17" layoutX="-5.0" layoutY="-15.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="529.0" layoutY="436.0">
+               <children>
+                  <Circle fx:id="C15" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L15" layoutX="-5.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="529.0" layoutY="371.0" onMouseClicked="#countryClick">
+               <children>
+                  <Circle fx:id="C16" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L16" layoutX="-5.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="461.0" layoutY="501.0">
+               <children>
+                  <Circle fx:id="C19" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L19" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="461.0" layoutY="436.0">
+               <children>
+                  <Circle fx:id="C14" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L14" layoutX="-5.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Line endX="5.0" layoutX="-5.0" layoutY="26.0" startX="5.0" startY="13.77777099609375" />
+               </children>
+            </Group>
+            <Group layoutX="461.0" layoutY="371.0">
+               <children>
+                  <Circle fx:id="C18" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L18" layoutX="-4.0" layoutY="-13.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="872.0" layoutY="426.0" onMouseClicked="#countryClick">
+               <children>
+                  <Circle fx:id="C41" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L41" layoutX="-5.0" layoutY="-15.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Line endX="20.5555419921875" layoutX="-21.0" layoutY="26.0" startX="20.5555419921875" startY="18.888885498046875" />
+               </children>
+            </Group>
+            <Group layoutX="805.0" layoutY="426.0">
+               <children>
+                  <Circle fx:id="C40" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L40" layoutX="-4.0" layoutY="-15.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Line endX="-7.0" layoutX="7.0" layoutY="26.0" startX="-7.0" startY="19.555572509765625" />
+               </children>
+            </Group>
+            <Group layoutX="872.0" layoutY="496.0" onMouseClicked="#countryClick">
+               <children>
+                  <Circle fx:id="C39" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L39" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="805.0" layoutY="496.0">
+               <children>
+                  <Circle fx:id="C42" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L42" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="725.0" layoutY="249.0">
+               <children>
+                  <Circle fx:id="C27" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L27" layoutX="-4.0" layoutY="-15.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="725.0" layoutY="308.0" onMouseClicked="#countryClick">
+               <children>
+                  <Circle fx:id="C33" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L33" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="725.0" layoutY="188.0">
+               <children>
+                  <Circle fx:id="C37" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L37" layoutX="-4.0" layoutY="-15.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="805.0" layoutY="188.0">
+               <children>
+                  <Circle fx:id="C36" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L36" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="805.0" layoutY="249.0">
+               <children>
+                  <Circle fx:id="C28" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L28" layoutX="-4.0" layoutY="-13.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="805.0" layoutY="308.0">
+               <children>
+                  <Circle fx:id="C29" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L29" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="884.0" layoutY="308.0">
+               <children>
+                  <Circle fx:id="C35" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L35" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="884.0" layoutY="249.0">
+               <children>
+                  <Circle fx:id="C34" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L34" layoutX="-4.0" layoutY="-15.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="884.0" layoutY="188.0">
+               <children>
+                  <Circle fx:id="C30" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L30" layoutX="-4.0" layoutY="-15.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="884.0" layoutY="127.0">
+               <children>
+                  <Circle fx:id="C38" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L38" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="950.0" layoutY="188.0">
+               <children>
+                  <Circle fx:id="C31" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L31" layoutX="-5.0" layoutY="-15.0" onMouseClicked="#countryClick" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="950.0" layoutY="127.0">
+               <children>
+                  <Circle fx:id="C32" fill="#9d9d9d" onMouseClicked="#countryClick" radius="26.0" stroke="BLACK" strokeType="INSIDE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+                  <Label fx:id="L32" layoutX="-4.0" layoutY="-14.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <ImageView fitHeight="105.0" fitWidth="88.0" layoutX="13.0" onDragDetected="#back" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../NotResoures/images/exit.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView disable="true" fitHeight="105.0" fitWidth="88.0" layoutX="212.0" onDragDetected="#dice" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../NotResoures/images/dice.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView disable="true" fitHeight="105.0" fitWidth="88.0" layoutX="111.0" onDragDetected="#cards" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../NotResoures/images/card.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Line endX="45.00001525878906" endY="8.0" layoutX="183.0" layoutY="119.0" startX="26.0" startY="8.0" />
+            <Line endX="44.0" endY="-3.0" layoutX="139.0" layoutY="217.0" startX="44.0" startY="6.0" />
+            <Line endX="28.66668701171875" endY="8.0" layoutX="155.0" layoutY="275.0" startX="28.66668701171875" />
+            <Line endX="1.33331298828125" layoutX="321.0" layoutY="153.0" startX="1.33331298828125" startY="12.0" />
+            <Line endX="25.0" endY="-8.666656494140625" layoutX="280.0" layoutY="219.0" startX="-4.33331298828125" startY="21.333343505859375" />
+            <Line endX="16.33331298828125" layoutX="212.0" layoutY="249.0" startX="-3.0" />
+            <Line endX="34.66668701171875" layoutX="219.0" layoutY="153.0" startX="34.66668701171875" startY="10.0" />
+            <Line endX="100.0" layoutX="155.0" layoutY="214.0" startX="100.0" startY="14.333343505859375" />
+            <Line endX="97.66668701171875" endY="-8.333328247070312" layoutX="138.0" layoutY="152.0" startX="63.0" startY="17.666671752929688" />
+            <Line endX="77.33331298828125" endY="-13.333343505859375" layoutX="157.0" layoutY="217.0" startX="44.666656494140625" startY="14.666656494140625" />
+            <Line endX="10.666671752929688" layoutX="218.0" layoutY="496.0" startX="-9.333328247070312" />
+            <Line endX="113.0" layoutX="141.0" layoutY="452.0" startX="113.0" startY="18.0" />
+            <Line endX="59.0" layoutX="124.0" layoutY="452.0" startX="59.0" startY="17.111114501953125" />
+            <Line endX="124.33332824707031" endY="5.888885498046875" layoutX="111.0" layoutY="437.0" startX="89.66667175292969" startY="40.111114501953125" />
+            <Line endX="16.0" endY="1.52587890625E-5" layoutX="487.0" layoutY="126.0" startX="-1.33331298828125" startY="1.52587890625E-5" />
+            <Line endX="81.0" layoutX="422.0" layoutY="191.0" startX="66.33331298828125" />
+            <Line endX="8.666656494140625" layoutX="494.0" layoutY="253.0" startX="-6.888885498046875" />
+            <Line endX="25.888885498046875" layoutX="435.0" layoutY="152.0" startX="25.888885498046875" startY="12.666671752929688" />
+            <Line endX="40.4444580078125" layoutX="420.0" layoutY="217.0" startX="40.4444580078125" startY="10.333328247070312" />
+            <Line endX="77.66668701171875" endY="-11.333328247070312" layoutX="451.0" layoutY="164.0" startX="77.66668701171875" startY="1.1110992431640625" />
+            <Line endX="101.0" layoutX="428.0" layoutY="217.0" startX="101.0" startY="10.333328247070312" />
+            <Line endX="41.33331298828125" endY="11.22222900390625" layoutX="544.0" layoutY="157.0" startX="8.4444580078125" startY="-19.0" />
+            <Line endX="51.22222900390625" endY="-9.111099243164062" layoutX="537.0" layoutY="224.0" startX="17.0" startY="18.444442749023438" />
+            <Line endX="16.0" endY="-12.444442749023438" layoutX="496.0" layoutY="158.0" startX="-16.4444580078125" startY="15.555557250976562" />
+            <Line endX="29.0" endY="-8.111099243164062" layoutX="485.0" layoutY="219.0" startX="-5.666656494140625" startY="16.333328247070312" />
+            <Line endX="14.5555419921875" endY="5.1110992431640625" layoutX="555.0" layoutY="188.0" startX="-1.0" startY="5.1110992431640625" />
+            <Line endX="16.4444580078125" layoutX="488.0" layoutY="436.0" startX="-1.777801513671875" />
+            <Line endX="44.33331298828125" endY="15.0" layoutX="469.0" layoutY="401.0" startX="13.222198486328125" startY="-16.111114501953125" />
+            <Line endX="28.22222900390625" endY="-20.444427490234375" layoutX="488.0" layoutY="478.0" startX="-5.111114501953125" startY="10.666656494140625" />
+            <Line endX="7.0" layoutX="497.0" layoutY="371.0" startX="-10.333343505859375" />
+            <Line endX="16.0" endY="-3.0" layoutX="445.0" layoutY="400.0" startX="16.0" startY="10.666656494140625" />
+            <Line endX="16.0" layoutX="513.0" layoutY="410.0" startX="16.0" startY="-13.77777099609375" />
+            <Line endX="0.4444580078125" endY="2.0" layoutX="528.0" layoutY="473.0" startX="0.4444580078125" startY="-11.22222900390625" />
+            <Line endX="10.666656494140625" endY="5.888885498046875" layoutX="494.0" layoutY="497.0" startX="-8.0" startY="5.888885498046875" />
+            <Line endX="16.5555419921875" layoutX="831.0" layoutY="426.0" startX="-0.77777099609375" />
+            <Line endX="7.0" layoutX="839.0" layoutY="495.0" startX="-8.33331298828125" />
+            <Line endX="100.0" layoutX="751.0" layoutY="442.0" startX="71.66668701171875" startY="34.4444580078125" />
+            <Line endX="68.0" endY="1.0" layoutX="367.0" layoutY="126.0" startX="-20.0" startY="1.52587890625E-5" />
+            <Line endX="11.0" endY="54.0" layoutX="174.0" layoutY="346.0" startX="11.0" startY="-12.0" />
+            <Line endX="59.0" endY="10.0" layoutX="376.0" layoutY="367.0" startX="-99.0" startY="48.666656494140625" />
+            <Line endX="-2.33331298828125" endY="-30.333343505859375" layoutX="462.0" layoutY="308.0" startX="-2.33331298828125" startY="38.333343505859375" />
+            <Line endX="100.0" layoutX="424.0" layoutY="279.0" startX="51.0" startY="70.0" />
+            <Line endX="2.33331298828125" endY="-33.0" layoutX="528.0" layoutY="312.0" startX="2.33331298828125" startY="35.0" />
+            <Line endX="100.0" layoutX="601.0" layoutY="317.0" startX="-46.0" startY="54.0" />
+            <Line endX="55.66668701171875" endY="-107.66665649414062" layoutX="654.0" layoutY="436.0" startX="-100.0" />
+            <Line endX="44.0" endY="50.0" layoutX="656.0" layoutY="255.0" startX="-104.0" startY="11.333343505859375" />
+            <Line endX="61.0" endY="57.666656494140625" layoutX="644.0" layoutY="236.0" startX="-35.66668701171875" startY="-23.666656494140625" />
+            <Line endX="43.0" layoutX="657.0" layoutY="188.0" startX="-37.0" />
+            <Line endX="47.0" endY="20.333343505859375" layoutX="652.0" layoutY="218.0" startX="-33.0" startY="-15.666656494140625" />
+            <Line endX="10.0" endY="-49.666656494140625" layoutX="872.0" layoutY="384.0" startX="2.66668701171875" startY="16.333343505859375" />
+            <Line endX="7.0" endY="1.52587890625E-5" layoutX="150.0" layoutY="126.0" startX="-2.333343505859375" startY="1.52587890625E-5" />
+            <Line endX="7.0" endY="1.52587890625E-5" layoutX="134.0" layoutY="126.0" startX="-2.333343505859375" startY="1.52587890625E-5" />
+            <Line endX="7.0" endY="1.52587890625E-5" layoutX="118.0" layoutY="126.0" startX="-2.333343505859375" startY="1.52587890625E-5" />
+            <Line endX="7.0" endY="1.52587890625E-5" layoutX="102.0" layoutY="126.0" startX="-2.333343505859375" startY="1.52587890625E-5" />
+            <Line endX="-52.5555419921875" layoutX="1043.0" layoutY="127.0" startX="-67.22222900390625" />
+            <Line endX="-52.5555419921875" layoutX="1065.0" layoutY="127.0" startX="-67.22222900390625" />
+            <Line endX="-52.5555419921875" layoutX="1087.0" layoutY="127.0" startX="-67.22222900390625" />
+            <Line endX="-52.5555419921875" layoutX="1109.0" layoutY="127.0" startX="-67.22222900390625" />
+            <Line endX="28.0" layoutX="751.0" layoutY="309.0" startX="0.66668701171875" />
+            <Line endX="28.0" layoutX="830.0" layoutY="309.0" startX="0.66668701171875" />
+            <Line endX="28.0" layoutX="830.0" layoutY="249.0" startX="0.66668701171875" />
+            <Line endX="28.0" layoutX="830.0" layoutY="187.0" startX="0.66668701171875" />
+            <Line endX="28.0" layoutX="751.0" layoutY="186.0" startX="0.66668701171875" />
+            <Line endX="28.0" layoutX="751.0" layoutY="249.0" startX="0.66668701171875" />
+            <Line endX="28.0" layoutX="897.0" layoutY="187.0" startX="13.0" />
+            <Line endX="28.0" layoutX="897.0" layoutY="127.0" startX="13.0" />
+            <Line endX="14.0" layoutX="711.0" layoutY="214.0" startX="14.0" startY="10.333343505859375" />
+            <Line endX="14.0" endY="2.333343505859375" layoutX="711.0" layoutY="273.0" startX="14.0" startY="9.0" />
+            <Line endX="14.0" layoutX="791.0" layoutY="214.0" startX="14.0" startY="10.333343505859375" />
+            <Line endX="14.0" layoutX="871.0" layoutY="213.0" startX="14.0" startY="10.333343505859375" />
+            <Line endX="14.0" endY="2.333343505859375" layoutX="791.0" layoutY="273.0" startX="14.0" startY="9.0" />
+            <Line endX="14.0" endY="2.333343505859375" layoutX="870.0" layoutY="273.0" startX="14.0" startY="9.0" />
+            <Line endX="14.0" layoutX="870.0" layoutY="153.0" startX="14.0" startY="9.0" />
+            <Line endX="14.0" layoutX="936.0" layoutY="153.0" startX="14.0" startY="9.0" />
+            <Line endX="26.11114501953125" endY="-12.333328247070312" layoutX="837.0" layoutY="153.0" startX="-14.33331298828125" startY="16.111099243164062" />
+            <Line endX="26.11114501953125" endY="-12.333328247070312" layoutX="917.0" layoutY="225.0" startX="-7.0" startY="15.666671752929688" />
+            <Line endX="23.5555419921875" endY="-7.8889007568359375" layoutX="908.0" layoutY="153.0" startX="-7.0" startY="15.666671752929688" />
+            <Line endX="27.5555419921875" endY="12.77777099609375" layoutX="758.0" layoutY="219.0" startX="-12.0" startY="-16.111099243164062" />
+            <Line endX="27.5555419921875" endY="12.77777099609375" layoutX="838.0" layoutY="219.0" startX="-12.0" startY="-16.111099243164062" />
+            <Line endX="27.5555419921875" endY="12.77777099609375" layoutX="757.0" layoutY="280.0" startX="-12.0" startY="-16.111099243164062" />
+            <Line endX="27.5555419921875" endY="12.77777099609375" layoutX="837.0" layoutY="280.0" startX="-12.0" startY="-16.111099243164062" />
+            <Label fx:id="currentPlayerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="617.0" layoutY="17.0" prefHeight="55.0" prefWidth="256.0" text="Label" textFill="#f5f5f5">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="playerImage" fitHeight="122.0" fitWidth="84.0" layoutX="231.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="nextPhase" fitHeight="72.0" fitWidth="76.0" layoutX="725.0" layoutY="552.0" onMouseClicked="#goNextPhase" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../NotResoures/images/next_phase_button.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="174.0" fitWidth="98.0" layoutX="628.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../NotResoures/images/20.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="gameStageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="342.0" layoutY="564.0" prefHeight="40.0" prefWidth="274.0" text="Label" textFill="#fffdfd">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
