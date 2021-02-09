@@ -129,10 +129,13 @@ public class User {
     }
 
     public String changeUserToString(){
+        Player player = UserController.getUserController().findPlayerByUserName(username);
+        String messagew = player.getAllPlayerMessagesInString();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("user$").append(ID).append("$").append(firstName).append("$").append(lastName).append("$");
         stringBuilder.append(username).append("$").append(password).append("$").append(emailAddress).append("$");
         stringBuilder.append(telephoneNumber).append("$").append(isAdmin).append("$");
+        stringBuilder.append(messagew);
         return String.valueOf(stringBuilder);
     }
 
@@ -148,6 +151,10 @@ public class User {
         boolean isAdmin = Boolean.parseBoolean(inputs[8]);
         User user = new User(firstName , lastName , username , password , email , telephoneNumber , isAdmin);
         user.setID(ID);
+        if(inputs.length == 10){
+            String message = inputs[9];
+            user.getAllMessageFromString(message);
+        }
         return user;
     }
 
