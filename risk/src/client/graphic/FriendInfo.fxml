@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Controllers.FriendInfoController">
+    <children>
+        <Pane prefHeight="650.0" prefWidth="1350.0">
+            <children>
+                <ImageView fitHeight="650.0" fitWidth="1350.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../NotResoures/images/friends_info.png" />
+                    </image>
+                </ImageView>
+                <Button fx:id="sendMessageButton" layoutX="742.0" layoutY="514.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="46.5" prefWidth="176.0" style="-fx-background-color: #cccccc;" text="Send Message" textFill="#2b2d42">
+                    <font>
+                        <Font name="System Bold" size="19.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="romveOrRequestButton" layoutX="1001.0" layoutY="518.0" mnemonicParsing="false" onAction="#romveOrRequest" prefHeight="39.0" prefWidth="226.0" style="-fx-background-color: #cccccc;" text="Remove" textFill="#2b2d42">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Label fx:id="usernameLabel" layoutX="850.0" layoutY="110.0" prefHeight="38.0" prefWidth="162.0" text="Username">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
+                <Label fx:id="winLabel" layoutX="850.0" layoutY="198.0" prefHeight="38.0" prefWidth="105.0" text="Wins">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
+                <Label fx:id="recodeLabel" layoutX="850.0" layoutY="283.0" prefHeight="38.0" prefWidth="124.0" text="Record">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
+                <Label fx:id="coinLabel" layoutX="850.0" layoutY="367.0" prefHeight="38.0" prefWidth="118.0" text="Coins">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
+                <Button fx:id="backButton" layoutX="23.0" layoutY="580.0" mnemonicParsing="false" onAction="#back" prefHeight="47.0" prefWidth="109.0" style="-fx-background-color: #e11469; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Back" textFill="WHITE">
+                    <font>
+                        <Font size="19.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
